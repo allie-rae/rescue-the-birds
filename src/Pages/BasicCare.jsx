@@ -20,47 +20,44 @@ export const BasicCare = () => {
         Budgie Fact Sheet
       </Typography>
       <Box sx={{ width: "500px", maxWidth: "100%" }}>
-        <Typography variant="h6">Cage Specifications</Typography>
-        <Typography variant="body1">
-          <ul>
-            <li>
-              <strong>Minimum cage size:</strong> 30&quot; x 18&quot; x 18&quot;
-            </li>
-            <li>
-              <strong>Maximum bar gap:</strong> 1/2&quot;
-            </li>
-            <li>
-              <strong>Horizontal bars preferred?</strong> Yes
-            </li>
-            <li>
-              <strong>Corners preferred?</strong> Yes
-            </li>
-            <li>
-              <strong>Wooden cage?</strong> No
-            </li>
-          </ul>
-        </Typography>
-        <Typography variant="h6">Diet</Typography>
-        <Typography variant="body1">
-          <ul>
-            <li>
-              <strong>Pellets:</strong> Unlimited access
-            </li>
-            <li>
-              <strong>Veggies:</strong> Daily
-            </li>
-            <li>
-              <strong>Seeds:</strong> 1.5-2 level teaspoons per bird daily
-            </li>
-            <li>
-              <strong>Water:</strong> Refresh daily
-            </li>
-            <li>
-              <strong>Supplements:</strong> Milk thistle, probiotics
-            </li>
-          </ul>
-        </Typography>
+        <BasicCareListComponent
+          title="Cage Specifications"
+          list={[
+            { title: "Minimum cage size", fact: `30" x 18" x 18"` },
+            { title: "Maximum bar gap", fact: `1/2"` },
+            { title: "Horizontal bars preferred?", fact: `Yes` },
+            { title: "Corners preferred?", fact: `Yes` },
+            { title: "Wooden cage?", fact: `No` },
+          ]}
+        />
+        <BasicCareListComponent
+          title="Diet"
+          list={[
+            { title: "Pellets", fact: `Unlimited access` },
+            { title: "Veggies", fact: `Daily` },
+            { title: "Seeds", fact: `1.5-2 level teaspoons per bird daily` },
+            { title: "Water", fact: `Refresh daily` },
+            { title: "Supplements", fact: `Milk thistle, probiotics` },
+          ]}
+        />
       </Box>
     </Box>
+  );
+};
+
+const BasicCareListComponent = ({ title, list }) => {
+  return (
+    <>
+      <Typography variant="h6">{title}</Typography>
+      <Typography variant="body1">
+        <ul>
+          {list.map((item) => (
+            <li key={item.title}>
+              <strong>{item.title}:</strong> {item.fact}
+            </li>
+          ))}
+        </ul>
+      </Typography>
+    </>
   );
 };
