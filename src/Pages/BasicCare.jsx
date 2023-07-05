@@ -36,10 +36,14 @@ export const BasicCare = () => {
             { title: "Pellets:", fact: `Unlimited access` },
             { title: "Veggies:", fact: `Daily` },
             { title: "Seeds:", fact: `1.5-2 level teaspoons per bird daily` },
+            {
+              title: "Spray millet:",
+              fact: `Good for training treats -- not part of regular diet`,
+            },
             { title: "Water:", fact: `Refresh daily` },
             { title: "Cuttlebone:", fact: `Unlimited access` },
             { title: "Mineral block:", fact: `Unlimited access` },
-            { title: "Supplements:", fact: `Milk thistle, probiotics, egg with shell` },
+            { title: "Supplements:", fact: `Milk thistle extract, probiotics, egg with shell` },
           ]}
         />
         <BasicCareListComponent
@@ -50,7 +54,7 @@ export const BasicCare = () => {
             { title: "Rope perches?", fact: `Only if no fibers are ingested` },
             { title: "Dowel perches?", fact: `Not preferred` },
             { title: "Plastic perches?", fact: `Not preferred` },
-            { title: "Sand paper perches?", fact: `No -- unsafe` },
+            { title: "Sandpaper perches?", fact: `No -- unsafe` },
           ]}
         />
         <BasicCareListComponent
@@ -72,11 +76,15 @@ export const BasicCare = () => {
             { title: "Foraging toys?", fact: `Yes` },
             {
               title: "Rope toys?",
-              fact: `Only if tassles are removed and no fibers are ingested`,
+              fact: `Only if tassels are removed and no fibers are ingested`,
+            },
+            {
+              title: "Lava rock / pumice stone toys?",
+              fact: `Only if rock is not being ingested`,
             },
             {
               title: "Bells?",
-              fact: `Yes, but not jingle bells -- they can cause budgie's beak and toes to get stuck`,
+              fact: `Yes, except for jingle bells -- they can cause budgie's beak and toes to get stuck`,
             },
             {
               title: "Mirrors?",
@@ -90,6 +98,22 @@ export const BasicCare = () => {
               title: "Nests, half coconuts, hutches?",
               fact: `No -- anything resembling a nest can cause territorial aggression`,
             },
+          ]}
+        />
+        <BasicCareListComponent
+          title="Recommendations"
+          list={[
+            {
+              title: "Cages:",
+              fact: `Prevue F040, F050, and SPF0610 flight cages, Yaheetech 69-Inch Extra Large Bird Cage`,
+            },
+            {
+              title: "Pellets:",
+              fact: `Harrison's Bird Foods High Potency Super Fine, RoudyBush Daily Maintenance Bird Food`,
+            },
+            { title: "Seeds:", fact: `Dr. Harvey's Our Best Parakeet Food` },
+            { title: "Mineral Block:", fact: `Manu mineral block` },
+            { title: "UV Lighting:", fact: `Zoo Med AvianSun 5.0 UVB Compact Fluorescent Bulb` },
           ]}
         />
       </Box>
