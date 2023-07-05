@@ -1,4 +1,3 @@
-export { BragPage } from "./BragPage";
+export { BasicCare } from "./BasicCare";
 export { FullPageLoader } from "./FullPageLoader";
-export { Goals } from "./Goals";
 export { PageNotFound } from "./PageNotFound";

@@ -1,16 +1,13 @@
 import { Box } from "@mui/system";
 import { Outlet } from "react-router-dom";
-import { BragContextProvider } from "./Contexts";
 
 import { Navigation } from "./Navigation";
 
 function App() {
   return (
     <Box>
-      <BragContextProvider>
-        <Navigation />
-        <Outlet />
-      </BragContextProvider>
+      <Navigation />
+      <Outlet />
     </Box>
   );
 }

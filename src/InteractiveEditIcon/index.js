@@ -1,1 +1,0 @@
-export { InteractiveEditIcon } from "./InteractiveEditIcon";

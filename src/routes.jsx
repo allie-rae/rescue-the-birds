@@ -1,6 +1,5 @@
 import App from "./App";
-import { BragPage, Goals, PageNotFound } from "./Pages";
-import { Demo } from "./Pages/Demo";
+import { BasicCare, PageNotFound } from "./Pages";
 
 export const routes = [
   {
@@ -8,9 +7,7 @@ export const routes = [
     element: <App />,
     errorElement: <PageNotFound />,
     children: [
-      { path: "/", element: <BragPage /> },
-      { path: "/goals", element: <Goals /> },
-      { path: "/demo", element: <Demo /> },
+      { path: "/", element: <BasicCare /> },
       { path: "/404", element: <PageNotFound /> },
     ],
   },

@@ -26,6 +26,10 @@ export const themeOptions = {
     caption: {
       fontSize: "1rem",
     },
+    h1: {
+      fontSize: "2rem",
+      fontWeight: "bold",
+    },
     h6: {
       fontSize: "1.2rem",
     },
