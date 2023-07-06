@@ -19,7 +19,7 @@ export const BasicCare = () => {
       <Typography variant="h1" sx={{ mb: 2 }}>
         Budgie Fact Sheet
       </Typography>
-      <Box sx={{ width: "500px", maxWidth: "100%" }}>
+      <Box sx={{ width: "600px", maxWidth: "100%" }}>
         <BasicCareListComponent
           title="Cage Specifications"
           list={[
