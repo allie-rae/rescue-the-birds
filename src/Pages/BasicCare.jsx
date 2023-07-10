@@ -23,10 +23,9 @@ export const BasicCare = () => {
         <BasicCareListComponent
           title="Cage Specifications"
           list={[
-            { title: "Minimum cage size:", fact: `30" x 18" x 18"` },
+            { title: "Minimum cage size:", fact: `30" x 18" x 18 for 1 or 2 birds"` },
             { title: "Maximum bar gap:", fact: `1/2"` },
-            { title: "Horizontal bars preferred?", fact: `Yes` },
-            { title: "Corners preferred?", fact: `Yes` },
+            { title: "Cage shape:", fact: `Rectangular preferred; Round cages are not ideal` },
             { title: "Wooden cage?", fact: `No` },
           ]}
         />
@@ -43,13 +42,19 @@ export const BasicCare = () => {
             { title: "Water:", fact: `Refresh daily` },
             { title: "Cuttlebone:", fact: `Unlimited access` },
             { title: "Mineral block:", fact: `Unlimited access` },
-            { title: "Supplements:", fact: `Milk thistle extract, probiotics, egg with shell` },
+            {
+              title: "Supplements:",
+              fact: `Milk thistle extract formulated for birds, probiotics, egg with shell or commercially made egg food for birds`,
+            },
           ]}
         />
         <BasicCareListComponent
           title="Perches"
           list={[
-            { title: "Natural perches of varying diameters?", fact: `Yes` },
+            {
+              title: "Natural perches of varying diameters?",
+              fact: `Yes, made from non-toxic trees or shrubs`,
+            },
             { title: "Calcium perches?", fact: `Yes` },
             { title: "Rope perches?", fact: `Only if no fibers are ingested` },
             { title: "Dowel perches?", fact: `Not preferred` },
@@ -70,7 +75,10 @@ export const BasicCare = () => {
             { title: "Do budgies need a variety of toys?", fact: `Yes` },
             { title: "Should toys be rotated to prevent boredom?", fact: `Yes` },
             { title: "Wooden chew toys?", fact: `Yes, if wood is budgie-safe` },
-            { title: "Toys meant for shredding?", fact: `Yes` },
+            {
+              title: "Toys meant for shredding?",
+              fact: `Yes, but keep in mind this can make a bird hormonal`,
+            },
             { title: "Swings?", fact: `Yes` },
             { title: "Ladders?", fact: `Yes` },
             { title: "Foraging toys?", fact: `Yes` },
@@ -88,11 +96,7 @@ export const BasicCare = () => {
             },
             {
               title: "Mirrors?",
-              fact: `Only if budgie is not obsessed / regurgitating / attempting to mate with reflection`,
-            },
-            {
-              title: "Very hard wooden toys?",
-              fact: `No -- give budgies soft wooden toys so they can shred them`,
+              fact: `Only if budgie is not obsessed / regurgitating / attempting to mate with reflection. Males and single birds are more prone to unhealthy obsession`,
             },
             {
               title: "Nests, half coconuts, hutches?",
