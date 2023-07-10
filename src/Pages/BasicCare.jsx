@@ -17,13 +17,13 @@ export const BasicCare = () => {
       }}
     >
       <Typography variant="h1" sx={{ mb: 2 }}>
-        Budgie Fact Sheet
+        Budgie Care Sheet
       </Typography>
       <Box sx={{ width: "600px", maxWidth: "100%" }}>
         <BasicCareListComponent
           title="Cage Specifications"
           list={[
-            { title: "Minimum cage size:", fact: `30" x 18" x 18 for 1 or 2 birds"` },
+            { title: "Minimum cage size:", fact: `30" x 18" x 18" for 1 or 2 birds` },
             { title: "Maximum bar gap:", fact: `1/2"` },
             { title: "Cage shape:", fact: `Rectangular preferred; Round cages are not ideal` },
             { title: "Wooden cage?", fact: `No` },
