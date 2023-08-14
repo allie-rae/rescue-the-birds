@@ -1,5 +1,5 @@
 import App from "./App";
-import { BasicCare, PageNotFound } from "./Pages";
+import { FrontPage, PageNotFound } from "./Pages";
 
 export const routes = [
   {
@@ -7,7 +7,7 @@ export const routes = [
     element: <App />,
     errorElement: <PageNotFound />,
     children: [
-      { path: "/", element: <BasicCare /> },
+      { path: "/", element: <FrontPage /> },
       { path: "/404", element: <PageNotFound /> },
     ],
   },
