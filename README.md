@@ -1,3 +1,3 @@
-# budgie facts
+# Rescue the birds
 
-A simple website full of budgie facts
+A website to help out my local parrot shelter
