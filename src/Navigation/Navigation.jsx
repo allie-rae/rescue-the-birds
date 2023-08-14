@@ -61,7 +61,7 @@ export function Navigation(props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            A Refuge for Saving the Wildlife
+            Rescue the Birds
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
