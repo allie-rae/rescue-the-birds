@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import rose from "../Photos/rose.jpg";
 
 export const FrontPage = () => {
   return (
@@ -9,14 +10,15 @@ export const FrontPage = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 3,
         marginBottom: 3,
         paddingLeft: 2,
         paddingRight: 2,
         maxWidth: "100%",
       }}
     >
-      <Typography variant="h1" sx={{ mb: 2 }}>
+      <img src={rose} width="400px" />
+
+      <Typography variant="h1" sx={{ mb: 2, mt: 2 }}>
         Welcome to the Refuge
       </Typography>
       <Box sx={{ width: "600px", maxWidth: "100%" }}>
