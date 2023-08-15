@@ -30,6 +30,10 @@ export const themeOptions = {
       fontSize: "2rem",
       fontWeight: "bold",
     },
+    h2: {
+      fontSize: "1.5rem",
+      fontWeight: "bold",
+    },
     h6: {
       fontSize: "1.2rem",
     },
