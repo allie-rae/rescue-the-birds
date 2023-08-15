@@ -6,9 +6,10 @@ import { Footer } from "./Footer";
 
 function App() {
   return (
-    <Box sx={{ width: "100vw" }}>
+    <Box sx={{ width: "100vw", height: "100vh" }}>
       <Navigation />
       <Outlet />
+      <Box sx={{ height: "220px" }} />
       <Footer />
     </Box>
   );
