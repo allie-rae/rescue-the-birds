@@ -9,7 +9,7 @@ function App() {
     <Box sx={{ width: "100vw", height: "100vh" }}>
       <Navigation />
       <Outlet />
-      <Box sx={{ height: "220px" }} />
+      <Box sx={{ height: "100px" }} />
       <Footer />
     </Box>
   );

@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <Box
       sx={{
-        position: "fixed",
+        position: "relative",
         width: "100%",
         color: "white",
         backgroundColor: "primary.main",
