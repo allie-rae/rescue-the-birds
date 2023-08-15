@@ -13,11 +13,18 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
-const navItems = ["Adopt", "Volunteer", "Donate", "Board"];
+const navItems = [
+  { name: "Adopt", route: "/adopt" },
+  { name: "Volunteer", route: "/volunteer" },
+  { name: "Donate", route: "/donate" },
+  { name: "Board", route: "/board" },
+];
 
 export function Navigation(props) {
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -32,9 +39,9 @@ export function Navigation(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+          <ListItem key={item.name} disablePadding>
+            <ListItemButton sx={{ textAlign: "center" }} onClick={() => navigate(item.route)}>
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -65,8 +72,8 @@ export function Navigation(props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
+              <Button key={item.name} sx={{ color: "#fff" }} onClick={() => navigate(item.route)}>
+                {item.name}
               </Button>
             ))}
           </Box>

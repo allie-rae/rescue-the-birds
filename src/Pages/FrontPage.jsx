@@ -16,8 +16,9 @@ export const FrontPage = () => {
         maxWidth: "100%",
       }}
     >
-      <img src={rose} width="400px" />
-
+      <Box sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}>
+        <img src={rose} width="400px" />
+      </Box>
       <Typography variant="h1" sx={{ mb: 2, mt: 2 }}>
         Welcome to the Refuge
       </Typography>

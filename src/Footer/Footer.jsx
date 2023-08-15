@@ -10,7 +10,7 @@ export const Footer = () => {
         top: "auto",
         bottom: 0,
         paddingTop: "15px",
-        paddingBottom: "25px",
+        paddingBottom: "35px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

@@ -6,7 +6,7 @@ import { Footer } from "./Footer";
 
 function App() {
   return (
-    <Box>
+    <Box sx={{ width: "100vw" }}>
       <Navigation />
       <Outlet />
       <Footer />
