@@ -25,7 +25,7 @@ export const Donate = () => {
         <Typography variant="h1" sx={{ mb: 2, mt: 2 }}>
           Donate
         </Typography>
-        <Box sx={{ width: "600px", maxWidth: "100%" }}>Woo donation page</Box>
+        <Box sx={{ width: "600px", maxWidth: "100%" }}>Coming soon</Box>
       </Box>
     </Fade>
   );
