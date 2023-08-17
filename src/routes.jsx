@@ -1,5 +1,14 @@
 import App from "./App";
-import { Adopt, FrontPage, PageNotFound, Volunteer, Donate, Board, Relinquish } from "./Pages";
+import {
+  Adopt,
+  FrontPage,
+  PageNotFound,
+  Volunteer,
+  Donate,
+  Board,
+  Relinquish,
+  Contact,
+} from "./Pages";
 
 export const routes = [
   {
@@ -13,6 +22,7 @@ export const routes = [
       { path: "/donate", element: <Donate />, exact: true },
       { path: "/board", element: <Board />, exact: true },
       { path: "/relinquish", element: <Relinquish />, exact: true },
+      { path: "/contact", element: <Contact />, exact: true },
       { path: "/404", element: <PageNotFound /> },
     ],
   },

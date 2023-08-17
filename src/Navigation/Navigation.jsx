@@ -22,6 +22,7 @@ const navItems = [
   { name: "Volunteer", route: "/volunteer" },
   { name: "Donate", route: "/donate" },
   { name: "Relinquish", route: "/relinquish" },
+  { name: "Contact", route: "/contact" },
 ];
 
 export function Navigation(props) {

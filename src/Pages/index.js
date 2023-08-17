@@ -6,3 +6,4 @@ export { Volunteer } from "./Volunteer";
 export { Donate } from "./Donate";
 export { Board } from "./Board";
 export { Relinquish } from "./Relinquish";
+export { Contact } from "./Contact";

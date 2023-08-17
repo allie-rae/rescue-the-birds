@@ -1,7 +1,6 @@
-import { Fade, Link, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
+import { Fade, Link, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import greenbirb from "../Photos/greenbirb.jpg";
-import CircleIcon from "@mui/icons-material/Circle";
 import { ListOfTests } from "../ListOfTests";
 
 export const Relinquish = () => {
