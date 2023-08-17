@@ -18,9 +18,10 @@ import { useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 const navItems = [
   { name: "Adopt", route: "/adopt" },
+  { name: "Board", route: "/board" },
   { name: "Volunteer", route: "/volunteer" },
   { name: "Donate", route: "/donate" },
-  { name: "Board", route: "/board" },
+  { name: "Relinquish", route: "/relinquish" },
 ];
 
 export function Navigation(props) {

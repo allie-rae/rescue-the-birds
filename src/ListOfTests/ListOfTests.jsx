@@ -2,7 +2,7 @@ import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import MedicalInformationIcon from "@mui/icons-material/MedicalInformation";
 
 const listOfTests = [
-  "Polyoma vaccination or test",
+  "Polyoma test or vaccination",
   "Psittacine Beak and Feather",
   "Psittacosis",
   "Fecal - Float",
