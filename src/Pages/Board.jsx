@@ -1,6 +1,6 @@
 import { Fade, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import cutetoo3 from "../Photos/cutetoo3.jpg";
+import oldLadyBird from "../Photos/old-lady-bird.png";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -28,7 +28,7 @@ export const Board = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={cutetoo3} width="400px" />
+          <img src={oldLadyBird} width="400px" />
         </Box>
         <Typography variant="h1" sx={{ mt: 2 }}>
           Board

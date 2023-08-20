@@ -1,6 +1,6 @@
 import { Fade, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import took from "../Photos/took.jpg";
+import took from "../Photos/took.png";
 import { ListOfTests } from "../ListOfTests";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import RuleIcon from "@mui/icons-material/Rule";

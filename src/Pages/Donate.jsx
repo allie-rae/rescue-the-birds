@@ -1,6 +1,6 @@
 import { Fade, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import mango from "../Photos/mango.jpg";
+import mango from "../Photos/mango.png";
 
 export const Donate = () => {
   return (

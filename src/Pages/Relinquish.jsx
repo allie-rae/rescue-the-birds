@@ -1,6 +1,6 @@
 import { Fade, Link, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import greenbirb from "../Photos/greenbirb.jpg";
+import greenbirb from "../Photos/greenbirb.png";
 import { ListOfTests } from "../ListOfTests";
 
 export const Relinquish = () => {

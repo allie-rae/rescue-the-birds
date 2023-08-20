@@ -1,6 +1,6 @@
 import { Fade, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import cutetoo2 from "../Photos/cutetoo2.jpg";
+import poppy from "../Photos/poppy.png";
 
 export const Contact = () => {
   return (
@@ -20,7 +20,7 @@ export const Contact = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={cutetoo2} width="400px" />
+          <img src={poppy} width="400px" />
         </Box>
         <Typography variant="h1" sx={{ mb: 2, mt: 2 }}>
           Contact

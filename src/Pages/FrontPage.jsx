@@ -1,6 +1,6 @@
 import { Fade, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import rose from "../Photos/rose.jpg";
+import rose from "../Photos/rose.png";
 
 export const FrontPage = () => {
   return (

@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import tuki from "../Photos/tuki.jpg";
+import tuki from "../Photos/tuki.png";
 
 export const Volunteer = () => {
   return (
