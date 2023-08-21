@@ -1,6 +1,6 @@
 import { Fade, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import took from "../Photos/took.png";
+import tuki from "../Photos/tuki.png";
 import { ListOfTests } from "../ListOfTests";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import RuleIcon from "@mui/icons-material/Rule";
@@ -32,7 +32,7 @@ export const Adopt = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={took} width="400px" />
+          <img src={tuki} width="400px" />
         </Box>
         <Typography variant="h1" sx={{ mt: 2 }}>
           Adopt

@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import tuki from "../Photos/tuki.png";
+import took from "../Photos/took.png";
 
 export const Volunteer = () => {
   return (
@@ -31,7 +31,7 @@ export const Volunteer = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={tuki} width="400px" />
+          <img src={took} width="400px" />
         </Box>
         <Typography variant="h1" sx={{ mb: 2, mt: 2 }}>
           Volunteer
