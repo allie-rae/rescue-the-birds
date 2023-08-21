@@ -8,6 +8,7 @@ import {
   Board,
   Relinquish,
   Contact,
+  About,
 } from "./Pages";
 
 export const routes = [
@@ -23,6 +24,7 @@ export const routes = [
       { path: "/board", element: <Board />, exact: true },
       { path: "/relinquish", element: <Relinquish />, exact: true },
       { path: "/contact", element: <Contact />, exact: true },
+      { path: "/about", element: <About />, exact: true },
       { path: "/404", element: <PageNotFound /> },
     ],
   },

@@ -19,8 +19,9 @@ const drawerWidth = 240;
 const navItems = [
   { name: "Adopt", route: "/adopt" },
   { name: "Board", route: "/board" },
-  { name: "Volunteer", route: "/volunteer" },
   { name: "Donate", route: "/donate" },
+  { name: "About", route: "/about" },
+  { name: "Volunteer", route: "/volunteer" },
   { name: "Relinquish", route: "/relinquish" },
   { name: "Contact", route: "/contact" },
 ];

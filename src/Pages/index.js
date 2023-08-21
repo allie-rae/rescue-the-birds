@@ -7,3 +7,4 @@ export { Donate } from "./Donate";
 export { Board } from "./Board";
 export { Relinquish } from "./Relinquish";
 export { Contact } from "./Contact";
+export { About } from "./About";
