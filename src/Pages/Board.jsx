@@ -182,7 +182,6 @@ export const Board = () => {
                 <FormControlLabel control={<Checkbox />} label="Wing Clip ($10)" />
                 <FormControlLabel control={<Checkbox />} label="Nail Trim ($20)" />
                 <FormControlLabel control={<Checkbox />} label="Microchipping - AVID Chip ($25)" />
-                <FormControlLabel control={<Checkbox />} label="None" />
               </FormGroup>
               <FormLabel id="emergency-buttons-group-label" sx={{ fontWeight: "bold" }}>
                 I request that in the event of an emergency, as so deemed by the staff at the
@@ -231,7 +230,7 @@ export const Board = () => {
                 allow us to recoup any monies not received. The Guardian is responsible for bringing
                 toys. For those times that this has not been provided, the Refuge will provide the
                 bird with an adequate number of toys for proper mental stimulation and the Guardian
-                charged for said toys.
+                will be charged for said toys.
               </FormLabel>
               <FormControlLabel control={<Checkbox />} label="Agreed" />
               <Button variant="contained" color="primary">
