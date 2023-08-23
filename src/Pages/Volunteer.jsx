@@ -31,7 +31,7 @@ export const Volunteer = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={took} width="400px" />
+          <img src={took} width="400px" style={{ borderRadius: "5px" }} />
         </Box>
         <Typography variant="h1" sx={{ mb: 2, mt: 2 }}>
           Volunteer

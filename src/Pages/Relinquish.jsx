@@ -21,7 +21,7 @@ export const Relinquish = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={greenbirb} width="400px" />
+          <img src={greenbirb} width="400px" style={{ borderRadius: "5px" }} />
         </Box>
         <Typography variant="h1" sx={{ mt: 2 }}>
           Relinquish

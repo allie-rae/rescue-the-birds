@@ -41,7 +41,7 @@ export const Board = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={rose} width="400px" />
+          <img src={rose} width="400px" style={{ borderRadius: "5px" }} />
         </Box>
         <Typography variant="h1" sx={{ mt: 2 }}>
           Board
