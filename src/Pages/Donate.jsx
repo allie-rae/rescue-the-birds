@@ -25,7 +25,17 @@ export const Donate = () => {
         <Typography variant="h1" sx={{ mb: 2, mt: 2 }}>
           Donate
         </Typography>
-        <Box sx={{ width: "600px", maxWidth: "100%" }}>Coming soon</Box>
+        <Box sx={{ width: "600px", maxWidth: "100%" }}>
+          Thank you so much for your interest in donating. Each animal in our shelter is given the
+          very best avian veterinary care whenver it&apos;s needed, a healthy diet, a clean, safe
+          enclosure, regular beak and nail filings, and plenty of enrichment so they can live
+          happily while they&apos;re with us at the Refuge.
+          <br />
+          <br />
+          It costs $65 a month to care for one bird. We have between 50-80 birds at all times. The
+          animals in our care depend on the generosity of our community; without donors like you, we
+          would not be able to keep the lights on or the water running.
+        </Box>
       </Box>
     </Fade>
   );
