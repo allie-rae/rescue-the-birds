@@ -188,33 +188,14 @@ export const Adopt = () => {
           </Typography>
           <FormControl sx={{ width: "600px", maxWidth: "100%" }}>
             <Stack spacing={2}>
-              <TextField id="first-name" label="First Name" variant="outlined" />
-              <TextField id="last-name" label="Last Name" variant="outlined" />
-              {/* <TextField id="date-of-birth" label="Date of Birth (MM/DD/YYYY)" variant="outlined" /> */}
+              <TextField id="name" label="Name" variant="outlined" />
+              <TextField id="date-of-birth" label="Date of Birth (MM/DD/YYYY)" variant="outlined" />
               <TextField id="email" label="Email" variant="outlined" />
               <TextField id="phone-number" label="Phone Number" variant="outlined" />
               <TextField id="street-address" label="Street Address" variant="outlined" />
               <TextField id="city" label="City" variant="outlined" />
               <TextField id="state" label="State" variant="outlined" />
               <TextField id="zip-code" label="Zip Code" variant="outlined" />
-              {/* <TextField id="drivers-license" label="Driver's License Number" variant="outlined" /> */}
-              {/* <TextField
-                id="emergency-contact"
-                label="Emergency Contact: Name, Relationship, Address, and Phone Number"
-                variant="outlined"
-                multiline
-                minRows={4}
-              /> */}
-              <TextField
-                id="adoption-timeframe"
-                label="Timeframe you hope to adopt (Month/Year)"
-                variant="outlined"
-              />
-              <TextField
-                id="hopeful-adoptee"
-                label="Who are you interested in adopting?"
-                variant="outlined"
-              />
               <TextField
                 id="how-did-you-hear-about-us"
                 label="How did you hear about us?"
@@ -242,18 +223,6 @@ export const Adopt = () => {
                 multiline
                 minRows={4}
               />
-              <FormLabel id="children-in-future" sx={{ fontWeight: "bold" }}>
-                If you do not have children now, do you plan to do so in the future?
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="children-in-future"
-                defaultValue="no"
-                name="children-in-future-radio-buttons-group"
-              >
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-                <FormControlLabel value="unsure" control={<Radio />} label="Unsure" />
-              </RadioGroup>
               <FormLabel id="children-in-future" sx={{ fontWeight: "bold" }}>
                 Do you currently have other birds in the household?
               </FormLabel>
@@ -284,29 +253,6 @@ export const Adopt = () => {
                 multiline
                 minRows={4}
               />
-              <FormLabel id="area-for-quarantine" sx={{ fontWeight: "bold" }}>
-                If you already have a bird, do you have an area for quarantine and adjustment?
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="area-for-quarantine"
-                defaultValue="no"
-                name="area-for-quarantine-radio-buttons-group"
-              >
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-                <FormControlLabel value="unsure" control={<Radio />} label="Unsure" />
-              </RadioGroup>
-              <FormLabel id="quarantine-instruction-needed" sx={{ fontWeight: "bold" }}>
-                Do you need instruction and/or information regarding proper quarantine protocol?
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="quarantine-instruction-needed"
-                defaultValue="no"
-                name="quarantine-instructions-needed-radio-buttons-group"
-              >
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
               <FormLabel id="previously-owned-birds-bool" sx={{ fontWeight: "bold" }}>
                 Have you previously owned a bird or birds that you no longer own?
               </FormLabel>
@@ -357,27 +303,6 @@ export const Adopt = () => {
               <TextField
                 id="veterinary-clinic-phone"
                 label="Veterinarian Clinic Phone Number"
-                variant="outlined"
-              />
-              <FormLabel id="cage-bool" sx={{ fontWeight: "bold" }}>
-                Do you have a cage for a new companion bird?
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="cage-bool"
-                defaultValue="no"
-                name="cage-bool-radio-buttons-group"
-              >
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-              <TextField
-                id="cage-text"
-                label="If yes, please provide make, model, and size"
-                variant="outlined"
-              />
-              <TextField
-                id="cage-text"
-                label="If no, are you interested in purchasing a cage from us?"
                 variant="outlined"
               />
               <FormLabel id="residence-type" sx={{ fontWeight: "bold" }}>
