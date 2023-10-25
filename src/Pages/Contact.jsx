@@ -27,13 +27,7 @@ export const Contact = () => {
         </Typography>
         <Box sx={{ width: "600px", maxWidth: "100%" }}>
           <Typography variant="h3" sx={{ mb: 2, mt: 2 }}>
-            Mailing Address
-          </Typography>
-          A Refuge for Saving the Wildlife
-          <br />
-          2720 Dundee Road, Suite #229, Northbrook, Illinois 60062
-          <Typography variant="h3" sx={{ mb: 2, mt: 2 }}>
-            Telephone
+            Phone
           </Typography>
           847-509-1026
           <Typography variant="h3" sx={{ mb: 2, mt: 2 }}>
