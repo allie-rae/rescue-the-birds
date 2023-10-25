@@ -1,4 +1,19 @@
-import { Fade, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
+import {
+  Button,
+  Fade,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Radio,
+  RadioGroup,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import tuki from "../Photos/tuki.png";
 import { ListOfTests } from "../ListOfTests";
@@ -13,6 +28,7 @@ import CottageIcon from "@mui/icons-material/Cottage";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import FactCheckIcon from "@mui/icons-material/FactCheck";
 
 export const Adopt = () => {
   return (
@@ -42,7 +58,7 @@ export const Adopt = () => {
             Thank you for your interest in adopting one of our birds! Our birds&apos; wellbeing is
             our top priority; some have been with us for many years and are loved by everyone at the
             Refuge. We have a process in place to make sure the birds in our care go to a safe,
-            happy, and healthy home. Please read all of the information below before submitting an
+            happy, and healthy home. Please read all the information below before submitting an
             application.
           </Typography>
           <Typography variant="h2" sx={{ mb: 2, mt: 2 }}>
@@ -90,6 +106,12 @@ export const Adopt = () => {
                 If you already own birds, they will need to be extensively tested for contagious
                 avian diseases prior to an adoption (approximate cost: $500 per bird)
               </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <FactCheckIcon />
+              </ListItemIcon>
+              <ListItemText>You must be at least 18 years old to adopt a bird from us</ListItemText>
             </ListItem>
           </List>
           <Typography variant="h2" sx={{ mb: 2, mt: 2 }}>
@@ -157,6 +179,240 @@ export const Adopt = () => {
               </ListItemText>
             </ListItem>
           </List>
+          <Typography variant="h2" sx={{ mb: 2, mt: 2 }}>
+            Adoption Application
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 4, mt: 2 }}>
+            Please fill out the below application in its entirety. If questions are skipped or left
+            incomplete, your application will be disqualified.
+          </Typography>
+          <FormControl sx={{ width: "600px", maxWidth: "100%" }}>
+            <Stack spacing={2}>
+              <TextField id="first-name" label="First Name" variant="outlined" />
+              <TextField id="last-name" label="Last Name" variant="outlined" />
+              {/* <TextField id="date-of-birth" label="Date of Birth (MM/DD/YYYY)" variant="outlined" /> */}
+              <TextField id="email" label="Email" variant="outlined" />
+              <TextField id="phone-number" label="Phone Number" variant="outlined" />
+              <TextField id="street-address" label="Street Address" variant="outlined" />
+              <TextField id="city" label="City" variant="outlined" />
+              <TextField id="state" label="State" variant="outlined" />
+              <TextField id="zip-code" label="Zip Code" variant="outlined" />
+              {/* <TextField id="drivers-license" label="Driver's License Number" variant="outlined" /> */}
+              {/* <TextField
+                id="emergency-contact"
+                label="Emergency Contact: Name, Relationship, Address, and Phone Number"
+                variant="outlined"
+                multiline
+                minRows={4}
+              /> */}
+              <TextField
+                id="adoption-timeframe"
+                label="Timeframe you hope to adopt (Month/Year)"
+                variant="outlined"
+              />
+              <TextField
+                id="hopeful-adoptee"
+                label="Who are you interested in adopting?"
+                variant="outlined"
+              />
+              <TextField
+                id="how-did-you-hear-about-us"
+                label="How did you hear about us?"
+                variant="outlined"
+              />
+              <TextField
+                id="how-many-people-in-household"
+                label="How many people are in your household?"
+                variant="outlined"
+              />
+              <TextField
+                id="how-old-is-primary-caregiver"
+                label="How old is the primary caregiver?"
+                variant="outlined"
+              />
+              <TextField
+                id="household-ages"
+                label="What are the ages of everyone in the household?"
+                variant="outlined"
+              />
+              <TextField
+                id="children-experience-with-birds"
+                label="Are there children in the household? What is their experience with birds?"
+                variant="outlined"
+                multiline
+                minRows={4}
+              />
+              <FormLabel id="children-in-future" sx={{ fontWeight: "bold" }}>
+                If you do not have children now, do you plan to do so in the future?
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="children-in-future"
+                defaultValue="no"
+                name="children-in-future-radio-buttons-group"
+              >
+                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                <FormControlLabel value="no" control={<Radio />} label="No" />
+                <FormControlLabel value="unsure" control={<Radio />} label="Unsure" />
+              </RadioGroup>
+              <FormLabel id="children-in-future" sx={{ fontWeight: "bold" }}>
+                Do you currently have other birds in the household?
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="other-birds-in-household-bool"
+                defaultValue="no"
+                name="other-birds-in-household-bool-radio-buttons-group"
+              >
+                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                <FormControlLabel value="no" control={<Radio />} label="No" />
+              </RadioGroup>
+              <TextField
+                id="other-birds-in-household-text"
+                label="If yes, list species and how many"
+                variant="outlined"
+                multiline
+                minRows={4}
+              />
+              <TextField
+                id="last-bird-checkup-date"
+                label="If you currently have birds, what was the date of their last annual checkup?"
+                variant="outlined"
+              />
+              <TextField
+                id="bird-diet"
+                label="List the current diet that you feed your birds"
+                variant="outlined"
+                multiline
+                minRows={4}
+              />
+              <FormLabel id="area-for-quarantine" sx={{ fontWeight: "bold" }}>
+                If you already have a bird, do you have an area for quarantine and adjustment?
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="area-for-quarantine"
+                defaultValue="no"
+                name="area-for-quarantine-radio-buttons-group"
+              >
+                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                <FormControlLabel value="no" control={<Radio />} label="No" />
+                <FormControlLabel value="unsure" control={<Radio />} label="Unsure" />
+              </RadioGroup>
+              <FormLabel id="quarantine-instruction-needed" sx={{ fontWeight: "bold" }}>
+                Do you need instruction and/or information regarding proper quarantine protocol?
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="quarantine-instruction-needed"
+                defaultValue="no"
+                name="quarantine-instructions-needed-radio-buttons-group"
+              >
+                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                <FormControlLabel value="no" control={<Radio />} label="No" />
+              </RadioGroup>
+              <FormLabel id="previously-owned-birds-bool" sx={{ fontWeight: "bold" }}>
+                Have you previously owned a bird or birds that you no longer own?
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="previously-owned-birds-bool"
+                defaultValue="no"
+                name="previously-owned-birds-bool-radio-buttons-group"
+              >
+                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                <FormControlLabel value="no" control={<Radio />} label="No" />
+              </RadioGroup>
+              <TextField
+                id="previously-owned-birds-text"
+                label="If yes, what happened to these birds?"
+                variant="outlined"
+                multiline
+                minRows={4}
+              />
+              <TextField
+                id="other-bird-experience"
+                label="Please list any other bird experience that you may have"
+                variant="outlined"
+                multiline
+                minRows={4}
+              />
+              <FormLabel id="current-veterinarian-bool" sx={{ fontWeight: "bold" }}>
+                Do you currently have an avian veterinarian?
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="current-veterinarian-bool"
+                defaultValue="yes"
+                name="current-veterinarian-bool-radio-buttons-group"
+              >
+                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                <FormControlLabel value="no" control={<Radio />} label="No" />
+              </RadioGroup>
+              <TextField id="veterinarian-name" label="Veterinarian Name" variant="outlined" />
+              <TextField
+                id="veterinary-clinic-name"
+                label="Veterinarian Clinic Name"
+                variant="outlined"
+              />
+              <TextField
+                id="veterinary-clinic-address"
+                label="Veterinarian Clinic Address"
+                variant="outlined"
+              />
+              <TextField
+                id="veterinary-clinic-phone"
+                label="Veterinarian Clinic Phone Number"
+                variant="outlined"
+              />
+              <FormLabel id="cage-bool" sx={{ fontWeight: "bold" }}>
+                Do you have a cage for a new companion bird?
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="cage-bool"
+                defaultValue="no"
+                name="cage-bool-radio-buttons-group"
+              >
+                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                <FormControlLabel value="no" control={<Radio />} label="No" />
+              </RadioGroup>
+              <TextField
+                id="cage-text"
+                label="If yes, please provide make, model, and size"
+                variant="outlined"
+              />
+              <TextField
+                id="cage-text"
+                label="If no, are you interested in purchasing a cage from us?"
+                variant="outlined"
+              />
+              <FormLabel id="residence-type" sx={{ fontWeight: "bold" }}>
+                Residence
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="residence-type"
+                defaultValue="single-family-house"
+                name="residence-type-radio-buttons-group"
+              >
+                <FormControlLabel
+                  value="single-family-house"
+                  control={<Radio />}
+                  label="Single Family House"
+                />
+                <FormControlLabel value="mobile-home" control={<Radio />} label="Mobile Home" />
+                <FormControlLabel value="condo" control={<Radio />} label="Condo" />
+                <FormControlLabel
+                  value="shared-housing"
+                  control={<Radio />}
+                  label="Shared Housing"
+                />
+                <FormControlLabel value="apartment" control={<Radio />} label="Apartment" />
+                <FormControlLabel
+                  value="temporary-housing"
+                  control={<Radio />}
+                  label="Temporary Housing"
+                />
+                <FormControlLabel value="other-housing" control={<Radio />} label="Other" />
+              </RadioGroup>
+              <Button variant="contained" color="primary">
+                Submit
+              </Button>
+            </Stack>
+          </FormControl>
         </Box>
       </Box>
     </Fade>

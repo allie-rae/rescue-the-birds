@@ -22,6 +22,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { ListOfTests } from "../ListOfTests";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 export const Board = () => {
   return (
@@ -58,6 +59,13 @@ export const Board = () => {
           </Typography>
           <PricingTable />
           <Typography variant="h2" sx={{ mt: 4, mb: 2 }}>
+            Cancellations
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 4, mt: 2 }}>
+            Clients must cancel their reservations at least 72 hours in advance in order to receive
+            a full refund.
+          </Typography>
+          <Typography variant="h2" sx={{ mt: 4, mb: 2 }}>
             Required testing
           </Typography>
           <ListOfTests />
@@ -75,15 +83,9 @@ export const Board = () => {
               <FormLabel id="boarding-schedule" sx={{ fontWeight: "bold" }}>
                 Personal Information
               </FormLabel>
-              <TextField id="first-name" label="First Name" variant="outlined" />
-              <TextField id="last-name" label="Last Name" variant="outlined" />
+              <TextField id="name" label="Name" variant="outlined" />
               <TextField id="email" label="Email" variant="outlined" />
               <TextField id="phone-number" label="Phone Number" variant="outlined" />
-              <TextField
-                id="secondary-phone-number"
-                label="Secondary Phone Number"
-                variant="outlined"
-              />
               <TextField id="street-address" label="Street Address" variant="outlined" />
               <TextField id="city" label="City" variant="outlined" />
               <TextField id="state" label="State" variant="outlined" />
@@ -101,88 +103,114 @@ export const Board = () => {
                 label="Boarding End Date (MM / DD / YYYY)"
                 variant="outlined"
               />
-              <FormLabel id="gender-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
-                Parrot Information
-              </FormLabel>
-              <TextField id="parrot-name" label="Parrot's Name" variant="outlined" />
-              <TextField id="parrot-species" label="Species" variant="outlined" />
-              <TextField id="cage-location" label="Cage Location" variant="outlined" />
-              <TextField id="i-got-my-bird-from" label="I got my bird from..." variant="outlined" />
-              <FormLabel id="gender-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
-                Gender
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="gender-radio-buttons-group-label"
-                defaultValue="female"
-                name="gender-radio-buttons-group"
+              <Box
+                sx={{
+                  padding: "30px",
+                  display: "flex",
+                  flexDirection: "column",
+                  borderRadius: "5px",
+                  justifyContent: "space-between",
+                  height: "1550px",
+                  border: "1px solid #e0e0e0",
+                }}
               >
-                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                <FormControlLabel value="male" control={<Radio />} label="Male" />
-                <FormControlLabel value="unknown" control={<Radio />} label="Unknown" />
-              </RadioGroup>
-              <FormLabel id="flighted-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
-                Flighted
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="flighted-radio-buttons-group-label"
-                defaultValue="yes"
-                name="flighted-radio-buttons-group"
+                <FormLabel id="gender-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
+                  Parrot Information
+                </FormLabel>
+                <TextField id="parrot-name" label="Parrot's Name" variant="outlined" />
+                <TextField id="parrot-species" label="Species" variant="outlined" />
+                <TextField
+                  id="i-got-my-bird-from"
+                  label="I got my bird from..."
+                  variant="outlined"
+                />
+                <FormLabel id="gender-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
+                  Gender
+                </FormLabel>
+                <RadioGroup
+                  aria-labelledby="gender-radio-buttons-group-label"
+                  defaultValue="female"
+                  name="gender-radio-buttons-group"
+                >
+                  <FormControlLabel value="female" control={<Radio />} label="Female" />
+                  <FormControlLabel value="male" control={<Radio />} label="Male" />
+                  <FormControlLabel value="unknown" control={<Radio />} label="Unknown" />
+                </RadioGroup>
+                <FormLabel id="flighted-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
+                  Flighted
+                </FormLabel>
+                <RadioGroup
+                  aria-labelledby="flighted-radio-buttons-group-label"
+                  defaultValue="yes"
+                  name="flighted-radio-buttons-group"
+                >
+                  <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+                <FormLabel id="special-diet-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
+                  Special Diet
+                </FormLabel>
+                <RadioGroup
+                  aria-labelledby="special-diet-radio-buttons-group-label"
+                  defaultValue="no"
+                  name="special-diet-radio-buttons-group"
+                >
+                  <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+                <TextField
+                  id="special-diet"
+                  label="If yes, explain your bird's special diet"
+                  variant="outlined"
+                  multiline
+                  minRows={4}
+                />
+                <FormLabel id="medication-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
+                  My Bird Requires Medication
+                </FormLabel>
+                <RadioGroup
+                  aria-labelledby="medication-radio-buttons-group-label"
+                  defaultValue="no"
+                  name="medication-radio-buttons-group"
+                >
+                  <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+                <TextField
+                  id="medication"
+                  label="If yes, explain your bird's medication"
+                  variant="outlined"
+                  multiline
+                  minRows={4}
+                />
+                <TextField
+                  id="special-instructions"
+                  label="Special instructions (likes, dislikes, hours of sleep, etc.)"
+                  variant="outlined"
+                  multiline
+                  minRows={4}
+                />
+                <FormLabel id="extra-services-buttons-group-label" sx={{ fontWeight: "bold" }}>
+                  Extra Services
+                </FormLabel>
+                <FormGroup>
+                  <FormControlLabel control={<Checkbox />} label="Break Trim ($20)" />
+                  <FormControlLabel control={<Checkbox />} label="Wing Clip ($10)" />
+                  <FormControlLabel control={<Checkbox />} label="Nail Trim ($20)" />
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Microchipping - AVID Chip ($25)"
+                  />
+                </FormGroup>
+              </Box>
+              <Button
+                startIcon={<AddCircleIcon />}
+                variant="contained"
+                color="primary"
+                sx={{ width: "250px" }}
               >
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-              <FormLabel id="special-diet-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
-                Special Diet
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="special-diet-radio-buttons-group-label"
-                defaultValue="no"
-                name="special-diet-radio-buttons-group"
-              >
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-              <TextField
-                id="special-diet"
-                label="If yes, explain your bird's special diet"
-                variant="outlined"
-                multiline
-                minRows={4}
-              />
-              <FormLabel id="medication-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
-                My Bird Requires Medication
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="medication-radio-buttons-group-label"
-                defaultValue="no"
-                name="medication-radio-buttons-group"
-              >
-                <FormControlLabel value="yes" control={<Radio />} label="Yes (+$3/day)" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-              <TextField
-                id="medication"
-                label="If yes, explain your bird's medication"
-                variant="outlined"
-                multiline
-                minRows={4}
-              />
-              <TextField
-                id="special-instructions"
-                label="Special instructions (likes, dislikes, hours of sleep, etc.)"
-                variant="outlined"
-                multiline
-                minRows={4}
-              />
-              <FormLabel id="extra-services-buttons-group-label" sx={{ fontWeight: "bold" }}>
-                Extra Services
-              </FormLabel>
-              <FormGroup>
-                <FormControlLabel control={<Checkbox />} label="Break Trim ($20)" />
-                <FormControlLabel control={<Checkbox />} label="Wing Clip ($10)" />
-                <FormControlLabel control={<Checkbox />} label="Nail Trim ($20)" />
-                <FormControlLabel control={<Checkbox />} label="Microchipping - AVID Chip ($25)" />
-              </FormGroup>
+                Add another bird
+              </Button>
               <FormLabel id="emergency-buttons-group-label" sx={{ fontWeight: "bold" }}>
                 I request that in the event of an emergency, as so deemed by the staff at the
                 Refuge, that my bird(s) be taken to
@@ -212,9 +240,15 @@ export const Board = () => {
                 variant="outlined"
               />
               <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }}>
-                I will ensure the Refuge has updated vet records
+                I will email or fax the Refuge updated vet records. I acknowledge that no cages will
+                be held for my bird(s) until the Refuge receives these records.
               </FormLabel>
-              <FormControlLabel control={<Checkbox />} label="Yes" />
+              <FormControlLabel control={<Checkbox />} label="Agree" />
+              <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }}>
+                I will email or call the Refuge to arrange a dropoff time. I acknowledge that no
+                cages will be held for my bird(s) until a dropoff time is agreed upon and scheduled.
+              </FormLabel>
+              <FormControlLabel control={<Checkbox />} label="Agree" />
               <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }}>
                 The Guardian agrees that no claim or legal action will be taken against the Refuge,
                 it’s officers or agents by reason of this contract or any action of the Refuge. The
@@ -232,7 +266,7 @@ export const Board = () => {
                 bird with an adequate number of toys for proper mental stimulation and the Guardian
                 will be charged for said toys.
               </FormLabel>
-              <FormControlLabel control={<Checkbox />} label="Agreed" />
+              <FormControlLabel control={<Checkbox />} label="Agree" />
               <Button variant="contained" color="primary">
                 Submit
               </Button>
@@ -247,10 +281,10 @@ export const Board = () => {
 const rows = [
   {
     name: "price",
-    xlarge: "$25 / day",
-    large: "$20 / day",
-    medium: "$15 / day",
-    small: "$10 / day",
+    xlarge: "$35 / day",
+    large: "$25 / day",
+    medium: "$20 / day",
+    small: "$16 / day",
   },
   {
     name: "description",
@@ -267,7 +301,10 @@ export const PricingTable = () => {
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 600 }} aria-label="caption table">
         <caption>
-          <strong>Special Diets and/or Medication:</strong> +$3/day
+          <strong>Specialty Diets (anything other than the Refuge&apos;s diet):</strong> +$2/day{" "}
+          <br />
+          <br />
+          <strong>Medications:</strong> +$4/day for the first two meds, $1/day each additional med
           <br />
           <br />
           <strong>Optional Services:</strong> <br /> Wing Clipping $10 <br /> Beak Trimming $20{" "}
