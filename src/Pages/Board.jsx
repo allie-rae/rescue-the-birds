@@ -356,20 +356,6 @@ export const Board = () => {
               >
                 Add another bird
               </Button>
-              <FormLabel id="emergency-agreement" sx={{ fontWeight: "bold" }} required>
-                In the event of a medical emergency, my bird will be taken to an avian veterinarian
-                chosen by the staff at the Refuge. If my bird is taken to a vet, I agree to pay for
-                all veterinary fees.
-              </FormLabel>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    value={emergencyAgreement}
-                    onChange={() => setEmergencyAgreement(!emergencyAgreement)}
-                  />
-                }
-                label="I Agree"
-              />
               <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }} required>
                 I will email or fax the Refuge updated vet records. I acknowledge that no cages will
                 be held for my bird(s) until the Refuge receives these records.
@@ -392,6 +378,20 @@ export const Board = () => {
                   <Checkbox
                     value={dropoffAgreement}
                     onChange={() => setDropoffAgreement(!dropoffAgreement)}
+                  />
+                }
+                label="I Agree"
+              />
+              <FormLabel id="emergency-agreement" sx={{ fontWeight: "bold" }} required>
+                In the event of a medical emergency, my bird will be taken to an avian veterinarian
+                chosen by the staff at the Refuge. If my bird is taken to a vet, I agree to pay for
+                all veterinary fees.
+              </FormLabel>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    value={emergencyAgreement}
+                    onChange={() => setEmergencyAgreement(!emergencyAgreement)}
                   />
                 }
                 label="I Agree"
