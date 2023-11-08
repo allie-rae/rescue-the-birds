@@ -23,8 +23,43 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { ListOfTests } from "../ListOfTests";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { useState } from "react";
 
 export const Board = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [boardingStartDate, setBoardingStartDate] = useState("");
+  const [boardingEndDate, setBoardingEndDate] = useState("");
+
+  const [parrotList, setParrotList] = useState([]);
+
+  const [parrotName, setParrotName] = useState("");
+  const [parrotSpecies, setParrotSpecies] = useState("");
+  const [parrotSource, setParrotSource] = useState("");
+  const [parrotGender, setParrotGender] = useState("Unknown");
+  const [parrotFlighted, setParrotFlighted] = useState("Yes");
+  const [parrotSpecialDiet, setParrotSpecialDiet] = useState("No");
+  const [parrotSpecialDietDescription, setParrotSpecialDietDescription] = useState("");
+  const [parrotMedication, setParrotMedication] = useState("No");
+  const [parrotMedicationDescription, setParrotMedicationDescription] = useState("");
+  const [parrotSpecialInstructions, setParrotSpecialInstructions] = useState("");
+  const [wingClip, setWingClip] = useState(false);
+  const [beakTrim, setBeakTrim] = useState(false);
+  const [nailTrim, setNailTrim] = useState(false);
+  const [microchip, setMicrochip] = useState(false);
+
+  const [parrotExtraServices, setParrotExtraServices] = useState("");
+
+  const [emergencyAgreement, setEmergencyAgreement] = useState(false);
+  const [vetRecordsAgreement, setVetRecordsAgreement] = useState(false);
+  const [dropoffAgreement, setDropoffAgreement] = useState(false);
+  const [legalAgreement, setLegalAgreement] = useState(false);
+
   return (
     <Fade in={true} timeout={400}>
       <Box
@@ -83,13 +118,62 @@ export const Board = () => {
               <FormLabel id="boarding-schedule" sx={{ fontWeight: "bold" }}>
                 Personal Information
               </FormLabel>
-              <TextField id="name" label="Name" variant="outlined" />
-              <TextField id="email" label="Email" variant="outlined" />
-              <TextField id="phone-number" label="Phone Number" variant="outlined" />
-              <TextField id="street-address" label="Street Address" variant="outlined" />
-              <TextField id="city" label="City" variant="outlined" />
-              <TextField id="state" label="State" variant="outlined" />
-              <TextField id="zip-code" label="Zip Code" variant="outlined" />
+              <TextField
+                id="name"
+                label="Name"
+                variant="outlined"
+                required
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+              />
+              <TextField
+                id="email"
+                label="Email"
+                variant="outlined"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
+              <TextField
+                id="phone-number"
+                label="Phone Number"
+                variant="outlined"
+                required
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                value={phoneNumber}
+              />
+              <TextField
+                id="street-address"
+                label="Street Address"
+                variant="outlined"
+                required
+                onChange={(e) => setStreetAddress(e.target.value)}
+                value={streetAddress}
+              />
+              <TextField
+                id="city"
+                label="City"
+                variant="outlined"
+                required
+                onChange={(e) => setCity(e.target.value)}
+                value={city}
+              />
+              <TextField
+                id="state"
+                label="State"
+                variant="outlined"
+                required
+                onChange={(e) => setState(e.target.value)}
+                value={state}
+              />
+              <TextField
+                id="zip-code"
+                label="Zip Code"
+                variant="outlined"
+                required
+                onChange={(e) => setZipCode(e.target.value)}
+                value={zipCode}
+              />
               <FormLabel id="boarding-schedule" sx={{ fontWeight: "bold" }}>
                 Boarding Schedule
               </FormLabel>
@@ -97,11 +181,17 @@ export const Board = () => {
                 id="boarding-start-date"
                 label="Boarding Start Date (MM / DD / YYYY)"
                 variant="outlined"
+                required
+                onChange={(e) => setBoardingStartDate(e.target.value)}
+                value={boardingStartDate}
               />
               <TextField
                 id="boarding-end-date"
                 label="Boarding End Date (MM / DD / YYYY)"
                 variant="outlined"
+                required
+                onChange={(e) => setBoardingEndDate(e.target.value)}
+                value={boardingEndDate}
               />
               <Box
                 sx={{
@@ -117,43 +207,76 @@ export const Board = () => {
                 <FormLabel id="gender-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
                   Parrot Information
                 </FormLabel>
-                <TextField id="parrot-name" label="Parrot's Name" variant="outlined" />
-                <TextField id="parrot-species" label="Species" variant="outlined" />
+                <TextField
+                  id="parrot-name"
+                  label="Parrot's Name"
+                  variant="outlined"
+                  required
+                  onChange={(e) => setParrotName(e.target.value)}
+                  value={parrotName}
+                />
+                <TextField
+                  id="parrot-species"
+                  label="Species"
+                  variant="outlined"
+                  required
+                  onChange={(e) => setParrotSpecies(e.target.value)}
+                  value={parrotSpecies}
+                />
                 <TextField
                   id="i-got-my-bird-from"
                   label="I got my bird from..."
                   variant="outlined"
+                  required
+                  onChange={(e) => setParrotSource(e.target.value)}
+                  value={parrotSource}
                 />
-                <FormLabel id="gender-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
+                <FormLabel
+                  id="gender-radio-buttons-group-label"
+                  sx={{ fontWeight: "bold" }}
+                  required
+                >
                   Gender
                 </FormLabel>
                 <RadioGroup
                   aria-labelledby="gender-radio-buttons-group-label"
-                  defaultValue="female"
                   name="gender-radio-buttons-group"
+                  onChange={(e) => setParrotGender(e.target.value)}
+                  value={parrotGender}
                 >
-                  <FormControlLabel value="female" control={<Radio />} label="Female" />
-                  <FormControlLabel value="male" control={<Radio />} label="Male" />
-                  <FormControlLabel value="unknown" control={<Radio />} label="Unknown" />
+                  <FormControlLabel value="Female" control={<Radio />} label="Female" />
+                  <FormControlLabel value="Male" control={<Radio />} label="Male" />
+                  <FormControlLabel value="Unknown" control={<Radio />} label="Unknown" />
                 </RadioGroup>
-                <FormLabel id="flighted-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
+                <FormLabel
+                  id="flighted-radio-buttons-group-label"
+                  sx={{ fontWeight: "bold" }}
+                  required
+                >
                   Flighted
                 </FormLabel>
                 <RadioGroup
                   aria-labelledby="flighted-radio-buttons-group-label"
-                  defaultValue="yes"
                   name="flighted-radio-buttons-group"
+                  required
+                  onChange={(e) => setParrotFlighted(e.target.value)}
+                  value={parrotFlighted}
                 >
-                  <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                  <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                  <FormControlLabel value="No" control={<Radio />} label="No" />
                 </RadioGroup>
-                <FormLabel id="special-diet-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
+                <FormLabel
+                  id="special-diet-radio-buttons-group-label"
+                  sx={{ fontWeight: "bold" }}
+                  required
+                >
                   Special Diet
                 </FormLabel>
                 <RadioGroup
                   aria-labelledby="special-diet-radio-buttons-group-label"
-                  defaultValue="no"
                   name="special-diet-radio-buttons-group"
+                  onChange={(e) => setParrotSpecialDiet(e.target.value)}
+                  value={parrotSpecialDiet}
                 >
                   <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                   <FormControlLabel value="no" control={<Radio />} label="No" />
@@ -164,17 +287,24 @@ export const Board = () => {
                   variant="outlined"
                   multiline
                   minRows={4}
+                  onChange={(e) => setParrotSpecialDietDescription(e.target.value)}
+                  value={parrotSpecialDietDescription}
                 />
-                <FormLabel id="medication-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
+                <FormLabel
+                  id="medication-radio-buttons-group-label"
+                  sx={{ fontWeight: "bold" }}
+                  required
+                >
                   My Bird Requires Medication
                 </FormLabel>
                 <RadioGroup
                   aria-labelledby="medication-radio-buttons-group-label"
-                  defaultValue="no"
                   name="medication-radio-buttons-group"
+                  onChange={(e) => setParrotMedication(e.target.value)}
+                  value={parrotMedication}
                 >
-                  <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                  <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                  <FormControlLabel value="No" control={<Radio />} label="No" />
                 </RadioGroup>
                 <TextField
                   id="medication"
@@ -182,6 +312,8 @@ export const Board = () => {
                   variant="outlined"
                   multiline
                   minRows={4}
+                  onChange={(e) => setParrotMedicationDescription(e.target.value)}
+                  value={parrotMedicationDescription}
                 />
                 <TextField
                   id="special-instructions"
@@ -189,16 +321,29 @@ export const Board = () => {
                   variant="outlined"
                   multiline
                   minRows={4}
+                  onChange={(e) => setParrotSpecialInstructions(e.target.value)}
+                  value={parrotSpecialInstructions}
                 />
                 <FormLabel id="extra-services-buttons-group-label" sx={{ fontWeight: "bold" }}>
                   Extra Services
                 </FormLabel>
                 <FormGroup>
-                  <FormControlLabel control={<Checkbox />} label="Break Trim ($20)" />
-                  <FormControlLabel control={<Checkbox />} label="Wing Clip ($10)" />
-                  <FormControlLabel control={<Checkbox />} label="Nail Trim ($20)" />
                   <FormControlLabel
-                    control={<Checkbox />}
+                    control={<Checkbox value={beakTrim} onChange={() => setBeakTrim(!beakTrim)} />}
+                    label="Break Trim ($20)"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox value={wingClip} onChange={() => setWingClip(!wingClip)} />}
+                    label="Wing Clip ($10)"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox value={nailTrim} onChange={() => setNailTrim(!nailTrim)} />}
+                    label="Nail Trim ($20)"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox value={microchip} onChange={() => setMicrochip(!microchip)} />
+                    }
                     label="Microchipping - AVID Chip ($25)"
                   />
                 </FormGroup>
@@ -211,23 +356,47 @@ export const Board = () => {
               >
                 Add another bird
               </Button>
-              <FormLabel id="emergency-agreement" sx={{ fontWeight: "bold" }}>
+              <FormLabel id="emergency-agreement" sx={{ fontWeight: "bold" }} required>
                 In the event of a medical emergency, my bird will be taken to an avian veterinarian
                 chosen by the staff at the Refuge. If my bird is taken to a vet, I agree to pay for
                 all veterinary fees.
               </FormLabel>
-              <FormControlLabel control={<Checkbox />} label="I Agree" />
-              <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    value={emergencyAgreement}
+                    onChange={() => setEmergencyAgreement(!emergencyAgreement)}
+                  />
+                }
+                label="I Agree"
+              />
+              <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }} required>
                 I will email or fax the Refuge updated vet records. I acknowledge that no cages will
                 be held for my bird(s) until the Refuge receives these records.
               </FormLabel>
-              <FormControlLabel control={<Checkbox />} label="I Agree" />
-              <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    value={vetRecordsAgreement}
+                    onChange={() => setVetRecordsAgreement(!vetRecordsAgreement)}
+                  />
+                }
+                label="I Agree"
+              />
+              <FormLabel id="dropoff-agreement" sx={{ fontWeight: "bold" }} required>
                 I will email or call the Refuge to arrange a dropoff time. I acknowledge that no
                 cages will be held for my bird(s) until a dropoff time is agreed upon and scheduled.
               </FormLabel>
-              <FormControlLabel control={<Checkbox />} label="I Agree" />
-              <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    value={dropoffAgreement}
+                    onChange={() => setDropoffAgreement(!dropoffAgreement)}
+                  />
+                }
+                label="I Agree"
+              />
+              <FormLabel id="legal-agreement" sx={{ fontWeight: "bold" }} required>
                 The Guardian agrees that no claim or legal action will be taken against the Refuge,
                 it’s officers or agents by reason of this contract or any action of the Refuge. The
                 Guardian accepts full legal responsibility for this(ese) animal(s) and it’s actions.
@@ -244,7 +413,15 @@ export const Board = () => {
                 bird with an adequate number of toys for proper mental stimulation and the Guardian
                 will be charged for said toys.
               </FormLabel>
-              <FormControlLabel control={<Checkbox />} label="I Agree" />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    value={legalAgreement}
+                    onChange={() => setLegalAgreement(!legalAgreement)}
+                  />
+                }
+                label="I Agree"
+              />
               <Button variant="contained" color="primary">
                 Submit
               </Button>
