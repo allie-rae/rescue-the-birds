@@ -54,8 +54,7 @@ export const Volunteer = () => {
 
         <FormControl sx={{ width: "600px", maxWidth: "100%" }}>
           <Stack spacing={2}>
-            <TextField id="first-name" label="First Name" variant="outlined" />
-            <TextField id="last-name" label="Last Name" variant="outlined" />
+            <TextField id="name" label="Name" variant="outlined" />
             <TextField id="date-of-birth" label="Date of Birth (MM/DD/YYYY)" variant="outlined" />
             <TextField id="email" label="Email" variant="outlined" />
             <TextField id="phone-number" label="Phone Number" variant="outlined" />
@@ -65,23 +64,14 @@ export const Volunteer = () => {
             <TextField id="zip-code" label="Zip Code" variant="outlined" />
             <TextField id="drivers-license" label="Driver's License Number" variant="outlined" />
             <TextField
-              id="emergency-contact"
-              label="Emergency Contact: Name, Relationship, Address, and Phone Number"
-              variant="outlined"
-              multiline
-              minRows={4}
-            />
-            <TextField
-              id="days-hours-preferred"
-              label="Days / Hours Preferred"
+              id="emergency-contact-name"
+              label="Emergency Contact Name"
               variant="outlined"
             />
             <TextField
-              id="special-skills"
-              label="Special Skills (e.g. computer programming, word processing, etc.)"
+              id="emergency-contact-number"
+              label="Emergency Contact Phone Number"
               variant="outlined"
-              multiline
-              minRows={4}
             />
             <TextField
               id="bird-experience"
@@ -90,27 +80,9 @@ export const Volunteer = () => {
               multiline
               minRows={4}
             />
-            <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-              List three references that have known you for over five years. Please do not include
-              more than one relative.
-            </Typography>
             <TextField
-              id="reference-one"
-              label="Reference One: Name, Relationship, Address, and Phone Number"
-              variant="outlined"
-              multiline
-              minRows={4}
-            />
-            <TextField
-              id="reference-two"
-              label="Reference Two: Name, Relationship, Address, and Phone Number"
-              variant="outlined"
-              multiline
-              minRows={4}
-            />
-            <TextField
-              id="reference-three"
-              label="Reference Three: Name, Relationship, Address, and Phone Number"
+              id="interest"
+              label="Why are you interested in volunteering with us?"
               variant="outlined"
               multiline
               minRows={4}
@@ -124,11 +96,6 @@ export const Volunteer = () => {
                 Socializing, playing, handling of animals, feeding, cutting fruits & veggies, making
                 warm meals, rotating toys, grooming, cleaning cages, changing cage paper, cleaning
                 pet care areas, etc.
-              </FormHelperText>
-
-              <FormControlLabel control={<Checkbox />} label="Tech support" />
-              <FormHelperText>
-                Web development using JavaScript/React, general tech support.
               </FormHelperText>
 
               <FormControlLabel control={<Checkbox />} label="Fostering in your home" />
@@ -151,22 +118,6 @@ export const Volunteer = () => {
               <FormHelperText>
                 Phone calls, letters, personal contact with potential sources of funding, grant
                 writing.
-              </FormHelperText>
-              <FormControlLabel control={<Checkbox />} label="Pet taxi" />
-              <FormHelperText>
-                Pick up and delivery of birds to fundraising events and vet’s office. You will need
-                to provide proof of a valid license & auto insurance.
-              </FormHelperText>
-              <FormControlLabel control={<Checkbox />} label="Home inspection" />
-              <FormHelperText>
-                Provide pre-adoption/post-adoption in-home inspections to determine compliance with
-                proper bird care practices. Please note what distance you would be willing to travel
-                to perform these inspections.
-              </FormHelperText>
-              <FormControlLabel control={<Checkbox />} label="Newsletter" />
-              <FormHelperText>
-                Write or obtain articles for publication in a newsletter. This can be done from your
-                home if desired.
               </FormHelperText>
             </FormGroup>
             <Button variant="contained" color="primary">
