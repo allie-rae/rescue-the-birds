@@ -211,44 +211,22 @@ export const Board = () => {
               >
                 Add another bird
               </Button>
-              <FormLabel id="emergency-buttons-group-label" sx={{ fontWeight: "bold" }}>
-                I request that in the event of an emergency, as so deemed by the staff at the
-                Refuge, that my bird(s) be taken to
+              <FormLabel id="emergency-agreement" sx={{ fontWeight: "bold" }}>
+                In the event of a medical emergency, my bird will be taken to an avian veterinarian
+                chosen by the staff at the Refuge. If my bird is taken to a vet, I agree to pay for
+                all veterinary fees.
               </FormLabel>
-              <RadioGroup
-                aria-labelledby="emergency-radio-buttons-group-label"
-                defaultValue="niles"
-                name="emergency-radio-buttons-group"
-              >
-                <FormControlLabel value="niles" control={<Radio />} label="Niles Animal Hospital" />
-                <FormControlLabel
-                  value="chicago-exotics"
-                  control={<Radio />}
-                  label="Chicago Exotics Animal Hospital"
-                />
-                <FormControlLabel
-                  value="midwest"
-                  control={<Radio />}
-                  label="Midwest Animal Hospital"
-                />
-                <FormControlLabel value="ness-exotics" control={<Radio />} label="Ness Exotics" />
-                <FormControlLabel value="other" control={<Radio />} label="Other" />
-              </RadioGroup>
-              <TextField
-                id="other-hospital-name"
-                label="If other, enter hospital name here"
-                variant="outlined"
-              />
+              <FormControlLabel control={<Checkbox />} label="I Agree" />
               <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }}>
                 I will email or fax the Refuge updated vet records. I acknowledge that no cages will
                 be held for my bird(s) until the Refuge receives these records.
               </FormLabel>
-              <FormControlLabel control={<Checkbox />} label="Agree" />
+              <FormControlLabel control={<Checkbox />} label="I Agree" />
               <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }}>
                 I will email or call the Refuge to arrange a dropoff time. I acknowledge that no
                 cages will be held for my bird(s) until a dropoff time is agreed upon and scheduled.
               </FormLabel>
-              <FormControlLabel control={<Checkbox />} label="Agree" />
+              <FormControlLabel control={<Checkbox />} label="I Agree" />
               <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }}>
                 The Guardian agrees that no claim or legal action will be taken against the Refuge,
                 it’s officers or agents by reason of this contract or any action of the Refuge. The
@@ -266,7 +244,7 @@ export const Board = () => {
                 bird with an adequate number of toys for proper mental stimulation and the Guardian
                 will be charged for said toys.
               </FormLabel>
-              <FormControlLabel control={<Checkbox />} label="Agree" />
+              <FormControlLabel control={<Checkbox />} label="I Agree" />
               <Button variant="contained" color="primary">
                 Submit
               </Button>
