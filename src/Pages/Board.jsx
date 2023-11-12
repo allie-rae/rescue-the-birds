@@ -303,7 +303,7 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
   });
 
   parentRegister("bird_list", {
-    required: "Complete parrot information is required",
+    required: "Bird information is required",
     validate: isValid,
   });
 
@@ -328,7 +328,7 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
       </FormLabel>
       <TextField
         id="parrot-name"
-        label="Parrot's Name"
+        label="Bird's Name"
         variant="outlined"
         {...register("parrotName", {
           required: "Parrot name is required",
@@ -341,7 +341,7 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         label="Species"
         variant="outlined"
         {...register("parrotSpecies", {
-          required: "Parrot species is required",
+          required: "Bird species is required",
         })}
         error={!!errors.parrotSpecies?.message}
         helperText={errors.parrotSpecies?.message}
@@ -351,7 +351,7 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         label="I got my bird from..."
         variant="outlined"
         {...register("parrotSource", {
-          required: "Parrot source is required",
+          required: "Bird source is required",
         })}
         error={!!errors.parrotSource?.message}
         helperText={errors.parrotSource?.message}
