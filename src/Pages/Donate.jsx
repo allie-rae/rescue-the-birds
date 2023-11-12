@@ -32,9 +32,10 @@ export const Donate = () => {
           happily while they&apos;re with us at the Refuge.
           <br />
           <br />
+          {/* TODO: check with Rich re: how much it costs to care for one bird/month. 
           It costs $65 a month to care for one bird. We have between 50-80 birds at all times. The
           animals in our care depend on the generosity of our community; without donors like you, we
-          would not be able to keep the lights on or the water running.
+          would not be able to keep the lights on or the water running. */}
         </Box>
       </Box>
     </Fade>
