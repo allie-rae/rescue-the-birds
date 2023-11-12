@@ -2,9 +2,9 @@ import {
   Button,
   Checkbox,
   Fade,
-  FormControl,
   FormControlLabel,
   FormGroup,
+  FormHelperText,
   FormLabel,
   Radio,
   RadioGroup,
@@ -14,27 +14,38 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import rose from "../Photos/rose.png";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { ListOfTests } from "../ListOfTests";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useState } from "react";
+import { PricingTable } from "../PricingTable";
+import { useForm } from "react-hook-form";
 
 export const Board = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [streetAddress, setStreetAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zipCode, setZipCode] = useState("");
-  const [boardingStartDate, setBoardingStartDate] = useState("");
-  const [boardingEndDate, setBoardingEndDate] = useState("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    mode: "all",
+    defaultValues: {
+      person_name: "",
+      person_email: "",
+      person_phone: "",
+      person_address: "",
+      person_city: "",
+      person_state: "",
+      person_zipcode: "",
+      boarding_start_date: "",
+      boarding_end_date: "",
+      vet_record_agreement: false,
+      dropoff_agreement: false,
+      emergency_agreement: false,
+      legal_agreement: false,
+    },
+  });
+  console.log("watch('person_name')", watch("person_name"));
+  console.log("errors", errors);
 
   const [parrotList, setParrotList] = useState([]);
 
@@ -54,11 +65,6 @@ export const Board = () => {
   const [microchip, setMicrochip] = useState(false);
 
   const [parrotExtraServices, setParrotExtraServices] = useState("");
-
-  const [emergencyAgreement, setEmergencyAgreement] = useState(false);
-  const [vetRecordsAgreement, setVetRecordsAgreement] = useState(false);
-  const [dropoffAgreement, setDropoffAgreement] = useState(false);
-  const [legalAgreement, setLegalAgreement] = useState(false);
 
   return (
     <Fade in={true} timeout={400}>
@@ -113,380 +119,349 @@ export const Board = () => {
           <Typography variant="h2" sx={{ mt: 4, mb: 2 }}>
             Boarding Contract
           </Typography>
-          <FormControl sx={{ width: "600px", maxWidth: "100%" }}>
-            <Stack spacing={2}>
-              <FormLabel id="boarding-schedule" sx={{ fontWeight: "bold" }}>
-                Personal Information
-              </FormLabel>
-              <TextField
-                id="name"
-                label="Name"
-                variant="outlined"
-                required
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-              />
-              <TextField
-                id="email"
-                label="Email"
-                variant="outlined"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-              />
-              <TextField
-                id="phone-number"
-                label="Phone Number"
-                variant="outlined"
-                required
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                value={phoneNumber}
-              />
-              <TextField
-                id="street-address"
-                label="Street Address"
-                variant="outlined"
-                required
-                onChange={(e) => setStreetAddress(e.target.value)}
-                value={streetAddress}
-              />
-              <TextField
-                id="city"
-                label="City"
-                variant="outlined"
-                required
-                onChange={(e) => setCity(e.target.value)}
-                value={city}
-              />
-              <TextField
-                id="state"
-                label="State"
-                variant="outlined"
-                required
-                onChange={(e) => setState(e.target.value)}
-                value={state}
-              />
-              <TextField
-                id="zip-code"
-                label="Zip Code"
-                variant="outlined"
-                required
-                onChange={(e) => setZipCode(e.target.value)}
-                value={zipCode}
-              />
-              <FormLabel id="boarding-schedule" sx={{ fontWeight: "bold" }}>
-                Boarding Schedule
-              </FormLabel>
-              <TextField
-                id="boarding-start-date"
-                label="Boarding Start Date (MM / DD / YYYY)"
-                variant="outlined"
-                required
-                onChange={(e) => setBoardingStartDate(e.target.value)}
-                value={boardingStartDate}
-              />
-              <TextField
-                id="boarding-end-date"
-                label="Boarding End Date (MM / DD / YYYY)"
-                variant="outlined"
-                required
-                onChange={(e) => setBoardingEndDate(e.target.value)}
-                value={boardingEndDate}
-              />
-              <Box
-                sx={{
-                  padding: "30px",
-                  display: "flex",
-                  flexDirection: "column",
-                  borderRadius: "5px",
-                  justifyContent: "space-between",
-                  height: "1550px",
-                  border: "1px solid #e0e0e0",
-                }}
-              >
-                <FormLabel id="gender-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
-                  Parrot Information
+          <Box sx={{ width: "600px", maxWidth: "100%" }}>
+            <form onSubmit={handleSubmit((data) => console.log("data", data))}>
+              <Stack spacing={2}>
+                <FormLabel id="boarding-schedule" sx={{ fontWeight: "bold" }}>
+                  Personal Information
                 </FormLabel>
                 <TextField
-                  id="parrot-name"
-                  label="Parrot's Name"
+                  id="name"
+                  label="Name"
                   variant="outlined"
-                  required
-                  onChange={(e) => setParrotName(e.target.value)}
-                  value={parrotName}
+                  {...register("person_name", { required: "Name is required" })}
+                  error={!!errors.person_name?.message}
+                  helperText={errors.person_name?.message}
                 />
                 <TextField
-                  id="parrot-species"
-                  label="Species"
+                  id="email"
+                  label="Email"
                   variant="outlined"
-                  required
-                  onChange={(e) => setParrotSpecies(e.target.value)}
-                  value={parrotSpecies}
+                  {...register("person_email", { required: "Email is required" })}
+                  error={!!errors.person_email?.message}
+                  helperText={errors.person_email?.message}
                 />
                 <TextField
-                  id="i-got-my-bird-from"
-                  label="I got my bird from..."
+                  id="phone-number"
+                  label="Phone Number"
                   variant="outlined"
-                  required
-                  onChange={(e) => setParrotSource(e.target.value)}
-                  value={parrotSource}
-                />
-                <FormLabel
-                  id="gender-radio-buttons-group-label"
-                  sx={{ fontWeight: "bold" }}
-                  required
-                >
-                  Gender
-                </FormLabel>
-                <RadioGroup
-                  aria-labelledby="gender-radio-buttons-group-label"
-                  name="gender-radio-buttons-group"
-                  onChange={(e) => setParrotGender(e.target.value)}
-                  value={parrotGender}
-                >
-                  <FormControlLabel value="Female" control={<Radio />} label="Female" />
-                  <FormControlLabel value="Male" control={<Radio />} label="Male" />
-                  <FormControlLabel value="Unknown" control={<Radio />} label="Unknown" />
-                </RadioGroup>
-                <FormLabel
-                  id="flighted-radio-buttons-group-label"
-                  sx={{ fontWeight: "bold" }}
-                  required
-                >
-                  Flighted
-                </FormLabel>
-                <RadioGroup
-                  aria-labelledby="flighted-radio-buttons-group-label"
-                  name="flighted-radio-buttons-group"
-                  required
-                  onChange={(e) => setParrotFlighted(e.target.value)}
-                  value={parrotFlighted}
-                >
-                  <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                  <FormControlLabel value="No" control={<Radio />} label="No" />
-                </RadioGroup>
-                <FormLabel
-                  id="special-diet-radio-buttons-group-label"
-                  sx={{ fontWeight: "bold" }}
-                  required
-                >
-                  Special Diet
-                </FormLabel>
-                <RadioGroup
-                  aria-labelledby="special-diet-radio-buttons-group-label"
-                  name="special-diet-radio-buttons-group"
-                  onChange={(e) => setParrotSpecialDiet(e.target.value)}
-                  value={parrotSpecialDiet}
-                >
-                  <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                  <FormControlLabel value="no" control={<Radio />} label="No" />
-                </RadioGroup>
-                <TextField
-                  id="special-diet"
-                  label="If yes, explain your bird's special diet"
-                  variant="outlined"
-                  multiline
-                  minRows={4}
-                  onChange={(e) => setParrotSpecialDietDescription(e.target.value)}
-                  value={parrotSpecialDietDescription}
-                />
-                <FormLabel
-                  id="medication-radio-buttons-group-label"
-                  sx={{ fontWeight: "bold" }}
-                  required
-                >
-                  My Bird Requires Medication
-                </FormLabel>
-                <RadioGroup
-                  aria-labelledby="medication-radio-buttons-group-label"
-                  name="medication-radio-buttons-group"
-                  onChange={(e) => setParrotMedication(e.target.value)}
-                  value={parrotMedication}
-                >
-                  <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                  <FormControlLabel value="No" control={<Radio />} label="No" />
-                </RadioGroup>
-                <TextField
-                  id="medication"
-                  label="If yes, explain your bird's medication"
-                  variant="outlined"
-                  multiline
-                  minRows={4}
-                  onChange={(e) => setParrotMedicationDescription(e.target.value)}
-                  value={parrotMedicationDescription}
+                  {...register("person_phone", { required: "Phone number is required" })}
+                  error={!!errors.person_phone?.message}
+                  helperText={errors.person_phone?.message}
                 />
                 <TextField
-                  id="special-instructions"
-                  label="Special instructions (likes, dislikes, hours of sleep, etc.)"
+                  id="street-address"
+                  label="Street Address"
                   variant="outlined"
-                  multiline
-                  minRows={4}
-                  onChange={(e) => setParrotSpecialInstructions(e.target.value)}
-                  value={parrotSpecialInstructions}
+                  {...register("person_address", { required: "Street address is required" })}
+                  error={!!errors.person_address?.message}
+                  helperText={errors.person_address?.message}
                 />
-                <FormLabel id="extra-services-buttons-group-label" sx={{ fontWeight: "bold" }}>
-                  Extra Services
+                <TextField
+                  id="city"
+                  label="City"
+                  variant="outlined"
+                  {...register("person_city", { required: "City is required" })}
+                  error={!!errors.person_city?.message}
+                  helperText={errors.person_city?.message}
+                />
+                <TextField
+                  id="state"
+                  label="State"
+                  variant="outlined"
+                  {...register("person_state", { required: "State is required" })}
+                  error={!!errors.person_state?.message}
+                  helperText={errors.person_state?.message}
+                />
+                <TextField
+                  id="zip-code"
+                  label="Zip Code"
+                  variant="outlined"
+                  {...register("person_zipcode", { required: "Zip code is required" })}
+                  error={!!errors.person_zipcode?.message}
+                  helperText={errors.person_zipcode?.message}
+                />
+                <FormLabel id="boarding-schedule" sx={{ fontWeight: "bold" }}>
+                  Boarding Schedule
                 </FormLabel>
-                <FormGroup>
-                  <FormControlLabel
-                    control={<Checkbox value={beakTrim} onChange={() => setBeakTrim(!beakTrim)} />}
-                    label="Break Trim ($20)"
+                <TextField
+                  id="boarding-start-date"
+                  label="Boarding Start Date (MM/DD/YYYY)"
+                  variant="outlined"
+                  {...register("boarding_start_date", {
+                    required: "Boarding start date is required",
+                  })}
+                  error={!!errors.boarding_start_date?.message}
+                  helperText={errors.boarding_start_date?.message}
+                />
+                <TextField
+                  id="boarding-end-date"
+                  label="Boarding End Date (MM/DD/YYYY)"
+                  variant="outlined"
+                  {...register("boarding_end_date", { required: "Boarding end date is required" })}
+                  error={!!errors.boarding_end_date?.message}
+                  helperText={errors.boarding_end_date?.message}
+                />
+                <Box
+                  sx={{
+                    padding: "30px",
+                    display: "flex",
+                    flexDirection: "column",
+                    borderRadius: "5px",
+                    justifyContent: "space-between",
+                    height: "1550px",
+                    border: "1px solid #e0e0e0",
+                  }}
+                >
+                  <FormLabel id="gender-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
+                    Parrot Information
+                  </FormLabel>
+                  <TextField
+                    id="parrot-name"
+                    label="Parrot's Name"
+                    variant="outlined"
+                    // required
+                    onChange={(e) => setParrotName(e.target.value)}
+                    value={parrotName}
                   />
-                  <FormControlLabel
-                    control={<Checkbox value={wingClip} onChange={() => setWingClip(!wingClip)} />}
-                    label="Wing Clip ($10)"
+                  <TextField
+                    id="parrot-species"
+                    label="Species"
+                    variant="outlined"
+                    // required
+                    onChange={(e) => setParrotSpecies(e.target.value)}
+                    value={parrotSpecies}
                   />
-                  <FormControlLabel
-                    control={<Checkbox value={nailTrim} onChange={() => setNailTrim(!nailTrim)} />}
-                    label="Nail Trim ($20)"
+                  <TextField
+                    id="i-got-my-bird-from"
+                    label="I got my bird from..."
+                    variant="outlined"
+                    // required
+                    onChange={(e) => setParrotSource(e.target.value)}
+                    value={parrotSource}
                   />
-                  <FormControlLabel
-                    control={
-                      <Checkbox value={microchip} onChange={() => setMicrochip(!microchip)} />
-                    }
-                    label="Microchipping - AVID Chip ($25)"
+                  <FormLabel
+                    id="gender-radio-buttons-group-label"
+                    sx={{ fontWeight: "bold" }}
+                    // required
+                  >
+                    Gender
+                  </FormLabel>
+                  <RadioGroup
+                    aria-labelledby="gender-radio-buttons-group-label"
+                    name="gender-radio-buttons-group"
+                    onChange={(e) => setParrotGender(e.target.value)}
+                    value={parrotGender}
+                  >
+                    <FormControlLabel value="Female" control={<Radio />} label="Female" />
+                    <FormControlLabel value="Male" control={<Radio />} label="Male" />
+                    <FormControlLabel value="Unknown" control={<Radio />} label="Unknown" />
+                  </RadioGroup>
+                  <FormLabel
+                    id="flighted-radio-buttons-group-label"
+                    sx={{ fontWeight: "bold" }}
+                    // required
+                  >
+                    Flighted
+                  </FormLabel>
+                  <RadioGroup
+                    aria-labelledby="flighted-radio-buttons-group-label"
+                    name="flighted-radio-buttons-group"
+                    // required
+                    onChange={(e) => setParrotFlighted(e.target.value)}
+                    value={parrotFlighted}
+                  >
+                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="No" control={<Radio />} label="No" />
+                  </RadioGroup>
+                  <FormLabel
+                    id="special-diet-radio-buttons-group-label"
+                    sx={{ fontWeight: "bold" }}
+                    // required
+                  >
+                    Special Diet
+                  </FormLabel>
+                  <RadioGroup
+                    aria-labelledby="special-diet-radio-buttons-group-label"
+                    name="special-diet-radio-buttons-group"
+                    onChange={(e) => setParrotSpecialDiet(e.target.value)}
+                    value={parrotSpecialDiet}
+                  >
+                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="No" control={<Radio />} label="No" />
+                  </RadioGroup>
+                  <TextField
+                    id="special-diet"
+                    label="If yes, explain your bird's special diet"
+                    variant="outlined"
+                    multiline
+                    minRows={4}
+                    onChange={(e) => setParrotSpecialDietDescription(e.target.value)}
+                    value={parrotSpecialDietDescription}
                   />
-                </FormGroup>
-              </Box>
-              <Button
-                startIcon={<AddCircleIcon />}
-                variant="contained"
-                color="primary"
-                sx={{ width: "250px" }}
-              >
-                Add another bird
-              </Button>
-              <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }} required>
-                I will email or fax the Refuge updated vet records. I acknowledge that no cages will
-                be held for my bird(s) until the Refuge receives these records.
-              </FormLabel>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    value={vetRecordsAgreement}
-                    onChange={() => setVetRecordsAgreement(!vetRecordsAgreement)}
+                  <FormLabel
+                    id="medication-radio-buttons-group-label"
+                    sx={{ fontWeight: "bold" }}
+                    // required
+                  >
+                    My Bird Requires Medication
+                  </FormLabel>
+                  <RadioGroup
+                    aria-labelledby="medication-radio-buttons-group-label"
+                    name="medication-radio-buttons-group"
+                    onChange={(e) => setParrotMedication(e.target.value)}
+                    value={parrotMedication}
+                  >
+                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="No" control={<Radio />} label="No" />
+                  </RadioGroup>
+                  <TextField
+                    id="medication"
+                    label="If yes, explain your bird's medication"
+                    variant="outlined"
+                    multiline
+                    minRows={4}
+                    onChange={(e) => setParrotMedicationDescription(e.target.value)}
+                    value={parrotMedicationDescription}
                   />
-                }
-                label="I Agree"
-              />
-              <FormLabel id="dropoff-agreement" sx={{ fontWeight: "bold" }} required>
-                I will email or call the Refuge to arrange a dropoff time. I acknowledge that no
-                cages will be held for my bird(s) until a dropoff time is agreed upon and scheduled.
-              </FormLabel>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    value={dropoffAgreement}
-                    onChange={() => setDropoffAgreement(!dropoffAgreement)}
+                  <TextField
+                    id="special-instructions"
+                    label="Special instructions (likes, dislikes, hours of sleep, etc.)"
+                    variant="outlined"
+                    multiline
+                    minRows={4}
+                    onChange={(e) => setParrotSpecialInstructions(e.target.value)}
+                    value={parrotSpecialInstructions}
                   />
-                }
-                label="I Agree"
-              />
-              <FormLabel id="emergency-agreement" sx={{ fontWeight: "bold" }} required>
-                In the event of a medical emergency, my bird will be taken to an avian veterinarian
-                chosen by the staff at the Refuge. If my bird is taken to a vet, I agree to pay for
-                all veterinary fees.
-              </FormLabel>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    value={emergencyAgreement}
-                    onChange={() => setEmergencyAgreement(!emergencyAgreement)}
-                  />
-                }
-                label="I Agree"
-              />
-              <FormLabel id="legal-agreement" sx={{ fontWeight: "bold" }} required>
-                The Guardian agrees that no claim or legal action will be taken against the Refuge,
-                it’s officers or agents by reason of this contract or any action of the Refuge. The
-                Guardian accepts full legal responsibility for this(ese) animal(s) and it’s actions.
-                Failure to comply with these conditions may subject the Guardian to legal action
-                from the Refuge and I am aware that any monies spent by the Refuge are recoverable
-                in such legal action. Further, this contract has a specified end date at which time
-                payment in full is required to release said bird(s) to the Guardian. Failure to pay
-                will subject the bird to not be released until such time that payment is made in
-                full. For those situations in which a Guardian neglects to contact the Refuge for
-                extending the boarding date or fails to pay and pickup said bird(s) after 30 days
-                past the agreed upon termination date, the bird(s) will be placed up for adoption to
-                allow us to recoup any monies not received. The Guardian is responsible for bringing
-                toys. For those times that this has not been provided, the Refuge will provide the
-                bird with an adequate number of toys for proper mental stimulation and the Guardian
-                will be charged for said toys.
-              </FormLabel>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    value={legalAgreement}
-                    onChange={() => setLegalAgreement(!legalAgreement)}
-                  />
-                }
-                label="I Agree"
-              />
-              <Button variant="contained" color="primary">
-                Submit
-              </Button>
-            </Stack>
-          </FormControl>
+                  <FormLabel id="extra-services-buttons-group-label" sx={{ fontWeight: "bold" }}>
+                    Extra Services
+                  </FormLabel>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox value={beakTrim} onChange={() => setBeakTrim(!beakTrim)} />
+                      }
+                      label="Break Trim ($20)"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox value={wingClip} onChange={() => setWingClip(!wingClip)} />
+                      }
+                      label="Wing Clip ($10)"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox value={nailTrim} onChange={() => setNailTrim(!nailTrim)} />
+                      }
+                      label="Nail Trim ($20)"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox value={microchip} onChange={() => setMicrochip(!microchip)} />
+                      }
+                      label="Microchipping - AVID Chip ($25)"
+                    />
+                  </FormGroup>
+                </Box>
+                <Button
+                  startIcon={<AddCircleIcon />}
+                  variant="contained"
+                  color="primary"
+                  sx={{ width: "250px" }}
+                >
+                  Add another bird
+                </Button>
+                <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }} required>
+                  I will email or fax the Refuge updated vet records. I acknowledge that no cages
+                  will be held for my bird(s) until the Refuge receives these records.
+                </FormLabel>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      {...register("vet_record_agreement", {
+                        required: "Vet record agreement is required",
+                      })}
+                      error={!!errors.vet_record_agreement?.message}
+                      helperText={errors.vet_record_agreement?.message}
+                    />
+                  }
+                  label="I Agree"
+                />
+                <FormHelperText error>{errors.vet_record_agreement?.message}</FormHelperText>
+                <FormLabel id="dropoff-agreement" sx={{ fontWeight: "bold" }} required>
+                  I will email or call the Refuge to arrange a dropoff time. I acknowledge that no
+                  cages will be held for my bird(s) until a dropoff time is agreed upon and
+                  scheduled.
+                </FormLabel>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      {...register("dropoff_agreement", {
+                        required: "Dropoff agreement is required",
+                      })}
+                      error={!!errors.dropoff_agreement?.message}
+                      helperText={errors.dropoff_agreement?.message}
+                    />
+                  }
+                  label="I Agree"
+                />
+                <FormHelperText error>{errors.dropoff_agreement?.message}</FormHelperText>
+                <FormLabel id="emergency-agreement" sx={{ fontWeight: "bold" }} required>
+                  In the event of a medical emergency, my bird will be taken to an avian
+                  veterinarian chosen by the staff at the Refuge. If my bird is taken to a vet, I
+                  agree to pay for all veterinary fees.
+                </FormLabel>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      {...register("emergency_agreement", {
+                        required: "Emergency agreement is required",
+                      })}
+                      error={!!errors.emergency_agreement?.message}
+                      helperText={errors.emergency_agreement?.message}
+                    />
+                  }
+                  label="I Agree"
+                />
+                <FormHelperText error>{errors.emergency_agreement?.message}</FormHelperText>
+                <FormLabel id="legal-agreement" sx={{ fontWeight: "bold" }} required>
+                  The Guardian agrees that no claim or legal action will be taken against the
+                  Refuge, it’s officers or agents by reason of this contract or any action of the
+                  Refuge. The Guardian accepts full legal responsibility for this(ese) animal(s) and
+                  it’s actions. Failure to comply with these conditions may subject the Guardian to
+                  legal action from the Refuge and I am aware that any monies spent by the Refuge
+                  are recoverable in such legal action. Further, this contract has a specified end
+                  date at which time payment in full is required to release said bird(s) to the
+                  Guardian. Failure to pay will subject the bird to not be released until such time
+                  that payment is made in full. For those situations in which a Guardian neglects to
+                  contact the Refuge for extending the boarding date or fails to pay and pickup said
+                  bird(s) after 30 days past the agreed upon termination date, the bird(s) will be
+                  placed up for adoption to allow us to recoup any monies not received. The Guardian
+                  is responsible for bringing toys. For those times that this has not been provided,
+                  the Refuge will provide the bird with an adequate number of toys for proper mental
+                  stimulation and the Guardian will be charged for said toys.
+                </FormLabel>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      {...register("legal_agreement", {
+                        required: "Legal agreement is required",
+                      })}
+                      error={!!errors.legal_agreement?.message}
+                      helperText={errors.legal_agreement?.message}
+                    />
+                  }
+                  label="I Agree"
+                />
+                <FormHelperText error>{errors.legal_agreement?.message}</FormHelperText>
+                <Button variant="contained" color="primary" type="submit">
+                  Submit
+                </Button>
+              </Stack>
+            </form>
+          </Box>
         </Box>
       </Box>
     </Fade>
-  );
-};
-
-const rows = [
-  {
-    name: "price",
-    xlarge: "$35 / day",
-    large: "$25 / day",
-    medium: "$20 / day",
-    small: "$16 / day",
-  },
-  {
-    name: "description",
-    xlarge:
-      "Moluccan Cockatoos, Macaws, Greater Sulfur Crested Cockatoos and large Umbrella Cockatoos",
-    large: "Amazons, African Greys, Large Conures, Severe Macaws and Lories",
-    medium: "Micro/Mini-Macaws and Cockatiels",
-    small: "Budgerigars, Canaries, Finches and Lovebirds",
-  },
-];
-
-export const PricingTable = () => {
-  return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 600 }} aria-label="caption table">
-        <caption>
-          <strong>Specialty Diets (anything other than the Refuge&apos;s diet):</strong> +$2/day{" "}
-          <br />
-          <br />
-          <strong>Medications:</strong> +$4/day for the first two meds, $1/day each additional med
-          <br />
-          <br />
-          <strong>Optional Services:</strong> <br /> Wing Clipping $10 <br /> Beak Trimming $20{" "}
-          <br /> Nail Clipping $20 <br />
-          Microchipping - AVID Chips $25
-        </caption>
-        <TableHead>
-          <TableRow sx={{ backgroundColor: "primary.main" }}>
-            <TableCell sx={{ color: "white" }}>Extra Large Bird</TableCell>
-            <TableCell sx={{ color: "white" }}>Large Bird</TableCell>
-            <TableCell sx={{ color: "white" }}>Medium Bird</TableCell>
-            <TableCell sx={{ color: "white" }}>Small Bird</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.xlarge}
-              </TableCell>
-              <TableCell>{row.large}</TableCell>
-              <TableCell>{row.medium}</TableCell>
-              <TableCell>{row.small}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
   );
 };
