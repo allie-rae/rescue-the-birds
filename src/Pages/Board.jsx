@@ -323,7 +323,7 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         border: "1px solid #e0e0e0",
       }}
     >
-      <FormLabel id="gender-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
+      <FormLabel id="gender-radio-buttons-group-label" sx={{ fontWeight: "bold" }} required>
         Parrot Information
       </FormLabel>
       <TextField
@@ -398,7 +398,7 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         minRows={4}
         {...register("parrotSpecialDietDescription")}
       />
-      <FormLabel id="medication-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>
+      <FormLabel id="medication-radio-buttons-group-label" sx={{ fontWeight: "bold" }} required>
         My Bird Requires Medication
       </FormLabel>
       <RadioGroup
