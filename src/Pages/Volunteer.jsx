@@ -2,7 +2,6 @@ import {
   Button,
   Checkbox,
   Fade,
-  FormControl,
   FormControlLabel,
   FormGroup,
   FormHelperText,
@@ -52,7 +51,7 @@ export const Volunteer = () => {
           your information will be reviewed and you will be contacted by our Volunteer Coordinator.
         </Box>
 
-        <FormControl sx={{ width: "600px", maxWidth: "100%" }}>
+        <Box sx={{ width: "600px", maxWidth: "100%" }}>
           <Stack spacing={2}>
             <TextField id="name" label="Name" variant="outlined" />
             <TextField id="date-of-birth" label="Date of Birth (MM/DD/YYYY)" variant="outlined" />
@@ -124,7 +123,7 @@ export const Volunteer = () => {
               Submit
             </Button>
           </Stack>
-        </FormControl>
+        </Box>
       </Box>
     </Fade>
   );

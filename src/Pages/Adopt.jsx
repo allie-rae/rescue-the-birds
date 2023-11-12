@@ -1,7 +1,6 @@
 import {
   Button,
   Fade,
-  FormControl,
   FormControlLabel,
   FormLabel,
   List,
@@ -186,7 +185,7 @@ export const Adopt = () => {
             Please fill out the below application in its entirety. If questions are skipped or left
             incomplete, your application will be disqualified.
           </Typography>
-          <FormControl sx={{ width: "600px", maxWidth: "100%" }}>
+          <Box sx={{ width: "600px", maxWidth: "100%" }}>
             <Stack spacing={2}>
               <TextField id="name" label="Name" variant="outlined" />
               <TextField id="date-of-birth" label="Date of Birth (MM/DD/YYYY)" variant="outlined" />
@@ -337,7 +336,7 @@ export const Adopt = () => {
                 Submit
               </Button>
             </Stack>
-          </FormControl>
+          </Box>
         </Box>
       </Box>
     </Fade>
