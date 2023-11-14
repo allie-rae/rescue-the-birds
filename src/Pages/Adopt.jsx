@@ -31,7 +31,10 @@ import FactCheckIcon from "@mui/icons-material/FactCheck";
 
 export const Adopt = () => {
   return (
-    <Fade in={true} timeout={400}>
+    <Fade
+      in={true}
+      timeout={400}
+    >
       <Box
         sx={{
           display: "flex",
@@ -47,20 +50,33 @@ export const Adopt = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={tuki} width="400px" style={{ borderRadius: "5px" }} />
+          <img
+            src={tuki}
+            width="400px"
+            style={{ borderRadius: "5px" }}
+          />
         </Box>
-        <Typography variant="h1" sx={{ mt: 2 }}>
+        <Typography
+          variant="h1"
+          sx={{ mt: 2 }}
+        >
           Adopt
         </Typography>
         <Box sx={{ width: "600px", maxWidth: "100%" }}>
-          <Typography variant="body1" sx={{ mb: 4, mt: 2 }}>
+          <Typography
+            variant="body1"
+            sx={{ mb: 4, mt: 2 }}
+          >
             Thank you for your interest in adopting one of our birds! Our birds&apos; wellbeing is
             our top priority; some have been with us for many years and are loved by everyone at the
             Refuge. We have a process in place to make sure the birds in our care go to a safe,
             happy, and healthy home. Please read all the information below before submitting an
             application.
           </Typography>
-          <Typography variant="h2" sx={{ mb: 2, mt: 2 }}>
+          <Typography
+            variant="h2"
+            sx={{ mb: 2, mt: 2 }}
+          >
             Things to know before applying
           </Typography>
           <List>
@@ -113,17 +129,26 @@ export const Adopt = () => {
               <ListItemText>You must be at least 18 years old to adopt a bird from us</ListItemText>
             </ListItem>
           </List>
-          <Typography variant="h2" sx={{ mb: 2, mt: 2 }}>
+          <Typography
+            variant="h2"
+            sx={{ mb: 2, mt: 2 }}
+          >
             Bird Health
           </Typography>
-          <Typography variant="body1" sx={{ mt: 2 }}>
+          <Typography
+            variant="body1"
+            sx={{ mt: 2 }}
+          >
             Every bird in our shelter is tested extensively for contagious avian diseases. This
             medical testing (along with food and shelter) is where our adoption fees come from. If
             you own birds and are approved for adoption, your birds will need to be tested for the
             following:
           </Typography>
           <ListOfTests />
-          <Typography variant="h2" sx={{ mb: 2, mt: 2 }}>
+          <Typography
+            variant="h2"
+            sx={{ mb: 2, mt: 2 }}
+          >
             The Adoption Process
           </Typography>
           <List>
@@ -178,23 +203,61 @@ export const Adopt = () => {
               </ListItemText>
             </ListItem>
           </List>
-          <Typography variant="h2" sx={{ mb: 2, mt: 2 }}>
+          <Typography
+            variant="h2"
+            sx={{ mb: 2, mt: 2 }}
+          >
             Adoption Application
           </Typography>
-          <Typography variant="body1" sx={{ mb: 4, mt: 2 }}>
+          <Typography
+            variant="body1"
+            sx={{ mb: 4, mt: 2 }}
+          >
             Please fill out the below application in its entirety. If questions are skipped or left
             incomplete, your application will be disqualified.
           </Typography>
           <Box sx={{ width: "600px", maxWidth: "100%" }}>
             <Stack spacing={2}>
-              <TextField id="name" label="Name" variant="outlined" />
-              <TextField id="date-of-birth" label="Date of Birth (MM/DD/YYYY)" variant="outlined" />
-              <TextField id="email" label="Email" variant="outlined" />
-              <TextField id="phone-number" label="Phone Number" variant="outlined" />
-              <TextField id="street-address" label="Street Address" variant="outlined" />
-              <TextField id="city" label="City" variant="outlined" />
-              <TextField id="state" label="State" variant="outlined" />
-              <TextField id="zip-code" label="Zip Code" variant="outlined" />
+              <TextField
+                id="name"
+                label="Name"
+                variant="outlined"
+              />
+              <TextField
+                id="date-of-birth"
+                label="Date of Birth (MM/DD/YYYY)"
+                variant="outlined"
+              />
+              <TextField
+                id="email"
+                label="Email"
+                variant="outlined"
+              />
+              <TextField
+                id="phone-number"
+                label="Phone Number"
+                variant="outlined"
+              />
+              <TextField
+                id="street-address"
+                label="Street Address"
+                variant="outlined"
+              />
+              <TextField
+                id="city"
+                label="City"
+                variant="outlined"
+              />
+              <TextField
+                id="state"
+                label="State"
+                variant="outlined"
+              />
+              <TextField
+                id="zip-code"
+                label="Zip Code"
+                variant="outlined"
+              />
               <TextField
                 id="how-did-you-hear-about-us"
                 label="How did you hear about us?"
@@ -222,7 +285,10 @@ export const Adopt = () => {
                 multiline
                 minRows={4}
               />
-              <FormLabel id="children-in-future" sx={{ fontWeight: "bold" }}>
+              <FormLabel
+                id="children-in-future"
+                sx={{ fontWeight: "bold" }}
+              >
                 Do you currently have other birds in the household?
               </FormLabel>
               <RadioGroup
@@ -230,8 +296,16 @@ export const Adopt = () => {
                 defaultValue="no"
                 name="other-birds-in-household-bool-radio-buttons-group"
               >
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
+                <FormControlLabel
+                  value="yes"
+                  control={<Radio />}
+                  label="Yes"
+                />
+                <FormControlLabel
+                  value="no"
+                  control={<Radio />}
+                  label="No"
+                />
               </RadioGroup>
               <TextField
                 id="other-birds-in-household-text"
@@ -252,7 +326,10 @@ export const Adopt = () => {
                 multiline
                 minRows={4}
               />
-              <FormLabel id="previously-owned-birds-bool" sx={{ fontWeight: "bold" }}>
+              <FormLabel
+                id="previously-owned-birds-bool"
+                sx={{ fontWeight: "bold" }}
+              >
                 Have you previously owned a bird or birds that you no longer own?
               </FormLabel>
               <RadioGroup
@@ -260,8 +337,16 @@ export const Adopt = () => {
                 defaultValue="no"
                 name="previously-owned-birds-bool-radio-buttons-group"
               >
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
+                <FormControlLabel
+                  value="yes"
+                  control={<Radio />}
+                  label="Yes"
+                />
+                <FormControlLabel
+                  value="no"
+                  control={<Radio />}
+                  label="No"
+                />
               </RadioGroup>
               <TextField
                 id="previously-owned-birds-text"
@@ -277,7 +362,10 @@ export const Adopt = () => {
                 multiline
                 minRows={4}
               />
-              <FormLabel id="current-veterinarian-bool" sx={{ fontWeight: "bold" }}>
+              <FormLabel
+                id="current-veterinarian-bool"
+                sx={{ fontWeight: "bold" }}
+              >
                 Do you currently have an avian veterinarian?
               </FormLabel>
               <RadioGroup
@@ -285,10 +373,22 @@ export const Adopt = () => {
                 defaultValue="yes"
                 name="current-veterinarian-bool-radio-buttons-group"
               >
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
+                <FormControlLabel
+                  value="yes"
+                  control={<Radio />}
+                  label="Yes"
+                />
+                <FormControlLabel
+                  value="no"
+                  control={<Radio />}
+                  label="No"
+                />
               </RadioGroup>
-              <TextField id="veterinarian-name" label="Veterinarian Name" variant="outlined" />
+              <TextField
+                id="veterinarian-name"
+                label="Veterinarian Name"
+                variant="outlined"
+              />
               <TextField
                 id="veterinary-clinic-name"
                 label="Veterinarian Clinic Name"
@@ -304,7 +404,10 @@ export const Adopt = () => {
                 label="Veterinarian Clinic Phone Number"
                 variant="outlined"
               />
-              <FormLabel id="residence-type" sx={{ fontWeight: "bold" }}>
+              <FormLabel
+                id="residence-type"
+                sx={{ fontWeight: "bold" }}
+              >
                 Residence
               </FormLabel>
               <RadioGroup
@@ -317,22 +420,41 @@ export const Adopt = () => {
                   control={<Radio />}
                   label="Single Family House"
                 />
-                <FormControlLabel value="mobile-home" control={<Radio />} label="Mobile Home" />
-                <FormControlLabel value="condo" control={<Radio />} label="Condo" />
+                <FormControlLabel
+                  value="mobile-home"
+                  control={<Radio />}
+                  label="Mobile Home"
+                />
+                <FormControlLabel
+                  value="condo"
+                  control={<Radio />}
+                  label="Condo"
+                />
                 <FormControlLabel
                   value="shared-housing"
                   control={<Radio />}
                   label="Shared Housing"
                 />
-                <FormControlLabel value="apartment" control={<Radio />} label="Apartment" />
+                <FormControlLabel
+                  value="apartment"
+                  control={<Radio />}
+                  label="Apartment"
+                />
                 <FormControlLabel
                   value="temporary-housing"
                   control={<Radio />}
                   label="Temporary Housing"
                 />
-                <FormControlLabel value="other-housing" control={<Radio />} label="Other" />
+                <FormControlLabel
+                  value="other-housing"
+                  control={<Radio />}
+                  label="Other"
+                />
               </RadioGroup>
-              <Button variant="contained" color="primary">
+              <Button
+                variant="contained"
+                color="primary"
+              >
                 Submit
               </Button>
             </Stack>

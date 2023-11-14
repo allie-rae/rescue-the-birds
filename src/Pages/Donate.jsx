@@ -4,7 +4,10 @@ import mango from "../Photos/mango.png";
 
 export const Donate = () => {
   return (
-    <Fade in={true} timeout={400}>
+    <Fade
+      in={true}
+      timeout={400}
+    >
       <Box
         sx={{
           display: "flex",
@@ -20,9 +23,16 @@ export const Donate = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={mango} width="400px" style={{ borderRadius: "5px" }} />
+          <img
+            src={mango}
+            width="400px"
+            style={{ borderRadius: "5px" }}
+          />
         </Box>
-        <Typography variant="h1" sx={{ mb: 2, mt: 2 }}>
+        <Typography
+          variant="h1"
+          sx={{ mb: 2, mt: 2 }}
+        >
           Donate
         </Typography>
         <Box sx={{ width: "600px", maxWidth: "100%" }}>

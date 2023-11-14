@@ -8,7 +8,10 @@ import SearchIcon from "@mui/icons-material/Search";
 
 export const About = () => {
   return (
-    <Fade in={true} timeout={400}>
+    <Fade
+      in={true}
+      timeout={400}
+    >
       <Box
         sx={{
           display: "flex",
@@ -24,9 +27,16 @@ export const About = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={phoenix} width="400px" style={{ borderRadius: "5px" }} />
+          <img
+            src={phoenix}
+            width="400px"
+            style={{ borderRadius: "5px" }}
+          />
         </Box>
-        <Typography variant="h1" sx={{ mb: 2, mt: 2 }}>
+        <Typography
+          variant="h1"
+          sx={{ mb: 2, mt: 2 }}
+        >
           About
         </Typography>
         <Box sx={{ width: "600px", maxWidth: "100%" }}>

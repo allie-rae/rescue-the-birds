@@ -4,7 +4,10 @@ import greenbirb from "../Photos/greenbirb.png";
 
 export const Relinquish = () => {
   return (
-    <Fade in={true} timeout={400}>
+    <Fade
+      in={true}
+      timeout={400}
+    >
       <Box
         sx={{
           display: "flex",
@@ -20,13 +23,23 @@ export const Relinquish = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={greenbirb} width="400px" style={{ borderRadius: "5px" }} />
+          <img
+            src={greenbirb}
+            width="400px"
+            style={{ borderRadius: "5px" }}
+          />
         </Box>
-        <Typography variant="h1" sx={{ mt: 2, mb: 2 }}>
+        <Typography
+          variant="h1"
+          sx={{ mt: 2, mb: 2 }}
+        >
           Relinquish
         </Typography>
         <Box sx={{ width: "600px", maxWidth: "100%" }}>
-          <Typography variant="body1" sx={{ mb: 4, mt: 2 }}>
+          <Typography
+            variant="body1"
+            sx={{ mb: 4, mt: 2 }}
+          >
             <strong>The Refuge is not currently accepting new surrenders.</strong> We wish we could
             take every animal, but are limited by the amount of space and staff we have to
             adequately take care of them.
@@ -52,7 +65,10 @@ export const Relinquish = () => {
             parrot. Many issues can be resolved with the right information and we would be happy to
             guide you to resources that might help you to work through any issues with your parrot.
           </Typography>
-          <Typography variant="h2" sx={{ mb: 2, mt: 2 }}>
+          <Typography
+            variant="h2"
+            sx={{ mb: 2, mt: 2 }}
+          >
             Helpful Resources
           </Typography>
           <ul>
@@ -77,10 +93,16 @@ export const Relinquish = () => {
               </Link>
             </li>
           </ul>
-          <Typography variant="h2" sx={{ mb: 2, mt: 2 }}>
+          <Typography
+            variant="h2"
+            sx={{ mb: 2, mt: 2 }}
+          >
             Re-Home Your Parrot Without Taking Them to a Shelter
           </Typography>
-          <Typography variant="body1" sx={{ mb: 4, mt: 2 }}>
+          <Typography
+            variant="body1"
+            sx={{ mb: 4, mt: 2 }}
+          >
             No one knows your pet better than you. You know his/her likes, dislikes, interests and
             temperament, therefore you have a far greater chance of finding a successful new home
             than anyone else. Perhaps you could find your parrot a home with a friend or family

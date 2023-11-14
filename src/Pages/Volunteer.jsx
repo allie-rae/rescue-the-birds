@@ -14,7 +14,10 @@ import took from "../Photos/took.png";
 
 export const Volunteer = () => {
   return (
-    <Fade in={true} timeout={400}>
+    <Fade
+      in={true}
+      timeout={400}
+    >
       <Box
         sx={{
           display: "flex",
@@ -30,9 +33,16 @@ export const Volunteer = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={took} width="400px" style={{ borderRadius: "5px" }} />
+          <img
+            src={took}
+            width="400px"
+            style={{ borderRadius: "5px" }}
+          />
         </Box>
-        <Typography variant="h1" sx={{ mb: 2, mt: 2 }}>
+        <Typography
+          variant="h1"
+          sx={{ mb: 2, mt: 2 }}
+        >
           Volunteer
         </Typography>
         <Box sx={{ width: "600px", maxWidth: "100%", marginBottom: "20px" }}>
@@ -53,15 +63,51 @@ export const Volunteer = () => {
 
         <Box sx={{ width: "600px", maxWidth: "100%" }}>
           <Stack spacing={2}>
-            <TextField id="name" label="Name" variant="outlined" />
-            <TextField id="date-of-birth" label="Date of Birth (MM/DD/YYYY)" variant="outlined" />
-            <TextField id="email" label="Email" variant="outlined" />
-            <TextField id="phone-number" label="Phone Number" variant="outlined" />
-            <TextField id="street-address" label="Street Address" variant="outlined" />
-            <TextField id="city" label="City" variant="outlined" />
-            <TextField id="state" label="State" variant="outlined" />
-            <TextField id="zip-code" label="Zip Code" variant="outlined" />
-            <TextField id="drivers-license" label="Driver's License Number" variant="outlined" />
+            <TextField
+              id="name"
+              label="Name"
+              variant="outlined"
+            />
+            <TextField
+              id="date-of-birth"
+              label="Date of Birth (MM/DD/YYYY)"
+              variant="outlined"
+            />
+            <TextField
+              id="email"
+              label="Email"
+              variant="outlined"
+            />
+            <TextField
+              id="phone-number"
+              label="Phone Number"
+              variant="outlined"
+            />
+            <TextField
+              id="street-address"
+              label="Street Address"
+              variant="outlined"
+            />
+            <TextField
+              id="city"
+              label="City"
+              variant="outlined"
+            />
+            <TextField
+              id="state"
+              label="State"
+              variant="outlined"
+            />
+            <TextField
+              id="zip-code"
+              label="Zip Code"
+              variant="outlined"
+            />
+            <TextField
+              id="drivers-license"
+              label="Driver's License Number"
+              variant="outlined"
+            />
             <TextField
               id="emergency-contact-name"
               label="Emergency Contact Name"
@@ -86,18 +132,27 @@ export const Volunteer = () => {
               multiline
               minRows={4}
             />
-            <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+            <Typography
+              variant="body1"
+              sx={{ fontWeight: "bold" }}
+            >
               Areas of interest:
             </Typography>
             <FormGroup>
-              <FormControlLabel control={<Checkbox />} label="Bird care at the Refuge" />
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Bird care at the Refuge"
+              />
               <FormHelperText>
                 Socializing, playing, handling of animals, feeding, cutting fruits & veggies, making
                 warm meals, rotating toys, grooming, cleaning cages, changing cage paper, cleaning
                 pet care areas, etc.
               </FormHelperText>
 
-              <FormControlLabel control={<Checkbox />} label="Fostering in your home" />
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Fostering in your home"
+              />
               <FormHelperText>
                 Having one of our adoptees in your home for socializing. A separate application must
                 be filled out for each foster bird in addition to this application. If you are
@@ -113,13 +168,19 @@ export const Volunteer = () => {
                 the Refuge for any and all expenses related to regaining custody of said bird(s).
               </FormHelperText>
 
-              <FormControlLabel control={<Checkbox />} label="Fundraising" />
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Fundraising"
+              />
               <FormHelperText>
                 Phone calls, letters, personal contact with potential sources of funding, grant
                 writing.
               </FormHelperText>
             </FormGroup>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+            >
               Submit
             </Button>
           </Stack>

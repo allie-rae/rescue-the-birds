@@ -29,7 +29,10 @@ const rows = [
 export const PricingTable = () => {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 600 }} aria-label="caption table">
+      <Table
+        sx={{ minWidth: 600 }}
+        aria-label="caption table"
+      >
         <caption>
           <strong>Specialty Diets (anything other than the Refuge&apos;s diet):</strong> +$2/day{" "}
           <br />
@@ -52,7 +55,10 @@ export const PricingTable = () => {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
+              <TableCell
+                component="th"
+                scope="row"
+              >
                 {row.xlarge}
               </TableCell>
               <TableCell>{row.large}</TableCell>

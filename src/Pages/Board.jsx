@@ -45,7 +45,10 @@ export const Board = () => {
   });
 
   return (
-    <Fade in={true} timeout={400}>
+    <Fade
+      in={true}
+      timeout={400}
+    >
       <Box
         sx={{
           display: "flex",
@@ -61,46 +64,77 @@ export const Board = () => {
         <Box
           sx={{ overflowX: "hidden", width: "100vw", display: "flex", justifyContent: "center" }}
         >
-          <img src={rose} width="400px" style={{ borderRadius: "5px" }} />
+          <img
+            src={rose}
+            width="400px"
+            style={{ borderRadius: "5px" }}
+          />
         </Box>
-        <Typography variant="h1" sx={{ mt: 2 }}>
+        <Typography
+          variant="h1"
+          sx={{ mt: 2 }}
+        >
           Board
         </Typography>
         <Box sx={{ width: "600px", maxWidth: "100%" }}>
-          <Typography variant="body1" sx={{ mb: 4, mt: 2 }}>
+          <Typography
+            variant="body1"
+            sx={{ mb: 4, mt: 2 }}
+          >
             Our facility offers world-class safety for your birds, with every bird boarded here
             pre-screened for contagious avian diseases within the last year. We are bonded and
             insured and members of both the National Association of Professional Pet Sitters, NAPPS,
             and Pet Sitters International, PSI.
           </Typography>
-          <Typography variant="h2" sx={{ mt: 4, mb: 2 }}>
+          <Typography
+            variant="h2"
+            sx={{ mt: 4, mb: 2 }}
+          >
             Pricing
           </Typography>
           <PricingTable />
-          <Typography variant="h2" sx={{ mt: 4, mb: 2 }}>
+          <Typography
+            variant="h2"
+            sx={{ mt: 4, mb: 2 }}
+          >
             Cancellations
           </Typography>
-          <Typography variant="body1" sx={{ mb: 4, mt: 2 }}>
+          <Typography
+            variant="body1"
+            sx={{ mb: 4, mt: 2 }}
+          >
             Clients must cancel their reservations at least 72 hours in advance in order to receive
             a full refund.
           </Typography>
-          <Typography variant="h2" sx={{ mt: 4, mb: 2 }}>
+          <Typography
+            variant="h2"
+            sx={{ mt: 4, mb: 2 }}
+          >
             Required testing
           </Typography>
           <ListOfTests />
-          <Typography variant="body1" sx={{ mb: 4, mt: 2 }}>
+          <Typography
+            variant="body1"
+            sx={{ mb: 4, mt: 2 }}
+          >
             Medical records must be faxed to us at (847) 457-1192 prior to drop off. All tests must
             have been performed within the last year. If your bird has come into contact with any
             untested birds since the tests were performed, the test results are null and void and
             the tests must be repeated.
           </Typography>
-          <Typography variant="h2" sx={{ mt: 4, mb: 2 }}>
+          <Typography
+            variant="h2"
+            sx={{ mt: 4, mb: 2 }}
+          >
             Boarding Contract
           </Typography>
           <Box sx={{ width: "600px", maxWidth: "100%" }}>
             <form onSubmit={handleSubmit((data) => console.log("data", data))}>
               <Stack spacing={2}>
-                <FormLabel id="boarding-schedule" sx={{ fontWeight: "bold" }}>
+                <FormLabel
+                  id="boarding-schedule"
+                  sx={{ fontWeight: "bold" }}
+                >
                   Personal Information
                 </FormLabel>
                 <TextField
@@ -159,7 +193,10 @@ export const Board = () => {
                   error={!!errors.person_zipcode?.message}
                   helperText={errors.person_zipcode?.message}
                 />
-                <FormLabel id="boarding-schedule" sx={{ fontWeight: "bold" }}>
+                <FormLabel
+                  id="boarding-schedule"
+                  sx={{ fontWeight: "bold" }}
+                >
                   Boarding Schedule
                 </FormLabel>
                 <TextField
@@ -182,7 +219,11 @@ export const Board = () => {
                 />
                 <ParrotBoardingForm parentRegister={register} />
                 <FormHelperText error>{errors.bird_list?.message}</FormHelperText>
-                <FormLabel id="vet-records-agreement" sx={{ fontWeight: "bold" }} required>
+                <FormLabel
+                  id="vet-records-agreement"
+                  sx={{ fontWeight: "bold" }}
+                  required
+                >
                   I will email or fax the Refuge updated vet records. I acknowledge that no cages
                   will be held for my bird(s) until the Refuge receives these records.
                 </FormLabel>
@@ -199,7 +240,11 @@ export const Board = () => {
                   label="I Agree"
                 />
                 <FormHelperText error>{errors.vet_record_agreement?.message}</FormHelperText>
-                <FormLabel id="dropoff-agreement" sx={{ fontWeight: "bold" }} required>
+                <FormLabel
+                  id="dropoff-agreement"
+                  sx={{ fontWeight: "bold" }}
+                  required
+                >
                   I will email or call the Refuge to arrange a dropoff time. I acknowledge that no
                   cages will be held for my bird(s) until a dropoff time is agreed upon and
                   scheduled.
@@ -217,7 +262,11 @@ export const Board = () => {
                   label="I Agree"
                 />
                 <FormHelperText error>{errors.dropoff_agreement?.message}</FormHelperText>
-                <FormLabel id="emergency-agreement" sx={{ fontWeight: "bold" }} required>
+                <FormLabel
+                  id="emergency-agreement"
+                  sx={{ fontWeight: "bold" }}
+                  required
+                >
                   In the event of a medical emergency, my bird will be taken to an avian
                   veterinarian chosen by the staff at the Refuge. If my bird is taken to a vet, I
                   agree to pay for all veterinary fees.
@@ -235,7 +284,11 @@ export const Board = () => {
                   label="I Agree"
                 />
                 <FormHelperText error>{errors.emergency_agreement?.message}</FormHelperText>
-                <FormLabel id="legal-agreement" sx={{ fontWeight: "bold" }} required>
+                <FormLabel
+                  id="legal-agreement"
+                  sx={{ fontWeight: "bold" }}
+                  required
+                >
                   The Guardian agrees that no claim or legal action will be taken against the
                   Refuge, it’s officers or agents by reason of this contract or any action of the
                   Refuge. The Guardian accepts full legal responsibility for this(ese) animal(s) and
@@ -265,7 +318,11 @@ export const Board = () => {
                   label="I Agree"
                 />
                 <FormHelperText error>{errors.legal_agreement?.message}</FormHelperText>
-                <Button variant="contained" color="primary" type="submit">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
                   Submit
                 </Button>
               </Stack>
@@ -323,7 +380,11 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         border: "1px solid #e0e0e0",
       }}
     >
-      <FormLabel id="gender-radio-buttons-group-label" sx={{ fontWeight: "bold" }} required>
+      <FormLabel
+        id="gender-radio-buttons-group-label"
+        sx={{ fontWeight: "bold" }}
+        required
+      >
         Parrot Information
       </FormLabel>
       <TextField
@@ -356,7 +417,11 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         error={!!errors.parrotSource?.message}
         helperText={errors.parrotSource?.message}
       />
-      <FormLabel id="gender-radio-buttons-group-label" sx={{ fontWeight: "bold" }} required>
+      <FormLabel
+        id="gender-radio-buttons-group-label"
+        sx={{ fontWeight: "bold" }}
+        required
+      >
         Gender
       </FormLabel>
       <RadioGroup
@@ -364,11 +429,27 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         name="gender-radio-buttons-group"
         {...register("parrotGender")}
       >
-        <FormControlLabel value="Female" control={<Radio />} label="Female" />
-        <FormControlLabel value="Male" control={<Radio />} label="Male" />
-        <FormControlLabel value="Unknown" control={<Radio />} label="Unknown" />
+        <FormControlLabel
+          value="Female"
+          control={<Radio />}
+          label="Female"
+        />
+        <FormControlLabel
+          value="Male"
+          control={<Radio />}
+          label="Male"
+        />
+        <FormControlLabel
+          value="Unknown"
+          control={<Radio />}
+          label="Unknown"
+        />
       </RadioGroup>
-      <FormLabel id="flighted-radio-buttons-group-label" sx={{ fontWeight: "bold" }} required>
+      <FormLabel
+        id="flighted-radio-buttons-group-label"
+        sx={{ fontWeight: "bold" }}
+        required
+      >
         Flighted
       </FormLabel>
       <RadioGroup
@@ -376,10 +457,22 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         name="flighted-radio-buttons-group"
         {...register("parrotFlighted")}
       >
-        <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-        <FormControlLabel value="No" control={<Radio />} label="No" />
+        <FormControlLabel
+          value="Yes"
+          control={<Radio />}
+          label="Yes"
+        />
+        <FormControlLabel
+          value="No"
+          control={<Radio />}
+          label="No"
+        />
       </RadioGroup>
-      <FormLabel id="special-diet-radio-buttons-group-label" sx={{ fontWeight: "bold" }} required>
+      <FormLabel
+        id="special-diet-radio-buttons-group-label"
+        sx={{ fontWeight: "bold" }}
+        required
+      >
         Special Diet
       </FormLabel>
       <RadioGroup
@@ -387,8 +480,16 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         name="special-diet-radio-buttons-group"
         {...register("parrotSpecialDiet")}
       >
-        <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-        <FormControlLabel value="No" control={<Radio />} label="No" />
+        <FormControlLabel
+          value="Yes"
+          control={<Radio />}
+          label="Yes"
+        />
+        <FormControlLabel
+          value="No"
+          control={<Radio />}
+          label="No"
+        />
       </RadioGroup>
       <TextField
         id="special-diet"
@@ -398,7 +499,11 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         minRows={4}
         {...register("parrotSpecialDietDescription")}
       />
-      <FormLabel id="medication-radio-buttons-group-label" sx={{ fontWeight: "bold" }} required>
+      <FormLabel
+        id="medication-radio-buttons-group-label"
+        sx={{ fontWeight: "bold" }}
+        required
+      >
         My Bird Requires Medication
       </FormLabel>
       <RadioGroup
@@ -406,8 +511,16 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         name="medication-radio-buttons-group"
         {...register("parrotMedication")}
       >
-        <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-        <FormControlLabel value="No" control={<Radio />} label="No" />
+        <FormControlLabel
+          value="Yes"
+          control={<Radio />}
+          label="Yes"
+        />
+        <FormControlLabel
+          value="No"
+          control={<Radio />}
+          label="No"
+        />
       </RadioGroup>
       <TextField
         id="medication"
@@ -429,12 +542,24 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         error={!!errors.parrotSpecialInstructions?.message}
         helperText={errors.parrotSpecialInstructions?.message}
       />
-      <FormLabel id="extra-services-buttons-group-label" sx={{ fontWeight: "bold" }}>
+      <FormLabel
+        id="extra-services-buttons-group-label"
+        sx={{ fontWeight: "bold" }}
+      >
         Extra Services
       </FormLabel>
-      <FormControlLabel control={<Checkbox {...register("beakTrim")} />} label="Break Trim ($20)" />
-      <FormControlLabel control={<Checkbox {...register("wingClip")} />} label="Wing Clip ($10)" />
-      <FormControlLabel control={<Checkbox {...register("nailTrim")} />} label="Nail Trim ($20)" />
+      <FormControlLabel
+        control={<Checkbox {...register("beakTrim")} />}
+        label="Break Trim ($20)"
+      />
+      <FormControlLabel
+        control={<Checkbox {...register("wingClip")} />}
+        label="Wing Clip ($10)"
+      />
+      <FormControlLabel
+        control={<Checkbox {...register("nailTrim")} />}
+        label="Nail Trim ($20)"
+      />
       <FormControlLabel
         control={<Checkbox {...register("microchip")} />}
         label="Microchipping - AVID Chip ($25)"

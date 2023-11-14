@@ -19,7 +19,11 @@ export const Footer = () => {
         alignItems: "center",
       }}
     >
-      <a href="https://www.dandb.com/verified/business/567690193/" target="_blank" rel="noreferrer">
+      <a
+        href="https://www.dandb.com/verified/business/567690193/"
+        target="_blank"
+        rel="noreferrer"
+      >
         <img src={dunAndBradstreetVerified} />
       </a>
       <Box
@@ -27,7 +31,11 @@ export const Footer = () => {
           maxWidth: "700px",
         }}
       >
-        <Typography variant="body2" color="inherit" sx={{ textAlign: "center" }}>
+        <Typography
+          variant="body2"
+          color="inherit"
+          sx={{ textAlign: "center" }}
+        >
           © 2023 A Refuge for Saving the Wildlife. All rights reserved. <br />A Refuge for Saving
           the Wildlife is a 501(c)(3) nonprofit organization. All contributions to A Refuge for
           Saving the Wildlife are tax-deductible to the full extent allowed by law. Our tax

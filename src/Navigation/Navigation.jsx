@@ -35,15 +35,28 @@ export function Navigation(props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }} onClick={() => navigate("/")}>
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{ textAlign: "center" }}
+    >
+      <Typography
+        variant="h6"
+        sx={{ my: 2 }}
+        onClick={() => navigate("/")}
+      >
         A Refuge
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item.name} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }} onClick={() => navigate(item.route)}>
+          <ListItem
+            key={item.name}
+            disablePadding
+          >
+            <ListItemButton
+              sx={{ textAlign: "center" }}
+              onClick={() => navigate(item.route)}
+            >
               <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
@@ -76,7 +89,11 @@ export function Navigation(props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item.name} sx={{ color: "#fff" }} onClick={() => navigate(item.route)}>
+              <Button
+                key={item.name}
+                sx={{ color: "#fff" }}
+                onClick={() => navigate(item.route)}
+              >
                 {item.name}
               </Button>
             ))}
@@ -99,7 +116,10 @@ export function Navigation(props) {
           {drawer}
         </Drawer>
       </Box>
-      <Box component="main" sx={{ p: 3 }}>
+      <Box
+        component="main"
+        sx={{ p: 3 }}
+      >
         <Toolbar />
         {props.children}
       </Box>
