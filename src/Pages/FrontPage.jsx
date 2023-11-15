@@ -25,7 +25,7 @@ export const FrontPage = () => {
         >
           <img
             src={prince}
-            width="400px"
+            height="400px"
             style={{ borderRadius: "5px" }}
           />
         </Box>

@@ -52,7 +52,7 @@ export const Adopt = () => {
         >
           <img
             src={tuki}
-            width="400px"
+            height="400px"
             style={{ borderRadius: "5px" }}
           />
         </Box>

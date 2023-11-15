@@ -25,7 +25,7 @@ export const Contact = () => {
         >
           <img
             src={poppy}
-            width="400px"
+            height="400px"
             style={{ borderRadius: "5px" }}
           />
         </Box>
