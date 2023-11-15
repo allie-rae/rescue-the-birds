@@ -11,7 +11,6 @@ function App() {
       <Box sx={{ flexGrow: 1 }}>
         <Outlet />
       </Box>
-      <Box sx={{ minHeight: "100px" }} />
       <Footer />
     </Box>
   );
