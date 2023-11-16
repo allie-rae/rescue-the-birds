@@ -25,7 +25,7 @@ export const Relinquish = () => {
         >
           <img
             src={greenbirb}
-            width="400px"
+            height="400px"
             style={{ borderRadius: "5px" }}
           />
         </Box>
