@@ -1,6 +1,7 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import CardMedia from "@mui/material/CardMedia";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
@@ -11,9 +12,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import combinationMark from "../Branding/combination-mark.png";
+import brandmark from "../Branding/brandmark.png"
 
 const drawerWidth = 240;
 const navItems = [
@@ -39,13 +41,21 @@ export function Navigation(props) {
       onClick={handleDrawerToggle}
       sx={{ textAlign: "center" }}
     >
-      <Typography
-        variant="h6"
-        sx={{ my: 2 }}
-        onClick={() => navigate("/")}
-      >
-        A Refuge
-      </Typography>
+      <Box sx={{ 
+        my: 1,
+        width: "100%",
+        display: "flex",
+        justifyContent: "center"
+      }}>
+        <Link to={"/"} aria-label="Go to homepage">
+          <CardMedia
+            component="img"
+            alt="Website brandmark, click to go to homepage"
+            image={brandmark}
+            height={40}
+          />
+        </Link>
+      </Box>
       <Divider />
       <List>
         {navItems.map((item) => (
@@ -69,7 +79,9 @@ export function Navigation(props) {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar component="nav">
-        <Toolbar>
+        <Toolbar
+          sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between"}}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -79,14 +91,18 @@ export function Navigation(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-            onClick={() => navigate("/")}
+          <Box
+            sx={{ display: { xs: "none", sm: "block"}}}
           >
-            Rescue the Birds
-          </Typography>
+            <Link to={"/"} aria-label="Go to homepage">
+              <CardMedia
+                component="img"
+                alt="Website combination mark, click to go to homepage"
+                image={combinationMark}
+                height={40}
+              />
+            </Link>
+          </Box>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Button
