@@ -35,7 +35,7 @@ export const Volunteer = () => {
         >
           <img
             src={took}
-            width="400px"
+            height="400px"
             style={{ borderRadius: "5px" }}
           />
         </Box>

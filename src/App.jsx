@@ -6,10 +6,11 @@ import { Footer } from "./Footer";
 
 function App() {
   return (
-    <Box sx={{ width: "100vw", height: "100vh" }}>
+    <Box sx={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column" }}>
       <Navigation />
-      <Outlet />
-      <Box sx={{ height: "100px" }} />
+      <Box sx={{ flexGrow: 1 }}>
+        <Outlet />
+      </Box>
       <Footer />
     </Box>
   );

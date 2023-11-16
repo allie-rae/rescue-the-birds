@@ -29,7 +29,7 @@ export const About = () => {
         >
           <img
             src={phoenix}
-            width="400px"
+            height="400px"
             style={{ borderRadius: "5px" }}
           />
         </Box>

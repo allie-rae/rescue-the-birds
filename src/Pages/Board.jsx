@@ -66,7 +66,7 @@ export const Board = () => {
         >
           <img
             src={rose}
-            width="400px"
+            height="400px"
             style={{ borderRadius: "5px" }}
           />
         </Box>
