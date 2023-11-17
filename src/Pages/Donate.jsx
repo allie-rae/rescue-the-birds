@@ -52,6 +52,8 @@ export const Donate = () => {
           <Link
             href="https://www.amazon.com/hz/wishlist/ls/1YMMJ3VB5032X/ref=hz_ls_biz_ex"
             target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit the Refuge's Amazon Wish List (opens in a new tab)"
           >
             Amazon Wishlist
           </Link>
