@@ -2,7 +2,7 @@
 
 ### Description
 
-This is a volunteer project to help A Refuge for Saving the Wildlife, Inc. The Refuge is a parrot shelter in the Chicago area. We are rebuilding their current website to save the Refuge money on website maintenance costs.
+This is a volunteer project to help A Refuge for Saving the Wildlife, Inc. The Refuge is a parrot shelter in the Chicago area. We are rebuilding their current website to save the Refuge money on maintenance costs.
 
 ### Status
 
