@@ -2,6 +2,7 @@ import {
   Button,
   Checkbox,
   Fade,
+  FormControl,
   FormControlLabel,
   FormHelperText,
   FormLabel,
@@ -15,9 +16,8 @@ import { Box } from "@mui/system";
 import rose from "../Photos/rose.png";
 import { ListOfTests } from "../ListOfTests";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useState } from "react";
 import { PricingTable } from "../PricingTable";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 export const Board = () => {
   const {
@@ -338,7 +338,7 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
   const {
     register,
     formState: { errors, isValid },
-    getValues,
+    control,
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -363,10 +363,6 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
     required: "Bird information is required",
     validate: isValid,
   });
-
-  console.log("getValues", getValues());
-
-  const [parrotExtraServices, setParrotExtraServices] = useState("");
 
   return (
     <Box
@@ -424,73 +420,100 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
       >
         Gender
       </FormLabel>
-      <RadioGroup
-        aria-labelledby="gender-radio-buttons-group-label"
-        name="gender-radio-buttons-group"
-        {...register("parrotGender")}
-      >
-        <FormControlLabel
-          value="Female"
-          control={<Radio />}
-          label="Female"
-        />
-        <FormControlLabel
-          value="Male"
-          control={<Radio />}
-          label="Male"
-        />
-        <FormControlLabel
-          value="Unknown"
-          control={<Radio />}
-          label="Unknown"
-        />
-      </RadioGroup>
-      <FormLabel
-        id="flighted-radio-buttons-group-label"
-        sx={{ fontWeight: "bold" }}
-        required
-      >
-        Flighted
-      </FormLabel>
-      <RadioGroup
-        aria-labelledby="flighted-radio-buttons-group-label"
-        name="flighted-radio-buttons-group"
-        {...register("parrotFlighted")}
-      >
-        <FormControlLabel
-          value="Yes"
-          control={<Radio />}
-          label="Yes"
-        />
-        <FormControlLabel
-          value="No"
-          control={<Radio />}
-          label="No"
-        />
-      </RadioGroup>
-      <FormLabel
-        id="special-diet-radio-buttons-group-label"
-        sx={{ fontWeight: "bold" }}
-        required
-      >
-        Special Diet
-      </FormLabel>
-      <RadioGroup
-        aria-labelledby="special-diet-radio-buttons-group-label"
-        name="special-diet-radio-buttons-group"
-        {...register("parrotSpecialDiet")}
-      >
-        <FormControlLabel
-          value="Yes"
-          control={<Radio />}
-          label="Yes"
-        />
-        <FormControlLabel
-          value="No"
-          control={<Radio />}
-          label="No"
-        />
-      </RadioGroup>
+      <Controller
+        control={control}
+        name="parrotGender"
+        render={({ field: { onChange, value, name } }) => (
+          <FormControl sx={{ display: "block" }}>
+            <RadioGroup
+              aria-labelledby="gender-radio-buttons-group-label"
+              name={name}
+              value={value}
+              onChange={onChange}
+            >
+              <FormControlLabel
+                value="Female"
+                control={<Radio />}
+                label="Female"
+              />
+              <FormControlLabel
+                value="Male"
+                control={<Radio />}
+                label="Male"
+              />
+              <FormControlLabel
+                value="Unknown"
+                control={<Radio />}
+                label="Unknown"
+              />
+            </RadioGroup>
+          </FormControl>
+        )}
+      />
+      <Controller
+        control={control}
+        name="parrotFlighted"
+        render={({ field: { onChange, value, name } }) => (
+          <FormControl sx={{ display: "block" }}>
+            <FormLabel
+              id="flighted-radio-buttons-group-label"
+              sx={{ fontWeight: "bold" }}
+              required
+            >
+              Flighted
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="flighted-radio-buttons-group-label"
+              name={name}
+              value={value}
+              onChange={onChange}
+            >
+              <FormControlLabel
+                value="Yes"
+                control={<Radio />}
+                label="Yes"
+              />
+              <FormControlLabel
+                value="No"
+                control={<Radio />}
+                label="No"
+              />
+            </RadioGroup>
+          </FormControl>
+        )}
+      />
+      <Controller
+        control={control}
+        name="parrotSpecialDiet"
+        render={({ field: { onChange, value, name } }) => (
+          <FormControl sx={{ display: "block" }}>
+            <FormLabel
+              id="special-diet-radio-buttons-group-label"
+              sx={{ fontWeight: "bold" }}
+              required
+            >
+              Special Diet
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="special-diet-radio-buttons-group-label"
+              name={name}
+              value={value}
+              onChange={onChange}
+            >
+              <FormControlLabel
+                value="Yes"
+                control={<Radio />}
+                label="Yes"
+              />
+              <FormControlLabel
+                value="No"
+                control={<Radio />}
+                label="No"
+              />
+            </RadioGroup>
+          </FormControl>
+        )}
+      />
       <TextField
         id="special-diet"
         label="If yes, explain your bird's special diet"
@@ -499,29 +522,38 @@ export const ParrotBoardingForm = ({ parentRegister }) => {
         minRows={4}
         {...register("parrotSpecialDietDescription")}
       />
-      <FormLabel
-        id="medication-radio-buttons-group-label"
-        sx={{ fontWeight: "bold" }}
-        required
-      >
-        My Bird Requires Medication
-      </FormLabel>
-      <RadioGroup
-        aria-labelledby="medication-radio-buttons-group-label"
-        name="medication-radio-buttons-group"
-        {...register("parrotMedication")}
-      >
-        <FormControlLabel
-          value="Yes"
-          control={<Radio />}
-          label="Yes"
-        />
-        <FormControlLabel
-          value="No"
-          control={<Radio />}
-          label="No"
-        />
-      </RadioGroup>
+      <Controller
+        control={control}
+        name="parrotMedication"
+        render={({ field: { onChange, value, name } }) => (
+          <FormControl sx={{ display: "block" }}>
+            <FormLabel
+              id="medication-radio-buttons-group-label"
+              sx={{ fontWeight: "bold" }}
+              required
+            >
+              My Bird Requires Medication
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="medication-radio-buttons-group-label"
+              name={name}
+              value={value}
+              onChange={onChange}
+            >
+              <FormControlLabel
+                value="Yes"
+                control={<Radio />}
+                label="Yes"
+              />
+              <FormControlLabel
+                value="No"
+                control={<Radio />}
+                label="No"
+              />
+            </RadioGroup>
+          </FormControl>
+        )}
+      />
       <TextField
         id="medication"
         label="If yes, explain your bird's medication"
