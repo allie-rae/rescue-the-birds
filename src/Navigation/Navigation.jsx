@@ -13,7 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import combinationMark from "../Branding/combination-mark.png";
 import brandmark from "../Branding/brandmark.png"
 
@@ -45,16 +45,19 @@ export function Navigation(props) {
         my: 1,
         width: "100%",
         display: "flex",
-        justifyContent: "center"
-      }}>
-        <Link to={"/"} aria-label="Go to homepage">
-          <CardMedia
-            component="img"
-            alt="Website brandmark, click to go to homepage"
-            image={brandmark}
-            height={40}
-          />
-        </Link>
+        justifyContent: "center",
+        overflow: "hidden"
+        }}>
+        <CardMedia
+          component="img"
+          alt="Website brandmark, click to go to homepage"
+          image={brandmark}
+          onClick={() => navigate("/")}
+          sx={{ 
+            height: "40px",
+            width: "auto",
+            cursor: "pointer"
+          }}/>
       </Box>
       <Divider />
       <List>
@@ -94,14 +97,16 @@ export function Navigation(props) {
           <Box
             sx={{ display: { xs: "none", sm: "block"}}}
           >
-            <Link to={"/"} aria-label="Go to homepage">
-              <CardMedia
-                component="img"
-                alt="Website combination mark, click to go to homepage"
-                image={combinationMark}
-                height={40}
-              />
-            </Link>
+            <CardMedia
+              component="img"
+              alt="Website combination mark, click to go to homepage"
+              image={combinationMark}
+              onClick={() => navigate("/")}
+              sx={{ 
+                height: "40px",
+                width: "auto",
+                cursor: "pointer" 
+              }}/>
           </Box>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
