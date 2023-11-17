@@ -8,7 +8,7 @@ This is a volunteer project to help A Refuge for Saving the Wildlife, Inc. The R
 
 This project is currently being built by Allie Robinson, Daniel Tressel, and Johnathon Bowers on the frontend and Jon Finger on the backend. This project is not currently accepting new contributors.
 
-### Run this app:
+### Run this app
 
 1. `npm install`
 2. `npm run start`
