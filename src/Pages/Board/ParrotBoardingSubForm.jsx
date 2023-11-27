@@ -160,7 +160,6 @@ export const ParrotBoardingForm = ({
         <FormLabel
           id="gender-radio-buttons-group-label"
           sx={{ fontWeight: "bold" }}
-          required
         >
           Gender
         </FormLabel>
@@ -202,7 +201,6 @@ export const ParrotBoardingForm = ({
               <FormLabel
                 id="flighted-radio-buttons-group-label"
                 sx={{ fontWeight: "bold" }}
-                required
               >
                 Flighted
               </FormLabel>
@@ -234,7 +232,6 @@ export const ParrotBoardingForm = ({
               <FormLabel
                 id="special-diet-radio-buttons-group-label"
                 sx={{ fontWeight: "bold" }}
-                required
               >
                 Special Diet
               </FormLabel>
@@ -274,7 +271,6 @@ export const ParrotBoardingForm = ({
               <FormLabel
                 id="medication-radio-buttons-group-label"
                 sx={{ fontWeight: "bold" }}
-                required
               >
                 My Bird Requires Medication
               </FormLabel>
