@@ -2,28 +2,34 @@ import {
   Button,
   Checkbox,
   Fade,
-  FormControl,
   FormControlLabel,
   FormHelperText,
   FormLabel,
-  Radio,
-  RadioGroup,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import rose from "../Photos/rose.png";
-import { ListOfTests } from "../ListOfTests";
+import { ListOfTests } from "../../ListOfTests";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { PricingTable } from "../PricingTable";
-import { Controller, useForm } from "react-hook-form";
+import { PricingTable } from "../../PricingTable";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { ParrotBoardingForm } from "./ParrotBoardingForm";
 
 export const Board = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    getValues,
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -43,7 +49,8 @@ export const Board = () => {
       legal_agreement: false,
     },
   });
-
+  const [addedBirdNames, setAddedBirdNames] = useState([]);
+  const [isParrotFormOpen, setIsParrotFormOpen] = useState(true);
   return (
     <Fade
       in={true}
@@ -142,7 +149,7 @@ export const Board = () => {
                   label="Name"
                   variant="outlined"
                   {...register("person_name", { required: "Name is required" })}
-                  error={!!errors.person_name?.message}
+                  error={Boolean(errors.person_name?.message)}
                   helperText={errors.person_name?.message}
                 />
                 <TextField
@@ -150,7 +157,7 @@ export const Board = () => {
                   label="Email"
                   variant="outlined"
                   {...register("person_email", { required: "Email is required" })}
-                  error={!!errors.person_email?.message}
+                  error={Boolean(errors.person_email?.message)}
                   helperText={errors.person_email?.message}
                 />
                 <TextField
@@ -158,7 +165,7 @@ export const Board = () => {
                   label="Phone Number"
                   variant="outlined"
                   {...register("person_phone", { required: "Phone number is required" })}
-                  error={!!errors.person_phone?.message}
+                  error={Boolean(errors.person_phone?.message)}
                   helperText={errors.person_phone?.message}
                 />
                 <TextField
@@ -166,7 +173,7 @@ export const Board = () => {
                   label="Street Address"
                   variant="outlined"
                   {...register("person_address", { required: "Street address is required" })}
-                  error={!!errors.person_address?.message}
+                  error={Boolean(errors.person_address?.message)}
                   helperText={errors.person_address?.message}
                 />
                 <TextField
@@ -174,7 +181,7 @@ export const Board = () => {
                   label="City"
                   variant="outlined"
                   {...register("person_city", { required: "City is required" })}
-                  error={!!errors.person_city?.message}
+                  error={Boolean(errors.person_city?.message)}
                   helperText={errors.person_city?.message}
                 />
                 <TextField
@@ -182,7 +189,7 @@ export const Board = () => {
                   label="State"
                   variant="outlined"
                   {...register("person_state", { required: "State is required" })}
-                  error={!!errors.person_state?.message}
+                  error={Boolean(errors.person_state?.message)}
                   helperText={errors.person_state?.message}
                 />
                 <TextField
@@ -190,7 +197,7 @@ export const Board = () => {
                   label="Zip Code"
                   variant="outlined"
                   {...register("person_zipcode", { required: "Zip code is required" })}
-                  error={!!errors.person_zipcode?.message}
+                  error={Boolean(errors.person_zipcode?.message)}
                   helperText={errors.person_zipcode?.message}
                 />
                 <FormLabel
@@ -206,7 +213,7 @@ export const Board = () => {
                   {...register("boarding_start_date", {
                     required: "Boarding start date is required",
                   })}
-                  error={!!errors.boarding_start_date?.message}
+                  error={Boolean(errors.boarding_start_date?.message)}
                   helperText={errors.boarding_start_date?.message}
                 />
                 <TextField
@@ -214,10 +221,30 @@ export const Board = () => {
                   label="Boarding End Date (MM/DD/YYYY)"
                   variant="outlined"
                   {...register("boarding_end_date", { required: "Boarding end date is required" })}
-                  error={!!errors.boarding_end_date?.message}
+                  error={Boolean(errors.boarding_end_date?.message)}
                   helperText={errors.boarding_end_date?.message}
                 />
-                <ParrotBoardingForm parentRegister={register} />
+                <AddedBirdsList birdNames={addedBirdNames} />
+                {!isParrotFormOpen && (
+                  <Button
+                    startIcon={<AddCircleIcon />}
+                    variant="outlined"
+                    color="primary"
+                    sx={{ width: "250px", mt: 2 }}
+                    onClick={() => setIsParrotFormOpen(true)}
+                  >
+                    Add Another Bird
+                  </Button>
+                )}
+                <ParrotBoardingForm
+                  parentRegister={register}
+                  isOpen={isParrotFormOpen}
+                  setIsOpen={setIsParrotFormOpen}
+                  addedBirdNames={addedBirdNames}
+                  setAddedBirdNames={setAddedBirdNames}
+                  setFormValue={setValue}
+                  birdListFormValue={getValues("bird_list")}
+                />
                 <FormHelperText error>{errors.bird_list?.message}</FormHelperText>
                 <FormLabel
                   id="vet-records-agreement"
@@ -233,7 +260,7 @@ export const Board = () => {
                       {...register("vet_record_agreement", {
                         required: "Vet record agreement is required",
                       })}
-                      error={!!errors.vet_record_agreement?.message}
+                      error={Boolean(errors.vet_record_agreement?.message)}
                       helperText={errors.vet_record_agreement?.message}
                     />
                   }
@@ -255,7 +282,7 @@ export const Board = () => {
                       {...register("dropoff_agreement", {
                         required: "Dropoff agreement is required",
                       })}
-                      error={!!errors.dropoff_agreement?.message}
+                      error={Boolean(errors.dropoff_agreement?.message)}
                       helperText={errors.dropoff_agreement?.message}
                     />
                   }
@@ -277,7 +304,7 @@ export const Board = () => {
                       {...register("emergency_agreement", {
                         required: "Emergency agreement is required",
                       })}
-                      error={!!errors.emergency_agreement?.message}
+                      error={Boolean(errors.emergency_agreement?.message)}
                       helperText={errors.emergency_agreement?.message}
                     />
                   }
@@ -290,20 +317,21 @@ export const Board = () => {
                   required
                 >
                   The Guardian agrees that no claim or legal action will be taken against the
-                  Refuge, it’s officers or agents by reason of this contract or any action of the
-                  Refuge. The Guardian accepts full legal responsibility for this(ese) animal(s) and
-                  it’s actions. Failure to comply with these conditions may subject the Guardian to
-                  legal action from the Refuge and I am aware that any monies spent by the Refuge
-                  are recoverable in such legal action. Further, this contract has a specified end
-                  date at which time payment in full is required to release said bird(s) to the
-                  Guardian. Failure to pay will subject the bird to not be released until such time
-                  that payment is made in full. For those situations in which a Guardian neglects to
-                  contact the Refuge for extending the boarding date or fails to pay and pickup said
-                  bird(s) after 30 days past the agreed upon termination date, the bird(s) will be
-                  placed up for adoption to allow us to recoup any monies not received. The Guardian
-                  is responsible for bringing toys. For those times that this has not been provided,
-                  the Refuge will provide the bird with an adequate number of toys for proper mental
-                  stimulation and the Guardian will be charged for said toys.
+                  Refuge, it&apos;s officers or agents by reason of this contract or any action of
+                  the Refuge. The Guardian accepts full legal responsibility for this(ese) animal(s)
+                  and it&apos;s actions. Failure to comply with these conditions may subject the
+                  Guardian to legal action from the Refuge and I am aware that any monies spent by
+                  the Refuge are recoverable in such legal action. Further, this contract has a
+                  specified end date at which time payment in full is required to release said
+                  bird(s) to the Guardian. Failure to pay will subject the bird to not be released
+                  until such time that payment is made in full. For those situations in which a
+                  Guardian neglects to contact the Refuge for extending the boarding date or fails
+                  to pay and pickup said bird(s) after 30 days past the agreed upon termination
+                  date, the bird(s) will be placed up for adoption to allow us to recoup any monies
+                  not received. The Guardian is responsible for bringing toys. For those times that
+                  this has not been provided, the Refuge will provide the bird with an adequate
+                  number of toys for proper mental stimulation and the Guardian will be charged for
+                  said toys.
                 </FormLabel>
                 <FormControlLabel
                   control={
@@ -311,7 +339,7 @@ export const Board = () => {
                       {...register("legal_agreement", {
                         required: "Legal agreement is required",
                       })}
-                      error={!!errors.legal_agreement?.message}
+                      error={Boolean(errors.legal_agreement?.message)}
                       helperText={errors.legal_agreement?.message}
                     />
                   }
@@ -334,276 +362,28 @@ export const Board = () => {
   );
 };
 
-export const ParrotBoardingForm = ({ parentRegister }) => {
-  const {
-    register,
-    formState: { errors, isValid },
-    control,
-  } = useForm({
-    mode: "all",
-    defaultValues: {
-      parrotName: "",
-      parrotSpecies: "",
-      parrotSource: "",
-      parrotGender: "Unknown",
-      parrotFlighted: "Yes",
-      parrotSpecialDiet: "No",
-      parrotSpecialDietDescription: "",
-      parrotMedication: "No",
-      parrotMedicationDescription: "",
-      parrotSpecialInstructions: "",
-      wingClip: false,
-      beakTrim: false,
-      nailTrim: false,
-      microchip: false,
-    },
-  });
-
-  parentRegister("bird_list", {
-    required: "Bird information is required",
-    validate: isValid,
-  });
-
+const AddedBirdsList = ({ birdNames }) => {
+  if (!birdNames.length) return null;
   return (
-    <Box
-      sx={{
-        padding: "30px",
-        display: "flex",
-        flexDirection: "column",
-        borderRadius: "5px",
-        justifyContent: "space-between",
-        height: "1550px",
-        border: "1px solid #e0e0e0",
-      }}
-    >
+    <>
       <FormLabel
-        id="gender-radio-buttons-group-label"
-        sx={{ fontWeight: "bold" }}
-        required
-      >
-        Parrot Information
-      </FormLabel>
-      <TextField
-        id="parrot-name"
-        label="Bird's Name"
-        variant="outlined"
-        {...register("parrotName", {
-          required: "Parrot name is required",
-        })}
-        error={!!errors.parrotName?.message}
-        helperText={errors.parrotName?.message}
-      />
-      <TextField
-        id="parrot-species"
-        label="Species"
-        variant="outlined"
-        {...register("parrotSpecies", {
-          required: "Bird species is required",
-        })}
-        error={!!errors.parrotSpecies?.message}
-        helperText={errors.parrotSpecies?.message}
-      />
-      <TextField
-        id="i-got-my-bird-from"
-        label="I got my bird from..."
-        variant="outlined"
-        {...register("parrotSource", {
-          required: "Bird source is required",
-        })}
-        error={!!errors.parrotSource?.message}
-        helperText={errors.parrotSource?.message}
-      />
-      <FormLabel
-        id="gender-radio-buttons-group-label"
-        sx={{ fontWeight: "bold" }}
-        required
-      >
-        Gender
-      </FormLabel>
-      <Controller
-        control={control}
-        name="parrotGender"
-        render={({ field: { onChange, value, name } }) => (
-          <FormControl sx={{ display: "block" }}>
-            <RadioGroup
-              aria-labelledby="gender-radio-buttons-group-label"
-              name={name}
-              value={value}
-              onChange={onChange}
-            >
-              <FormControlLabel
-                value="Female"
-                control={<Radio />}
-                label="Female"
-              />
-              <FormControlLabel
-                value="Male"
-                control={<Radio />}
-                label="Male"
-              />
-              <FormControlLabel
-                value="Unknown"
-                control={<Radio />}
-                label="Unknown"
-              />
-            </RadioGroup>
-          </FormControl>
-        )}
-      />
-      <Controller
-        control={control}
-        name="parrotFlighted"
-        render={({ field: { onChange, value, name } }) => (
-          <FormControl sx={{ display: "block" }}>
-            <FormLabel
-              id="flighted-radio-buttons-group-label"
-              sx={{ fontWeight: "bold" }}
-              required
-            >
-              Flighted
-            </FormLabel>
-            <RadioGroup
-              aria-labelledby="flighted-radio-buttons-group-label"
-              name={name}
-              value={value}
-              onChange={onChange}
-            >
-              <FormControlLabel
-                value="Yes"
-                control={<Radio />}
-                label="Yes"
-              />
-              <FormControlLabel
-                value="No"
-                control={<Radio />}
-                label="No"
-              />
-            </RadioGroup>
-          </FormControl>
-        )}
-      />
-      <Controller
-        control={control}
-        name="parrotSpecialDiet"
-        render={({ field: { onChange, value, name } }) => (
-          <FormControl sx={{ display: "block" }}>
-            <FormLabel
-              id="special-diet-radio-buttons-group-label"
-              sx={{ fontWeight: "bold" }}
-              required
-            >
-              Special Diet
-            </FormLabel>
-            <RadioGroup
-              aria-labelledby="special-diet-radio-buttons-group-label"
-              name={name}
-              value={value}
-              onChange={onChange}
-            >
-              <FormControlLabel
-                value="Yes"
-                control={<Radio />}
-                label="Yes"
-              />
-              <FormControlLabel
-                value="No"
-                control={<Radio />}
-                label="No"
-              />
-            </RadioGroup>
-          </FormControl>
-        )}
-      />
-      <TextField
-        id="special-diet"
-        label="If yes, explain your bird's special diet"
-        variant="outlined"
-        multiline
-        minRows={4}
-        {...register("parrotSpecialDietDescription")}
-      />
-      <Controller
-        control={control}
-        name="parrotMedication"
-        render={({ field: { onChange, value, name } }) => (
-          <FormControl sx={{ display: "block" }}>
-            <FormLabel
-              id="medication-radio-buttons-group-label"
-              sx={{ fontWeight: "bold" }}
-              required
-            >
-              My Bird Requires Medication
-            </FormLabel>
-            <RadioGroup
-              aria-labelledby="medication-radio-buttons-group-label"
-              name={name}
-              value={value}
-              onChange={onChange}
-            >
-              <FormControlLabel
-                value="Yes"
-                control={<Radio />}
-                label="Yes"
-              />
-              <FormControlLabel
-                value="No"
-                control={<Radio />}
-                label="No"
-              />
-            </RadioGroup>
-          </FormControl>
-        )}
-      />
-      <TextField
-        id="medication"
-        label="If yes, explain your bird's medication"
-        variant="outlined"
-        multiline
-        minRows={4}
-        {...register("parrotMedicationDescription")}
-      />
-      <TextField
-        id="special-instructions"
-        label="Special instructions (likes, dislikes, hours of sleep, etc.)"
-        variant="outlined"
-        multiline
-        minRows={4}
-        {...register("parrotSpecialInstructions", {
-          required: "Special instructions are required",
-        })}
-        error={!!errors.parrotSpecialInstructions?.message}
-        helperText={errors.parrotSpecialInstructions?.message}
-      />
-      <FormLabel
-        id="extra-services-buttons-group-label"
+        id="emergency-agreement"
         sx={{ fontWeight: "bold" }}
       >
-        Extra Services
+        {birdNames.length === 1 ? "Bird" : "Birds"} added:
       </FormLabel>
-      <FormControlLabel
-        control={<Checkbox {...register("beakTrim")} />}
-        label="Break Trim ($20)"
-      />
-      <FormControlLabel
-        control={<Checkbox {...register("wingClip")} />}
-        label="Wing Clip ($10)"
-      />
-      <FormControlLabel
-        control={<Checkbox {...register("nailTrim")} />}
-        label="Nail Trim ($20)"
-      />
-      <FormControlLabel
-        control={<Checkbox {...register("microchip")} />}
-        label="Microchipping - AVID Chip ($25)"
-      />
-      <Button
-        startIcon={<AddCircleIcon />}
-        variant="contained"
-        color="primary"
-        sx={{ width: "250px", mt: 2 }}
-      >
-        Add another bird
-      </Button>
-    </Box>
+      <List>
+        {birdNames.map((name) => {
+          return (
+            <ListItem key={name}>
+              <ListItemIcon>
+                <TaskAltIcon color="success" />
+              </ListItemIcon>
+              <ListItemText>{name}</ListItemText>
+            </ListItem>
+          );
+        })}
+      </List>
+    </>
   );
 };
