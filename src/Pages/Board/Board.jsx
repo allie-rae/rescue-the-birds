@@ -14,14 +14,14 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import rose from "../Photos/rose.png";
+import rose from "../../Photos/rose.png";
 import { ListOfTests } from "../../ListOfTests";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { PricingTable } from "../../PricingTable";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import { ParrotBoardingForm } from "./ParrotBoardingForm";
+import { ParrotBoardingForm } from "./ParrotBoardingSubForm";
 
 export const Board = () => {
   const {

@@ -30,6 +30,7 @@ export const ParrotBoardingForm = ({
     control,
     getValues,
     reset,
+    trigger,
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -64,6 +65,10 @@ export const ParrotBoardingForm = ({
   });
 
   const addBird = () => {
+    if (!isValid) {
+      trigger(["parrotName", "parrotSpecies", "parrotSource", "parrotSpecialInstructions"]);
+      return;
+    }
     const birdName = getValues("parrotName");
     setAddedBirdNames((prev) => [...prev, birdName]);
     setFormValue("bird_list", [
