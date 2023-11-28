@@ -51,7 +51,7 @@ export const ParrotBoardingForm = ({
     },
   });
 
-  const hasBirdBeedAdded = !!addedBirdNames.length;
+  const hasBirdBeenAdded = !!addedBirdNames.length;
 
   useEffect(() => {
     if (!isOpen) {
@@ -61,7 +61,7 @@ export const ParrotBoardingForm = ({
 
   parentRegister("bird_list", {
     required: "Bird information is required",
-    validate: isValid || (hasBirdBeedAdded && !isOpen),
+    validate: isValid || (hasBirdBeenAdded && !isOpen),
   });
 
   const addBird = () => {
@@ -118,7 +118,7 @@ export const ParrotBoardingForm = ({
           >
             Parrot Information
           </FormLabel>
-          {hasBirdBeedAdded && (
+          {hasBirdBeenAdded && (
             <IconButton
               size="small"
               onClick={() => setIsOpen(false)}
@@ -345,7 +345,7 @@ export const ParrotBoardingForm = ({
           >
             Add Bird
           </Button>
-          {hasBirdBeedAdded && (
+          {hasBirdBeenAdded && (
             <Button
               variant="outlined"
               color="primary"
