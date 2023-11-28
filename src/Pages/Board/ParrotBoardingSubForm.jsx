@@ -77,7 +77,6 @@ export const ParrotBoardingForm = ({
         Species: ${getValues("parrotSpecies")} | 
         Source: ${getValues("parrotSource")} |
         Gender: ${getValues("parrotGender")} |
-        Gender: ${getValues("parrotGender")} |
         Flighted: ${getValues("parrotFlighted")} |
         Special Diet: ${getValues("parrotSpecialDiet")} | 
         Special Diet Description: ${getValues("parrotSpecialDietDescription")} | 
