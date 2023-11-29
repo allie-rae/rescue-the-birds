@@ -57,7 +57,7 @@ export const ParrotBoardingForm = ({
     if (!isOpen) {
       reset();
     }
-  });
+  }, [isOpen]);
 
   parentRegister("bird_list", {
     required: "Bird information is required",
@@ -86,7 +86,9 @@ export const ParrotBoardingForm = ({
         Wing Clip: ${getValues("wingClip")} | 
         Beak Trim: ${getValues("beakTrim")} | 
         Nail Trim: ${getValues("nailTrim")} | 
-        Microchip: ${getValues("microchip")} | `,
+        Microchip: ${getValues("microchip")} | `
+        .replace(/(\s\s+|[\n])/g, " ")
+        .trim(),
     ]);
     setIsOpen(false);
   };
