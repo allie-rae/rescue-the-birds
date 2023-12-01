@@ -48,27 +48,27 @@ export const Adopt = () => {
       person_city: "",
       person_state: "",
       person_zipcode: "",
-      how_you_found_us: "",
-      household_size: "",
-      caregiver_age: "",
-      household_ages: "",
-      children_experience: "",
-      other_birds: "no",
+      hear_about_us: "",
+      num_household_people: "",
+      primary_caregiver_age: "",
+      ages_in_household: "",
+      children_in_house: "",
+      have_other_birds: "no",
       other_bird_species: "",
       other_bird_checkup_date: "",
       other_bird_diet: "",
       previous_birds: "no",
       previous_what_happened: "",
-      bird_experience: "",
+      other_bird_experience: "",
       have_avian_vet: "no",
       vet_name: "",
       vet_clinic_name: "",
       vet_address: "",
       vet_phone: "",
-      residency_type: "single-family-house",
+      residence_type: "single-family-house",
     },
   });
-  const watchOtherBirds = watch("other_birds", "no");
+  const watchOtherBirds = watch("have_other_birds", "no");
   const watchPreviousBirds = watch("previous_birds", "no");
   const watchAvianVet = watch("have_avian_vet", "no");
 
@@ -329,37 +329,37 @@ export const Adopt = () => {
                   id="how-did-you-hear-about-us"
                   label="How did you hear about us?"
                   variant="outlined"
-                  {...register("how_you_found_us", {
+                  {...register("hear_about_us", {
                     required: "How did you hear about us? response is required",
                   })}
-                  error={!!errors.how_you_found_us?.message}
-                  helperText={errors.how_you_found_us?.message}
+                  error={!!errors.hear_about_us?.message}
+                  helperText={errors.hear_about_us?.message}
                 />
                 <TextField
                   id="how-many-people-in-household"
                   label="How many people are in your household?"
                   variant="outlined"
-                  {...register("household_size", { required: "Household size is required" })}
-                  error={!!errors.household_size?.message}
-                  helperText={errors.household_size?.message}
+                  {...register("num_household_people", { required: "Household size is required" })}
+                  error={!!errors.num_household_people?.message}
+                  helperText={errors.num_household_people?.message}
                 />
                 <TextField
                   id="how-old-is-primary-caregiver"
                   label="How old is the primary caregiver?"
                   variant="outlined"
-                  {...register("caregiver_age", { required: "Caregiver age is required" })}
-                  error={!!errors.caregiver_age?.message}
-                  helperText={errors.caregiver_age?.message}
+                  {...register("primary_caregiver_age", { required: "Caregiver age is required" })}
+                  error={!!errors.primary_caregiver_age?.message}
+                  helperText={errors.primary_caregiver_age?.message}
                 />
                 <TextField
                   id="household-ages"
                   label="What are the ages of everyone in the household?"
                   variant="outlined"
-                  {...register("household_ages", {
+                  {...register("ages_in_household", {
                     required: "Household members' ages are required",
                   })}
-                  error={!!errors.household_ages?.message}
-                  helperText={errors.household_ages?.message}
+                  error={!!errors.ages_in_household?.message}
+                  helperText={errors.ages_in_household?.message}
                 />
                 <TextField
                   id="children-experience-with-birds"
@@ -367,11 +367,11 @@ export const Adopt = () => {
                   variant="outlined"
                   multiline
                   minRows={4}
-                  {...register("children_experience", {
+                  {...register("children_in_house", {
                     required: "Children's experience with birds is required",
                   })}
-                  error={!!errors.children_experience?.message}
-                  helperText={errors.children_experience?.message}
+                  error={!!errors.children_in_house?.message}
+                  helperText={errors.children_in_house?.message}
                 />
                 <FormLabel
                   id="children-in-future"
@@ -381,7 +381,7 @@ export const Adopt = () => {
                 </FormLabel>
                 <Controller
                   control={control}
-                  name="other_birds"
+                  name="have_other_birds"
                   render={({ field: { onChange, value, name } }) => (
                     // <FormControl>
                     <RadioGroup
@@ -489,11 +489,11 @@ export const Adopt = () => {
                   variant="outlined"
                   multiline
                   minRows={4}
-                  {...register("bird_experience", {
+                  {...register("other_bird_experience", {
                     required: "Other bird experience is required",
                   })}
-                  error={!!errors.bird_experience?.message}
-                  helperText={errors.bird_experience?.message}
+                  error={!!errors.other_bird_experience?.message}
+                  helperText={errors.other_bird_experience?.message}
                 />
                 <FormLabel
                   id="current-veterinarian-bool"
@@ -576,7 +576,7 @@ export const Adopt = () => {
                 </FormLabel>
                 <Controller
                   control={control}
-                  name="residency_type"
+                  name="residence_type"
                   render={({ field: { onChange, value, name } }) => (
                     <RadioGroup
                       aria-labelledby="residence-type"
