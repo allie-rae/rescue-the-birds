@@ -9,10 +9,37 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useForm, Controller } from "react-hook-form";
 import { Box } from "@mui/system";
 import took from "../Photos/took.png";
 
 export const Volunteer = () => {
+  
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors }
+  } = useForm({
+    mode: "all",
+    defaultValues: {
+      person_name: "",
+      person_email: "",
+      person_phone: "",
+      person_address: "",
+      person_city: "",
+      person_state: "",
+      person_zipcode: "",
+      person_dob: "",
+      dl_number: "",
+      emergency_contact: "",
+      brief_synopsis_of_birds: "",
+      why_interested: "",
+      interested_bird_care: "",
+      interested_fundraising: "",
+      interested_fostering: ""
+    }
+  });
+  
   return (
     <Fade
       in={true}
