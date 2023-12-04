@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   Checkbox,
@@ -22,6 +23,23 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { ParrotBoardingForm } from "./ParrotBoardingSubForm";
+
+export const requiredInputErrors = {
+  name: "Name is required",
+  email: "Email is required",
+  phone: "Phone number is required",
+  address: "Street address is required",
+  city: "City is required",
+  state: "State is required",
+  zipcode: "Zip code is required",
+  boardingStartDate: "Boarding start date is required",
+  boardingEndDate: "Boarding end date is required",
+  birdList: "Bird list is required",
+  vetRecordAgreement: "Vet record agreement is required",
+  dropoffAgreement: "Dropoff agreement is required",
+  emergencyAgreement: "Emergency agreement is required",
+  legalAgreement: "Legal agreement is required",
+};
 
 export const Board = () => {
   const {
@@ -148,15 +166,15 @@ export const Board = () => {
                   id="name"
                   label="Name"
                   variant="outlined"
-                  {...register("person_name", { required: "Name is required" })}
-                  error={Boolean(errors.person_name?.message)}
+                  {...register("person_name", { required: requiredInputErrors.name })}
+                  error={Boolean(errors.person_name?.message) ? true : undefined}
                   helperText={errors.person_name?.message}
                 />
                 <TextField
                   id="email"
                   label="Email"
                   variant="outlined"
-                  {...register("person_email", { required: "Email is required" })}
+                  {...register("person_email", { required: requiredInputErrors.email })}
                   error={Boolean(errors.person_email?.message)}
                   helperText={errors.person_email?.message}
                 />
@@ -164,7 +182,7 @@ export const Board = () => {
                   id="phone-number"
                   label="Phone Number"
                   variant="outlined"
-                  {...register("person_phone", { required: "Phone number is required" })}
+                  {...register("person_phone", { required: requiredInputErrors.phone })}
                   error={Boolean(errors.person_phone?.message)}
                   helperText={errors.person_phone?.message}
                 />
@@ -172,7 +190,7 @@ export const Board = () => {
                   id="street-address"
                   label="Street Address"
                   variant="outlined"
-                  {...register("person_address", { required: "Street address is required" })}
+                  {...register("person_address", { required: requiredInputErrors.address })}
                   error={Boolean(errors.person_address?.message)}
                   helperText={errors.person_address?.message}
                 />
@@ -180,7 +198,7 @@ export const Board = () => {
                   id="city"
                   label="City"
                   variant="outlined"
-                  {...register("person_city", { required: "City is required" })}
+                  {...register("person_city", { required: requiredInputErrors.city })}
                   error={Boolean(errors.person_city?.message)}
                   helperText={errors.person_city?.message}
                 />
@@ -188,7 +206,7 @@ export const Board = () => {
                   id="state"
                   label="State"
                   variant="outlined"
-                  {...register("person_state", { required: "State is required" })}
+                  {...register("person_state", { required: requiredInputErrors.state })}
                   error={Boolean(errors.person_state?.message)}
                   helperText={errors.person_state?.message}
                 />
@@ -196,7 +214,7 @@ export const Board = () => {
                   id="zip-code"
                   label="Zip Code"
                   variant="outlined"
-                  {...register("person_zipcode", { required: "Zip code is required" })}
+                  {...register("person_zipcode", { required: requiredInputErrors.zipcode })}
                   error={Boolean(errors.person_zipcode?.message)}
                   helperText={errors.person_zipcode?.message}
                 />
@@ -211,7 +229,7 @@ export const Board = () => {
                   label="Boarding Start Date (MM/DD/YYYY)"
                   variant="outlined"
                   {...register("boarding_start_date", {
-                    required: "Boarding start date is required",
+                    required: requiredInputErrors.boardingStartDate,
                   })}
                   error={Boolean(errors.boarding_start_date?.message)}
                   helperText={errors.boarding_start_date?.message}
@@ -220,7 +238,9 @@ export const Board = () => {
                   id="boarding-end-date"
                   label="Boarding End Date (MM/DD/YYYY)"
                   variant="outlined"
-                  {...register("boarding_end_date", { required: "Boarding end date is required" })}
+                  {...register("boarding_end_date", {
+                    required: requiredInputErrors.boardingEndDate,
+                  })}
                   error={Boolean(errors.boarding_end_date?.message)}
                   helperText={errors.boarding_end_date?.message}
                 />
@@ -258,7 +278,7 @@ export const Board = () => {
                   control={
                     <Checkbox
                       {...register("vet_record_agreement", {
-                        required: "Vet record agreement is required",
+                        required: requiredInputErrors.vetRecordAgreement,
                       })}
                       error={Boolean(errors.vet_record_agreement?.message)}
                       helperText={errors.vet_record_agreement?.message}
@@ -280,7 +300,7 @@ export const Board = () => {
                   control={
                     <Checkbox
                       {...register("dropoff_agreement", {
-                        required: "Dropoff agreement is required",
+                        required: requiredInputErrors.dropoffAgreement,
                       })}
                       error={Boolean(errors.dropoff_agreement?.message)}
                       helperText={errors.dropoff_agreement?.message}
@@ -302,7 +322,7 @@ export const Board = () => {
                   control={
                     <Checkbox
                       {...register("emergency_agreement", {
-                        required: "Emergency agreement is required",
+                        required: requiredInputErrors.emergencyAgreement,
                       })}
                       error={Boolean(errors.emergency_agreement?.message)}
                       helperText={errors.emergency_agreement?.message}
@@ -337,7 +357,7 @@ export const Board = () => {
                   control={
                     <Checkbox
                       {...register("legal_agreement", {
-                        required: "Legal agreement is required",
+                        required: requiredInputErrors.legalAgreement,
                       })}
                       error={Boolean(errors.legal_agreement?.message)}
                       helperText={errors.legal_agreement?.message}

@@ -16,6 +16,7 @@
     "react/prop-types": "off",
     "no-unused-vars": "warn",
     "no-console": "warn",
-    "no-debugger": "warn"
+    "no-debugger": "warn",
+    "no-extra-boolean-cast": "off"
   }
 }
