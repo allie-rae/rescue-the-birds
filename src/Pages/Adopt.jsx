@@ -411,7 +411,6 @@ export const Adopt = () => {
                   control={control}
                   name="have_other_birds"
                   render={({ field: { onChange, value, name } }) => (
-                    // <FormControl>
                     <RadioGroup
                       aria-labelledby="other-birds-in-household-bool"
                       value={value}
@@ -429,7 +428,6 @@ export const Adopt = () => {
                         label="No"
                       />
                     </RadioGroup>
-                    // </FormControl>
                   )}
                 />
                 <TextField
