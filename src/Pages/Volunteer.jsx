@@ -10,18 +10,20 @@ import {
   Typography,
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Box } from "@mui/system";
 import took from "../Photos/took.png";
 
 export const Volunteer = () => {
   
   const {
+    clearErrors,
     control,
-    formState: { errors },
+    formState: { errors, isSubmitted },
     handleSubmit,
     register,
-    setValue,
+    setError,
+    watch
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -35,41 +37,65 @@ export const Volunteer = () => {
       person_dob: "",
       dl_number: "",
       emergency_contact: "",
+      emergency_contact_name: "",
+      emergency_contact_number: "",
       brief_synopsis_of_birds: "",
       why_interested: "",
-      interested_bird_care: "",
-      interested_fundraising: "",
-      interested_fostering: ""
+      interested_bird_care: "no",
+      interested_fundraising: "no",
+      interested_fostering: "no"
     }
   });
 
-  // Manage state independently for the emergency contact name and number so that they can be concatenated to form the value of the "emergency_contact" property
-  const [emergencyContactName, setEmergencyContactName] = useState("");
-  const [emergencyContactNumber, setEmergencyContactNumber] = useState("");
+  // Set watchers for changes to the checkboxes
+  const watchBirdCare = watch("interested_bird_care");
+  const watchFundraising = watch("interested_fundraising");
+  const watchFostering = watch("interested_fostering");
+
+  // Error message for when the user has not selected at least one interest. Declared here to avoid duplicating messages below.
+  const noInterestsSelectedMessage = "Please select at least one of the following areas of interest: ";
+
+  // Helper function to determine if the user has selected at least one of the interest checkboxes
+  const hasSelectedOneInterest = () => {
+    return watchBirdCare === "yes" || watchFundraising === "yes" || watchFostering === "yes";
+  }
+
+  // Custom onChange handler for checkboxes. Updates the respective form fields with the strings "yes" or "no"
+  const onCheckboxChange = (onChange) => (e) => {
+    const newCheckboxValue = e.target.checked ? "yes" : "no";
+    onChange(newCheckboxValue);
+  };
+
+  // Set up useEffect hook to display or clear the "has_selected_one_interest" error message, but only after the form has been first submitted
+  useEffect(() => {
+    
+    // Use React Hook Form's isSubmitted property to check if the form has been submitted yet
+    const hasFormBeenSubmitted = isSubmitted;
+    
+    if (hasFormBeenSubmitted) {
+      if (hasSelectedOneInterest()) {
+        clearErrors("has_selected_one_interest");
+      } else {
+        setError("has_selected_one_interest", {
+          type: "manual",
+          message: noInterestsSelectedMessage
+        });
+      }
+    }
+  }, [watchBirdCare, watchFundraising, watchFostering, setError, clearErrors])
 
   const onSubmit = (data) => {
-    const { emergency_contact_name, emergency_contact_number, ...submissionData } = data;
-    console.log("data: ", submissionData);
-  }
+    // Destructure data that will not be sent to the back end
+    //eslint-disable-next-line
+    const { emergency_contact_name, emergency_contact_number, has_selected_one_interest, ...submissionData} = data;
 
-  /**
-   * Handles changes to the emergency contact name and number fields.
-   * 
-   * @param {string} field - The name of the field that was updated 
-   * @param {string} value - The new value of the field
-   */
-  const handleEmergencyContactChange = async (field, value) => {
-    
-    if (field === "emergency_contact_name") setEmergencyContactName(value);
-    else if (field === "emergency_contact_number") setEmergencyContactNumber(value);
-    
-  }
+    // Concatenate emergency contact name and number into one field
+    submissionData.emergency_contact = `${emergency_contact_name} | ${emergency_contact_number}`;
 
-  // Update the value of the hidden input field "emergency_contact" whenever the emergency contact name or number changes
-  useEffect(() => {
-    const emergencyContact = `${emergencyContactName}: ${emergencyContactNumber}`.trim();
-    setValue("emergency_contact", emergencyContact);
-  }, [emergencyContactName, emergencyContactNumber, setValue]);
+    // Console log the data for now
+    //eslint-disable-next-line
+    console.log("Submission data: ", submissionData);
+  }
 
   return (
     <Fade
@@ -194,52 +220,21 @@ export const Volunteer = () => {
                 error={!!errors.dl_number?.message}
                 helperText={errors.dl_number?.message}
               />
-              {/* 
-                Use React Hook Form's Controller component to individually manage the state of "emergency_contact_name" and "emergency_contact_number". This approach enables:
-                1. Separate error validations for each field.
-                2. Concatenating both fields' values to form the "emergency_contact" property's value, as handled in the useEffect hook above.
-              */}
-              <Controller 
-                control={control}
-                name="emergency_contact_name"
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    id="emergency-contact-name"
-                    label="Emergency Contact Name"
-                    variant="outlined"
-                    value={emergencyContactName}
-                    error={!!errors.emergency_contact_name?.message}
-                    helperText={errors.emergency_contact_name?.message}
-                    onChange={(e) => {
-                      field.onChange(e);
-                      handleEmergencyContactChange("emergency_contact_name", e.target.value)
-                    }}
-                  />
-                )}
-                rules={{ required: "Emergency contact name is required" }}
+              <TextField
+                id="emergency-contact-name"
+                label="Emergency Contact Name"
+                variant="outlined"
+                {...register("emergency_contact_name", { required: "Emergency contact name is required" })}
+                error={!!errors.emergency_contact_name?.message}
+                helperText={errors.emergency_contact_name?.message}
               />
-              <Controller 
-                control={control}
-                name="emergency_contact_number"
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    id="emergency-contact-number"
-                    label="Emergency Contact Phone Number"
-                    variant="outlined"
-                    value={emergencyContactNumber}
-                    error={!!errors.emergency_contact_number?.message}
-                    helperText={errors.emergency_contact_number?.message}
-                    onChange={(e) => {
-                      field.onChange(e);
-                      handleEmergencyContactChange("emergency_contact_number", e.target.value)
-                    }}
-                  />
-                )}
-                rules={{ required: "Emergency contact number is required" }}
+              <TextField
+                id="emergency-contact-number"
+                label="Emergency Contact Phone Number"
+                variant="outlined"
+                {...register("emergency_contact_number", { required: "Emergency contact number is required" })}
+                error={!!errors.emergency_contact_number?.message}
+                helperText={errors.emergency_contact_number?.message}
               />
               <TextField
                 id="bird-experience"
@@ -247,6 +242,9 @@ export const Volunteer = () => {
                 variant="outlined"
                 multiline
                 minRows={4}
+                {...register("brief_synopsis_of_birds", { required: "A brief synopsis of your bird experience is required" })}
+                error={!!errors.brief_synopsis_of_birds?.message}
+                helperText={errors.brief_synopsis_of_birds?.message}
               />
               <TextField
                 id="interest"
@@ -254,27 +252,54 @@ export const Volunteer = () => {
                 variant="outlined"
                 multiline
                 minRows={4}
+                {...register("why_interested", { required: "Explanation of interest is required"})}
+                error={!!errors.why_interested?.message}
+                helperText={errors.why_interested?.message}
               />
+              {/* TODO: Consider adding "(select at least one)" to the line below, so that it reads "Areas of interest (select at least one):" */}
               <Typography
                 variant="body1"
                 sx={{ fontWeight: "bold" }}
               >
                 Areas of interest:
               </Typography>
+              {/* Display an error message if the user has not selected at least one area of interest for volunteering */}
+              {errors.has_selected_one_interest && (
+                <FormHelperText error>
+                  {errors.has_selected_one_interest.message}
+                </FormHelperText>
+              )}
               <FormGroup>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label="Bird care at the Refuge"
+                <Controller 
+                  control={control}
+                  name="interested_bird_care"
+                  render={({ field: { value, onChange }}) => (
+                      <FormControlLabel
+                        control={<Checkbox
+                          checked={value === "yes"}
+                          onChange={onCheckboxChange(onChange)}
+                        />}
+                        label="Bird care at the Refuge"
+                      />
+                  )}
                 />
                 <FormHelperText>
                   Socializing, playing, handling of animals, feeding, cutting fruits & veggies, making
                   warm meals, rotating toys, grooming, cleaning cages, changing cage paper, cleaning
                   pet care areas, etc.
                 </FormHelperText>
-
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label="Fostering in your home"
+                <Controller 
+                  control={control}
+                  name="interested_fostering"
+                  render={({ field: { value, onChange }}) => (
+                      <FormControlLabel
+                        control={<Checkbox
+                          checked={value === "yes"}
+                          onChange={onCheckboxChange(onChange)}
+                        />}
+                        label="Fostering in your home"
+                      />
+                  )}
                 />
                 <FormHelperText>
                   Having one of our adoptees in your home for socializing. A separate application must
@@ -290,16 +315,29 @@ export const Volunteer = () => {
                   to take legal action to obtain the bird(s), you, as the volunteer, will reimburse
                   the Refuge for any and all expenses related to regaining custody of said bird(s).
                 </FormHelperText>
-
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label="Fundraising"
+                <Controller 
+                  control={control}
+                  name="interested_fundraising"
+                  render={({ field: { value, onChange }}) => (
+                      <FormControlLabel
+                        control={<Checkbox
+                          checked={value === "yes"}
+                          onChange={onCheckboxChange(onChange)}
+                        />}
+                        label="Fundraising"
+                      />
+                  )}
                 />
                 <FormHelperText>
                   Phone calls, letters, personal contact with potential sources of funding, grant
                   writing.
                 </FormHelperText>
               </FormGroup>
+              {/* Hidden input used to validate whether or not a user has selected an area of interest for volunteering. This input is registered to React Hook Form in order to make use of its validation functionality */}
+              <input 
+                type="hidden"
+                {...register("has_selected_one_interest", { validate: () => hasSelectedOneInterest() || noInterestsSelectedMessage })}
+              />
               <Button
                 variant="contained"
                 color="primary"
@@ -307,8 +345,6 @@ export const Volunteer = () => {
               >
                 Submit
               </Button>
-              {/* Register a hidden input for the "emergency_contact" field so that React Hook Form can manage its state. This field's value is dynamically updated based on the "emergencyContactName" and "emergencyContactNumber" state variables, handled in the useEffect hook above. */}
-              <input type="hidden" {...register("emergency_contact")} />
             </Stack>
           </form>
         </Box>
