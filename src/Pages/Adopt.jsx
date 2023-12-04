@@ -454,6 +454,7 @@ export const Adopt = () => {
                   {...register("other_bird_species", {
                     required:
                       watchOtherBirds === "yes" ? 'required when answered "Yes" above' : false,
+                    disabled: watchOtherBirds === "no",
                   })}
                   error={!!errors.other_bird_species?.message}
                   helperText={errors.other_bird_species?.message}
@@ -465,6 +466,7 @@ export const Adopt = () => {
                   {...register("other_bird_checkup_date", {
                     required:
                       watchOtherBirds === "yes" ? 'required when answered "Yes" above' : false,
+                    disabled: watchOtherBirds === "no",
                   })}
                   error={!!errors.other_bird_checkup_date?.message}
                   helperText={errors.other_bird_checkup_date?.message}
@@ -478,6 +480,7 @@ export const Adopt = () => {
                   {...register("other_bird_diet", {
                     required:
                       watchOtherBirds === "yes" ? 'required when answered "Yes" above' : false,
+                    disabled: watchOtherBirds === "no",
                   })}
                   error={!!errors.other_bird_diet?.message}
                   helperText={errors.other_bird_diet?.message}
@@ -520,6 +523,7 @@ export const Adopt = () => {
                   {...register("previous_what_happened", {
                     required:
                       watchPreviousBirds === "yes" ? 'required when answered "Yes" above' : false,
+                    disabled: watchPreviousBirds === "no",
                   })}
                   error={!!errors.previous_what_happened?.message}
                   helperText={errors.previous_what_happened?.message}
@@ -572,6 +576,7 @@ export const Adopt = () => {
                   {...register("vet_name", {
                     required:
                       watchAvianVet === "yes" ? 'required when answered "Yes" above' : false,
+                    disabled: watchAvianVet === "no",
                   })}
                   error={!!errors.vet_name?.message}
                   helperText={errors.vet_name?.message}
@@ -583,6 +588,7 @@ export const Adopt = () => {
                   {...register("vet_clinic_name", {
                     required:
                       watchAvianVet === "yes" ? 'required when answered "Yes" above' : false,
+                    disabled: watchAvianVet === "no",
                   })}
                   error={!!errors.vet_clinic_name?.message}
                   helperText={errors.vet_clinic_name?.message}
@@ -594,6 +600,7 @@ export const Adopt = () => {
                   {...register("vet_address", {
                     required:
                       watchAvianVet === "yes" ? 'required when answered "Yes" above' : false,
+                    disabled: watchAvianVet === "no",
                   })}
                   error={!!errors.vet_address?.message}
                   helperText={errors.vet_address?.message}
@@ -605,6 +612,7 @@ export const Adopt = () => {
                   {...register("vet_phone", {
                     required:
                       watchAvianVet === "yes" ? 'required when answered "Yes" above' : false,
+                    disabled: watchAvianVet === "no",
                   })}
                   error={!!errors.vet_phone?.message}
                   helperText={errors.vet_phone?.message}
