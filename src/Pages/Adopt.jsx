@@ -439,8 +439,7 @@ export const Adopt = () => {
                   multiline
                   minRows={4}
                   {...register("other_bird_species", {
-                    required:
-                      watchOtherBirds === "yes" ? 'required when answered "Yes" above' : false,
+                    required: watchOtherBirds === "yes" ? "other bird species is required" : false,
                     disabled: watchOtherBirds === "no",
                   })}
                   error={!!errors.other_bird_species?.message}
@@ -451,8 +450,7 @@ export const Adopt = () => {
                   label="If you currently have birds, what was the date of their last annual checkup?"
                   variant="outlined"
                   {...register("other_bird_checkup_date", {
-                    required:
-                      watchOtherBirds === "yes" ? 'required when answered "Yes" above' : false,
+                    required: watchOtherBirds === "yes" ? "last checkup date is required" : false,
                     disabled: watchOtherBirds === "no",
                   })}
                   error={!!errors.other_bird_checkup_date?.message}
@@ -465,8 +463,7 @@ export const Adopt = () => {
                   multiline
                   minRows={4}
                   {...register("other_bird_diet", {
-                    required:
-                      watchOtherBirds === "yes" ? 'required when answered "Yes" above' : false,
+                    required: watchOtherBirds === "yes" ? "other bird diet is required" : false,
                     disabled: watchOtherBirds === "no",
                   })}
                   error={!!errors.other_bird_diet?.message}
@@ -509,7 +506,7 @@ export const Adopt = () => {
                   minRows={4}
                   {...register("previous_what_happened", {
                     required:
-                      watchPreviousBirds === "yes" ? 'required when answered "Yes" above' : false,
+                      watchPreviousBirds === "yes" ? "what happened to birds is required" : false,
                     disabled: watchPreviousBirds === "no",
                   })}
                   error={!!errors.previous_what_happened?.message}
@@ -561,8 +558,7 @@ export const Adopt = () => {
                   label="Veterinarian Name"
                   variant="outlined"
                   {...register("vet_name", {
-                    required:
-                      watchAvianVet === "yes" ? 'required when answered "Yes" above' : false,
+                    required: watchAvianVet === "yes" ? "veterinarian name is required" : false,
                     disabled: watchAvianVet === "no",
                   })}
                   error={!!errors.vet_name?.message}
@@ -574,7 +570,7 @@ export const Adopt = () => {
                   variant="outlined"
                   {...register("vet_clinic_name", {
                     required:
-                      watchAvianVet === "yes" ? 'required when answered "Yes" above' : false,
+                      watchAvianVet === "yes" ? "veterinarian clinic name is required" : false,
                     disabled: watchAvianVet === "no",
                   })}
                   error={!!errors.vet_clinic_name?.message}
@@ -585,8 +581,7 @@ export const Adopt = () => {
                   label="Veterinarian Clinic Address"
                   variant="outlined"
                   {...register("vet_address", {
-                    required:
-                      watchAvianVet === "yes" ? 'required when answered "Yes" above' : false,
+                    required: watchAvianVet === "yes" ? "veterinarian address is required" : false,
                     disabled: watchAvianVet === "no",
                   })}
                   error={!!errors.vet_address?.message}
@@ -598,7 +593,7 @@ export const Adopt = () => {
                   variant="outlined"
                   {...register("vet_phone", {
                     required:
-                      watchAvianVet === "yes" ? 'required when answered "Yes" above' : false,
+                      watchAvianVet === "yes" ? "veterinarian phone number is required" : false,
                     disabled: watchAvianVet === "no",
                   })}
                   error={!!errors.vet_phone?.message}
