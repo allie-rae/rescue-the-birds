@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   Button,
   Checkbox,
@@ -19,7 +20,7 @@ import { ListOfTests } from "../../ListOfTests";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { PricingTable } from "../../PricingTable";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { ParrotBoardingForm } from "./ParrotBoardingSubForm";
 
@@ -30,6 +31,7 @@ export const Board = () => {
     formState: { errors },
     setValue,
     getValues,
+    reset,
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -51,6 +53,20 @@ export const Board = () => {
   });
   const [addedBirdNames, setAddedBirdNames] = useState([]);
   const [isParrotFormOpen, setIsParrotFormOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsSuccess(false);
+      setIsError(false);
+    }, 5000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isSuccess, isError]);
+
   return (
     <Fade
       in={true}
@@ -136,7 +152,31 @@ export const Board = () => {
             Boarding Contract
           </Typography>
           <Box sx={{ width: "600px", maxWidth: "100%" }}>
-            <form onSubmit={handleSubmit((data) => console.log("data", data))}>
+            <form
+              onSubmit={handleSubmit((data) => {
+                setIsLoading(true);
+                const {
+                  dropoff_agreement,
+                  emergency_agreement,
+                  legal_agreement,
+                  vet_record_agreement,
+                  ...rest
+                } = data;
+                axios
+                  .post("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/boarding", {
+                    ...rest,
+                  })
+                  .then(() => {
+                    setIsSuccess(true);
+                    reset();
+                    setIsLoading(false);
+                  })
+                  .catch(() => {
+                    setIsError(true);
+                    setIsLoading(false);
+                  });
+              })}
+            >
               <Stack spacing={2}>
                 <FormLabel
                   id="boarding-schedule"
@@ -350,9 +390,16 @@ export const Board = () => {
                   variant="contained"
                   color="primary"
                   type="submit"
+                  disabled={isLoading}
                 >
                   Submit
                 </Button>
+                {isSuccess && <FormHelperText>Form successfully submitted!</FormHelperText>}
+                {isError && (
+                  <FormHelperText error>
+                    We&apos;re sorry, but there was an error submitting the form. Please try again.
+                  </FormHelperText>
+                )}
               </Stack>
             </form>
           </Box>

@@ -73,22 +73,20 @@ export const ParrotBoardingForm = ({
     setAddedBirdNames((prev) => [...prev, birdName]);
     setFormValue("bird_list", [
       ...birdListFormValue,
-      `Name: ${getValues("parrotName")} | 
-        Species: ${getValues("parrotSpecies")} | 
-        Source: ${getValues("parrotSource")} |
-        Gender: ${getValues("parrotGender")} |
-        Flighted: ${getValues("parrotFlighted")} |
-        Special Diet: ${getValues("parrotSpecialDiet")} | 
-        Special Diet Description: ${getValues("parrotSpecialDietDescription")} | 
-        Medication: ${getValues("parrotMedication")} | 
-        Medication Description: ${getValues("parrotMedicationDescription")} | 
-        Special Instructions: ${getValues("parrotSpecialInstructions")} | 
-        Wing Clip: ${getValues("wingClip")} | 
-        Beak Trim: ${getValues("beakTrim")} | 
-        Nail Trim: ${getValues("nailTrim")} | 
-        Microchip: ${getValues("microchip")} | `
-        .replace(/(\s\s+|[\n])/g, " ")
-        .trim(),
+      `Name: ${getValues("parrotName")}  
+        Species: ${getValues("parrotSpecies")}  
+        Source: ${getValues("parrotSource")} 
+        Gender: ${getValues("parrotGender")} 
+        Flighted: ${getValues("parrotFlighted")} 
+        Special Diet: ${getValues("parrotSpecialDiet")}  
+        Special Diet Description: ${getValues("parrotSpecialDietDescription")}  
+        Medication: ${getValues("parrotMedication")} 
+        Medication Description: ${getValues("parrotMedicationDescription")} 
+        Special Instructions: ${getValues("parrotSpecialInstructions")} 
+        Wing Clip: ${getValues("wingClip")} 
+        Beak Trim: ${getValues("beakTrim")} 
+        Nail Trim: ${getValues("nailTrim")} 
+        Microchip: ${getValues("microchip")} `,
     ]);
     setIsOpen(false);
   };
