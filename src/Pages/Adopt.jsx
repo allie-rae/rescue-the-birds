@@ -73,35 +73,31 @@ export const Adopt = () => {
   const watchAvianVet = watch("have_avian_vet", "no");
 
   const onSubmit = (data) => {
+    const {
+      other_bird_species,
+      other_bird_checkup_date,
+      other_bird_diet,
+      previous_what_happened,
+      have_avian_vet,
+      vet_name,
+      vet_clinic_name,
+      vet_address,
+      vet_phone,
+      ...submissionData
+    } = data;
     if (data.have_other_birds === "yes") {
-      data.have_other_birds = `yes | ${data.other_bird_species} | last checkup: ${data.other_bird_checkup_date} | diet: ${data.other_bird_diet}`;
+      submissionData.have_other_birds = `yes | ${other_bird_species} | last checkup: ${other_bird_checkup_date} | diet: ${other_bird_diet}`;
     }
     if (data.previous_birds === "yes") {
-      data.previous_birds = `yes | ${data.previous_what_happened}`;
+      submissionData.previous_birds = `yes | ${previous_what_happened}`;
     }
-    if (data.have_avian_vet === "yes") {
-      data.avian_vet_info = `${data.vet_name} | ${data.vet_clinic_name} | ${data.vet_address} | ${data.vet_phone}`;
+    if (have_avian_vet === "yes") {
+      submissionData.avian_vet_info = `${vet_name} | ${vet_clinic_name} | ${vet_address} | ${vet_phone}`;
     } else {
-      data.avian_vet_info = "no avian vet";
+      submissionData.avian_vet_info = "no avian vet";
     }
-    for (const field of [
-      "other_bird_species",
-      "other_bird_checkup_date",
-      "other_bird_diet",
-      "previous_what_happened",
-      "have_avian_vet",
-      "vet_name",
-      "vet_clinic_name",
-      "vet_address",
-      "vet_phone",
-    ]) {
-      delete data[field];
-    }
-    console.log(data);
-  };
-
-  const onError = () => {
-    console.log("There was an error");
+    // This is where in the future we can send data to the back end
+    console.log(submissionData);
   };
 
   return (
@@ -291,16 +287,7 @@ export const Adopt = () => {
             incomplete, your application will be disqualified.
           </Typography>
           <Box sx={{ width: "600px", maxWidth: "100%" }}>
-            <form
-              onSubmit={(evt) =>
-                handleSubmit(
-                  onSubmit,
-                  onError
-                )(evt).catch((evt) => {
-                  console.log(evt);
-                })
-              }
-            >
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing={2}>
                 <TextField
                   id="name"
