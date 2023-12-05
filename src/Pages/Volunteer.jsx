@@ -68,7 +68,6 @@ export const Volunteer = () => {
 
   // Set up useEffect hook to display or clear the "has_selected_one_interest" error message, but only after the form has been first submitted
   useEffect(() => {
-    
     // Use React Hook Form's isSubmitted property to check if the form has been submitted yet
     const hasFormBeenSubmitted = isSubmitted;
     
@@ -85,15 +84,13 @@ export const Volunteer = () => {
   }, [watchBirdCare, watchFundraising, watchFostering, setError, clearErrors])
 
   const onSubmit = (data) => {
-    // Destructure data that will not be sent to the back end
-    //eslint-disable-next-line
     const { emergency_contact_name, emergency_contact_number, has_selected_one_interest, ...submissionData} = data;
 
     // Concatenate emergency contact name and number into one field
-    submissionData.emergency_contact = `${emergency_contact_name} | ${emergency_contact_number}`;
+    submissionData.emergency_contact = `Name: ${emergency_contact_name}
+    Number: ${emergency_contact_number}`;
 
     // Console log the data for now
-    //eslint-disable-next-line
     console.log("Submission data: ", submissionData);
   }
 
@@ -256,12 +253,11 @@ export const Volunteer = () => {
                 error={!!errors.why_interested?.message}
                 helperText={errors.why_interested?.message}
               />
-              {/* TODO: Consider adding "(select at least one)" to the line below, so that it reads "Areas of interest (select at least one):" */}
               <Typography
                 variant="body1"
                 sx={{ fontWeight: "bold" }}
               >
-                Areas of interest:
+                Areas of interest (select at least one):
               </Typography>
               {/* Display an error message if the user has not selected at least one area of interest for volunteering */}
               {errors.has_selected_one_interest && (
