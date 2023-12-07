@@ -37,6 +37,7 @@ export const Adopt = () => {
     formState: { errors },
     control,
     watch,
+    clearErrors,
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -65,7 +66,7 @@ export const Adopt = () => {
       vet_clinic_name: "",
       vet_address: "",
       vet_phone: "",
-      residence_type: "single-family-house",
+      residence_type: "single family house",
     },
   });
   const watchOtherBirds = watch("have_other_birds", "no");
@@ -422,7 +423,14 @@ export const Adopt = () => {
                       aria-labelledby="other-birds-in-household-bool"
                       value={value}
                       name={name}
-                      onChange={onChange}
+                      onChange={(evt) => {
+                        clearErrors([
+                          "other_bird_species",
+                          "other_bird_checkup_date",
+                          "other_bird_diet",
+                        ]);
+                        onChange(evt);
+                      }}
                     >
                       <FormControlLabel
                         value="yes"
@@ -438,42 +446,47 @@ export const Adopt = () => {
                   )}
                 />
                 {watchOtherBirds === "yes" && (
-                  <>
-                    <TextField
-                      id="other-birds-in-household-text"
-                      label="If yes, list species and how many"
-                      variant="outlined"
-                      multiline
-                      minRows={4}
-                      {...register("other_bird_species", {
-                        required: "Other bird species is required",
-                      })}
-                      error={!!errors.other_bird_species?.message}
-                      helperText={errors.other_bird_species?.message}
-                    />
-                    <TextField
-                      id="last-bird-checkup-date"
-                      label="If you currently have birds, what was the date of their last annual checkup?"
-                      variant="outlined"
-                      {...register("other_bird_checkup_date", {
-                        required: "Last checkup date is required",
-                      })}
-                      error={!!errors.other_bird_checkup_date?.message}
-                      helperText={errors.other_bird_checkup_date?.message}
-                    />
-                    <TextField
-                      id="bird-diet"
-                      label="List the current diet that you feed your birds"
-                      variant="outlined"
-                      multiline
-                      minRows={4}
-                      {...register("other_bird_diet", {
-                        required: "Other bird diet is required",
-                      })}
-                      error={!!errors.other_bird_diet?.message}
-                      helperText={errors.other_bird_diet?.message}
-                    />
-                  </>
+                  <Fade
+                    in={true}
+                    timeout={250}
+                  >
+                    <Stack spacing={2}>
+                      <TextField
+                        id="other-birds-in-household-text"
+                        label="If yes, list species and how many"
+                        variant="outlined"
+                        multiline
+                        minRows={4}
+                        {...register("other_bird_species", {
+                          required: "Other bird species is required",
+                        })}
+                        error={!!errors.other_bird_species?.message}
+                        helperText={errors.other_bird_species?.message}
+                      />
+                      <TextField
+                        id="last-bird-checkup-date"
+                        label="If you currently have birds, what was the date of their last annual checkup?"
+                        variant="outlined"
+                        {...register("other_bird_checkup_date", {
+                          required: "Last checkup date is required",
+                        })}
+                        error={!!errors.other_bird_checkup_date?.message}
+                        helperText={errors.other_bird_checkup_date?.message}
+                      />
+                      <TextField
+                        id="bird-diet"
+                        label="List the current diet that you feed your birds"
+                        variant="outlined"
+                        multiline
+                        minRows={4}
+                        {...register("other_bird_diet", {
+                          required: "Other bird diet is required",
+                        })}
+                        error={!!errors.other_bird_diet?.message}
+                        helperText={errors.other_bird_diet?.message}
+                      />
+                    </Stack>
+                  </Fade>
                 )}
                 <FormLabel
                   id="previously-owned-birds-bool"
@@ -489,7 +502,10 @@ export const Adopt = () => {
                       aria-labelledby="previously-owned-birds-bool"
                       value={value}
                       name={name}
-                      onChange={onChange}
+                      onChange={(evt) => {
+                        clearErrors("previous_what_happened");
+                        onChange(evt);
+                      }}
                     >
                       <FormControlLabel
                         value="yes"
@@ -505,18 +521,23 @@ export const Adopt = () => {
                   )}
                 />
                 {watchPreviousBirds === "yes" && (
-                  <TextField
-                    id="previously-owned-birds-text"
-                    label="If yes, what happened to these birds?"
-                    variant="outlined"
-                    multiline
-                    minRows={4}
-                    {...register("previous_what_happened", {
-                      required: "What happened to birds is required",
-                    })}
-                    error={!!errors.previous_what_happened?.message}
-                    helperText={errors.previous_what_happened?.message}
-                  />
+                  <Fade
+                    in={true}
+                    timeout={250}
+                  >
+                    <TextField
+                      id="previously-owned-birds-text"
+                      label="If yes, what happened to these birds?"
+                      variant="outlined"
+                      multiline
+                      minRows={4}
+                      {...register("previous_what_happened", {
+                        required: "What happened to birds is required",
+                      })}
+                      error={!!errors.previous_what_happened?.message}
+                      helperText={errors.previous_what_happened?.message}
+                    />
+                  </Fade>
                 )}
                 <TextField
                   id="other-bird-experience"
@@ -544,7 +565,10 @@ export const Adopt = () => {
                       aria-labelledby="current-veterinarian-bool"
                       value={value}
                       name={name}
-                      onChange={onChange}
+                      onChange={(evt) => {
+                        clearErrors(["vet_name", "vet_clinic_name", "vet_address", "vet_phone"]);
+                        onChange(evt);
+                      }}
                     >
                       <FormControlLabel
                         value="yes"
@@ -560,48 +584,53 @@ export const Adopt = () => {
                   )}
                 />
                 {watchAvianVet === "yes" && (
-                  <>
-                    <TextField
-                      id="veterinarian-name"
-                      label="Veterinarian Name"
-                      variant="outlined"
-                      {...register("vet_name", {
-                        required: "Veterinarian name is required",
-                      })}
-                      error={!!errors.vet_name?.message}
-                      helperText={errors.vet_name?.message}
-                    />
-                    <TextField
-                      id="veterinary-clinic-name"
-                      label="Veterinarian Clinic Name"
-                      variant="outlined"
-                      {...register("vet_clinic_name", {
-                        required: "Veterinarian clinic name is required",
-                      })}
-                      error={!!errors.vet_clinic_name?.message}
-                      helperText={errors.vet_clinic_name?.message}
-                    />
-                    <TextField
-                      id="veterinary-clinic-address"
-                      label="Veterinarian Clinic Address"
-                      variant="outlined"
-                      {...register("vet_address", {
-                        required: "Veterinarian address is required",
-                      })}
-                      error={!!errors.vet_address?.message}
-                      helperText={errors.vet_address?.message}
-                    />
-                    <TextField
-                      id="veterinary-clinic-phone"
-                      label="Veterinarian Clinic Phone Number"
-                      variant="outlined"
-                      {...register("vet_phone", {
-                        required: "Veterinarian phone number is required",
-                      })}
-                      error={!!errors.vet_phone?.message}
-                      helperText={errors.vet_phone?.message}
-                    />
-                  </>
+                  <Fade
+                    in={true}
+                    timeout={250}
+                  >
+                    <Stack spacing={2}>
+                      <TextField
+                        id="veterinarian-name"
+                        label="Veterinarian Name"
+                        variant="outlined"
+                        {...register("vet_name", {
+                          required: "Veterinarian name is required",
+                        })}
+                        error={!!errors.vet_name?.message}
+                        helperText={errors.vet_name?.message}
+                      />
+                      <TextField
+                        id="veterinary-clinic-name"
+                        label="Veterinarian Clinic Name"
+                        variant="outlined"
+                        {...register("vet_clinic_name", {
+                          required: "Veterinarian clinic name is required",
+                        })}
+                        error={!!errors.vet_clinic_name?.message}
+                        helperText={errors.vet_clinic_name?.message}
+                      />
+                      <TextField
+                        id="veterinary-clinic-address"
+                        label="Veterinarian Clinic Address"
+                        variant="outlined"
+                        {...register("vet_address", {
+                          required: "Veterinarian address is required",
+                        })}
+                        error={!!errors.vet_address?.message}
+                        helperText={errors.vet_address?.message}
+                      />
+                      <TextField
+                        id="veterinary-clinic-phone"
+                        label="Veterinarian Clinic Phone Number"
+                        variant="outlined"
+                        {...register("vet_phone", {
+                          required: "Veterinarian phone number is required",
+                        })}
+                        error={!!errors.vet_phone?.message}
+                        helperText={errors.vet_phone?.message}
+                      />
+                    </Stack>
+                  </Fade>
                 )}
                 <FormLabel
                   id="residence-type"
