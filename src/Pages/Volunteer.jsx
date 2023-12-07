@@ -80,8 +80,7 @@ export const Volunteer = () => {
   const onSubmit = (data) => {
     const { emergency_contact_name, emergency_contact_number, has_selected_one_interest, ...submissionData} = data;
 
-    submissionData.emergency_contact = `Name: ${emergency_contact_name}
-    Number: ${emergency_contact_number}`;
+    submissionData.emergency_contact = `Name: ${emergency_contact_name}\nNumber: ${emergency_contact_number}`;
 
     // Console log the data for now
     console.log("Submission data: ", submissionData);
