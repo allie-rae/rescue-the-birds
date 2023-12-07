@@ -86,13 +86,20 @@ export const Adopt = () => {
       ...submissionData
     } = data;
     if (data.have_other_birds === "yes") {
-      submissionData.have_other_birds = `yes | ${other_bird_species} | last checkup: ${other_bird_checkup_date} | diet: ${other_bird_diet}`;
+      submissionData.have_other_birds = `yes
+      ${other_bird_species}
+      last checkup: ${other_bird_checkup_date}
+      diet: ${other_bird_diet}`;
     }
     if (data.previous_birds === "yes") {
-      submissionData.previous_birds = `yes | ${previous_what_happened}`;
+      submissionData.previous_birds = `yes
+      ${previous_what_happened}`;
     }
     if (have_avian_vet === "yes") {
-      submissionData.avian_vet_info = `${vet_name} | ${vet_clinic_name} | ${vet_address} | ${vet_phone}`;
+      submissionData.avian_vet_info = `${vet_name}
+      ${vet_clinic_name}
+      ${vet_address}
+      ${vet_phone}`;
     } else {
       submissionData.avian_vet_info = "no avian vet";
     }
@@ -301,7 +308,7 @@ export const Adopt = () => {
                   id="date-of-birth"
                   label="Date of Birth (MM/DD/YYYY)"
                   variant="outlined"
-                  {...register("person_dob", { required: "Date of Birth is required" })}
+                  {...register("person_dob", { required: "Date of birth is required" })}
                   error={!!errors.person_dob?.message}
                   helperText={errors.person_dob?.message}
                 />
@@ -317,7 +324,7 @@ export const Adopt = () => {
                   id="phone-number"
                   label="Phone Number"
                   variant="outlined"
-                  {...register("person_phone", { required: "Phone Number is required" })}
+                  {...register("person_phone", { required: "Phone number is required" })}
                   error={!!errors.person_phone?.message}
                   helperText={errors.person_phone?.message}
                 />
@@ -325,7 +332,7 @@ export const Adopt = () => {
                   id="street-address"
                   label="Street Address"
                   variant="outlined"
-                  {...register("person_address", { required: "Address is required" })}
+                  {...register("person_address", { required: "Street address is required" })}
                   error={!!errors.person_address?.message}
                   helperText={errors.person_address?.message}
                 />
@@ -349,7 +356,7 @@ export const Adopt = () => {
                   id="zip-code"
                   label="Zip Code"
                   variant="outlined"
-                  {...register("person_zipcode", { required: "Zip Code is required" })}
+                  {...register("person_zipcode", { required: "Zip code is required" })}
                   error={!!errors.person_zipcode?.message}
                   helperText={errors.person_zipcode?.message}
                 />
@@ -358,7 +365,7 @@ export const Adopt = () => {
                   label="How did you hear about us?"
                   variant="outlined"
                   {...register("hear_about_us", {
-                    required: "How did you hear about us? response is required",
+                    required: "Response is required",
                   })}
                   error={!!errors.hear_about_us?.message}
                   helperText={errors.hear_about_us?.message}
@@ -437,7 +444,7 @@ export const Adopt = () => {
                   multiline
                   minRows={4}
                   {...register("other_bird_species", {
-                    required: watchOtherBirds === "yes" ? "other bird species is required" : false,
+                    required: watchOtherBirds === "yes" ? "Other bird species is required" : false,
                     disabled: watchOtherBirds === "no",
                   })}
                   error={!!errors.other_bird_species?.message}
@@ -448,7 +455,7 @@ export const Adopt = () => {
                   label="If you currently have birds, what was the date of their last annual checkup?"
                   variant="outlined"
                   {...register("other_bird_checkup_date", {
-                    required: watchOtherBirds === "yes" ? "last checkup date is required" : false,
+                    required: watchOtherBirds === "yes" ? "Last checkup date is required" : false,
                     disabled: watchOtherBirds === "no",
                   })}
                   error={!!errors.other_bird_checkup_date?.message}
@@ -461,7 +468,7 @@ export const Adopt = () => {
                   multiline
                   minRows={4}
                   {...register("other_bird_diet", {
-                    required: watchOtherBirds === "yes" ? "other bird diet is required" : false,
+                    required: watchOtherBirds === "yes" ? "Other bird diet is required" : false,
                     disabled: watchOtherBirds === "no",
                   })}
                   error={!!errors.other_bird_diet?.message}
@@ -504,7 +511,7 @@ export const Adopt = () => {
                   minRows={4}
                   {...register("previous_what_happened", {
                     required:
-                      watchPreviousBirds === "yes" ? "what happened to birds is required" : false,
+                      watchPreviousBirds === "yes" ? "What happened to birds is required" : false,
                     disabled: watchPreviousBirds === "no",
                   })}
                   error={!!errors.previous_what_happened?.message}
@@ -556,7 +563,7 @@ export const Adopt = () => {
                   label="Veterinarian Name"
                   variant="outlined"
                   {...register("vet_name", {
-                    required: watchAvianVet === "yes" ? "veterinarian name is required" : false,
+                    required: watchAvianVet === "yes" ? "Veterinarian name is required" : false,
                     disabled: watchAvianVet === "no",
                   })}
                   error={!!errors.vet_name?.message}
@@ -568,7 +575,7 @@ export const Adopt = () => {
                   variant="outlined"
                   {...register("vet_clinic_name", {
                     required:
-                      watchAvianVet === "yes" ? "veterinarian clinic name is required" : false,
+                      watchAvianVet === "yes" ? "Veterinarian clinic name is required" : false,
                     disabled: watchAvianVet === "no",
                   })}
                   error={!!errors.vet_clinic_name?.message}
@@ -579,7 +586,7 @@ export const Adopt = () => {
                   label="Veterinarian Clinic Address"
                   variant="outlined"
                   {...register("vet_address", {
-                    required: watchAvianVet === "yes" ? "veterinarian address is required" : false,
+                    required: watchAvianVet === "yes" ? "Veterinarian address is required" : false,
                     disabled: watchAvianVet === "no",
                   })}
                   error={!!errors.vet_address?.message}
@@ -591,7 +598,7 @@ export const Adopt = () => {
                   variant="outlined"
                   {...register("vet_phone", {
                     required:
-                      watchAvianVet === "yes" ? "veterinarian phone number is required" : false,
+                      watchAvianVet === "yes" ? "Veterinarian phone number is required" : false,
                     disabled: watchAvianVet === "no",
                   })}
                   error={!!errors.vet_phone?.message}
