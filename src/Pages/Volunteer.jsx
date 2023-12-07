@@ -47,28 +47,22 @@ export const Volunteer = () => {
     }
   });
 
-  // Set watchers for changes to the checkboxes
   const watchBirdCare = watch("interested_bird_care");
   const watchFundraising = watch("interested_fundraising");
   const watchFostering = watch("interested_fostering");
 
-  // Error message for when the user has not selected at least one interest. Declared here to avoid duplicating messages below.
   const noInterestsSelectedMessage = "Please select at least one of the following areas of interest: ";
 
-  // Helper function to determine if the user has selected at least one of the interest checkboxes
   const hasSelectedOneInterest = () => {
     return watchBirdCare === "yes" || watchFundraising === "yes" || watchFostering === "yes";
   }
 
-  // Custom onChange handler for checkboxes. Updates the respective form fields with the strings "yes" or "no"
   const onCheckboxChange = (onChange) => (e) => {
     const newCheckboxValue = e.target.checked ? "yes" : "no";
     onChange(newCheckboxValue);
   };
 
-  // Set up useEffect hook to display or clear the "has_selected_one_interest" error message, but only after the form has been first submitted
   useEffect(() => {
-    // Use React Hook Form's isSubmitted property to check if the form has been submitted yet
     const hasFormBeenSubmitted = isSubmitted;
     
     if (hasFormBeenSubmitted) {
@@ -86,7 +80,6 @@ export const Volunteer = () => {
   const onSubmit = (data) => {
     const { emergency_contact_name, emergency_contact_number, has_selected_one_interest, ...submissionData} = data;
 
-    // Concatenate emergency contact name and number into one field
     submissionData.emergency_contact = `Name: ${emergency_contact_name}
     Number: ${emergency_contact_number}`;
 
