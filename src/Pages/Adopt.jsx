@@ -54,24 +54,24 @@ export const Adopt = () => {
       primary_caregiver_age: "",
       ages_in_household: "",
       children_in_house: "",
-      have_other_birds: "no",
+      have_other_birds: "No",
       other_bird_species: "",
       other_bird_checkup_date: "",
       other_bird_diet: "",
-      previous_birds: "no",
+      previous_birds: "No",
       previous_what_happened: "",
       other_bird_experience: "",
-      have_avian_vet: "no",
+      have_avian_vet: "No",
       vet_name: "",
       vet_clinic_name: "",
       vet_address: "",
       vet_phone: "",
-      residence_type: "single family house",
+      residence_type: "Single Family House",
     },
   });
-  const watchOtherBirds = watch("have_other_birds", "no");
-  const watchPreviousBirds = watch("previous_birds", "no");
-  const watchAvianVet = watch("have_avian_vet", "no");
+  const watchOtherBirds = watch("have_other_birds", "No");
+  const watchPreviousBirds = watch("previous_birds", "No");
+  const watchAvianVet = watch("have_avian_vet", "No");
 
   const onSubmit = (data) => {
     const {
@@ -86,23 +86,23 @@ export const Adopt = () => {
       vet_phone,
       ...submissionData
     } = data;
-    if (data.have_other_birds === "yes") {
-      submissionData.have_other_birds = `yes
-      ${other_bird_species}
-      last checkup: ${other_bird_checkup_date}
-      diet: ${other_bird_diet}`;
+    if (data.have_other_birds === "Yes") {
+      submissionData.have_other_birds = `Yes
+      Species: ${other_bird_species}
+      Last Checkup: ${other_bird_checkup_date}
+      Diet: ${other_bird_diet}`;
     }
-    if (data.previous_birds === "yes") {
-      submissionData.previous_birds = `yes
-      ${previous_what_happened}`;
+    if (data.previous_birds === "Yes") {
+      submissionData.previous_birds = `Yes
+      What Happened: ${previous_what_happened}`;
     }
-    if (have_avian_vet === "yes") {
-      submissionData.avian_vet_info = `${vet_name}
-      ${vet_clinic_name}
-      ${vet_address}
-      ${vet_phone}`;
+    if (have_avian_vet === "Yes") {
+      submissionData.avian_vet_info = `Vet: ${vet_name}
+      Clinic: ${vet_clinic_name}
+      Address: ${vet_address}
+      Phone: ${vet_phone}`;
     } else {
-      submissionData.avian_vet_info = "no avian vet";
+      submissionData.avian_vet_info = "No avian vet";
     }
     // This is where in the future we can send data to the back end
     console.log(submissionData);
@@ -433,19 +433,19 @@ export const Adopt = () => {
                       }}
                     >
                       <FormControlLabel
-                        value="yes"
+                        value="Yes"
                         control={<Radio />}
                         label="Yes"
                       />
                       <FormControlLabel
-                        value="no"
+                        value="No"
                         control={<Radio />}
                         label="No"
                       />
                     </RadioGroup>
                   )}
                 />
-                {watchOtherBirds === "yes" && (
+                {watchOtherBirds === "Yes" && (
                   <Fade
                     in={true}
                     timeout={250}
@@ -508,19 +508,19 @@ export const Adopt = () => {
                       }}
                     >
                       <FormControlLabel
-                        value="yes"
+                        value="Yes"
                         control={<Radio />}
                         label="Yes"
                       />
                       <FormControlLabel
-                        value="no"
+                        value="No"
                         control={<Radio />}
                         label="No"
                       />
                     </RadioGroup>
                   )}
                 />
-                {watchPreviousBirds === "yes" && (
+                {watchPreviousBirds === "Yes" && (
                   <Fade
                     in={true}
                     timeout={250}
@@ -571,19 +571,19 @@ export const Adopt = () => {
                       }}
                     >
                       <FormControlLabel
-                        value="yes"
+                        value="Yes"
                         control={<Radio />}
                         label="Yes"
                       />
                       <FormControlLabel
-                        value="no"
+                        value="No"
                         control={<Radio />}
                         label="No"
                       />
                     </RadioGroup>
                   )}
                 />
-                {watchAvianVet === "yes" && (
+                {watchAvianVet === "Yes" && (
                   <Fade
                     in={true}
                     timeout={250}
@@ -649,37 +649,37 @@ export const Adopt = () => {
                       onChange={onChange}
                     >
                       <FormControlLabel
-                        value="single family house"
+                        value="Single Family House"
                         control={<Radio />}
                         label="Single Family House"
                       />
                       <FormControlLabel
-                        value="mobile home"
+                        value="Mobile Home"
                         control={<Radio />}
                         label="Mobile Home"
                       />
                       <FormControlLabel
-                        value="condo"
+                        value="Condo"
                         control={<Radio />}
                         label="Condo"
                       />
                       <FormControlLabel
-                        value="shared housing"
+                        value="Shared Housing"
                         control={<Radio />}
                         label="Shared Housing"
                       />
                       <FormControlLabel
-                        value="apartment"
+                        value="Apartment"
                         control={<Radio />}
                         label="Apartment"
                       />
                       <FormControlLabel
-                        value="temporary housing"
+                        value="Temporary Housing"
                         control={<Radio />}
                         label="Temporary Housing"
                       />
                       <FormControlLabel
-                        value="other housing"
+                        value="Other Housing"
                         control={<Radio />}
                         label="Other"
                       />
