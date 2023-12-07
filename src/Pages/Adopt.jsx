@@ -620,12 +620,12 @@ export const Adopt = () => {
                       onChange={onChange}
                     >
                       <FormControlLabel
-                        value="single-family-house"
+                        value="single family house"
                         control={<Radio />}
                         label="Single Family House"
                       />
                       <FormControlLabel
-                        value="mobile-home"
+                        value="mobile home"
                         control={<Radio />}
                         label="Mobile Home"
                       />
@@ -635,7 +635,7 @@ export const Adopt = () => {
                         label="Condo"
                       />
                       <FormControlLabel
-                        value="shared-housing"
+                        value="shared housing"
                         control={<Radio />}
                         label="Shared Housing"
                       />
@@ -645,12 +645,12 @@ export const Adopt = () => {
                         label="Apartment"
                       />
                       <FormControlLabel
-                        value="temporary-housing"
+                        value="temporary housing"
                         control={<Radio />}
                         label="Temporary Housing"
                       />
                       <FormControlLabel
-                        value="other-housing"
+                        value="other housing"
                         control={<Radio />}
                         label="Other"
                       />
