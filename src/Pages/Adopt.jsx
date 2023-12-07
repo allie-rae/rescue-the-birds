@@ -437,43 +437,44 @@ export const Adopt = () => {
                     </RadioGroup>
                   )}
                 />
-                <TextField
-                  id="other-birds-in-household-text"
-                  label="If yes, list species and how many"
-                  variant="outlined"
-                  multiline
-                  minRows={4}
-                  {...register("other_bird_species", {
-                    required: watchOtherBirds === "yes" ? "Other bird species is required" : false,
-                    disabled: watchOtherBirds === "no",
-                  })}
-                  error={!!errors.other_bird_species?.message}
-                  helperText={errors.other_bird_species?.message}
-                />
-                <TextField
-                  id="last-bird-checkup-date"
-                  label="If you currently have birds, what was the date of their last annual checkup?"
-                  variant="outlined"
-                  {...register("other_bird_checkup_date", {
-                    required: watchOtherBirds === "yes" ? "Last checkup date is required" : false,
-                    disabled: watchOtherBirds === "no",
-                  })}
-                  error={!!errors.other_bird_checkup_date?.message}
-                  helperText={errors.other_bird_checkup_date?.message}
-                />
-                <TextField
-                  id="bird-diet"
-                  label="List the current diet that you feed your birds"
-                  variant="outlined"
-                  multiline
-                  minRows={4}
-                  {...register("other_bird_diet", {
-                    required: watchOtherBirds === "yes" ? "Other bird diet is required" : false,
-                    disabled: watchOtherBirds === "no",
-                  })}
-                  error={!!errors.other_bird_diet?.message}
-                  helperText={errors.other_bird_diet?.message}
-                />
+                {watchOtherBirds === "yes" && (
+                  <>
+                    <TextField
+                      id="other-birds-in-household-text"
+                      label="If yes, list species and how many"
+                      variant="outlined"
+                      multiline
+                      minRows={4}
+                      {...register("other_bird_species", {
+                        required: "Other bird species is required",
+                      })}
+                      error={!!errors.other_bird_species?.message}
+                      helperText={errors.other_bird_species?.message}
+                    />
+                    <TextField
+                      id="last-bird-checkup-date"
+                      label="If you currently have birds, what was the date of their last annual checkup?"
+                      variant="outlined"
+                      {...register("other_bird_checkup_date", {
+                        required: "Last checkup date is required",
+                      })}
+                      error={!!errors.other_bird_checkup_date?.message}
+                      helperText={errors.other_bird_checkup_date?.message}
+                    />
+                    <TextField
+                      id="bird-diet"
+                      label="List the current diet that you feed your birds"
+                      variant="outlined"
+                      multiline
+                      minRows={4}
+                      {...register("other_bird_diet", {
+                        required: "Other bird diet is required",
+                      })}
+                      error={!!errors.other_bird_diet?.message}
+                      helperText={errors.other_bird_diet?.message}
+                    />
+                  </>
+                )}
                 <FormLabel
                   id="previously-owned-birds-bool"
                   sx={{ fontWeight: "bold" }}
@@ -503,20 +504,20 @@ export const Adopt = () => {
                     </RadioGroup>
                   )}
                 />
-                <TextField
-                  id="previously-owned-birds-text"
-                  label="If yes, what happened to these birds?"
-                  variant="outlined"
-                  multiline
-                  minRows={4}
-                  {...register("previous_what_happened", {
-                    required:
-                      watchPreviousBirds === "yes" ? "What happened to birds is required" : false,
-                    disabled: watchPreviousBirds === "no",
-                  })}
-                  error={!!errors.previous_what_happened?.message}
-                  helperText={errors.previous_what_happened?.message}
-                />
+                {watchPreviousBirds === "yes" && (
+                  <TextField
+                    id="previously-owned-birds-text"
+                    label="If yes, what happened to these birds?"
+                    variant="outlined"
+                    multiline
+                    minRows={4}
+                    {...register("previous_what_happened", {
+                      required: "What happened to birds is required",
+                    })}
+                    error={!!errors.previous_what_happened?.message}
+                    helperText={errors.previous_what_happened?.message}
+                  />
+                )}
                 <TextField
                   id="other-bird-experience"
                   label="Please list any other bird experience that you may have"
@@ -558,52 +559,50 @@ export const Adopt = () => {
                     </RadioGroup>
                   )}
                 />
-                <TextField
-                  id="veterinarian-name"
-                  label="Veterinarian Name"
-                  variant="outlined"
-                  {...register("vet_name", {
-                    required: watchAvianVet === "yes" ? "Veterinarian name is required" : false,
-                    disabled: watchAvianVet === "no",
-                  })}
-                  error={!!errors.vet_name?.message}
-                  helperText={errors.vet_name?.message}
-                />
-                <TextField
-                  id="veterinary-clinic-name"
-                  label="Veterinarian Clinic Name"
-                  variant="outlined"
-                  {...register("vet_clinic_name", {
-                    required:
-                      watchAvianVet === "yes" ? "Veterinarian clinic name is required" : false,
-                    disabled: watchAvianVet === "no",
-                  })}
-                  error={!!errors.vet_clinic_name?.message}
-                  helperText={errors.vet_clinic_name?.message}
-                />
-                <TextField
-                  id="veterinary-clinic-address"
-                  label="Veterinarian Clinic Address"
-                  variant="outlined"
-                  {...register("vet_address", {
-                    required: watchAvianVet === "yes" ? "Veterinarian address is required" : false,
-                    disabled: watchAvianVet === "no",
-                  })}
-                  error={!!errors.vet_address?.message}
-                  helperText={errors.vet_address?.message}
-                />
-                <TextField
-                  id="veterinary-clinic-phone"
-                  label="Veterinarian Clinic Phone Number"
-                  variant="outlined"
-                  {...register("vet_phone", {
-                    required:
-                      watchAvianVet === "yes" ? "Veterinarian phone number is required" : false,
-                    disabled: watchAvianVet === "no",
-                  })}
-                  error={!!errors.vet_phone?.message}
-                  helperText={errors.vet_phone?.message}
-                />
+                {watchAvianVet === "yes" && (
+                  <>
+                    <TextField
+                      id="veterinarian-name"
+                      label="Veterinarian Name"
+                      variant="outlined"
+                      {...register("vet_name", {
+                        required: "Veterinarian name is required",
+                      })}
+                      error={!!errors.vet_name?.message}
+                      helperText={errors.vet_name?.message}
+                    />
+                    <TextField
+                      id="veterinary-clinic-name"
+                      label="Veterinarian Clinic Name"
+                      variant="outlined"
+                      {...register("vet_clinic_name", {
+                        required: "Veterinarian clinic name is required",
+                      })}
+                      error={!!errors.vet_clinic_name?.message}
+                      helperText={errors.vet_clinic_name?.message}
+                    />
+                    <TextField
+                      id="veterinary-clinic-address"
+                      label="Veterinarian Clinic Address"
+                      variant="outlined"
+                      {...register("vet_address", {
+                        required: "Veterinarian address is required",
+                      })}
+                      error={!!errors.vet_address?.message}
+                      helperText={errors.vet_address?.message}
+                    />
+                    <TextField
+                      id="veterinary-clinic-phone"
+                      label="Veterinarian Clinic Phone Number"
+                      variant="outlined"
+                      {...register("vet_phone", {
+                        required: "Veterinarian phone number is required",
+                      })}
+                      error={!!errors.vet_phone?.message}
+                      helperText={errors.vet_phone?.message}
+                    />
+                  </>
+                )}
                 <FormLabel
                   id="residence-type"
                   sx={{ fontWeight: "bold" }}
