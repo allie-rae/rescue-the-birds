@@ -87,20 +87,13 @@ export const Adopt = () => {
       ...submissionData
     } = data;
     if (data.have_other_birds === "Yes") {
-      submissionData.have_other_birds = `Yes
-      Species: ${other_bird_species}
-      Last Checkup: ${other_bird_checkup_date}
-      Diet: ${other_bird_diet}`;
+      submissionData.have_other_birds = `Yes\nSpecies: ${other_bird_species}\nLast Checkup: ${other_bird_checkup_date}\nDiet: ${other_bird_diet}`;
     }
     if (data.previous_birds === "Yes") {
-      submissionData.previous_birds = `Yes
-      What Happened: ${previous_what_happened}`;
+      submissionData.previous_birds = `Yes\nWhat Happened: ${previous_what_happened}`;
     }
     if (have_avian_vet === "Yes") {
-      submissionData.avian_vet_info = `Vet: ${vet_name}
-      Clinic: ${vet_clinic_name}
-      Address: ${vet_address}
-      Phone: ${vet_phone}`;
+      submissionData.avian_vet_info = `Vet: ${vet_name}\nClinic: ${vet_clinic_name}\nAddress: ${vet_address}\nPhone: ${vet_phone}`;
     } else {
       submissionData.avian_vet_info = "No avian vet";
     }
