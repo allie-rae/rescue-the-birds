@@ -416,13 +416,13 @@ export const Adopt = () => {
                       aria-labelledby="other-birds-in-household-bool"
                       value={value}
                       name={name}
-                      onChange={(evt) => {
+                      onChange={(event) => {
                         clearErrors([
                           "other_bird_species",
                           "other_bird_checkup_date",
                           "other_bird_diet",
                         ]);
-                        onChange(evt);
+                        onChange(event);
                       }}
                     >
                       <FormControlLabel
@@ -473,7 +473,7 @@ export const Adopt = () => {
                         multiline
                         minRows={4}
                         {...register("other_bird_diet", {
-                          required: "Other bird diet is required",
+                          required: "Current diet is required",
                         })}
                         error={!!errors.other_bird_diet?.message}
                         helperText={errors.other_bird_diet?.message}
@@ -495,9 +495,9 @@ export const Adopt = () => {
                       aria-labelledby="previously-owned-birds-bool"
                       value={value}
                       name={name}
-                      onChange={(evt) => {
+                      onChange={(event) => {
                         clearErrors("previous_what_happened");
-                        onChange(evt);
+                        onChange(event);
                       }}
                     >
                       <FormControlLabel
@@ -558,9 +558,9 @@ export const Adopt = () => {
                       aria-labelledby="current-veterinarian-bool"
                       value={value}
                       name={name}
-                      onChange={(evt) => {
+                      onChange={(event) => {
                         clearErrors(["vet_name", "vet_clinic_name", "vet_address", "vet_phone"]);
-                        onChange(evt);
+                        onChange(event);
                       }}
                     >
                       <FormControlLabel
