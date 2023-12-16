@@ -451,7 +451,7 @@ export const Adopt = () => {
                         multiline
                         minRows={4}
                         {...register("other_bird_species", {
-                          required: "Other bird species is required",
+                          required: "Species is required",
                         })}
                         error={!!errors.other_bird_species?.message}
                         helperText={errors.other_bird_species?.message}
