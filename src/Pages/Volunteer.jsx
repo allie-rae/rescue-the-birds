@@ -41,9 +41,9 @@ export const Volunteer = () => {
       emergency_contact_number: "",
       brief_synopsis_of_birds: "",
       why_interested: "",
-      interested_bird_care: "no",
-      interested_fundraising: "no",
-      interested_fostering: "no"
+      interested_bird_care: "No",
+      interested_fundraising: "No",
+      interested_fostering: "No"
     }
   });
 
@@ -54,11 +54,11 @@ export const Volunteer = () => {
   const noInterestsSelectedMessage = "Please select at least one of the following areas of interest: ";
 
   const hasSelectedOneInterest = () => {
-    return watchBirdCare === "yes" || watchFundraising === "yes" || watchFostering === "yes";
+    return watchBirdCare === "Yes" || watchFundraising === "Yes" || watchFostering === "Yes";
   }
 
   const onCheckboxChange = (onChange) => (e) => {
-    const newCheckboxValue = e.target.checked ? "yes" : "no";
+    const newCheckboxValue = e.target.checked ? "Yes" : "No";
     onChange(newCheckboxValue);
   };
 
@@ -264,7 +264,7 @@ export const Volunteer = () => {
                   render={({ field: { value, onChange }}) => (
                       <FormControlLabel
                         control={<Checkbox
-                          checked={value === "yes"}
+                          checked={value === "Yes"}
                           onChange={onCheckboxChange(onChange)}
                         />}
                         label="Bird care at the Refuge"
@@ -282,7 +282,7 @@ export const Volunteer = () => {
                   render={({ field: { value, onChange }}) => (
                       <FormControlLabel
                         control={<Checkbox
-                          checked={value === "yes"}
+                          checked={value === "Yes"}
                           onChange={onCheckboxChange(onChange)}
                         />}
                         label="Fostering in your home"
@@ -309,7 +309,7 @@ export const Volunteer = () => {
                   render={({ field: { value, onChange }}) => (
                       <FormControlLabel
                         control={<Checkbox
-                          checked={value === "yes"}
+                          checked={value === "Yes"}
                           onChange={onCheckboxChange(onChange)}
                         />}
                         label="Fundraising"
