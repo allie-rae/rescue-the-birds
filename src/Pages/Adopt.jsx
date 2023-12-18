@@ -28,8 +28,79 @@ import Diversity3Icon from "@mui/icons-material/Diversity3";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
+import { Controller, useForm } from "react-hook-form";
 
 export const Adopt = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+    watch,
+    clearErrors,
+  } = useForm({
+    mode: "all",
+    defaultValues: {
+      person_name: "",
+      person_dob: "",
+      person_email: "",
+      person_phone: "",
+      person_address: "",
+      person_city: "",
+      person_state: "",
+      person_zipcode: "",
+      hear_about_us: "",
+      num_household_people: "",
+      primary_caregiver_age: "",
+      ages_in_household: "",
+      children_in_house: "",
+      have_other_birds: "No",
+      other_bird_species: "",
+      other_bird_checkup_date: "",
+      other_bird_diet: "",
+      previous_birds: "No",
+      previous_what_happened: "",
+      other_bird_experience: "",
+      have_avian_vet: "No",
+      vet_name: "",
+      vet_clinic_name: "",
+      vet_address: "",
+      vet_phone: "",
+      residence_type: "Single Family House",
+    },
+  });
+  const watchOtherBirds = watch("have_other_birds", "No");
+  const watchPreviousBirds = watch("previous_birds", "No");
+  const watchAvianVet = watch("have_avian_vet", "No");
+
+  const onSubmit = (data) => {
+    const {
+      other_bird_species,
+      other_bird_checkup_date,
+      other_bird_diet,
+      previous_what_happened,
+      have_avian_vet,
+      vet_name,
+      vet_clinic_name,
+      vet_address,
+      vet_phone,
+      ...submissionData
+    } = data;
+    if (data.have_other_birds === "Yes") {
+      submissionData.have_other_birds = `Yes\nSpecies: ${other_bird_species}\nLast Checkup: ${other_bird_checkup_date}\nDiet: ${other_bird_diet}`;
+    }
+    if (data.previous_birds === "Yes") {
+      submissionData.previous_birds = `Yes\nWhat Happened: ${previous_what_happened}`;
+    }
+    if (have_avian_vet === "Yes") {
+      submissionData.avian_vet_info = `Vet: ${vet_name}\nClinic: ${vet_clinic_name}\nAddress: ${vet_address}\nPhone: ${vet_phone}`;
+    } else {
+      submissionData.avian_vet_info = "No avian vet";
+    }
+    // This is where in the future we can send data to the back end
+    console.log(submissionData);
+  };
+
   return (
     <Fade
       in={true}
@@ -217,247 +288,406 @@ export const Adopt = () => {
             incomplete, your application will be disqualified.
           </Typography>
           <Box sx={{ width: "600px", maxWidth: "100%" }}>
-            <Stack spacing={2}>
-              <TextField
-                id="name"
-                label="Name"
-                variant="outlined"
-              />
-              <TextField
-                id="date-of-birth"
-                label="Date of Birth (MM/DD/YYYY)"
-                variant="outlined"
-              />
-              <TextField
-                id="email"
-                label="Email"
-                variant="outlined"
-              />
-              <TextField
-                id="phone-number"
-                label="Phone Number"
-                variant="outlined"
-              />
-              <TextField
-                id="street-address"
-                label="Street Address"
-                variant="outlined"
-              />
-              <TextField
-                id="city"
-                label="City"
-                variant="outlined"
-              />
-              <TextField
-                id="state"
-                label="State"
-                variant="outlined"
-              />
-              <TextField
-                id="zip-code"
-                label="Zip Code"
-                variant="outlined"
-              />
-              <TextField
-                id="how-did-you-hear-about-us"
-                label="How did you hear about us?"
-                variant="outlined"
-              />
-              <TextField
-                id="how-many-people-in-household"
-                label="How many people are in your household?"
-                variant="outlined"
-              />
-              <TextField
-                id="how-old-is-primary-caregiver"
-                label="How old is the primary caregiver?"
-                variant="outlined"
-              />
-              <TextField
-                id="household-ages"
-                label="What are the ages of everyone in the household?"
-                variant="outlined"
-              />
-              <TextField
-                id="children-experience-with-birds"
-                label="Are there children in the household? What is their experience with birds?"
-                variant="outlined"
-                multiline
-                minRows={4}
-              />
-              <FormLabel
-                id="children-in-future"
-                sx={{ fontWeight: "bold" }}
-              >
-                Do you currently have other birds in the household?
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="other-birds-in-household-bool"
-                defaultValue="no"
-                name="other-birds-in-household-bool-radio-buttons-group"
-              >
-                <FormControlLabel
-                  value="yes"
-                  control={<Radio />}
-                  label="Yes"
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Stack spacing={2}>
+                <TextField
+                  id="name"
+                  label="Name"
+                  variant="outlined"
+                  {...register("person_name", { required: "Name is required" })}
+                  error={!!errors.person_name?.message}
+                  helperText={errors.person_name?.message}
                 />
-                <FormControlLabel
-                  value="no"
-                  control={<Radio />}
-                  label="No"
+                <TextField
+                  id="date-of-birth"
+                  label="Date of Birth (MM/DD/YYYY)"
+                  variant="outlined"
+                  {...register("person_dob", { required: "Date of birth is required" })}
+                  error={!!errors.person_dob?.message}
+                  helperText={errors.person_dob?.message}
                 />
-              </RadioGroup>
-              <TextField
-                id="other-birds-in-household-text"
-                label="If yes, list species and how many"
-                variant="outlined"
-                multiline
-                minRows={4}
-              />
-              <TextField
-                id="last-bird-checkup-date"
-                label="If you currently have birds, what was the date of their last annual checkup?"
-                variant="outlined"
-              />
-              <TextField
-                id="bird-diet"
-                label="List the current diet that you feed your birds"
-                variant="outlined"
-                multiline
-                minRows={4}
-              />
-              <FormLabel
-                id="previously-owned-birds-bool"
-                sx={{ fontWeight: "bold" }}
-              >
-                Have you previously owned a bird or birds that you no longer own?
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="previously-owned-birds-bool"
-                defaultValue="no"
-                name="previously-owned-birds-bool-radio-buttons-group"
-              >
-                <FormControlLabel
-                  value="yes"
-                  control={<Radio />}
-                  label="Yes"
+                <TextField
+                  id="email"
+                  label="Email"
+                  variant="outlined"
+                  {...register("person_email", { required: "Email is required" })}
+                  error={!!errors.person_email?.message}
+                  helperText={errors.person_email?.message}
                 />
-                <FormControlLabel
-                  value="no"
-                  control={<Radio />}
-                  label="No"
+                <TextField
+                  id="phone-number"
+                  label="Phone Number"
+                  variant="outlined"
+                  {...register("person_phone", { required: "Phone number is required" })}
+                  error={!!errors.person_phone?.message}
+                  helperText={errors.person_phone?.message}
                 />
-              </RadioGroup>
-              <TextField
-                id="previously-owned-birds-text"
-                label="If yes, what happened to these birds?"
-                variant="outlined"
-                multiline
-                minRows={4}
-              />
-              <TextField
-                id="other-bird-experience"
-                label="Please list any other bird experience that you may have"
-                variant="outlined"
-                multiline
-                minRows={4}
-              />
-              <FormLabel
-                id="current-veterinarian-bool"
-                sx={{ fontWeight: "bold" }}
-              >
-                Do you currently have an avian veterinarian?
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="current-veterinarian-bool"
-                defaultValue="yes"
-                name="current-veterinarian-bool-radio-buttons-group"
-              >
-                <FormControlLabel
-                  value="yes"
-                  control={<Radio />}
-                  label="Yes"
+                <TextField
+                  id="street-address"
+                  label="Street Address"
+                  variant="outlined"
+                  {...register("person_address", { required: "Street address is required" })}
+                  error={!!errors.person_address?.message}
+                  helperText={errors.person_address?.message}
                 />
-                <FormControlLabel
-                  value="no"
-                  control={<Radio />}
-                  label="No"
+                <TextField
+                  id="city"
+                  label="City"
+                  variant="outlined"
+                  {...register("person_city", { required: "City is required" })}
+                  error={!!errors.person_city?.message}
+                  helperText={errors.person_city?.message}
                 />
-              </RadioGroup>
-              <TextField
-                id="veterinarian-name"
-                label="Veterinarian Name"
-                variant="outlined"
-              />
-              <TextField
-                id="veterinary-clinic-name"
-                label="Veterinarian Clinic Name"
-                variant="outlined"
-              />
-              <TextField
-                id="veterinary-clinic-address"
-                label="Veterinarian Clinic Address"
-                variant="outlined"
-              />
-              <TextField
-                id="veterinary-clinic-phone"
-                label="Veterinarian Clinic Phone Number"
-                variant="outlined"
-              />
-              <FormLabel
-                id="residence-type"
-                sx={{ fontWeight: "bold" }}
-              >
-                Residence
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="residence-type"
-                defaultValue="single-family-house"
-                name="residence-type-radio-buttons-group"
-              >
-                <FormControlLabel
-                  value="single-family-house"
-                  control={<Radio />}
-                  label="Single Family House"
+                <TextField
+                  id="state"
+                  label="State"
+                  variant="outlined"
+                  {...register("person_state", { required: "State is required" })}
+                  error={!!errors.person_state?.message}
+                  helperText={errors.person_state?.message}
                 />
-                <FormControlLabel
-                  value="mobile-home"
-                  control={<Radio />}
-                  label="Mobile Home"
+                <TextField
+                  id="zip-code"
+                  label="Zip Code"
+                  variant="outlined"
+                  {...register("person_zipcode", { required: "Zip code is required" })}
+                  error={!!errors.person_zipcode?.message}
+                  helperText={errors.person_zipcode?.message}
                 />
-                <FormControlLabel
-                  value="condo"
-                  control={<Radio />}
-                  label="Condo"
+                <TextField
+                  id="how-did-you-hear-about-us"
+                  label="How did you hear about us?"
+                  variant="outlined"
+                  {...register("hear_about_us", {
+                    required: "Response is required",
+                  })}
+                  error={!!errors.hear_about_us?.message}
+                  helperText={errors.hear_about_us?.message}
                 />
-                <FormControlLabel
-                  value="shared-housing"
-                  control={<Radio />}
-                  label="Shared Housing"
+                <TextField
+                  id="how-many-people-in-household"
+                  label="How many people are in your household?"
+                  variant="outlined"
+                  {...register("num_household_people", { required: "Household size is required" })}
+                  error={!!errors.num_household_people?.message}
+                  helperText={errors.num_household_people?.message}
                 />
-                <FormControlLabel
-                  value="apartment"
-                  control={<Radio />}
-                  label="Apartment"
+                <TextField
+                  id="how-old-is-primary-caregiver"
+                  label="How old is the primary caregiver?"
+                  variant="outlined"
+                  {...register("primary_caregiver_age", { required: "Caregiver age is required" })}
+                  error={!!errors.primary_caregiver_age?.message}
+                  helperText={errors.primary_caregiver_age?.message}
                 />
-                <FormControlLabel
-                  value="temporary-housing"
-                  control={<Radio />}
-                  label="Temporary Housing"
+                <TextField
+                  id="household-ages"
+                  label="What are the ages of everyone in the household?"
+                  variant="outlined"
+                  {...register("ages_in_household", {
+                    required: "Household members' ages are required",
+                  })}
+                  error={!!errors.ages_in_household?.message}
+                  helperText={errors.ages_in_household?.message}
                 />
-                <FormControlLabel
-                  value="other-housing"
-                  control={<Radio />}
-                  label="Other"
+                <TextField
+                  id="children-experience-with-birds"
+                  label="Are there children in the household? What is their experience with birds?"
+                  variant="outlined"
+                  multiline
+                  minRows={4}
+                  {...register("children_in_house", {
+                    required: "Children's experience with birds is required",
+                  })}
+                  error={!!errors.children_in_house?.message}
+                  helperText={errors.children_in_house?.message}
                 />
-              </RadioGroup>
-              <Button
-                variant="contained"
-                color="primary"
-              >
-                Submit
-              </Button>
-            </Stack>
+                <FormLabel
+                  id="children-in-future"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Do you currently have other birds in the household?
+                </FormLabel>
+                <Controller
+                  control={control}
+                  name="have_other_birds"
+                  render={({ field: { onChange, value, name } }) => (
+                    <RadioGroup
+                      aria-labelledby="other-birds-in-household-bool"
+                      value={value}
+                      name={name}
+                      onChange={(event) => {
+                        clearErrors([
+                          "other_bird_species",
+                          "other_bird_checkup_date",
+                          "other_bird_diet",
+                        ]);
+                        onChange(event);
+                      }}
+                    >
+                      <FormControlLabel
+                        value="Yes"
+                        control={<Radio />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="No"
+                        control={<Radio />}
+                        label="No"
+                      />
+                    </RadioGroup>
+                  )}
+                />
+                {watchOtherBirds === "Yes" && (
+                  <Fade
+                    in={true}
+                    timeout={250}
+                  >
+                    <Stack spacing={2}>
+                      <TextField
+                        id="other-birds-in-household-text"
+                        label="If yes, list species and how many"
+                        variant="outlined"
+                        multiline
+                        minRows={4}
+                        {...register("other_bird_species", {
+                          required: "Species is required",
+                        })}
+                        error={!!errors.other_bird_species?.message}
+                        helperText={errors.other_bird_species?.message}
+                      />
+                      <TextField
+                        id="last-bird-checkup-date"
+                        label="If you currently have birds, what was the date of their last annual checkup?"
+                        variant="outlined"
+                        {...register("other_bird_checkup_date", {
+                          required: "Last checkup date is required",
+                        })}
+                        error={!!errors.other_bird_checkup_date?.message}
+                        helperText={errors.other_bird_checkup_date?.message}
+                      />
+                      <TextField
+                        id="bird-diet"
+                        label="List the current diet that you feed your birds"
+                        variant="outlined"
+                        multiline
+                        minRows={4}
+                        {...register("other_bird_diet", {
+                          required: "Current diet is required",
+                        })}
+                        error={!!errors.other_bird_diet?.message}
+                        helperText={errors.other_bird_diet?.message}
+                      />
+                    </Stack>
+                  </Fade>
+                )}
+                <FormLabel
+                  id="previously-owned-birds-bool"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Have you previously owned a bird or birds that you no longer own?
+                </FormLabel>
+                <Controller
+                  control={control}
+                  name="previous_birds"
+                  render={({ field: { onChange, value, name } }) => (
+                    <RadioGroup
+                      aria-labelledby="previously-owned-birds-bool"
+                      value={value}
+                      name={name}
+                      onChange={(event) => {
+                        clearErrors("previous_what_happened");
+                        onChange(event);
+                      }}
+                    >
+                      <FormControlLabel
+                        value="Yes"
+                        control={<Radio />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="No"
+                        control={<Radio />}
+                        label="No"
+                      />
+                    </RadioGroup>
+                  )}
+                />
+                {watchPreviousBirds === "Yes" && (
+                  <Fade
+                    in={true}
+                    timeout={250}
+                  >
+                    <TextField
+                      id="previously-owned-birds-text"
+                      label="If yes, what happened to these birds?"
+                      variant="outlined"
+                      multiline
+                      minRows={4}
+                      {...register("previous_what_happened", {
+                        required: "What happened to birds is required",
+                      })}
+                      error={!!errors.previous_what_happened?.message}
+                      helperText={errors.previous_what_happened?.message}
+                    />
+                  </Fade>
+                )}
+                <TextField
+                  id="other-bird-experience"
+                  label="Please list any other bird experience that you may have"
+                  variant="outlined"
+                  multiline
+                  minRows={4}
+                  {...register("other_bird_experience", {
+                    required: "Other bird experience is required",
+                  })}
+                  error={!!errors.other_bird_experience?.message}
+                  helperText={errors.other_bird_experience?.message}
+                />
+                <FormLabel
+                  id="current-veterinarian-bool"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Do you currently have an avian veterinarian?
+                </FormLabel>
+                <Controller
+                  control={control}
+                  name="have_avian_vet"
+                  render={({ field: { onChange, value, name } }) => (
+                    <RadioGroup
+                      aria-labelledby="current-veterinarian-bool"
+                      value={value}
+                      name={name}
+                      onChange={(event) => {
+                        clearErrors(["vet_name", "vet_clinic_name", "vet_address", "vet_phone"]);
+                        onChange(event);
+                      }}
+                    >
+                      <FormControlLabel
+                        value="Yes"
+                        control={<Radio />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="No"
+                        control={<Radio />}
+                        label="No"
+                      />
+                    </RadioGroup>
+                  )}
+                />
+                {watchAvianVet === "Yes" && (
+                  <Fade
+                    in={true}
+                    timeout={250}
+                  >
+                    <Stack spacing={2}>
+                      <TextField
+                        id="veterinarian-name"
+                        label="Veterinarian Name"
+                        variant="outlined"
+                        {...register("vet_name", {
+                          required: "Veterinarian name is required",
+                        })}
+                        error={!!errors.vet_name?.message}
+                        helperText={errors.vet_name?.message}
+                      />
+                      <TextField
+                        id="veterinary-clinic-name"
+                        label="Veterinarian Clinic Name"
+                        variant="outlined"
+                        {...register("vet_clinic_name", {
+                          required: "Veterinarian clinic name is required",
+                        })}
+                        error={!!errors.vet_clinic_name?.message}
+                        helperText={errors.vet_clinic_name?.message}
+                      />
+                      <TextField
+                        id="veterinary-clinic-address"
+                        label="Veterinarian Clinic Address"
+                        variant="outlined"
+                        {...register("vet_address", {
+                          required: "Veterinarian address is required",
+                        })}
+                        error={!!errors.vet_address?.message}
+                        helperText={errors.vet_address?.message}
+                      />
+                      <TextField
+                        id="veterinary-clinic-phone"
+                        label="Veterinarian Clinic Phone Number"
+                        variant="outlined"
+                        {...register("vet_phone", {
+                          required: "Veterinarian phone number is required",
+                        })}
+                        error={!!errors.vet_phone?.message}
+                        helperText={errors.vet_phone?.message}
+                      />
+                    </Stack>
+                  </Fade>
+                )}
+                <FormLabel
+                  id="residence-type"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Residence
+                </FormLabel>
+                <Controller
+                  control={control}
+                  name="residence_type"
+                  render={({ field: { onChange, value, name } }) => (
+                    <RadioGroup
+                      aria-labelledby="residence-type"
+                      name={name}
+                      value={value}
+                      onChange={onChange}
+                    >
+                      <FormControlLabel
+                        value="Single Family House"
+                        control={<Radio />}
+                        label="Single Family House"
+                      />
+                      <FormControlLabel
+                        value="Mobile Home"
+                        control={<Radio />}
+                        label="Mobile Home"
+                      />
+                      <FormControlLabel
+                        value="Condo"
+                        control={<Radio />}
+                        label="Condo"
+                      />
+                      <FormControlLabel
+                        value="Shared Housing"
+                        control={<Radio />}
+                        label="Shared Housing"
+                      />
+                      <FormControlLabel
+                        value="Apartment"
+                        control={<Radio />}
+                        label="Apartment"
+                      />
+                      <FormControlLabel
+                        value="Temporary Housing"
+                        control={<Radio />}
+                        label="Temporary Housing"
+                      />
+                      <FormControlLabel
+                        value="Other Housing"
+                        control={<Radio />}
+                        label="Other"
+                      />
+                    </RadioGroup>
+                  )}
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Stack>
+            </form>
           </Box>
         </Box>
       </Box>
