@@ -6,6 +6,7 @@ import {
   FormControlLabel,
   FormHelperText,
   FormLabel,
+  LinearProgress,
   List,
   ListItem,
   ListItemIcon,
@@ -19,7 +20,7 @@ import rose from "../../Photos/rose.png";
 import { ListOfTests } from "../../ListOfTests";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { PricingTable } from "../../PricingTable";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { ParrotBoardingForm } from "./ParrotBoardingSubForm";
@@ -32,6 +33,7 @@ export const Board = () => {
     setValue,
     getValues,
     reset,
+    control,
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -66,6 +68,32 @@ export const Board = () => {
       clearTimeout(timeout);
     };
   }, [isSuccess, isError]);
+
+  const onSubmit = (data) => {
+    setIsLoading(true);
+    const {
+      dropoff_agreement,
+      emergency_agreement,
+      legal_agreement,
+      vet_record_agreement,
+      ...rest
+    } = data;
+    axios
+      .post("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/boarding", {
+        ...rest,
+      })
+      .then(() => {
+        setIsSuccess(true);
+        reset();
+        setAddedBirdNames([]);
+        setIsParrotFormOpen(true);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsError(true);
+        setIsLoading(false);
+      });
+  };
 
   return (
     <Fade
@@ -152,31 +180,7 @@ export const Board = () => {
             Boarding Contract
           </Typography>
           <Box sx={{ width: "600px", maxWidth: "100%" }}>
-            <form
-              onSubmit={handleSubmit((data) => {
-                setIsLoading(true);
-                const {
-                  dropoff_agreement,
-                  emergency_agreement,
-                  legal_agreement,
-                  vet_record_agreement,
-                  ...rest
-                } = data;
-                axios
-                  .post("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/boarding", {
-                    ...rest,
-                  })
-                  .then(() => {
-                    setIsSuccess(true);
-                    reset();
-                    setIsLoading(false);
-                  })
-                  .catch(() => {
-                    setIsError(true);
-                    setIsLoading(false);
-                  });
-              })}
-            >
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing={2}>
                 <FormLabel
                   id="boarding-schedule"
@@ -296,12 +300,18 @@ export const Board = () => {
                 </FormLabel>
                 <FormControlLabel
                   control={
-                    <Checkbox
-                      {...register("vet_record_agreement", {
-                        required: "Vet record agreement is required",
-                      })}
-                      error={Boolean(errors.vet_record_agreement?.message)}
-                      helperText={errors.vet_record_agreement?.message}
+                    <Controller
+                      name="vet_record_agreement"
+                      control={control}
+                      rules={{ required: "Vet record agreement is required" }}
+                      render={({ field }) => (
+                        <Checkbox
+                          {...field}
+                          checked={field["value"] ?? false}
+                          error={Boolean(errors.vet_record_agreement?.message)}
+                          helperText={errors.vet_record_agreement?.message}
+                        />
+                      )}
                     />
                   }
                   label="I Agree"
@@ -318,12 +328,18 @@ export const Board = () => {
                 </FormLabel>
                 <FormControlLabel
                   control={
-                    <Checkbox
-                      {...register("dropoff_agreement", {
-                        required: "Dropoff agreement is required",
-                      })}
-                      error={Boolean(errors.dropoff_agreement?.message)}
-                      helperText={errors.dropoff_agreement?.message}
+                    <Controller
+                      name="dropoff_agreement"
+                      control={control}
+                      rules={{ required: "Dropoff agreement is required" }}
+                      render={({ field }) => (
+                        <Checkbox
+                          {...field}
+                          checked={field["value"] ?? false}
+                          error={Boolean(errors.dropoff_agreement?.message)}
+                          helperText={errors.dropoff_agreement?.message}
+                        />
+                      )}
                     />
                   }
                   label="I Agree"
@@ -340,12 +356,18 @@ export const Board = () => {
                 </FormLabel>
                 <FormControlLabel
                   control={
-                    <Checkbox
-                      {...register("emergency_agreement", {
-                        required: "Emergency agreement is required",
-                      })}
-                      error={Boolean(errors.emergency_agreement?.message)}
-                      helperText={errors.emergency_agreement?.message}
+                    <Controller
+                      name="emergency_agreement"
+                      control={control}
+                      rules={{ required: "Emergency agreement is required" }}
+                      render={({ field }) => (
+                        <Checkbox
+                          {...field}
+                          checked={field["value"] ?? false}
+                          error={Boolean(errors.emergency_agreement?.message)}
+                          helperText={errors.emergency_agreement?.message}
+                        />
+                      )}
                     />
                   }
                   label="I Agree"
@@ -375,12 +397,18 @@ export const Board = () => {
                 </FormLabel>
                 <FormControlLabel
                   control={
-                    <Checkbox
-                      {...register("legal_agreement", {
-                        required: "Legal agreement is required",
-                      })}
-                      error={Boolean(errors.legal_agreement?.message)}
-                      helperText={errors.legal_agreement?.message}
+                    <Controller
+                      name="legal_agreement"
+                      control={control}
+                      rules={{ required: "Legal agreement is required" }}
+                      render={({ field }) => (
+                        <Checkbox
+                          {...field}
+                          checked={field["value"] ?? false}
+                          error={Boolean(errors.legal_agreement?.message)}
+                          helperText={errors.legal_agreement?.message}
+                        />
+                      )}
                     />
                   }
                   label="I Agree"
@@ -394,6 +422,7 @@ export const Board = () => {
                 >
                   Submit
                 </Button>
+                {isLoading && <LinearProgress />}
                 {isSuccess && <FormHelperText>Form successfully submitted!</FormHelperText>}
                 {isError && (
                   <FormHelperText error>
