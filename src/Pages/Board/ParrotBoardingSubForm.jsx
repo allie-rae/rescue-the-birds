@@ -302,9 +302,15 @@ export const ParrotBoardingForm = ({
           minRows={4}
           {...register("parrotMedicationDescription")}
         />
+        <FormLabel
+          id="special-instructions-label"
+          sx={{ fontWeight: "bold" }}
+        >
+          Special Instructions
+        </FormLabel>
         <TextField
           id="special-instructions"
-          label="Special instructions (likes, dislikes, hours of sleep, etc.)"
+          label="Likes, dislikes, hours of sleep, etc."
           variant="outlined"
           multiline
           minRows={4}
