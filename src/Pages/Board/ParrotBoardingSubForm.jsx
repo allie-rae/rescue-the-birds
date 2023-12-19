@@ -87,7 +87,7 @@ export const ParrotBoardingForm = ({
         "wingClip"
       )}\nBeak Trim: ${getValues("beakTrim")}\nNail Trim: ${getValues(
         "nailTrim"
-      )}\nMicrochip: ${getValues("microchip")} `,
+      )}\nMicrochip: ${getValues("microchip")}\n\n`,
     ]);
     setIsOpen(false);
   };
