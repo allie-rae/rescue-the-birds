@@ -679,6 +679,41 @@ export const Adopt = () => {
                     </RadioGroup>
                   )}
                 />
+                <FormLabel
+                  id="renter-verification"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  If you are renting, have you verified with landlord that birds are allowed and
+                  that you have a pet deposit?
+                </FormLabel>
+                <Controller
+                  control={control}
+                  name="renter_verification"
+                  render={({ field: { onChange, value, name } }) => (
+                    <RadioGroup
+                      aria-labelledby="renter-verification"
+                      value={value}
+                      name={name}
+                      onChange={onChange}
+                    >
+                      <FormControlLabel
+                        value="Yes"
+                        control={<Radio />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="No"
+                        control={<Radio />}
+                        label="No"
+                      />
+                      <FormControlLabel
+                        value="Not yet"
+                        control={<Radio />}
+                        label="Not yet"
+                      />
+                    </RadioGroup>
+                  )}
+                />
                 <Button
                   variant="contained"
                   color="primary"
