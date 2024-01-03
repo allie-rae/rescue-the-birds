@@ -96,6 +96,13 @@ export const Adopt = () => {
   const watchOtherPets = watch("other_pets_in_home", "No");
 
   const onSubmit = (data) => {
+    for (const key of [
+      "home_address_agreement",
+      "home_visit_agreement",
+      "no_guarantee_agreement",
+    ]) {
+      delete data[key];
+    }
     const {
       other_bird_species,
       other_bird_checkup_date,
@@ -109,9 +116,6 @@ export const Adopt = () => {
       weekend_different,
       smokers_explanation,
       what_other_pets,
-      home_address_agreement,
-      home_visit_agreement,
-      no_guarantee_agreement,
       ...submissionData
     } = data;
     if (data.have_other_birds === "Yes") {
@@ -129,10 +133,10 @@ export const Adopt = () => {
       submissionData.weekend_routine = "Same as daily routine";
     }
     if (data.smokers_in_house === "Yes") {
-      submissionData.smokers_in_house = `Yes. ${smokers_explanation}`;
+      submissionData.smokers_in_house = `Yes\nExplanation: ${smokers_explanation}`;
     }
     if (data.other_pets_in_home === "Yes") {
-      submissionData.other_pets_in_home = `Yes. ${what_other_pets}`;
+      submissionData.other_pets_in_home = `Yes.\nOther Pets: ${what_other_pets}`;
     }
     // This is where in the future we can send data to the back end
     console.log(submissionData);
