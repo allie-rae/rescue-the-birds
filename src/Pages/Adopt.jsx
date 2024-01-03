@@ -1106,8 +1106,6 @@ export const Adopt = () => {
                         <Checkbox
                           {...field}
                           checked={field["value"] ?? false}
-                          error={Boolean(errors.home_address_agreement?.message)}
-                          helperText={errors.home_address_agreement?.message}
                         />
                       )}
                     />
@@ -1134,8 +1132,6 @@ export const Adopt = () => {
                         <Checkbox
                           {...field}
                           checked={field["value"] ?? false}
-                          error={Boolean(errors.home_visit_agreement?.message)}
-                          helperText={errors.home_visit_agreement?.message}
                         />
                       )}
                     />
@@ -1162,8 +1158,6 @@ export const Adopt = () => {
                         <Checkbox
                           {...field}
                           checked={field["value"] ?? false}
-                          error={Boolean(errors.no_guarantee_agreement?.message)}
-                          helperText={errors.no_guarantee_agreement?.message}
                         />
                       )}
                     />
