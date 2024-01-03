@@ -75,7 +75,7 @@ export const Adopt = () => {
       bird_hours_alone: "",
       smokers_in_house: "No",
       smokers_explanation: "",
-      other_pets_in_home: "Yes",
+      other_pets_in_home: "No",
       what_other_pets: "",
       what_supp_info: "",
       lifestyle_changes: "",
@@ -106,6 +106,12 @@ export const Adopt = () => {
       vet_clinic_name,
       vet_address,
       vet_phone,
+      weekend_different,
+      smokers_explanation,
+      what_other_pets,
+      home_address_agreement,
+      home_visit_agreement,
+      no_guarantee_agreement,
       ...submissionData
     } = data;
     if (data.have_other_birds === "Yes") {
@@ -118,6 +124,15 @@ export const Adopt = () => {
       submissionData.avian_vet_info = `Vet: ${vet_name}\nClinic: ${vet_clinic_name}\nAddress: ${vet_address}\nPhone: ${vet_phone}`;
     } else {
       submissionData.avian_vet_info = "No avian vet";
+    }
+    if (weekend_different === "No") {
+      submissionData.weekend_routine = "Same as daily routine";
+    }
+    if (data.smokers_in_house === "Yes") {
+      submissionData.smokers_in_house = `Yes. ${smokers_explanation}`;
+    }
+    if (data.other_pets_in_home === "Yes") {
+      submissionData.other_pets_in_home = `Yes. ${what_other_pets}`;
     }
     // This is where in the future we can send data to the back end
     console.log(submissionData);
@@ -311,6 +326,12 @@ export const Adopt = () => {
           </Typography>
           <Box sx={{ width: "600px", maxWidth: "100%" }}>
             <form onSubmit={handleSubmit(onSubmit)}>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2 }}
+              >
+                General Info
+              </Typography>
               <Stack spacing={2}>
                 <TextField
                   id="name"
@@ -386,6 +407,14 @@ export const Adopt = () => {
                   error={!!errors.hear_about_us?.message}
                   helperText={errors.hear_about_us?.message}
                 />
+              </Stack>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2, mt: 4 }}
+              >
+                Household
+              </Typography>
+              <Stack spacing={2}>
                 <TextField
                   id="how-many-people-in-household"
                   label="How many people are in your household?"
@@ -424,6 +453,14 @@ export const Adopt = () => {
                   error={!!errors.children_in_house?.message}
                   helperText={errors.children_in_house?.message}
                 />
+              </Stack>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2, mt: 4 }}
+              >
+                Bird Experience
+              </Typography>
+              <Stack spacing={2}>
                 <FormLabel
                   id="children-in-future"
                   sx={{ fontWeight: "bold" }}
@@ -647,6 +684,14 @@ export const Adopt = () => {
                     </Stack>
                   </Fade>
                 )}
+              </Stack>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2, mt: 4 }}
+              >
+                Environment
+              </Typography>
+              <Stack spacing={2}>
                 <FormLabel
                   id="residence-type"
                   sx={{ fontWeight: "bold" }}
@@ -791,6 +836,8 @@ export const Adopt = () => {
                       id="weekend-routine"
                       label="If yes, please explain"
                       variant="outlined"
+                      multiline
+                      minRows={4}
                       {...register("weekend_routine", {
                         required: "Weekend routine is required",
                       })}
@@ -850,6 +897,8 @@ export const Adopt = () => {
                       id="smokers-explanation"
                       label="If yes, how do you prevent health-related problems due to second-hand smoke and nicotine exposure for your bird(s)?"
                       variant="outlined"
+                      multiline
+                      minRows={4}
                       {...register("smokers_explanation", {
                         required: "Second-hand smoke plan is required",
                       })}
@@ -908,14 +957,21 @@ export const Adopt = () => {
                     />
                   </Fade>
                 )}
-
+              </Stack>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2, mt: 4 }}
+              >
+                Bird Care
+              </Typography>
+              <Stack spacing={2}>
                 <TextField
                   id="what-supp-info"
                   label="What sources of information do you use to supplement your knowledge of avian care?"
                   // allows label to wrap when input not in focus
                   sx={{
                     "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.Mui-focused": { whiteSpace: "nowrap" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
                   }}
                   variant="outlined"
                   multiline
@@ -932,7 +988,7 @@ export const Adopt = () => {
                   label="Please describe the lifestyle changes you might anticipate over the next 5 years? 10 years? 25 years?"
                   sx={{
                     "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.Mui-focused": { whiteSpace: "nowrap" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
                   }}
                   variant="outlined"
                   multiline
@@ -949,7 +1005,7 @@ export const Adopt = () => {
                   label="When you travel or go on an extended vacation, who will care for your bird?"
                   sx={{
                     "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.Mui-focused": { whiteSpace: "nowrap" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
                   }}
                   variant="outlined"
                   multiline
@@ -966,7 +1022,7 @@ export const Adopt = () => {
                   label="What provisions have you made for your birds and/or other pets in the event of your illness or death?"
                   sx={{
                     "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.Mui-focused": { whiteSpace: "nowrap" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
                   }}
                   variant="outlined"
                   multiline
@@ -977,13 +1033,20 @@ export const Adopt = () => {
                   error={!!errors.death_plans?.message}
                   helperText={errors.death_plans?.message}
                 />
-
+              </Stack>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2, mt: 4 }}
+              >
+                Additional Questions
+              </Typography>
+              <Stack spacing={2}>
                 <TextField
                   id="looking-for-in-bird"
                   label="What are the most important characteristics you are looking for in a companion bird?"
                   sx={{
                     "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.Mui-focused": { whiteSpace: "nowrap" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
                   }}
                   variant="outlined"
                   multiline
@@ -1000,7 +1063,7 @@ export const Adopt = () => {
                   label="Is there anything else you would like to add/ask that would help in determining your eligibility?"
                   sx={{
                     "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.Mui-focused": { whiteSpace: "nowrap" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
                   }}
                   variant="outlined"
                   multiline
@@ -1011,8 +1074,14 @@ export const Adopt = () => {
                   error={!!errors.additional_comments?.message}
                   helperText={errors.additional_comments?.message}
                 />
-
-                {/* ***********ADD GROUP LABEL***************************** */}
+              </Stack>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2, mt: 4 }}
+              >
+                Agreements
+              </Typography>
+              <Stack spacing={2}>
                 <FormLabel
                   id="home-address-agreement"
                   sx={{ fontWeight: "bold" }}
