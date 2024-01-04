@@ -5,13 +5,15 @@ import {
   FormControlLabel,
   FormGroup,
   FormHelperText,
+  LinearProgress,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
+import axios from "axios";
 import took from "../Photos/took.png";
 
 export const Volunteer = () => {
@@ -22,6 +24,7 @@ export const Volunteer = () => {
     formState: { errors, isSubmitted },
     handleSubmit,
     register,
+    reset,
     setError,
     watch
   } = useForm({
@@ -46,6 +49,10 @@ export const Volunteer = () => {
       interested_fostering: "No"
     }
   });
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const watchBirdCare = watch("interested_bird_care");
   const watchFundraising = watch("interested_fundraising");
@@ -77,14 +84,33 @@ export const Volunteer = () => {
     }
   }, [watchBirdCare, watchFundraising, watchFostering, setError, clearErrors])
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsSuccess(false);
+      setIsError(false);
+    }, 5000);
+    return () => clearTimeout(timeout);
+  }, [isSuccess, isError]);
+
   const onSubmit = (data) => {
+    setIsLoading(true);
+
     const { emergency_contact_name, emergency_contact_number, has_selected_one_interest, ...submissionData} = data;
 
     submissionData.emergency_contact = `Name: ${emergency_contact_name}\nNumber: ${emergency_contact_number}`;
 
-    // Console log the data for now
-    console.log("Submission data: ", submissionData);
-  }
+    axios
+      .post("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/volunteer", submissionData)
+      .then(() => {
+        setIsSuccess(true);
+        setIsLoading(false);
+        reset();
+      })
+      .catch(() => {
+        setIsError(true);
+        setIsLoading(false);
+      });
+  };
 
   return (
     <Fade
@@ -330,9 +356,17 @@ export const Volunteer = () => {
                 variant="contained"
                 color="primary"
                 type="submit"
+                disabled={isLoading}
               >
                 Submit
               </Button>
+              {isLoading && <LinearProgress />}
+              {isSuccess && <FormHelperText>Form successfully submitted!</FormHelperText>}
+              {isError && (
+                <FormHelperText error>
+                  We&apos;re sorry, but there was an error submitting the form. Please try again.
+                </FormHelperText>
+              )}
             </Stack>
           </form>
         </Box>
