@@ -893,7 +893,11 @@ export const Adopt = () => {
                   >
                     <TextField
                       id="smokers-explanation"
-                      label="If yes, how do you prevent health-related problems due to second-hand smoke and nicotine exposure for your bird(s)?"
+                      label="If yes, how do you prevent health problems due to second-hand smoke exposure for your bird(s)?"
+                      sx={{
+                        "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                        "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                      }}
                       variant="outlined"
                       multiline
                       minRows={4}
@@ -965,7 +969,6 @@ export const Adopt = () => {
                 <TextField
                   id="what-supp-info"
                   label="What sources of information do you use to supplement your knowledge of avian care?"
-                  // allows label to wrap when input not in focus
                   sx={{
                     "& .MuiFormLabel-root": { whiteSpace: "normal" },
                     "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
