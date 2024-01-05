@@ -754,8 +754,8 @@ export const Adopt = () => {
                   id="renter-verification"
                   sx={{ fontWeight: "bold" }}
                 >
-                  If you are renting, have you verified with landlord that birds are allowed and
-                  that you have a pet deposit?
+                  If you are renting, have you verified with your landlord that birds are allowed
+                  and that you have a pet deposit?
                 </FormLabel>
                 <Controller
                   control={control}
