@@ -750,8 +750,6 @@ export const Adopt = () => {
                     </RadioGroup>
                   )}
                 />
-
-                {/* ****************************************************************************************************************** */}
                 <FormLabel
                   id="renter-verification"
                   sx={{ fontWeight: "bold" }}
@@ -787,7 +785,6 @@ export const Adopt = () => {
                     </RadioGroup>
                   )}
                 />
-
                 <TextField
                   id="daily-routine"
                   label="Describe your daily routine at home"
@@ -798,7 +795,6 @@ export const Adopt = () => {
                   error={!!errors.daily_routine?.message}
                   helperText={errors.daily_routine?.message}
                 />
-
                 <FormLabel
                   id="weekend-different-bool"
                   sx={{ fontWeight: "bold" }}
@@ -850,7 +846,6 @@ export const Adopt = () => {
                     />
                   </Fade>
                 )}
-
                 <TextField
                   id="bird-hours-alone"
                   label="How many hours a day will your bird spend alone?"
@@ -859,7 +854,6 @@ export const Adopt = () => {
                   error={!!errors.bird_hours_alone?.message}
                   helperText={errors.bird_hours_alone?.message}
                 />
-
                 <FormLabel
                   id="smokers-in-house-bool"
                   sx={{ fontWeight: "bold" }}
@@ -911,7 +905,6 @@ export const Adopt = () => {
                     />
                   </Fade>
                 )}
-
                 <FormLabel
                   id="other-pets-bool"
                   sx={{ fontWeight: "bold" }}
@@ -986,7 +979,6 @@ export const Adopt = () => {
                   error={!!errors.what_supp_info?.message}
                   helperText={errors.what_supp_info?.message}
                 />
-
                 <TextField
                   id="lifestyle-changes"
                   label="Please describe the lifestyle changes you might anticipate over the next 5 years? 10 years? 25 years?"
@@ -1003,7 +995,6 @@ export const Adopt = () => {
                   error={!!errors.lifestyle_changes?.message}
                   helperText={errors.lifestyle_changes?.message}
                 />
-
                 <TextField
                   id="vacation-care"
                   label="When you travel or go on an extended vacation, who will care for your bird?"
@@ -1020,7 +1011,6 @@ export const Adopt = () => {
                   error={!!errors.vacation_care?.message}
                   helperText={errors.vacation_care?.message}
                 />
-
                 <TextField
                   id="death-plans"
                   label="What provisions have you made for your birds and/or other pets in the event of your illness or death?"
@@ -1061,7 +1051,6 @@ export const Adopt = () => {
                   error={!!errors.looking_for_in_bird?.message}
                   helperText={errors.looking_for_in_bird?.message}
                 />
-
                 <TextField
                   id="additional-comments"
                   label="Is there anything else you would like to add/ask that would help in determining your eligibility?"
@@ -1113,7 +1102,6 @@ export const Adopt = () => {
                   label="I Agree"
                 />
                 <FormHelperText error>{errors.home_address_agreement?.message}</FormHelperText>
-
                 <FormLabel
                   id="home-visit-agreement"
                   sx={{ fontWeight: "bold" }}
@@ -1139,7 +1127,6 @@ export const Adopt = () => {
                   label="I Agree"
                 />
                 <FormHelperText error>{errors.home_visit_agreement?.message}</FormHelperText>
-
                 <FormLabel
                   id="no-guarantee-agreement"
                   sx={{ fontWeight: "bold" }}
@@ -1165,7 +1152,6 @@ export const Adopt = () => {
                   label="I Agree"
                 />
                 <FormHelperText error>{errors.no_guarantee_agreement?.message}</FormHelperText>
-
                 <Button
                   variant="contained"
                   color="primary"
