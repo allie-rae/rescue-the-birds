@@ -96,13 +96,6 @@ export const Adopt = () => {
   const watchOtherPets = watch("other_pets_in_home", "No");
 
   const onSubmit = (data) => {
-    for (const key of [
-      "home_address_agreement",
-      "home_visit_agreement",
-      "no_guarantee_agreement",
-    ]) {
-      delete data[key];
-    }
     const {
       other_bird_species,
       other_bird_checkup_date,
@@ -116,6 +109,9 @@ export const Adopt = () => {
       weekend_different,
       smokers_explanation,
       what_other_pets,
+      home_address_agreement,
+      home_visit_agreement,
+      no_guarantee_agreement,
       ...submissionData
     } = data;
     if (data.have_other_birds === "Yes") {
@@ -438,6 +434,10 @@ export const Adopt = () => {
                 <TextField
                   id="household-ages"
                   label="What are the ages of everyone in the household?"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
                   variant="outlined"
                   {...register("ages_in_household", {
                     required: "Household members' ages are required",
@@ -448,6 +448,10 @@ export const Adopt = () => {
                 <TextField
                   id="children-experience-with-birds"
                   label="Are there children in the household? What is their experience with birds?"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
                   variant="outlined"
                   multiline
                   minRows={4}
@@ -522,6 +526,10 @@ export const Adopt = () => {
                       <TextField
                         id="last-bird-checkup-date"
                         label="If you currently have birds, what was the date of their last annual checkup?"
+                        sx={{
+                          "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                          "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                        }}
                         variant="outlined"
                         {...register("other_bird_checkup_date", {
                           required: "Last checkup date is required",
@@ -532,6 +540,10 @@ export const Adopt = () => {
                       <TextField
                         id="bird-diet"
                         label="List the current diet that you feed your birds"
+                        sx={{
+                          "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                          "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                        }}
                         variant="outlined"
                         multiline
                         minRows={4}
@@ -598,6 +610,10 @@ export const Adopt = () => {
                 <TextField
                   id="other-bird-experience"
                   label="Please list any other bird experience that you may have"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
                   variant="outlined"
                   multiline
                   minRows={4}
@@ -849,6 +865,10 @@ export const Adopt = () => {
                 <TextField
                   id="bird-hours-alone"
                   label="How many hours a day will your bird spend alone?"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
                   variant="outlined"
                   {...register("bird_hours_alone", { required: "Hours alone is required" })}
                   error={!!errors.bird_hours_alone?.message}
