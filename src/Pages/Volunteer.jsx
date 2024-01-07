@@ -451,6 +451,11 @@ export const Volunteer = () => {
               >
                 Submit
               </Button>
+              {Object.keys(errors).length > 0 && isSubmitted && (
+                <FormHelperText error>
+                  Please fill out all required fields.
+                </FormHelperText>
+              )}
               {isLoading && <LinearProgress />}
               {isSuccess && <FormHelperText>Form successfully submitted!</FormHelperText>}
               {isError && (
