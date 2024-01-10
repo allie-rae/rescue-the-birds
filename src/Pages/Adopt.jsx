@@ -1,7 +1,9 @@
 import {
   Button,
+  Checkbox,
   Fade,
   FormControlLabel,
+  FormHelperText,
   FormLabel,
   List,
   ListItem,
@@ -67,11 +69,31 @@ export const Adopt = () => {
       vet_address: "",
       vet_phone: "",
       residence_type: "Single Family House",
+      renter_verification: "Not yet",
+      weekend_different: "No",
+      weekend_routine: "",
+      bird_hours_alone: "",
+      smokers_in_house: "No",
+      smokers_explanation: "",
+      other_pets_in_home: "No",
+      what_other_pets: "",
+      what_supp_info: "",
+      lifestyle_changes: "",
+      vacation_care: "",
+      death_plans: "",
+      looking_for_in_bird: "",
+      additional_comments: "",
+      home_address_agreement: false,
+      home_visit_agreement: false,
+      no_guarantee_agreement: false,
     },
   });
   const watchOtherBirds = watch("have_other_birds", "No");
   const watchPreviousBirds = watch("previous_birds", "No");
   const watchAvianVet = watch("have_avian_vet", "No");
+  const watchWeekendDifferent = watch("weekend_different", "No");
+  const watchSmokersInHouse = watch("smokers_in_house", "No");
+  const watchOtherPets = watch("other_pets_in_home", "No");
 
   const onSubmit = (data) => {
     const {
@@ -84,6 +106,12 @@ export const Adopt = () => {
       vet_clinic_name,
       vet_address,
       vet_phone,
+      weekend_different,
+      smokers_explanation,
+      what_other_pets,
+      home_address_agreement,
+      home_visit_agreement,
+      no_guarantee_agreement,
       ...submissionData
     } = data;
     if (data.have_other_birds === "Yes") {
@@ -96,6 +124,15 @@ export const Adopt = () => {
       submissionData.avian_vet_info = `Vet: ${vet_name}\nClinic: ${vet_clinic_name}\nAddress: ${vet_address}\nPhone: ${vet_phone}`;
     } else {
       submissionData.avian_vet_info = "No avian vet";
+    }
+    if (weekend_different === "No") {
+      submissionData.weekend_routine = "Same as daily routine";
+    }
+    if (data.smokers_in_house === "Yes") {
+      submissionData.smokers_in_house = `Yes\nExplanation: ${smokers_explanation}`;
+    }
+    if (data.other_pets_in_home === "Yes") {
+      submissionData.other_pets_in_home = `Yes.\nOther Pets: ${what_other_pets}`;
     }
     // This is where in the future we can send data to the back end
     console.log(submissionData);
@@ -289,6 +326,12 @@ export const Adopt = () => {
           </Typography>
           <Box sx={{ width: "600px", maxWidth: "100%" }}>
             <form onSubmit={handleSubmit(onSubmit)}>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2 }}
+              >
+                General Info
+              </Typography>
               <Stack spacing={2}>
                 <TextField
                   id="name"
@@ -364,6 +407,14 @@ export const Adopt = () => {
                   error={!!errors.hear_about_us?.message}
                   helperText={errors.hear_about_us?.message}
                 />
+              </Stack>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2, mt: 4 }}
+              >
+                Household
+              </Typography>
+              <Stack spacing={2}>
                 <TextField
                   id="how-many-people-in-household"
                   label="How many people are in your household?"
@@ -383,6 +434,10 @@ export const Adopt = () => {
                 <TextField
                   id="household-ages"
                   label="What are the ages of everyone in the household?"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
                   variant="outlined"
                   {...register("ages_in_household", {
                     required: "Household members' ages are required",
@@ -393,6 +448,10 @@ export const Adopt = () => {
                 <TextField
                   id="children-experience-with-birds"
                   label="Are there children in the household? What is their experience with birds?"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
                   variant="outlined"
                   multiline
                   minRows={4}
@@ -402,6 +461,14 @@ export const Adopt = () => {
                   error={!!errors.children_in_house?.message}
                   helperText={errors.children_in_house?.message}
                 />
+              </Stack>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2, mt: 4 }}
+              >
+                Bird Experience
+              </Typography>
+              <Stack spacing={2}>
                 <FormLabel
                   id="children-in-future"
                   sx={{ fontWeight: "bold" }}
@@ -459,6 +526,10 @@ export const Adopt = () => {
                       <TextField
                         id="last-bird-checkup-date"
                         label="If you currently have birds, what was the date of their last annual checkup?"
+                        sx={{
+                          "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                          "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                        }}
                         variant="outlined"
                         {...register("other_bird_checkup_date", {
                           required: "Last checkup date is required",
@@ -469,6 +540,10 @@ export const Adopt = () => {
                       <TextField
                         id="bird-diet"
                         label="List the current diet that you feed your birds"
+                        sx={{
+                          "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                          "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                        }}
                         variant="outlined"
                         multiline
                         minRows={4}
@@ -535,6 +610,10 @@ export const Adopt = () => {
                 <TextField
                   id="other-bird-experience"
                   label="Please list any other bird experience that you may have"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
                   variant="outlined"
                   multiline
                   minRows={4}
@@ -625,6 +704,14 @@ export const Adopt = () => {
                     </Stack>
                   </Fade>
                 )}
+              </Stack>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2, mt: 4 }}
+              >
+                Environment
+              </Typography>
+              <Stack spacing={2}>
                 <FormLabel
                   id="residence-type"
                   sx={{ fontWeight: "bold" }}
@@ -679,6 +766,415 @@ export const Adopt = () => {
                     </RadioGroup>
                   )}
                 />
+                <FormLabel
+                  id="renter-verification"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  If you are renting, have you verified with your landlord that birds are allowed
+                  and that you have a pet deposit?
+                </FormLabel>
+                <Controller
+                  control={control}
+                  name="renter_verification"
+                  render={({ field: { onChange, value, name } }) => (
+                    <RadioGroup
+                      aria-labelledby="renter-verification"
+                      value={value}
+                      name={name}
+                      onChange={onChange}
+                    >
+                      <FormControlLabel
+                        value="Yes"
+                        control={<Radio />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="No"
+                        control={<Radio />}
+                        label="No"
+                      />
+                      <FormControlLabel
+                        value="Not yet"
+                        control={<Radio />}
+                        label="Not yet"
+                      />
+                    </RadioGroup>
+                  )}
+                />
+                <TextField
+                  id="daily-routine"
+                  label="Describe your daily routine at home"
+                  variant="outlined"
+                  multiline
+                  minRows={4}
+                  {...register("daily_routine", { required: "Daily routine is required" })}
+                  error={!!errors.daily_routine?.message}
+                  helperText={errors.daily_routine?.message}
+                />
+                <FormLabel
+                  id="weekend-different-bool"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Does your routine differ on weekends?
+                </FormLabel>
+                <Controller
+                  control={control}
+                  name="weekend_different"
+                  render={({ field: { onChange, value, name } }) => (
+                    <RadioGroup
+                      aria-labelledby="weekend-different-bool"
+                      value={value}
+                      name={name}
+                      onChange={(event) => {
+                        clearErrors("weekend_routine");
+                        onChange(event);
+                      }}
+                    >
+                      <FormControlLabel
+                        value="Yes"
+                        control={<Radio />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="No"
+                        control={<Radio />}
+                        label="No"
+                      />
+                    </RadioGroup>
+                  )}
+                />
+                {watchWeekendDifferent === "Yes" && (
+                  <Fade
+                    in={true}
+                    timeout={250}
+                  >
+                    <TextField
+                      id="weekend-routine"
+                      label="If yes, please explain"
+                      variant="outlined"
+                      multiline
+                      minRows={4}
+                      {...register("weekend_routine", {
+                        required: "Weekend routine is required",
+                      })}
+                      error={!!errors.weekend_routine?.message}
+                      helperText={errors.weekend_routine?.message}
+                    />
+                  </Fade>
+                )}
+                <TextField
+                  id="bird-hours-alone"
+                  label="How many hours a day will your bird spend alone?"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
+                  variant="outlined"
+                  {...register("bird_hours_alone", { required: "Hours alone is required" })}
+                  error={!!errors.bird_hours_alone?.message}
+                  helperText={errors.bird_hours_alone?.message}
+                />
+                <FormLabel
+                  id="smokers-in-house-bool"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Are there smokers in the house?
+                </FormLabel>
+                <Controller
+                  control={control}
+                  name="smokers_in_house"
+                  render={({ field: { onChange, value, name } }) => (
+                    <RadioGroup
+                      aria-labelledby="smokers-in-house-bool"
+                      value={value}
+                      name={name}
+                      onChange={(event) => {
+                        clearErrors("smokers_explanation");
+                        onChange(event);
+                      }}
+                    >
+                      <FormControlLabel
+                        value="Yes"
+                        control={<Radio />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="No"
+                        control={<Radio />}
+                        label="No"
+                      />
+                    </RadioGroup>
+                  )}
+                />
+                {watchSmokersInHouse === "Yes" && (
+                  <Fade
+                    in={true}
+                    timeout={250}
+                  >
+                    <TextField
+                      id="smokers-explanation"
+                      label="If yes, how do you prevent health problems due to second-hand smoke exposure for your bird(s)?"
+                      sx={{
+                        "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                        "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                      }}
+                      variant="outlined"
+                      multiline
+                      minRows={4}
+                      {...register("smokers_explanation", {
+                        required: "Second-hand smoke plan is required",
+                      })}
+                      error={!!errors.smokers_explanation?.message}
+                      helperText={errors.smokers_explanation?.message}
+                    />
+                  </Fade>
+                )}
+                <FormLabel
+                  id="other-pets-bool"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Do you currently have other pets living in your home?
+                </FormLabel>
+                <Controller
+                  control={control}
+                  name="other_pets_in_home"
+                  render={({ field: { onChange, value, name } }) => (
+                    <RadioGroup
+                      aria-labelledby="other-pets-bool"
+                      value={value}
+                      name={name}
+                      onChange={(event) => {
+                        clearErrors("what_other_pets");
+                        onChange(event);
+                      }}
+                    >
+                      <FormControlLabel
+                        value="Yes"
+                        control={<Radio />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="No"
+                        control={<Radio />}
+                        label="No"
+                      />
+                    </RadioGroup>
+                  )}
+                />
+                {watchOtherPets === "Yes" && (
+                  <Fade
+                    in={true}
+                    timeout={250}
+                  >
+                    <TextField
+                      id="what-other-pets"
+                      label="If yes, please list species and how many"
+                      variant="outlined"
+                      {...register("what_other_pets", {
+                        required: "Other pets information is required",
+                      })}
+                      error={!!errors.what_other_pets?.message}
+                      helperText={errors.what_other_pets?.message}
+                    />
+                  </Fade>
+                )}
+              </Stack>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2, mt: 4 }}
+              >
+                Bird Care
+              </Typography>
+              <Stack spacing={2}>
+                <TextField
+                  id="what-supp-info"
+                  label="What sources of information do you use to supplement your knowledge of avian care?"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
+                  variant="outlined"
+                  multiline
+                  minRows={4}
+                  {...register("what_supp_info", {
+                    required: "Avian sources of information is required",
+                  })}
+                  error={!!errors.what_supp_info?.message}
+                  helperText={errors.what_supp_info?.message}
+                />
+                <TextField
+                  id="lifestyle-changes"
+                  label="Please describe the lifestyle changes you might anticipate over the next 5 years? 10 years? 25 years?"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
+                  variant="outlined"
+                  multiline
+                  minRows={4}
+                  {...register("lifestyle_changes", {
+                    required: "Lifestyle changes description is required",
+                  })}
+                  error={!!errors.lifestyle_changes?.message}
+                  helperText={errors.lifestyle_changes?.message}
+                />
+                <TextField
+                  id="vacation-care"
+                  label="When you travel or go on an extended vacation, who will care for your bird?"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
+                  variant="outlined"
+                  multiline
+                  minRows={4}
+                  {...register("vacation_care", {
+                    required: "Vacation care plan is required",
+                  })}
+                  error={!!errors.vacation_care?.message}
+                  helperText={errors.vacation_care?.message}
+                />
+                <TextField
+                  id="death-plans"
+                  label="What provisions have you made for your birds and/or other pets in the event of your illness or death?"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
+                  variant="outlined"
+                  multiline
+                  minRows={4}
+                  {...register("death_plans", {
+                    required: "Provisions in case of illness/death is required",
+                  })}
+                  error={!!errors.death_plans?.message}
+                  helperText={errors.death_plans?.message}
+                />
+              </Stack>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2, mt: 4 }}
+              >
+                Additional Questions
+              </Typography>
+              <Stack spacing={2}>
+                <TextField
+                  id="looking-for-in-bird"
+                  label="What are the most important characteristics you are looking for in a companion bird?"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
+                  variant="outlined"
+                  multiline
+                  minRows={4}
+                  {...register("looking_for_in_bird", {
+                    required: "Important characteristics is required",
+                  })}
+                  error={!!errors.looking_for_in_bird?.message}
+                  helperText={errors.looking_for_in_bird?.message}
+                />
+                <TextField
+                  id="additional-comments"
+                  label="Is there anything else you would like to add/ask that would help in determining your eligibility?"
+                  sx={{
+                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
+                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
+                  }}
+                  variant="outlined"
+                  multiline
+                  minRows={4}
+                  {...register("additional_comments", {
+                    required: false,
+                  })}
+                  error={!!errors.additional_comments?.message}
+                  helperText={errors.additional_comments?.message}
+                />
+              </Stack>
+              <Typography
+                variant="h3"
+                sx={{ mb: 2, mt: 4 }}
+              >
+                Agreements
+              </Typography>
+              <Stack spacing={2}>
+                <FormLabel
+                  id="home-address-agreement"
+                  sx={{ fontWeight: "bold" }}
+                  required
+                >
+                  I understand that if I am approved and adopt a bird that this bird must remain in
+                  my home. If my circumstances change, I understand I must contact a Refuge for
+                  Saving the Wildlife. I will forward any changes to my address(es) and/or phone
+                  number(s) to a Refuge for Saving the Wildlife.
+                </FormLabel>
+                <FormControlLabel
+                  control={
+                    <Controller
+                      name="home_address_agreement"
+                      control={control}
+                      rules={{ required: "Home address agreement is required" }}
+                      render={({ field }) => (
+                        <Checkbox
+                          {...field}
+                          checked={field["value"] ?? false}
+                        />
+                      )}
+                    />
+                  }
+                  label="I Agree"
+                />
+                <FormHelperText error>{errors.home_address_agreement?.message}</FormHelperText>
+                <FormLabel
+                  id="home-visit-agreement"
+                  sx={{ fontWeight: "bold" }}
+                  required
+                >
+                  I agree to a home visit prior to approval, and I understand that a Refuge for
+                  Saving the Wildlife representative may make periodic visits to my home.
+                </FormLabel>
+                <FormControlLabel
+                  control={
+                    <Controller
+                      name="home_visit_agreement"
+                      control={control}
+                      rules={{ required: "Home visit agreement is required" }}
+                      render={({ field }) => (
+                        <Checkbox
+                          {...field}
+                          checked={field["value"] ?? false}
+                        />
+                      )}
+                    />
+                  }
+                  label="I Agree"
+                />
+                <FormHelperText error>{errors.home_visit_agreement?.message}</FormHelperText>
+                <FormLabel
+                  id="no-guarantee-agreement"
+                  sx={{ fontWeight: "bold" }}
+                  required
+                >
+                  I understand that completion of this Adoption Application does not guarantee that
+                  I qualify to adopt a bird from a Refuge for Saving the Wildlife.
+                </FormLabel>
+                <FormControlLabel
+                  control={
+                    <Controller
+                      name="no_guarantee_agreement"
+                      control={control}
+                      rules={{ required: "Adoption not guaranteed understanding is required" }}
+                      render={({ field }) => (
+                        <Checkbox
+                          {...field}
+                          checked={field["value"] ?? false}
+                        />
+                      )}
+                    />
+                  }
+                  label="I Agree"
+                />
+                <FormHelperText error>{errors.no_guarantee_agreement?.message}</FormHelperText>
                 <Button
                   variant="contained"
                   color="primary"
