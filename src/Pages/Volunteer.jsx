@@ -5,13 +5,15 @@ import {
   FormControlLabel,
   FormGroup,
   FormHelperText,
+  LinearProgress,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
+import axios from "axios";
 import took from "../Photos/took.png";
 
 export const Volunteer = () => {
@@ -22,6 +24,7 @@ export const Volunteer = () => {
     formState: { errors, isSubmitted },
     handleSubmit,
     register,
+    reset,
     setError,
     watch
   } = useForm({
@@ -46,6 +49,10 @@ export const Volunteer = () => {
       interested_fostering: "No"
     }
   });
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const watchBirdCare = watch("interested_bird_care");
   const watchFundraising = watch("interested_fundraising");
@@ -77,14 +84,33 @@ export const Volunteer = () => {
     }
   }, [watchBirdCare, watchFundraising, watchFostering, setError, clearErrors])
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsSuccess(false);
+      setIsError(false);
+    }, 5000);
+    return () => clearTimeout(timeout);
+  }, [isSuccess, isError]);
+
   const onSubmit = (data) => {
+    setIsLoading(true);
+
     const { emergency_contact_name, emergency_contact_number, has_selected_one_interest, ...submissionData} = data;
 
     submissionData.emergency_contact = `Name: ${emergency_contact_name}\nNumber: ${emergency_contact_number}`;
 
-    // Console log the data for now
-    console.log("Submission data: ", submissionData);
-  }
+    axios
+      .post("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/volunteer", submissionData)
+      .then(() => {
+        setIsSuccess(true);
+        setIsLoading(false);
+        reset();
+      })
+      .catch(() => {
+        setIsError(true);
+        setIsLoading(false);
+      });
+  };
 
   return (
     <Fade
@@ -137,113 +163,204 @@ export const Volunteer = () => {
         <Box sx={{ width: "600px", maxWidth: "100%" }}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2}>
-              <TextField
-                id="name"
-                label="Name"
-                variant="outlined"
-                {...register("person_name", { required: "Name is required" })}
-                error={!!errors.person_name?.message}
-                helperText={errors.person_name?.message}
+              <Controller 
+                control={control}
+                name="person_name"
+                rules={{ required: "Name is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="name"
+                    label="Name"
+                    variant="outlined"
+                    error={!!errors.person_name?.message}
+                    helperText={errors.person_name?.message}
+                  />
+                )}
               />
-              <TextField
-                id="date-of-birth"
-                label="Date of Birth (MM/DD/YYYY)"
-                variant="outlined"
-                {...register("person_dob", { required: "Date of birth is required" })}
-                error={!!errors.person_dob?.message}
-                helperText={errors.person_dob?.message}
+              <Controller 
+                control={control}
+                name="person_dob"
+                rules={{ required: "Date of birth is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="date-of-birth"
+                    label="Date of Birth (MM/DD/YYYY)"
+                    variant="outlined"
+                    error={!!errors.person_dob?.message}
+                    helperText={errors.person_dob?.message}
+                  />
+                )}
               />
-              <TextField
-                id="email"
-                label="Email"
-                variant="outlined"
-                {...register("person_email", { required: "Email is required" })}
-                error={!!errors.person_email?.message}
-                helperText={errors.person_email?.message}
+              <Controller 
+                control={control}
+                name="person_email"
+                rules={{ required: "Email is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="email"
+                    label="Email"
+                    variant="outlined"
+                    error={!!errors.person_email?.message}
+                    helperText={errors.person_email?.message}
+                  />
+                )}
               />
-              <TextField
-                id="phone-number"
-                label="Phone Number"
-                variant="outlined"
-                {...register("person_phone", { required: "Phone number is required" })}
-                error={!!errors.person_phone?.message}
-                helperText={errors.person_phone?.message}
+              <Controller 
+                control={control}
+                name="person_phone"
+                rules={{ required: "Phone number is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="phone-number"
+                    label="Phone Number"
+                    variant="outlined"
+                    error={!!errors.person_phone?.message}
+                    helperText={errors.person_phone?.message}
+                  />
+                )}
               />
-              <TextField
-                id="street-address"
-                label="Street Address"
-                variant="outlined"
-                {...register("person_address", { required: "Street address is required" })}
-                error={!!errors.person_address?.message}
-                helperText={errors.person_address?.message}
+              <Controller 
+                control={control}
+                name="person_address"
+                rules={{ required: "Street address is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="street-address"
+                    label="Street Address"
+                    variant="outlined"
+                    error={!!errors.person_address?.message}
+                    helperText={errors.person_address?.message}
+                  />
+                )}
               />
-              <TextField
-                id="city"
-                label="City"
-                variant="outlined"
-                {...register("person_city", { required: "City is required" })}
-                error={!!errors.person_city?.message}
-                helperText={errors.person_city?.message}
+              <Controller 
+                control={control}
+                name="person_city"
+                rules={{ required: "City is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="city"
+                    label="City"
+                    variant="outlined"
+                    error={!!errors.person_city?.message}
+                    helperText={errors.person_city?.message}
+                  />
+                )}
               />
-              <TextField
-                id="state"
-                label="State"
-                variant="outlined"
-                {...register("person_state", { required: "State is required" })}
-                error={!!errors.person_state?.message}
-                helperText={errors.person_state?.message}
+              <Controller 
+                control={control}
+                name="person_state"
+                rules={{ required: "State is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="state"
+                    label="State"
+                    variant="outlined"
+                    error={!!errors.person_state?.message}
+                    helperText={errors.person_state?.message}
+                  />
+                )}
               />
-              <TextField
-                id="zip-code"
-                label="Zip Code"
-                variant="outlined"
-                {...register("person_zipcode", { required: "Zip code is required" })}
-                error={!!errors.person_zipcode?.message}
-                helperText={errors.person_zipcode?.message}
+              <Controller 
+                control={control}
+                name="person_zipcode"
+                rules={{ required: "Zip code is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="zip-code"
+                    label="Zip Code"
+                    variant="outlined"
+                    error={!!errors.person_zipcode?.message}
+                    helperText={errors.person_zipcode?.message}
+                  />
+                )}
               />
-              <TextField
-                id="drivers-license"
-                label="Driver's License Number"
-                variant="outlined"
-                {...register("dl_number", { required: "Driver's license number is required" })}
-                error={!!errors.dl_number?.message}
-                helperText={errors.dl_number?.message}
+              <Controller 
+                control={control}
+                name="dl_number"
+                rules={{ required: "Driver's license number is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="drivers-license"
+                    label="Driver's License Number"
+                    variant="outlined"
+                    error={!!errors.dl_number?.message}
+                    helperText={errors.dl_number?.message}
+                  />
+                )}
               />
-              <TextField
-                id="emergency-contact-name"
-                label="Emergency Contact Name"
-                variant="outlined"
-                {...register("emergency_contact_name", { required: "Emergency contact name is required" })}
-                error={!!errors.emergency_contact_name?.message}
-                helperText={errors.emergency_contact_name?.message}
+              <Controller 
+                control={control}
+                name="emergency_contact_name"
+                rules={{ required: "Emergency contact name is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="emergency-contact-name"
+                    label="Emergency Contact Name"
+                    variant="outlined"
+                    error={!!errors.emergency_contact_name?.message}
+                    helperText={errors.emergency_contact_name?.message}
+                  />
+                )}
               />
-              <TextField
-                id="emergency-contact-number"
-                label="Emergency Contact Phone Number"
-                variant="outlined"
-                {...register("emergency_contact_number", { required: "Emergency contact number is required" })}
-                error={!!errors.emergency_contact_number?.message}
-                helperText={errors.emergency_contact_number?.message}
+              <Controller 
+                control={control}
+                name="emergency_contact_number"
+                rules={{ required: "Emergency contact number is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="emergency-contact-number"
+                    label="Emergency Contact Phone Number"
+                    variant="outlined"
+                    error={!!errors.emergency_contact_number?.message}
+                    helperText={errors.emergency_contact_number?.message}
+                  />
+                )}
               />
-              <TextField
-                id="bird-experience"
-                label="A brief synopsis of your bird experience"
-                variant="outlined"
-                multiline
-                minRows={4}
-                {...register("brief_synopsis_of_birds", { required: "A brief synopsis of your bird experience is required" })}
-                error={!!errors.brief_synopsis_of_birds?.message}
-                helperText={errors.brief_synopsis_of_birds?.message}
+              <Controller 
+                control={control}
+                name="brief_synopsis_of_birds"
+                rules={{ required: "A brief synopsis of your bird experience is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="bird-experience"
+                    label="A brief synopsis of your bird experience"
+                    variant="outlined"
+                    multiline
+                    minRows={4}
+                    error={!!errors.brief_synopsis_of_birds?.message}
+                    helperText={errors.brief_synopsis_of_birds?.message}
+                  />
+                )}
               />
-              <TextField
-                id="interest"
-                label="Why are you interested in volunteering with us?"
-                variant="outlined"
-                multiline
-                minRows={4}
-                {...register("why_interested", { required: "Explanation of interest is required"})}
-                error={!!errors.why_interested?.message}
-                helperText={errors.why_interested?.message}
+              <Controller 
+                control={control}
+                name="why_interested"
+                rules={{ required: "Explanation of interest is required" }}
+                render={({ field }) => (
+                  <TextField 
+                    {...field}
+                    id="interest"
+                    label="Why are you interested in volunteering with us?"
+                    variant="outlined"
+                    multiline
+                    minRows={4}
+                    error={!!errors.why_interested?.message}
+                    helperText={errors.why_interested?.message}
+                  />
+                )}
               />
               <Typography
                 variant="body1"
@@ -330,9 +447,22 @@ export const Volunteer = () => {
                 variant="contained"
                 color="primary"
                 type="submit"
+                disabled={isLoading}
               >
                 Submit
               </Button>
+              {Object.keys(errors).length > 0 && isSubmitted && (
+                <FormHelperText error>
+                  Please fill out all required fields.
+                </FormHelperText>
+              )}
+              {isLoading && <LinearProgress />}
+              {isSuccess && <FormHelperText>Form successfully submitted!</FormHelperText>}
+              {isError && (
+                <FormHelperText error>
+                  We&apos;re sorry, but there was an error submitting the form. Please try again.
+                </FormHelperText>
+              )}
             </Stack>
           </form>
         </Box>
