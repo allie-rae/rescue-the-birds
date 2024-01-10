@@ -53,6 +53,7 @@ export const Board = () => {
       legal_agreement: false,
     },
   });
+
   const [addedBirdNames, setAddedBirdNames] = useState([]);
   const [isParrotFormOpen, setIsParrotFormOpen] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -76,11 +77,22 @@ export const Board = () => {
       emergency_agreement,
       legal_agreement,
       vet_record_agreement,
+      boarding_start_date,
+      boarding_end_date,
       ...rest
     } = data;
+
+    const boardingStartDateArr = boarding_start_date.split("-");
+    const boardingEndDateArr = boarding_end_date.split("-");
+
+    const reformattedBoardingStartDate = `${boardingStartDateArr[1]}/${boardingStartDateArr[2]}/${boardingStartDateArr[0]}`;
+    const reformattedBoardingEndDate = `${boardingEndDateArr[1]}/${boardingEndDateArr[2]}/${boardingEndDateArr[0]}`;
+
     axios
       .post("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/boarding", {
         ...rest,
+        boarding_start_date: reformattedBoardingStartDate,
+        boarding_end_date: reformattedBoardingEndDate,
       })
       .then(() => {
         setIsSuccess(true);
@@ -192,6 +204,7 @@ export const Board = () => {
                   id="name"
                   label="Name"
                   variant="outlined"
+                  type="text"
                   {...register("person_name", { required: "Name is required" })}
                   error={Boolean(errors.person_name?.message)}
                   helperText={errors.person_name?.message}
@@ -200,6 +213,7 @@ export const Board = () => {
                   id="email"
                   label="Email"
                   variant="outlined"
+                  type="email"
                   {...register("person_email", { required: "Email is required" })}
                   error={Boolean(errors.person_email?.message)}
                   helperText={errors.person_email?.message}
@@ -208,6 +222,7 @@ export const Board = () => {
                   id="phone-number"
                   label="Phone Number"
                   variant="outlined"
+                  type="tel"
                   {...register("person_phone", { required: "Phone number is required" })}
                   error={Boolean(errors.person_phone?.message)}
                   helperText={errors.person_phone?.message}
@@ -224,6 +239,7 @@ export const Board = () => {
                   id="city"
                   label="City"
                   variant="outlined"
+                  type="text"
                   {...register("person_city", { required: "City is required" })}
                   error={Boolean(errors.person_city?.message)}
                   helperText={errors.person_city?.message}
@@ -232,6 +248,7 @@ export const Board = () => {
                   id="state"
                   label="State"
                   variant="outlined"
+                  type="text"
                   {...register("person_state", { required: "State is required" })}
                   error={Boolean(errors.person_state?.message)}
                   helperText={errors.person_state?.message}
@@ -240,6 +257,7 @@ export const Board = () => {
                   id="zip-code"
                   label="Zip Code"
                   variant="outlined"
+                  type="text"
                   {...register("person_zipcode", { required: "Zip code is required" })}
                   error={Boolean(errors.person_zipcode?.message)}
                   helperText={errors.person_zipcode?.message}
@@ -252,21 +270,25 @@ export const Board = () => {
                 </FormLabel>
                 <TextField
                   id="boarding-start-date"
-                  label="Boarding Start Date (MM/DD/YYYY)"
+                  label="Boarding Start Date"
                   variant="outlined"
+                  type="date"
                   {...register("boarding_start_date", {
                     required: "Boarding start date is required",
                   })}
                   error={Boolean(errors.boarding_start_date?.message)}
                   helperText={errors.boarding_start_date?.message}
+                  InputLabelProps={{ shrink: true }}
                 />
                 <TextField
                   id="boarding-end-date"
-                  label="Boarding End Date (MM/DD/YYYY)"
+                  label="Boarding End Date"
                   variant="outlined"
+                  type="date"
                   {...register("boarding_end_date", { required: "Boarding end date is required" })}
                   error={Boolean(errors.boarding_end_date?.message)}
                   helperText={errors.boarding_end_date?.message}
+                  InputLabelProps={{ shrink: true }}
                 />
                 <AddedBirdsList birdNames={addedBirdNames} />
                 {!isParrotFormOpen && (
@@ -308,8 +330,6 @@ export const Board = () => {
                         <Checkbox
                           {...field}
                           checked={field["value"] ?? false}
-                          error={Boolean(errors.vet_record_agreement?.message)}
-                          helperText={errors.vet_record_agreement?.message}
                         />
                       )}
                     />
@@ -336,8 +356,6 @@ export const Board = () => {
                         <Checkbox
                           {...field}
                           checked={field["value"] ?? false}
-                          error={Boolean(errors.dropoff_agreement?.message)}
-                          helperText={errors.dropoff_agreement?.message}
                         />
                       )}
                     />
@@ -364,8 +382,6 @@ export const Board = () => {
                         <Checkbox
                           {...field}
                           checked={field["value"] ?? false}
-                          error={Boolean(errors.emergency_agreement?.message)}
-                          helperText={errors.emergency_agreement?.message}
                         />
                       )}
                     />
@@ -405,8 +421,6 @@ export const Board = () => {
                         <Checkbox
                           {...field}
                           checked={field["value"] ?? false}
-                          error={Boolean(errors.legal_agreement?.message)}
-                          helperText={errors.legal_agreement?.message}
                         />
                       )}
                     />
