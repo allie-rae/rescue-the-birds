@@ -14,6 +14,7 @@ import { Box } from "@mui/system";
 import { Controller, useForm } from "react-hook-form";
 import { useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 export const ParrotBoardingForm = ({
   parentRegister,
@@ -373,8 +374,9 @@ export const ParrotBoardingForm = ({
             color="primary"
             sx={{ width: "250px", mt: 2 }}
             onClick={() => addBird()}
+            startIcon={<AddCircleOutlineIcon />}
           >
-            Add Bird
+            Add this bird
           </Button>
           {hasBirdBeenAdded && (
             <Button
