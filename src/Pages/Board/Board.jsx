@@ -7,10 +7,6 @@ import {
   FormHelperText,
   FormLabel,
   LinearProgress,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Stack,
   TextField,
   Typography,
@@ -22,9 +18,9 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { PricingTable } from "../../PricingTable";
 import { Controller, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { ParrotBoardingForm } from "./ParrotBoardingSubForm";
 import { TextInput } from "../../TextInput";
+import { AddedBirdsList } from "./AddedBirdsList";
 
 const textFields = [
   {
@@ -458,31 +454,5 @@ export const Board = () => {
         </Box>
       </Box>
     </Fade>
-  );
-};
-
-const AddedBirdsList = ({ birdNames }) => {
-  if (!birdNames.length) return null;
-  return (
-    <>
-      <FormLabel
-        id="emergency-agreement"
-        sx={{ fontWeight: "bold" }}
-      >
-        {birdNames.length === 1 ? "Bird" : "Birds"} added:
-      </FormLabel>
-      <List>
-        {birdNames.map((name) => {
-          return (
-            <ListItem key={name}>
-              <ListItemIcon>
-                <TaskAltIcon color="success" />
-              </ListItemIcon>
-              <ListItemText>{name}</ListItemText>
-            </ListItem>
-          );
-        })}
-      </List>
-    </>
   );
 };
