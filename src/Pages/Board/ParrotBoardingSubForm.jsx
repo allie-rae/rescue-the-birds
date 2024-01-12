@@ -32,6 +32,7 @@ export const ParrotBoardingForm = ({
     getValues,
     reset,
     trigger,
+    watch,
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -53,6 +54,8 @@ export const ParrotBoardingForm = ({
   });
 
   const hasBirdBeenAdded = !!addedBirdNames.length;
+  const doesBirdNeedMedication = watch("parrotMedication", "No");
+  const doesBirdHaveSpecialDiet = watch("parrotSpecialDiet", "No");
 
   useEffect(() => {
     if (!isOpen) {
@@ -256,14 +259,25 @@ export const ParrotBoardingForm = ({
             </FormControl>
           )}
         />
-        <TextField
-          id="special-diet"
-          label="If yes, explain your bird's special diet"
-          variant="outlined"
-          multiline
-          minRows={4}
-          {...register("parrotSpecialDietDescription")}
-        />
+        {doesBirdHaveSpecialDiet === "Yes" && (
+          <Fade
+            in={true}
+            timeout={250}
+          >
+            <TextField
+              id="special-diet"
+              label="If yes, explain your bird's special diet"
+              variant="outlined"
+              multiline
+              minRows={4}
+              {...register("parrotSpecialDietDescription", {
+                required: "Explanation of special diet required",
+              })}
+              error={Boolean(errors.parrotSpecialDietDescription?.message)}
+              helperText={errors.parrotSpecialDietDescription?.message}
+            />
+          </Fade>
+        )}
         <Controller
           control={control}
           name="parrotMedication"
@@ -295,14 +309,25 @@ export const ParrotBoardingForm = ({
             </FormControl>
           )}
         />
-        <TextField
-          id="medication"
-          label="If yes, explain your bird's medication"
-          variant="outlined"
-          multiline
-          minRows={4}
-          {...register("parrotMedicationDescription")}
-        />
+        {doesBirdNeedMedication === "Yes" && (
+          <Fade
+            in={true}
+            timeout={250}
+          >
+            <TextField
+              id="medication"
+              label="If yes, explain your bird's medication"
+              variant="outlined"
+              multiline
+              minRows={4}
+              {...register("parrotMedicationDescription", {
+                required: "Medication explanation required",
+              })}
+              error={Boolean(errors.parrotMedicationDescription?.message)}
+              helperText={errors.parrotMedicationDescription?.message}
+            />
+          </Fade>
+        )}
         <FormLabel
           id="special-instructions-label"
           sx={{ fontWeight: "bold" }}
