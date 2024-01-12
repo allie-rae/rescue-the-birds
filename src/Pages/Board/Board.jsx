@@ -200,67 +200,116 @@ export const Board = () => {
                 >
                   Personal Information
                 </FormLabel>
-                <TextField
-                  id="name"
-                  label="Name"
-                  variant="outlined"
-                  type="text"
-                  {...register("person_name", { required: "Name is required" })}
-                  error={Boolean(errors.person_name?.message)}
-                  helperText={errors.person_name?.message}
+                <Controller
+                  control={control}
+                  name="person_name"
+                  rules={{ required: "Name is required" }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      id="name"
+                      label="Name"
+                      variant="outlined"
+                      type="text"
+                      error={Boolean(errors.person_name?.message)}
+                      helperText={errors.person_name?.message}
+                    />
+                  )}
                 />
-                <TextField
-                  id="email"
-                  label="Email"
-                  variant="outlined"
-                  type="email"
-                  {...register("person_email", { required: "Email is required" })}
-                  error={Boolean(errors.person_email?.message)}
-                  helperText={errors.person_email?.message}
+                <Controller
+                  control={control}
+                  name="person_email"
+                  rules={{ required: "Email is required" }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      id="email"
+                      label="Email"
+                      variant="outlined"
+                      type="email"
+                      error={Boolean(errors.person_email?.message)}
+                      helperText={errors.person_email?.message}
+                    />
+                  )}
                 />
-                <TextField
-                  id="phone-number"
-                  label="Phone Number"
-                  variant="outlined"
-                  type="tel"
-                  {...register("person_phone", { required: "Phone number is required" })}
-                  error={Boolean(errors.person_phone?.message)}
-                  helperText={errors.person_phone?.message}
+                <Controller
+                  control={control}
+                  name="person_phone"
+                  rules={{ required: "Phone number is required" }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      id="phone-number"
+                      label="Phone Number"
+                      variant="outlined"
+                      type="tel"
+                      error={Boolean(errors.person_phone?.message)}
+                      helperText={errors.person_phone?.message}
+                    />
+                  )}
                 />
-                <TextField
-                  id="street-address"
-                  label="Street Address"
-                  variant="outlined"
-                  {...register("person_address", { required: "Street address is required" })}
-                  error={Boolean(errors.person_address?.message)}
-                  helperText={errors.person_address?.message}
+                <Controller
+                  control={control}
+                  name="person_address"
+                  rules={{ required: "Street address is required" }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      id="street-address"
+                      label="Street Address"
+                      variant="outlined"
+                      error={Boolean(errors.person_address?.message)}
+                      helperText={errors.person_address?.message}
+                    />
+                  )}
                 />
-                <TextField
-                  id="city"
-                  label="City"
-                  variant="outlined"
-                  type="text"
-                  {...register("person_city", { required: "City is required" })}
-                  error={Boolean(errors.person_city?.message)}
-                  helperText={errors.person_city?.message}
+                <Controller
+                  control={control}
+                  name="person_city"
+                  rules={{ required: "City is required" }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      id="city"
+                      label="City"
+                      variant="outlined"
+                      type="text"
+                      error={Boolean(errors.person_city?.message)}
+                      helperText={errors.person_city?.message}
+                    />
+                  )}
                 />
-                <TextField
-                  id="state"
-                  label="State"
-                  variant="outlined"
-                  type="text"
-                  {...register("person_state", { required: "State is required" })}
-                  error={Boolean(errors.person_state?.message)}
-                  helperText={errors.person_state?.message}
+                <Controller
+                  control={control}
+                  name="person_state"
+                  rules={{ required: "State is required" }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      id="state"
+                      label="State"
+                      variant="outlined"
+                      type="text"
+                      error={Boolean(errors.person_state?.message)}
+                      helperText={errors.person_state?.message}
+                    />
+                  )}
                 />
-                <TextField
-                  id="zip-code"
-                  label="Zip Code"
-                  variant="outlined"
-                  type="text"
-                  {...register("person_zipcode", { required: "Zip code is required" })}
-                  error={Boolean(errors.person_zipcode?.message)}
-                  helperText={errors.person_zipcode?.message}
+                <Controller
+                  control={control}
+                  name="person_zipcode"
+                  rules={{ required: "Zip code is required" }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      id="zip-code"
+                      label="Zip Code"
+                      variant="outlined"
+                      type="text"
+                      error={Boolean(errors.person_zipcode?.message)}
+                      helperText={errors.person_zipcode?.message}
+                    />
+                  )}
                 />
                 <FormLabel
                   id="boarding-schedule"
@@ -268,27 +317,39 @@ export const Board = () => {
                 >
                   Boarding Schedule
                 </FormLabel>
-                <TextField
-                  id="boarding-start-date"
-                  label="Boarding Start Date"
-                  variant="outlined"
-                  type="date"
-                  {...register("boarding_start_date", {
-                    required: "Boarding start date is required",
-                  })}
-                  error={Boolean(errors.boarding_start_date?.message)}
-                  helperText={errors.boarding_start_date?.message}
-                  InputLabelProps={{ shrink: true }}
+                <Controller
+                  control={control}
+                  name="boarding_start_date"
+                  rules={{ required: "Boarding start date is required" }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      id="boarding-start-date"
+                      label="Boarding Start Date"
+                      variant="outlined"
+                      type="date"
+                      error={Boolean(errors.boarding_start_date?.message)}
+                      helperText={errors.boarding_start_date?.message}
+                      InputLabelProps={{ shrink: true }}
+                    />
+                  )}
                 />
-                <TextField
-                  id="boarding-end-date"
-                  label="Boarding End Date"
-                  variant="outlined"
-                  type="date"
-                  {...register("boarding_end_date", { required: "Boarding end date is required" })}
-                  error={Boolean(errors.boarding_end_date?.message)}
-                  helperText={errors.boarding_end_date?.message}
-                  InputLabelProps={{ shrink: true }}
+                <Controller
+                  control={control}
+                  name="boarding_end_date"
+                  rules={{ required: "Boarding end date is required" }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      id="boarding-end-date"
+                      label="Boarding End Date"
+                      variant="outlined"
+                      type="date"
+                      error={Boolean(errors.boarding_end_date?.message)}
+                      helperText={errors.boarding_end_date?.message}
+                      InputLabelProps={{ shrink: true }}
+                    />
+                  )}
                 />
                 <AddedBirdsList birdNames={addedBirdNames} />
                 {!isParrotFormOpen && (
