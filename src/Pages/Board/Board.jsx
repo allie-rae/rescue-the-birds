@@ -24,6 +24,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { ParrotBoardingForm } from "./ParrotBoardingSubForm";
+import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../../constants";
 
 export const Board = () => {
   const {
@@ -98,7 +99,7 @@ export const Board = () => {
   return (
     <Fade
       in={true}
-      timeout={400}
+      timeout={pageFadeTimeout}
     >
       <Box
         sx={{
@@ -117,8 +118,7 @@ export const Board = () => {
         >
           <img
             src={rose}
-            height="400px"
-            style={{ borderRadius: "5px" }}
+            style={parrotImageStyling}
           />
         </Box>
         <Typography
@@ -127,7 +127,7 @@ export const Board = () => {
         >
           Board
         </Typography>
-        <Box sx={{ width: "600px", maxWidth: "100%" }}>
+        <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
           <Typography
             variant="body1"
             sx={{ mb: 4, mt: 2 }}
@@ -179,7 +179,7 @@ export const Board = () => {
           >
             Boarding Contract
           </Typography>
-          <Box sx={{ width: "600px", maxWidth: "100%" }}>
+          <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing={2}>
                 <FormLabel

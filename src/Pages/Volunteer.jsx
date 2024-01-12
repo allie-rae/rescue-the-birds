@@ -15,9 +15,9 @@ import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import axios from "axios";
 import took from "../Photos/took.png";
+import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../constants";
 
 export const Volunteer = () => {
-  
   const {
     clearErrors,
     control,
@@ -26,7 +26,7 @@ export const Volunteer = () => {
     register,
     reset,
     setError,
-    watch
+    watch,
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -46,8 +46,8 @@ export const Volunteer = () => {
       why_interested: "",
       interested_bird_care: "No",
       interested_fundraising: "No",
-      interested_fostering: "No"
-    }
+      interested_fostering: "No",
+    },
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -58,11 +58,12 @@ export const Volunteer = () => {
   const watchFundraising = watch("interested_fundraising");
   const watchFostering = watch("interested_fostering");
 
-  const noInterestsSelectedMessage = "Please select at least one of the following areas of interest: ";
+  const noInterestsSelectedMessage =
+    "Please select at least one of the following areas of interest: ";
 
   const hasSelectedOneInterest = () => {
     return watchBirdCare === "Yes" || watchFundraising === "Yes" || watchFostering === "Yes";
-  }
+  };
 
   const onCheckboxChange = (onChange) => (e) => {
     const newCheckboxValue = e.target.checked ? "Yes" : "No";
@@ -71,18 +72,18 @@ export const Volunteer = () => {
 
   useEffect(() => {
     const hasFormBeenSubmitted = isSubmitted;
-    
+
     if (hasFormBeenSubmitted) {
       if (hasSelectedOneInterest()) {
         clearErrors("has_selected_one_interest");
       } else {
         setError("has_selected_one_interest", {
           type: "manual",
-          message: noInterestsSelectedMessage
+          message: noInterestsSelectedMessage,
         });
       }
     }
-  }, [watchBirdCare, watchFundraising, watchFostering, setError, clearErrors])
+  }, [watchBirdCare, watchFundraising, watchFostering, setError, clearErrors]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -95,7 +96,12 @@ export const Volunteer = () => {
   const onSubmit = (data) => {
     setIsLoading(true);
 
-    const { emergency_contact_name, emergency_contact_number, has_selected_one_interest, ...submissionData} = data;
+    const {
+      emergency_contact_name,
+      emergency_contact_number,
+      has_selected_one_interest,
+      ...submissionData
+    } = data;
 
     submissionData.emergency_contact = `Name: ${emergency_contact_name}\nNumber: ${emergency_contact_number}`;
 
@@ -115,7 +121,7 @@ export const Volunteer = () => {
   return (
     <Fade
       in={true}
-      timeout={400}
+      timeout={pageFadeTimeout}
     >
       <Box
         sx={{
@@ -134,8 +140,7 @@ export const Volunteer = () => {
         >
           <img
             src={took}
-            height="400px"
-            style={{ borderRadius: "5px" }}
+            style={parrotImageStyling}
           />
         </Box>
         <Typography
@@ -144,7 +149,7 @@ export const Volunteer = () => {
         >
           Volunteer
         </Typography>
-        <Box sx={{ width: "600px", maxWidth: "100%", marginBottom: "20px" }}>
+        <Box sx={{ width: pageWidth, maxWidth: "100%", marginBottom: "20px" }}>
           Thank you for your interest in volunteering at A Refuge for Saving the Wildlife. We rely
           on volunteers to support our mission and operations every day. You can be a part of our
           life-saving work. By choosing to volunteer your time and talents, you are helping to make
@@ -160,15 +165,15 @@ export const Volunteer = () => {
           your information will be reviewed and you will be contacted by our Volunteer Coordinator.
         </Box>
 
-        <Box sx={{ width: "600px", maxWidth: "100%" }}>
+        <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2}>
-              <Controller 
+              <Controller
                 control={control}
                 name="person_name"
                 rules={{ required: "Name is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="name"
                     label="Name"
@@ -178,12 +183,12 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller 
+              <Controller
                 control={control}
                 name="person_dob"
                 rules={{ required: "Date of birth is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="date-of-birth"
                     label="Date of Birth (MM/DD/YYYY)"
@@ -193,12 +198,12 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller 
+              <Controller
                 control={control}
                 name="person_email"
                 rules={{ required: "Email is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="email"
                     label="Email"
@@ -208,12 +213,12 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller 
+              <Controller
                 control={control}
                 name="person_phone"
                 rules={{ required: "Phone number is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="phone-number"
                     label="Phone Number"
@@ -223,12 +228,12 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller 
+              <Controller
                 control={control}
                 name="person_address"
                 rules={{ required: "Street address is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="street-address"
                     label="Street Address"
@@ -238,12 +243,12 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller 
+              <Controller
                 control={control}
                 name="person_city"
                 rules={{ required: "City is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="city"
                     label="City"
@@ -253,12 +258,12 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller 
+              <Controller
                 control={control}
                 name="person_state"
                 rules={{ required: "State is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="state"
                     label="State"
@@ -268,12 +273,12 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller 
+              <Controller
                 control={control}
                 name="person_zipcode"
                 rules={{ required: "Zip code is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="zip-code"
                     label="Zip Code"
@@ -283,12 +288,12 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller 
+              <Controller
                 control={control}
                 name="dl_number"
                 rules={{ required: "Driver's license number is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="drivers-license"
                     label="Driver's License Number"
@@ -298,12 +303,12 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller 
+              <Controller
                 control={control}
                 name="emergency_contact_name"
                 rules={{ required: "Emergency contact name is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="emergency-contact-name"
                     label="Emergency Contact Name"
@@ -313,12 +318,12 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller 
+              <Controller
                 control={control}
                 name="emergency_contact_number"
                 rules={{ required: "Emergency contact number is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="emergency-contact-number"
                     label="Emergency Contact Phone Number"
@@ -328,12 +333,12 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller 
+              <Controller
                 control={control}
                 name="brief_synopsis_of_birds"
                 rules={{ required: "A brief synopsis of your bird experience is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="bird-experience"
                     label="A brief synopsis of your bird experience"
@@ -345,12 +350,12 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller 
+              <Controller
                 control={control}
                 name="why_interested"
                 rules={{ required: "Explanation of interest is required" }}
                 render={({ field }) => (
-                  <TextField 
+                  <TextField
                     {...field}
                     id="interest"
                     label="Why are you interested in volunteering with us?"
@@ -370,67 +375,72 @@ export const Volunteer = () => {
               </Typography>
               {/* Display an error message if the user has not selected at least one area of interest for volunteering */}
               {errors.has_selected_one_interest && (
-                <FormHelperText error>
-                  {errors.has_selected_one_interest.message}
-                </FormHelperText>
+                <FormHelperText error>{errors.has_selected_one_interest.message}</FormHelperText>
               )}
               <FormGroup>
-                <Controller 
+                <Controller
                   control={control}
                   name="interested_bird_care"
-                  render={({ field: { value, onChange }}) => (
-                      <FormControlLabel
-                        control={<Checkbox
+                  render={({ field: { value, onChange } }) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
                           checked={value === "Yes"}
                           onChange={onCheckboxChange(onChange)}
-                        />}
-                        label="Bird care at the Refuge"
-                      />
+                        />
+                      }
+                      label="Bird care at the Refuge"
+                    />
                   )}
                 />
                 <FormHelperText>
-                  Socializing, playing, handling of animals, feeding, cutting fruits & veggies, making
-                  warm meals, rotating toys, grooming, cleaning cages, changing cage paper, cleaning
-                  pet care areas, etc.
+                  Socializing, playing, handling of animals, feeding, cutting fruits & veggies,
+                  making warm meals, rotating toys, grooming, cleaning cages, changing cage paper,
+                  cleaning pet care areas, etc.
                 </FormHelperText>
-                <Controller 
+                <Controller
                   control={control}
                   name="interested_fostering"
-                  render={({ field: { value, onChange }}) => (
-                      <FormControlLabel
-                        control={<Checkbox
+                  render={({ field: { value, onChange } }) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
                           checked={value === "Yes"}
                           onChange={onCheckboxChange(onChange)}
-                        />}
-                        label="Fostering in your home"
-                      />
+                        />
+                      }
+                      label="Fostering in your home"
+                    />
                   )}
                 />
                 <FormHelperText>
-                  Having one of our adoptees in your home for socializing. A separate application must
-                  be filled out for each foster bird in addition to this application. If you are
-                  fostering for the Refuge, the Refuge maintains legal custody of the foster bird(s).
-                  You will be expected to take care of all the needs of the bird(s), which will
-                  include food, medicine, veterinary care, toys, etc., without remuneration. If you
-                  need financial assistance in caring for the bird(s), we will provide you with the
-                  necessary funds. In agreeing to foster, you will not be reimbursed for expenses
-                  after the fact unless there has been an agreement with the Executive Director. If
-                  the Executive Director determines that it is in the best interest of the bird, the
-                  bird(s) will be returned upon demand of the Executive Director. If the Refuge needs
-                  to take legal action to obtain the bird(s), you, as the volunteer, will reimburse
-                  the Refuge for any and all expenses related to regaining custody of said bird(s).
+                  Having one of our adoptees in your home for socializing. A separate application
+                  must be filled out for each foster bird in addition to this application. If you
+                  are fostering for the Refuge, the Refuge maintains legal custody of the foster
+                  bird(s). You will be expected to take care of all the needs of the bird(s), which
+                  will include food, medicine, veterinary care, toys, etc., without remuneration. If
+                  you need financial assistance in caring for the bird(s), we will provide you with
+                  the necessary funds. In agreeing to foster, you will not be reimbursed for
+                  expenses after the fact unless there has been an agreement with the Executive
+                  Director. If the Executive Director determines that it is in the best interest of
+                  the bird, the bird(s) will be returned upon demand of the Executive Director. If
+                  the Refuge needs to take legal action to obtain the bird(s), you, as the
+                  volunteer, will reimburse the Refuge for any and all expenses related to regaining
+                  custody of said bird(s).
                 </FormHelperText>
-                <Controller 
+                <Controller
                   control={control}
                   name="interested_fundraising"
-                  render={({ field: { value, onChange }}) => (
-                      <FormControlLabel
-                        control={<Checkbox
+                  render={({ field: { value, onChange } }) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
                           checked={value === "Yes"}
                           onChange={onCheckboxChange(onChange)}
-                        />}
-                        label="Fundraising"
-                      />
+                        />
+                      }
+                      label="Fundraising"
+                    />
                   )}
                 />
                 <FormHelperText>
@@ -439,9 +449,11 @@ export const Volunteer = () => {
                 </FormHelperText>
               </FormGroup>
               {/* Hidden input used to validate whether or not a user has selected an area of interest for volunteering. This input is registered to React Hook Form in order to make use of its validation functionality */}
-              <input 
+              <input
                 type="hidden"
-                {...register("has_selected_one_interest", { validate: () => hasSelectedOneInterest() || noInterestsSelectedMessage })}
+                {...register("has_selected_one_interest", {
+                  validate: () => hasSelectedOneInterest() || noInterestsSelectedMessage,
+                })}
               />
               <Button
                 variant="contained"
@@ -452,9 +464,7 @@ export const Volunteer = () => {
                 Submit
               </Button>
               {Object.keys(errors).length > 0 && isSubmitted && (
-                <FormHelperText error>
-                  Please fill out all required fields.
-                </FormHelperText>
+                <FormHelperText error>Please fill out all required fields.</FormHelperText>
               )}
               {isLoading && <LinearProgress />}
               {isSuccess && <FormHelperText>Form successfully submitted!</FormHelperText>}

@@ -1,12 +1,13 @@
 import { Fade, Link, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import greenbirb from "../Photos/greenbirb.png";
+import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../constants";
 
 export const Relinquish = () => {
   return (
     <Fade
       in={true}
-      timeout={400}
+      timeout={pageFadeTimeout}
     >
       <Box
         sx={{
@@ -25,8 +26,7 @@ export const Relinquish = () => {
         >
           <img
             src={greenbirb}
-            height="400px"
-            style={{ borderRadius: "5px" }}
+            style={parrotImageStyling}
           />
         </Box>
         <Typography
@@ -35,7 +35,7 @@ export const Relinquish = () => {
         >
           Relinquish
         </Typography>
-        <Box sx={{ width: "600px", maxWidth: "100%" }}>
+        <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
           <Typography
             variant="body1"
             sx={{ mb: 4, mt: 2 }}

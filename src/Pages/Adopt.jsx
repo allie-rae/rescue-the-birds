@@ -31,6 +31,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
 import { Controller, useForm } from "react-hook-form";
+import {
+  longLabelInputStyling,
+  pageFadeTimeout,
+  pageWidth,
+  parrotImageStyling,
+} from "../constants";
 
 export const Adopt = () => {
   const {
@@ -141,7 +147,7 @@ export const Adopt = () => {
   return (
     <Fade
       in={true}
-      timeout={400}
+      timeout={pageFadeTimeout}
     >
       <Box
         sx={{
@@ -160,8 +166,7 @@ export const Adopt = () => {
         >
           <img
             src={tuki}
-            height="400px"
-            style={{ borderRadius: "5px" }}
+            style={parrotImageStyling}
           />
         </Box>
         <Typography
@@ -170,7 +175,7 @@ export const Adopt = () => {
         >
           Adopt
         </Typography>
-        <Box sx={{ width: "600px", maxWidth: "100%" }}>
+        <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
           <Typography
             variant="body1"
             sx={{ mb: 4, mt: 2 }}
@@ -324,7 +329,7 @@ export const Adopt = () => {
             Please fill out the below application in its entirety. If questions are skipped or left
             incomplete, your application will be disqualified.
           </Typography>
-          <Box sx={{ width: "600px", maxWidth: "100%" }}>
+          <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Typography
                 variant="h3"
@@ -448,10 +453,7 @@ export const Adopt = () => {
                 <TextField
                   id="children-experience-with-birds"
                   label="Are there children in the household? What is their experience with birds?"
-                  sx={{
-                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                  }}
+                  sx={longLabelInputStyling}
                   variant="outlined"
                   multiline
                   minRows={4}
@@ -526,10 +528,7 @@ export const Adopt = () => {
                       <TextField
                         id="last-bird-checkup-date"
                         label="If you currently have birds, what was the date of their last annual checkup?"
-                        sx={{
-                          "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                          "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                        }}
+                        sx={longLabelInputStyling}
                         variant="outlined"
                         {...register("other_bird_checkup_date", {
                           required: "Last checkup date is required",
@@ -540,10 +539,7 @@ export const Adopt = () => {
                       <TextField
                         id="bird-diet"
                         label="List the current diet that you feed your birds"
-                        sx={{
-                          "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                          "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                        }}
+                        sx={longLabelInputStyling}
                         variant="outlined"
                         multiline
                         minRows={4}
@@ -610,10 +606,7 @@ export const Adopt = () => {
                 <TextField
                   id="other-bird-experience"
                   label="Please list any other bird experience that you may have"
-                  sx={{
-                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                  }}
+                  sx={longLabelInputStyling}
                   variant="outlined"
                   multiline
                   minRows={4}
@@ -865,10 +858,7 @@ export const Adopt = () => {
                 <TextField
                   id="bird-hours-alone"
                   label="How many hours a day will your bird spend alone?"
-                  sx={{
-                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                  }}
+                  sx={longLabelInputStyling}
                   variant="outlined"
                   {...register("bird_hours_alone", { required: "Hours alone is required" })}
                   error={!!errors.bird_hours_alone?.message}
@@ -914,10 +904,7 @@ export const Adopt = () => {
                     <TextField
                       id="smokers-explanation"
                       label="If yes, how do you prevent health problems due to second-hand smoke exposure for your bird(s)?"
-                      sx={{
-                        "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                        "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                      }}
+                      sx={longLabelInputStyling}
                       variant="outlined"
                       multiline
                       minRows={4}
@@ -989,10 +976,7 @@ export const Adopt = () => {
                 <TextField
                   id="what-supp-info"
                   label="What sources of information do you use to supplement your knowledge of avian care?"
-                  sx={{
-                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                  }}
+                  sx={longLabelInputStyling}
                   variant="outlined"
                   multiline
                   minRows={4}
@@ -1005,10 +989,7 @@ export const Adopt = () => {
                 <TextField
                   id="lifestyle-changes"
                   label="Please describe the lifestyle changes you might anticipate over the next 5 years? 10 years? 25 years?"
-                  sx={{
-                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                  }}
+                  sx={longLabelInputStyling}
                   variant="outlined"
                   multiline
                   minRows={4}
@@ -1021,10 +1002,7 @@ export const Adopt = () => {
                 <TextField
                   id="vacation-care"
                   label="When you travel or go on an extended vacation, who will care for your bird?"
-                  sx={{
-                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                  }}
+                  sx={longLabelInputStyling}
                   variant="outlined"
                   multiline
                   minRows={4}
@@ -1037,10 +1015,7 @@ export const Adopt = () => {
                 <TextField
                   id="death-plans"
                   label="What provisions have you made for your birds and/or other pets in the event of your illness or death?"
-                  sx={{
-                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                  }}
+                  sx={longLabelInputStyling}
                   variant="outlined"
                   multiline
                   minRows={4}
@@ -1061,10 +1036,7 @@ export const Adopt = () => {
                 <TextField
                   id="looking-for-in-bird"
                   label="What are the most important characteristics you are looking for in a companion bird?"
-                  sx={{
-                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                  }}
+                  sx={longLabelInputStyling}
                   variant="outlined"
                   multiline
                   minRows={4}
@@ -1077,10 +1049,7 @@ export const Adopt = () => {
                 <TextField
                   id="additional-comments"
                   label="Is there anything else you would like to add/ask that would help in determining your eligibility?"
-                  sx={{
-                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                  }}
+                  sx={longLabelInputStyling}
                   variant="outlined"
                   multiline
                   minRows={4}
