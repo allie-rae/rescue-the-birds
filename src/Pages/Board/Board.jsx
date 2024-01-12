@@ -24,6 +24,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { ParrotBoardingForm } from "./ParrotBoardingSubForm";
+import { TextInput } from "../../TextInput";
 
 const textFields = [
   {
@@ -247,22 +248,14 @@ export const Board = () => {
                 </FormLabel>
                 {textFields.map((textField) => {
                   return (
-                    <Controller
+                    <TextInput
                       key={textField.name}
-                      control={control}
                       name={textField.name}
+                      control={control}
                       rules={textField.rules}
-                      render={({ field }) => (
-                        <TextField
-                          {...field}
-                          id={textField.name}
-                          label={textField.label}
-                          variant="outlined"
-                          type={textField.type}
-                          error={Boolean(errors[textField.name]?.message)}
-                          helperText={errors[textField.name]?.message}
-                        />
-                      )}
+                      label={textField.label}
+                      type={textField.type}
+                      errors={errors}
                     />
                   );
                 })}
