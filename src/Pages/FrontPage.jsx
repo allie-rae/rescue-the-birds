@@ -1,12 +1,13 @@
 import { Fade, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import prince from "../Photos/prince.png";
+import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../constants";
 
 export const FrontPage = () => {
   return (
     <Fade
       in={true}
-      timeout={400}
+      timeout={pageFadeTimeout}
     >
       <Box
         sx={{
@@ -25,8 +26,7 @@ export const FrontPage = () => {
         >
           <img
             src={prince}
-            height="400px"
-            style={{ borderRadius: "5px" }}
+            style={parrotImageStyling}
           />
         </Box>
         <Typography
@@ -35,7 +35,7 @@ export const FrontPage = () => {
         >
           Welcome to the Refuge
         </Typography>
-        <Box sx={{ width: "600px", maxWidth: "100%" }}>
+        <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
           A Refuge for Saving the Wildlife is a no-kill parrot rescue, rehabilitation, education and
           adoption shelter. We provide a safe place for parrots that have to be re-homed due to
           unfortunate situations that sometimes arise. Most of them were loved dearly and cared for,

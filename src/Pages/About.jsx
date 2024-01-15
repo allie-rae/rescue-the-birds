@@ -5,12 +5,13 @@ import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import SchoolIcon from "@mui/icons-material/School";
 import CottageIcon from "@mui/icons-material/Cottage";
 import SearchIcon from "@mui/icons-material/Search";
+import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../constants";
 
 export const About = () => {
   return (
     <Fade
       in={true}
-      timeout={400}
+      timeout={pageFadeTimeout}
     >
       <Box
         sx={{
@@ -29,8 +30,7 @@ export const About = () => {
         >
           <img
             src={phoenix}
-            height="400px"
-            style={{ borderRadius: "5px" }}
+            style={parrotImageStyling}
           />
         </Box>
         <Typography
@@ -39,7 +39,7 @@ export const About = () => {
         >
           About
         </Typography>
-        <Box sx={{ width: "600px", maxWidth: "100%" }}>
+        <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
           This refuge was incorporated in the State of Illinois on July 26, 1999 and licensed by the
           Illinois Department of Agriculture, Bureau of Animal Welfare in February 2001 as a rescue
           facility.

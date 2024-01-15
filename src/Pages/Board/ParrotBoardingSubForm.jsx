@@ -15,6 +15,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { pageFadeTimeout } from "../../constants";
 
 export const ParrotBoardingForm = ({
   parentRegister,
@@ -101,7 +102,7 @@ export const ParrotBoardingForm = ({
   return (
     <Fade
       in={true}
-      timeout={400}
+      timeout={pageFadeTimeout}
     >
       <Box
         sx={{

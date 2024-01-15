@@ -1,12 +1,13 @@
 import { Fade, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import poppy from "../Photos/poppy.png";
+import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../constants";
 
 export const Contact = () => {
   return (
     <Fade
       in={true}
-      timeout={400}
+      timeout={pageFadeTimeout}
     >
       <Box
         sx={{
@@ -25,8 +26,7 @@ export const Contact = () => {
         >
           <img
             src={poppy}
-            height="400px"
-            style={{ borderRadius: "5px" }}
+            style={parrotImageStyling}
           />
         </Box>
         <Typography
@@ -35,7 +35,7 @@ export const Contact = () => {
         >
           Contact
         </Typography>
-        <Box sx={{ width: "600px", maxWidth: "100%" }}>
+        <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
           <Typography
             variant="h3"
             sx={{ mb: 2, mt: 2 }}

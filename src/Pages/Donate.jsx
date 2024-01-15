@@ -2,12 +2,13 @@ import { Fade, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import mango from "../Photos/mango.png";
 import { Link } from "@mui/material";
+import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../constants";
 
 export const Donate = () => {
   return (
     <Fade
       in={true}
-      timeout={400}
+      timeout={pageFadeTimeout}
     >
       <Box
         sx={{
@@ -26,8 +27,7 @@ export const Donate = () => {
         >
           <img
             src={mango}
-            height="400px"
-            style={{ borderRadius: "5px" }}
+            style={parrotImageStyling}
           />
         </Box>
         <Typography
@@ -36,7 +36,7 @@ export const Donate = () => {
         >
           Donate
         </Typography>
-        <Box sx={{ width: "600px", maxWidth: "100%" }}>
+        <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
           Thank you so much for your interest in donating. Each animal in our shelter is given the
           very best avian veterinary care whenver it&apos;s needed, a healthy diet, a clean, safe
           enclosure, regular beak and nail filings, and plenty of enrichment so they can live
