@@ -7,10 +7,6 @@ import {
   FormHelperText,
   FormLabel,
   LinearProgress,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Stack,
   TextField,
   Typography,
@@ -22,8 +18,54 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { PricingTable } from "../../PricingTable";
 import { Controller, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { ParrotBoardingForm } from "./ParrotBoardingSubForm";
+import { TextInput } from "../../TextInput";
+import { AddedBirdsList } from "./AddedBirdsList";
+
+const textFields = [
+  {
+    name: "person_name",
+    label: "Name",
+    rules: { required: "Name is required" },
+    type: "text",
+  },
+  {
+    name: "person_email",
+    label: "Email",
+    rules: { required: "Email is required" },
+    type: "email",
+  },
+  {
+    name: "person_phone",
+    label: "Phone Number",
+    rules: { required: "Phone number is required" },
+    type: "tel",
+  },
+  {
+    name: "person_address",
+    label: "Street Address",
+    rules: { required: "Street address is required" },
+    type: "text",
+  },
+  {
+    name: "person_city",
+    label: "City",
+    rules: { required: "City is required" },
+    type: "text",
+  },
+  {
+    name: "person_state",
+    label: "State",
+    rules: { required: "State is required" },
+    type: "text",
+  },
+  {
+    name: "person_zipcode",
+    label: "Zip Code",
+    rules: { required: "Zip code is required" },
+    type: "text",
+  },
+];
 
 export const Board = () => {
   const {
@@ -53,6 +95,7 @@ export const Board = () => {
       legal_agreement: false,
     },
   });
+
   const [addedBirdNames, setAddedBirdNames] = useState([]);
   const [isParrotFormOpen, setIsParrotFormOpen] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -76,11 +119,22 @@ export const Board = () => {
       emergency_agreement,
       legal_agreement,
       vet_record_agreement,
+      boarding_start_date,
+      boarding_end_date,
       ...rest
     } = data;
+
+    const boardingStartDateArr = boarding_start_date.split("-");
+    const boardingEndDateArr = boarding_end_date.split("-");
+
+    const reformattedBoardingStartDate = `${boardingStartDateArr[1]}/${boardingStartDateArr[2]}/${boardingStartDateArr[0]}`;
+    const reformattedBoardingEndDate = `${boardingEndDateArr[1]}/${boardingEndDateArr[2]}/${boardingEndDateArr[0]}`;
+
     axios
       .post("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/boarding", {
         ...rest,
+        boarding_start_date: reformattedBoardingStartDate,
+        boarding_end_date: reformattedBoardingEndDate,
       })
       .then(() => {
         setIsSuccess(true);
@@ -188,85 +242,58 @@ export const Board = () => {
                 >
                   Personal Information
                 </FormLabel>
-                <TextField
-                  id="name"
-                  label="Name"
-                  variant="outlined"
-                  {...register("person_name", { required: "Name is required" })}
-                  error={Boolean(errors.person_name?.message)}
-                  helperText={errors.person_name?.message}
-                />
-                <TextField
-                  id="email"
-                  label="Email"
-                  variant="outlined"
-                  {...register("person_email", { required: "Email is required" })}
-                  error={Boolean(errors.person_email?.message)}
-                  helperText={errors.person_email?.message}
-                />
-                <TextField
-                  id="phone-number"
-                  label="Phone Number"
-                  variant="outlined"
-                  {...register("person_phone", { required: "Phone number is required" })}
-                  error={Boolean(errors.person_phone?.message)}
-                  helperText={errors.person_phone?.message}
-                />
-                <TextField
-                  id="street-address"
-                  label="Street Address"
-                  variant="outlined"
-                  {...register("person_address", { required: "Street address is required" })}
-                  error={Boolean(errors.person_address?.message)}
-                  helperText={errors.person_address?.message}
-                />
-                <TextField
-                  id="city"
-                  label="City"
-                  variant="outlined"
-                  {...register("person_city", { required: "City is required" })}
-                  error={Boolean(errors.person_city?.message)}
-                  helperText={errors.person_city?.message}
-                />
-                <TextField
-                  id="state"
-                  label="State"
-                  variant="outlined"
-                  {...register("person_state", { required: "State is required" })}
-                  error={Boolean(errors.person_state?.message)}
-                  helperText={errors.person_state?.message}
-                />
-                <TextField
-                  id="zip-code"
-                  label="Zip Code"
-                  variant="outlined"
-                  {...register("person_zipcode", { required: "Zip code is required" })}
-                  error={Boolean(errors.person_zipcode?.message)}
-                  helperText={errors.person_zipcode?.message}
-                />
+                {textFields.map((textField) => {
+                  return (
+                    <TextInput
+                      key={textField.name}
+                      name={textField.name}
+                      control={control}
+                      rules={textField.rules}
+                      label={textField.label}
+                      type={textField.type}
+                      errors={errors}
+                    />
+                  );
+                })}
                 <FormLabel
                   id="boarding-schedule"
                   sx={{ fontWeight: "bold" }}
                 >
                   Boarding Schedule
                 </FormLabel>
-                <TextField
-                  id="boarding-start-date"
-                  label="Boarding Start Date (MM/DD/YYYY)"
-                  variant="outlined"
-                  {...register("boarding_start_date", {
-                    required: "Boarding start date is required",
-                  })}
-                  error={Boolean(errors.boarding_start_date?.message)}
-                  helperText={errors.boarding_start_date?.message}
+                <Controller
+                  control={control}
+                  name="boarding_start_date"
+                  rules={{ required: "Boarding start date is required" }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      id="boarding-start-date"
+                      label="Boarding Start Date"
+                      variant="outlined"
+                      type="date"
+                      error={Boolean(errors.boarding_start_date?.message)}
+                      helperText={errors.boarding_start_date?.message}
+                      InputLabelProps={{ shrink: true }}
+                    />
+                  )}
                 />
-                <TextField
-                  id="boarding-end-date"
-                  label="Boarding End Date (MM/DD/YYYY)"
-                  variant="outlined"
-                  {...register("boarding_end_date", { required: "Boarding end date is required" })}
-                  error={Boolean(errors.boarding_end_date?.message)}
-                  helperText={errors.boarding_end_date?.message}
+                <Controller
+                  control={control}
+                  name="boarding_end_date"
+                  rules={{ required: "Boarding end date is required" }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      id="boarding-end-date"
+                      label="Boarding End Date"
+                      variant="outlined"
+                      type="date"
+                      error={Boolean(errors.boarding_end_date?.message)}
+                      helperText={errors.boarding_end_date?.message}
+                      InputLabelProps={{ shrink: true }}
+                    />
+                  )}
                 />
                 <AddedBirdsList birdNames={addedBirdNames} />
                 {!isParrotFormOpen && (
@@ -308,8 +335,6 @@ export const Board = () => {
                         <Checkbox
                           {...field}
                           checked={field["value"] ?? false}
-                          error={Boolean(errors.vet_record_agreement?.message)}
-                          helperText={errors.vet_record_agreement?.message}
                         />
                       )}
                     />
@@ -336,8 +361,6 @@ export const Board = () => {
                         <Checkbox
                           {...field}
                           checked={field["value"] ?? false}
-                          error={Boolean(errors.dropoff_agreement?.message)}
-                          helperText={errors.dropoff_agreement?.message}
                         />
                       )}
                     />
@@ -364,8 +387,6 @@ export const Board = () => {
                         <Checkbox
                           {...field}
                           checked={field["value"] ?? false}
-                          error={Boolean(errors.emergency_agreement?.message)}
-                          helperText={errors.emergency_agreement?.message}
                         />
                       )}
                     />
@@ -405,8 +426,6 @@ export const Board = () => {
                         <Checkbox
                           {...field}
                           checked={field["value"] ?? false}
-                          error={Boolean(errors.legal_agreement?.message)}
-                          helperText={errors.legal_agreement?.message}
                         />
                       )}
                     />
@@ -435,31 +454,5 @@ export const Board = () => {
         </Box>
       </Box>
     </Fade>
-  );
-};
-
-const AddedBirdsList = ({ birdNames }) => {
-  if (!birdNames.length) return null;
-  return (
-    <>
-      <FormLabel
-        id="emergency-agreement"
-        sx={{ fontWeight: "bold" }}
-      >
-        {birdNames.length === 1 ? "Bird" : "Birds"} added:
-      </FormLabel>
-      <List>
-        {birdNames.map((name) => {
-          return (
-            <ListItem key={name}>
-              <ListItemIcon>
-                <TaskAltIcon color="success" />
-              </ListItemIcon>
-              <ListItemText>{name}</ListItemText>
-            </ListItem>
-          );
-        })}
-      </List>
-    </>
   );
 };
