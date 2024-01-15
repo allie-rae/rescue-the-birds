@@ -438,7 +438,7 @@ export const Adopt = () => {
                 />
                 <TextField
                   id="household-ages"
-                  label="What are the ages of everyone in the household?"
+                  label="List the ages of everyone in the household"
                   sx={{
                     "& .MuiFormLabel-root": { whiteSpace: "normal" },
                     "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
