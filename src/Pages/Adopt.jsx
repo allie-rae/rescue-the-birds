@@ -38,6 +38,93 @@ import {
   parrotImageStyling,
 } from "../constants";
 
+const generalInfoTextFields = [
+  {
+    name: "person_name",
+    label: "Name",
+    rules: { required: "Name is required" },
+    type: "text",
+  },
+  {
+    name: "person_dob",
+    label: "Date of Birth (MM/DD/YYYY)",
+    rules: { required: "Date of birth is required" },
+    type: "text",
+  },
+  {
+    name: "person_email",
+    label: "Email",
+    rules: { required: "Email is required" },
+    type: "text",
+  },
+  {
+    name: "person_phone",
+    label: "Phone Number",
+    rules: { required: "Phone number is required" },
+    type: "text",
+  },
+  {
+    name: "person_address",
+    label: "Street Address",
+    rules: { required: "Street address is required" },
+    type: "text",
+  },
+  {
+    name: "person_city",
+    label: "City",
+    rules: { required: "City is required" },
+    type: "text",
+  },
+  {
+    name: "person_state",
+    label: "State",
+    rules: { required: "State is required" },
+    type: "text",
+  },
+  {
+    name: "person_zipcode",
+    label: "Zip Code",
+    rules: { required: "Zip Code is required" },
+    type: "text",
+  },
+  {
+    name: "hear_about_us",
+    label: "How did you hear about us?",
+    rules: { required: "Response is required is required" },
+    type: "text",
+  },
+];
+
+const householdTextFields = [
+  {
+    name: "num_household_people",
+    label: "How many people are in your household?",
+    rules: { required: "Household size is required" },
+    type: "text",
+  },
+  {
+    name: "primary_caregiver_age",
+    label: "How old is the primary caregiver?",
+    rules: { required: "Caregiver age is required" },
+    type: "text",
+  },
+  {
+    name: "ages_in_household",
+    label: "List the ages of everyone in the household",
+    rules: { required: "Household members' ages are required" },
+    type: "text",
+    longLabel: true,
+  },
+  {
+    name: "children_in_house",
+    label: "Are there children in the household? What is their experience with birds?",
+    rules: { required: "Children's experience with birds is required" },
+    type: "text",
+    multiline: true,
+    longLabel: true,
+  },
+];
+
 export const Adopt = () => {
   const {
     register,
