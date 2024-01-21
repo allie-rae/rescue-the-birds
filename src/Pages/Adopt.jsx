@@ -31,19 +31,10 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
 import { Controller, useForm } from "react-hook-form";
 import { TextInput } from "../TextInput";
+import { DateInput } from "../DateInput";
 import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../constants";
 
 const generalInfoTextFields = [
-  {
-    name: "person_name",
-    label: "Name",
-    rules: { required: "Name is required" },
-  },
-  {
-    name: "person_dob",
-    label: "Date of Birth (MM/DD/YYYY)",
-    rules: { required: "Date of birth is required" },
-  },
   {
     name: "person_email",
     label: "Email",
@@ -104,29 +95,6 @@ const householdTextFields = [
     name: "children_in_house",
     label: "Are there children in the household? What is their experience with birds?",
     rules: { required: "Children's experience with birds is required" },
-    multiline: true,
-    longLabel: true,
-  },
-];
-
-const birdExperienceTextFields = [
-  {
-    name: "other_bird_species",
-    label: "If yes, list species and how many",
-    rules: { required: "Species is required" },
-    multiline: true,
-    longLabel: true,
-  },
-  {
-    name: "other_bird_checkup_date",
-    label: "If you currently have birds, what was the date of their last annual checkup?",
-    rules: { required: "Last checkup date is required" },
-    longLabel: true,
-  },
-  {
-    name: "other_bird_diet",
-    label: "List the current diet that you feed your birds",
-    rules: { required: "Current diet is required" },
     multiline: true,
     longLabel: true,
   },
@@ -286,8 +254,11 @@ export const Adopt = () => {
       no_guarantee_agreement,
       ...submissionData
     } = data;
+
     if (data.have_other_birds === "Yes") {
-      submissionData.have_other_birds = `Yes\nSpecies: ${other_bird_species}\nLast Checkup: ${other_bird_checkup_date}\nDiet: ${other_bird_diet}`;
+      const otherBirdCheckupDateArr = other_bird_checkup_date.split("-");
+      const reformattedCheckupDate = `${otherBirdCheckupDateArr[1]}/${otherBirdCheckupDateArr[2]}/${otherBirdCheckupDateArr[0]}`;
+      submissionData.have_other_birds = `Yes\nSpecies: ${other_bird_species}\nLast Checkup: ${reformattedCheckupDate}\nDiet: ${other_bird_diet}`;
     }
     if (data.previous_birds === "Yes") {
       submissionData.previous_birds = `Yes\nWhat Happened: ${previous_what_happened}`;
@@ -306,6 +277,10 @@ export const Adopt = () => {
     if (data.other_pets_in_home === "Yes") {
       submissionData.other_pets_in_home = `Yes.\nOther Pets: ${what_other_pets}`;
     }
+
+    const personDobArr = submissionData.person_dob.split("-");
+    submissionData.person_dob = `${personDobArr[1]}/${personDobArr[2]}/${personDobArr[0]}`;
+
     // This is where in the future we can send data to the back end
     console.log(submissionData);
   };
@@ -504,6 +479,20 @@ export const Adopt = () => {
                 General Info
               </Typography>
               <Stack spacing={2}>
+                <TextInput
+                  name="person_name"
+                  control={control}
+                  rules={{ required: "Name is required" }}
+                  label="Name"
+                  errors={errors}
+                />
+                <DateInput
+                  name="person_dob"
+                  control={control}
+                  rules={{ required: "Date of birth is required" }}
+                  label="Date of Birth"
+                  errors={errors}
+                />
                 {generalInfoTextFields.map((textField) => {
                   return (
                     <TextInput
@@ -592,21 +581,31 @@ export const Adopt = () => {
                     timeout={250}
                   >
                     <Stack spacing={2}>
-                      {birdExperienceTextFields.map((textField) => {
-                        return (
-                          <TextInput
-                            key={textField.name}
-                            name={textField.name}
-                            control={control}
-                            rules={textField.rules}
-                            label={textField.label}
-                            multiline={textField.multiline}
-                            minRows={textField.minRows}
-                            longLabel={textField.longLabel}
-                            errors={errors}
-                          />
-                        );
-                      })}
+                      <TextInput
+                        name="other_bird_species"
+                        control={control}
+                        rules={{ required: "Species is required" }}
+                        label="If yes, list species and how many"
+                        multiline
+                        longLabel
+                        errors={errors}
+                      />
+                      <DateInput
+                        name="other_bird_checkup_date"
+                        control={control}
+                        rules={{ required: "Last checkup date is required" }}
+                        label="Date of their last annual checkup"
+                        errors={errors}
+                      />
+                      <TextInput
+                        name="other_bird_diet"
+                        control={control}
+                        rules={{ required: "Current diet is required" }}
+                        label="List the current diet that you feed your birds"
+                        multiline
+                        longLabel
+                        errors={errors}
+                      />
                     </Stack>
                   </Fade>
                 )}
