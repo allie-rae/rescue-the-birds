@@ -16,6 +16,7 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import took from "../Photos/took.png";
 import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../constants";
+import { DateUtilities } from "../../utils/date.utils";
 
 export const Volunteer = () => {
   const {
@@ -69,6 +70,10 @@ export const Volunteer = () => {
     const newCheckboxValue = e.target.checked ? "Yes" : "No";
     onChange(newCheckboxValue);
   };
+
+  const currentDateAsOrdinal = DateUtilities.getCurrentDateAsOrdinal();
+  const currentMonth = DateUtilities.getCurrentMonth();
+  const currentYear = DateUtilities.getCurrentFullYear();
 
   useEffect(() => {
     const hasFormBeenSubmitted = isSubmitted;
