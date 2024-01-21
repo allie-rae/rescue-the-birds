@@ -48,6 +48,11 @@ export const Volunteer = () => {
       interested_bird_care: "No",
       interested_fundraising: "No",
       interested_fostering: "No",
+      wishes_to_be_volunteer: "No",
+      desires_to_work_with_animals: "No",
+      acknowledges_animal_unknown_behavior: "No",
+      acknowledges_rsw_not_responsible: "No",
+      agrees_to_background_check: "No",
     },
   });
 
