@@ -16,7 +16,7 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import took from "../Photos/took.png";
 import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../constants";
-import { DateUtilities } from "../../utils/date.utils";
+import { DateUtilities } from "../utils/date.utils";
 
 export const Volunteer = () => {
   const {
