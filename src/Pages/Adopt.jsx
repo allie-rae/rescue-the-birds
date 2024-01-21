@@ -884,7 +884,6 @@ export const Adopt = () => {
                   control={control}
                   rules={{ required: "Hours alone is required" }}
                   label="How many hours a day will your bird spend alone?"
-                  multiline
                   longLabel
                   errors={errors}
                 />
