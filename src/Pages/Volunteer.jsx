@@ -10,7 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, Form } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import axios from "axios";
@@ -110,6 +110,11 @@ export const Volunteer = () => {
       emergency_contact_name,
       emergency_contact_number,
       has_selected_one_interest,
+      wishes_to_be_volunteer,
+      desires_to_work_with_animals,
+      acknowledges_animal_unknown_behavior,
+      acknowledges_rsw_not_responsible,
+      agrees_to_background_check,
       ...submissionData
     } = data;
 
@@ -379,7 +384,7 @@ export const Volunteer = () => {
               />
               <Typography
                 variant="body1"
-                sx={{ fontWeight: "bold" }}
+                sx={{ fontWeight: "bold", pt: 2 }}
               >
                 Areas of interest (select at least one):
               </Typography>
@@ -460,19 +465,154 @@ export const Volunteer = () => {
               </FormGroup>
               <Typography
                 variant="body1"
-                sx={{ fontWeight: "bold" }}
+                sx={{ fontWeight: "bold", pt: 2 }}
               >
                 Volunteer Hold Harmless Agreement:
               </Typography>
               <FormHelperText>
-                Agreement made this {currentDateAsOrdinal} day of {currentMonth}, {currentYear} by and between A Refuge for Saving the Wildlife, Incorporated&copy; (hereinafter referred to as RSW&copy;, Inc.), located in Northbrook, IL, and (hereinafter referred to as Volunteer).
+                Agreement made this {currentDateAsOrdinal} day of {currentMonth}, {currentYear} by and between A Refuge for Saving the Wildlife, Incorporated&copy; (hereinafter referred to as RSW&copy;), located in Northbrook, IL, and (hereinafter referred to as Volunteer).
               </FormHelperText>
               <FormHelperText>
-                Whereas RSW&copy;, Inc. desires to accept the gratuitous services of the Volunteer, and the Volunteer desires to provide gratuitous services to RSW&copy;, Inc.
+                Whereas RSW&copy; desires to accept the gratuitous services of the Volunteer, and the Volunteer desires to provide gratuitous services to RSW&copy;.
               </FormHelperText>
               <FormHelperText>
                 In consideration of the following premises and mutual covenants, and other good and valuable considerations, the receipt and sufficiency of which are hereby acknowledged, it is mutually covenanted and agreed by and between the parties hereto as follows:
               </FormHelperText>
+              <FormGroup
+                sx={{ pl: 4 }}
+              >
+                <Controller 
+                  control={control}
+                  name="wishes_to_be_volunteer"
+                  rules={{ validate: (value) => value === "Yes" || "Response is required" }}
+                  render={({ field: { value, onChange }}) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox 
+                          checked={value === "Yes"}
+                          onChange={onCheckboxChange(onChange)}
+                        />
+                      }
+                      label="That I wish to be a Volunteer to RSW&copy;, Inc.*"
+                    />
+                  )}
+                />
+                {errors.wishes_to_be_volunteer && (
+                  <FormHelperText 
+                    error
+                    sx={{ ml: 4, mb: 1 }}
+                  >
+                    {errors.wishes_to_be_volunteer?.message}
+                  </FormHelperText>
+                )}
+                <Controller 
+                  control={control}
+                  name="desires_to_work_with_animals"
+                  rules={{ validate: (value) => value === "Yes" || "Response is required" }}
+                  render={({ field: { value, onChange }}) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox 
+                          checked={value === "Yes"}
+                          onChange={onCheckboxChange(onChange)}
+                        />
+                      }
+                      label="That I desire to work with the various animals of RSW&copy;.*"
+                    />
+                  )}
+                />
+                {errors.desires_to_work_with_animals && (
+                  <FormHelperText 
+                    error
+                    sx={{ ml: 4, mb: 1 }}
+                  >
+                    {errors.desires_to_work_with_animals?.message}
+                  </FormHelperText>
+                )}
+                <Controller 
+                  control={control}
+                  name="acknowledges_animal_unknown_behavior"
+                  rules={{ validate: (value) => value === "Yes" || "Response is required" }}
+                  render={({ field: { value, onChange }}) => (
+                    <FormControlLabel
+                      sx={{ alignItems: "flex-start", pt:1, mb: 1 }}
+                      control={
+                        <Checkbox
+                          sx={{ mt: -1 }}
+                          checked={value === "Yes"}
+                          onChange={onCheckboxChange(onChange)}
+                        />
+                      }
+                      label="That I acknowledge that some of the animal residents that currently reside at RSW&copy; are formerly abused/neglected animals whose behavior, temperament, and health are unknown.*"
+                    />
+                  )}
+                />
+                {errors.acknowledges_animal_unknown_behavior && (
+                  <FormHelperText 
+                    error
+                    sx={{ ml: 4, mb: 1 }}
+                  >
+                    {errors.acknowledges_animal_unknown_behavior?.message}
+                  </FormHelperText>
+                )}
+                <Controller 
+                  control={control}
+                  name="acknowledges_rsw_not_responsible"
+                  rules={{ validate: (value) => value === "Yes" || "Response is required" }}
+                  render={({ field: { value, onChange }}) => (
+                    <FormControlLabel
+                      sx={{ alignItems: "flex-start", pt:1, mb: 1 }}
+                      control={
+                        <Checkbox 
+                          sx={{ mt: -1 }}  
+                          checked={value === "Yes"}
+                          onChange={onCheckboxChange(onChange)}
+                        />
+                      }
+                      label="That I acknowledge that RSW&copy; is not responsible for any and all damage, injury claims, and expenses of whatever nature arising from my participation as a Volunteer for RSW&copy;. I agree to hold RSW&copy;, its agents, successors, and assigns harmless.*"
+                    />
+                  )}
+                />
+                {errors.acknowledges_rsw_not_responsible && (
+                  <FormHelperText 
+                    error
+                    sx={{ ml: 4, mb: 1 }}
+                  >
+                    {errors.acknowledges_rsw_not_responsible?.message}
+                  </FormHelperText>
+                )}
+              </FormGroup>
+              <FormHelperText>
+                I agree to allow RSW&copy; to perform a background check on myself, which may include, but not be limited to, a check of my references, a criminal conviction check, and a credit check.
+              </FormHelperText>
+              <FormGroup
+                sx={{ pl: 4 }}
+              >
+                <Controller 
+                  control={control}
+                  name="agrees_to_background_check"
+                  rules={{ validate: (value) => value === "Yes" || "Response is required" }}
+                  render={({ field: { value, onChange }}) => (
+                    <FormControlLabel 
+                      control={
+                        <Checkbox 
+                          checked={value === "Yes"}
+                          onChange={onCheckboxChange(onChange)} 
+                        />
+                      }
+                      label="I agree.*"
+                    />
+                  )}
+                />
+                {errors.agrees_to_background_check && (
+                  <FormHelperText 
+                    error
+                    sx={{ ml: 4, mb: 1 }}
+                  >
+                    {errors.agrees_to_background_check?.message}
+                  </FormHelperText>
+                )}
+              </FormGroup>
               {/* Hidden input used to validate whether or not a user has selected an area of interest for volunteering. This input is registered to React Hook Form in order to make use of its validation functionality */}
               <input
                 type="hidden"
@@ -489,7 +629,7 @@ export const Volunteer = () => {
                 Submit
               </Button>
               {Object.keys(errors).length > 0 && isSubmitted && (
-                <FormHelperText error>Please fill out all required fields.</FormHelperText>
+                <FormHelperText error>Please fill out all required fields</FormHelperText>
               )}
               {isLoading && <LinearProgress />}
               {isSuccess && <FormHelperText>Form successfully submitted!</FormHelperText>}
