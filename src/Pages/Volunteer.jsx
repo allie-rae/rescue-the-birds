@@ -583,7 +583,7 @@ export const Volunteer = () => {
                 )}
               </FormGroup>
               <FormHelperText>
-                I agree to allow RSW&copy; to perform a background check on myself, which may include, but not be limited to, a check of my references, a criminal conviction check, and a credit check.
+                I agree to allow RSW&copy; to perform a background check on myself, which may include, but not be limited to, a criminal conviction check and a credit check.
               </FormHelperText>
               <FormGroup
                 sx={{ pl: 4 }}
