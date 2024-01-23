@@ -23,7 +23,7 @@ import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../../constants"
 import { TextInput } from "../../TextInput";
 import { AddedBirdsList } from "./AddedBirdsList";
 
-const textFields = [
+export const textFields = [
   {
     name: "person_name",
     label: "Name",
