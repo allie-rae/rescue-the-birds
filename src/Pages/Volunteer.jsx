@@ -484,7 +484,7 @@ export const Volunteer = () => {
                 <Controller 
                   control={control}
                   name="wishes_to_be_volunteer"
-                  rules={{ validate: (value) => value === "Yes" || "Response is required" }}
+                  rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
                   render={({ field: { value, onChange }}) => (
                     <FormControlLabel
                       control={
@@ -508,7 +508,7 @@ export const Volunteer = () => {
                 <Controller 
                   control={control}
                   name="desires_to_work_with_animals"
-                  rules={{ validate: (value) => value === "Yes" || "Response is required" }}
+                  rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
                   render={({ field: { value, onChange }}) => (
                     <FormControlLabel
                       control={
@@ -532,7 +532,7 @@ export const Volunteer = () => {
                 <Controller 
                   control={control}
                   name="acknowledges_animal_unknown_behavior"
-                  rules={{ validate: (value) => value === "Yes" || "Response is required" }}
+                  rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
                   render={({ field: { value, onChange }}) => (
                     <FormControlLabel
                       sx={{ alignItems: "flex-start", pt:1, mb: 1 }}
@@ -558,7 +558,7 @@ export const Volunteer = () => {
                 <Controller 
                   control={control}
                   name="acknowledges_rsw_not_responsible"
-                  rules={{ validate: (value) => value === "Yes" || "Response is required" }}
+                  rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
                   render={({ field: { value, onChange }}) => (
                     <FormControlLabel
                       sx={{ alignItems: "flex-start", pt:1, mb: 1 }}
@@ -591,7 +591,7 @@ export const Volunteer = () => {
                 <Controller 
                   control={control}
                   name="agrees_to_background_check"
-                  rules={{ validate: (value) => value === "Yes" || "Response is required" }}
+                  rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
                   render={({ field: { value, onChange }}) => (
                     <FormControlLabel 
                       control={
