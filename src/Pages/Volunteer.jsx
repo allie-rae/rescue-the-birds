@@ -23,6 +23,7 @@ export const Volunteer = () => {
     clearErrors,
     control,
     formState: { errors, isSubmitted },
+    getValues,
     handleSubmit,
     register,
     reset,
@@ -59,6 +60,13 @@ export const Volunteer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
+
+  const [volunteerName, setVolunteerName] = useState("_____");
+
+  const onPersonNameBlur = () => {
+    const personName = getValues("person_name").trim();
+    setVolunteerName(personName || "_____");
+  }
 
   const watchBirdCare = watch("interested_bird_care");
   const watchFundraising = watch("interested_fundraising");
@@ -193,6 +201,7 @@ export const Volunteer = () => {
                     id="name"
                     label="Name"
                     variant="outlined"
+                    onBlur={onPersonNameBlur}
                     error={!!errors.person_name?.message}
                     helperText={errors.person_name?.message}
                   />
@@ -470,7 +479,7 @@ export const Volunteer = () => {
                 Volunteer Hold Harmless Agreement:
               </Typography>
               <FormHelperText>
-                Agreement made this {currentDateAsOrdinal} day of {currentMonth}, {currentYear} by and between A Refuge for Saving the Wildlife, Incorporated&copy; (hereinafter referred to as RSW&copy;), located in Northbrook, IL, and (hereinafter referred to as Volunteer).
+                Agreement made this {currentDateAsOrdinal} day of {currentMonth}, {currentYear} by and between A Refuge for Saving the Wildlife, Incorporated&copy; (hereinafter referred to as RSW&copy;), located in Northbrook, IL, and {volunteerName} (hereinafter referred to as Volunteer).
               </FormHelperText>
               <FormHelperText>
                 Whereas RSW&copy; desires to accept the gratuitous services of the Volunteer, and the Volunteer desires to provide gratuitous services to RSW&copy;.
