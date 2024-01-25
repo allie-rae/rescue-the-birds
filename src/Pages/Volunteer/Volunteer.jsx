@@ -16,7 +16,8 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import took from "../../Photos/took.png";
 import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../../constants";
-import { DateUtilities } from "../../utils/date.utils";
+import { formHelperTextContent } from "./config/index.js";
+import { formHelperTextUtilities } from "./utils/formHelperText.utils.js";
 
 export const Volunteer = () => {
   const {
@@ -63,6 +64,8 @@ export const Volunteer = () => {
 
   const [volunteerName, setVolunteerName] = useState("_____");
 
+  const holdHarmlessPreamble = formHelperTextUtilities.getHoldHarmlessPreamble(volunteerName);
+
   const onPersonNameBlur = () => {
     const personName = getValues("person_name").trim();
     setVolunteerName(personName || "_____");
@@ -83,10 +86,6 @@ export const Volunteer = () => {
     const newCheckboxValue = e.target.checked ? "Yes" : "No";
     onChange(newCheckboxValue);
   };
-
-  const currentDateAsOrdinal = DateUtilities.getCurrentDateAsOrdinal();
-  const currentMonth = DateUtilities.getCurrentMonth();
-  const currentYear = DateUtilities.getCurrentFullYear();
 
   useEffect(() => {
     const hasFormBeenSubmitted = isSubmitted;
@@ -175,12 +174,7 @@ export const Volunteer = () => {
         
         <Box sx={{ width: pageWidth, maxWidth: "100%", marginBottom: "20px" }}>
           <FormHelperText>
-            Thank you for your interest in volunteering at A Refuge for Saving the Wildlife. We rely
-            on volunteers to support our mission and operations every day. You can be a part of our
-            life-saving work. By choosing to volunteer your time and talents, you are helping to make
-            a difference to all the parrots housed here. Whether caring for parrots, managing
-            operations, or cleaning, volunteers are the key to our success. There are many ways you
-            can help out at A Refuge for Saving the Wildlife. Continue reading below to find out how!
+            {formHelperTextContent.formIntroduction}
           </FormHelperText>
           <Typography
             variant="body1"
@@ -189,8 +183,7 @@ export const Volunteer = () => {
             You must be at least 18 years old to volunteer at the Refuge.
           </Typography>
           <FormHelperText>
-            To apply, please fill out the form below. Once you complete the volunteer application,
-            your information will be reviewed and you will be contacted by our Volunteer Coordinator.
+            {formHelperTextContent.formInstructions}
           </FormHelperText>
         </Box>
 
@@ -424,9 +417,7 @@ export const Volunteer = () => {
                   )}
                 />
                 <FormHelperText>
-                  Socializing, playing, handling of animals, feeding, cutting fruits & veggies,
-                  making warm meals, rotating toys, grooming, cleaning cages, changing cage paper,
-                  cleaning pet care areas, etc.
+                  {formHelperTextContent.birdCareExamples}
                 </FormHelperText>
                 <Controller
                   control={control}
@@ -444,19 +435,7 @@ export const Volunteer = () => {
                   )}
                 />
                 <FormHelperText>
-                  Having one of our adoptees in your home for socializing. A separate application
-                  must be filled out for each foster bird in addition to this application. If you
-                  are fostering for the Refuge, the Refuge maintains legal custody of the foster
-                  bird(s). You will be expected to take care of all the needs of the bird(s), which
-                  will include food, medicine, veterinary care, toys, etc., without remuneration. If
-                  you need financial assistance in caring for the bird(s), we will provide you with
-                  the necessary funds. In agreeing to foster, you will not be reimbursed for
-                  expenses after the fact unless there has been an agreement with the Executive
-                  Director. If the Executive Director determines that it is in the best interest of
-                  the bird, the bird(s) will be returned upon demand of the Executive Director. If
-                  the Refuge needs to take legal action to obtain the bird(s), you, as the
-                  volunteer, will reimburse the Refuge for any and all expenses related to regaining
-                  custody of said bird(s).
+                  {formHelperTextContent.fosteringInstructions}
                 </FormHelperText>
                 <Controller
                   control={control}
@@ -474,8 +453,7 @@ export const Volunteer = () => {
                   )}
                 />
                 <FormHelperText>
-                  Phone calls, letters, personal contact with potential sources of funding, grant
-                  writing.
+                  {formHelperTextContent.fundraisingExamples}
                 </FormHelperText>
               </FormGroup>
               <Typography
@@ -484,15 +462,9 @@ export const Volunteer = () => {
               >
                 Volunteer Hold Harmless Agreement:
               </Typography>
-              <FormHelperText>
-                Agreement made this {currentDateAsOrdinal} day of {currentMonth}, {currentYear} by and between A Refuge for Saving the Wildlife, Incorporated&copy; (hereinafter referred to as RSW&copy;), located in Northbrook, IL, and {volunteerName} (hereinafter referred to as Volunteer).
-              </FormHelperText>
-              <FormHelperText>
-                Whereas RSW&copy; desires to accept the gratuitous services of the Volunteer, and the Volunteer desires to provide gratuitous services to RSW&copy;.
-              </FormHelperText>
-              <FormHelperText>
-                In consideration of the following premises and mutual covenants, and other good and valuable considerations, the receipt and sufficiency of which are hereby acknowledged, it is mutually covenanted and agreed by and between the parties hereto as follows:
-              </FormHelperText>
+              
+              {holdHarmlessPreamble}
+              
               <FormGroup
                 sx={{ pl: 4 }}
               >
