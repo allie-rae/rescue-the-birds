@@ -5,5 +5,10 @@
   "coveragePathIgnorePatterns": ["/node_modules/"],
   "moduleFileExtensions": ["js", "jsx", "json"],
   "setupFilesAfterEnv": ["<rootDir>/src/setupTests.js"],
-  "testEnvironment": "jsdom"
+  "testEnvironment": "jsdom",
+  "moduleNameMapper": {
+    "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/Mocks/file.js",
+    "\\.(css|less)$": "<rootDir>/src/Mocks/file.js"
+  },
+  "moduleDirectories": ["node_modules"]
 }
