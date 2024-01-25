@@ -12,7 +12,6 @@ import {
   Radio,
   RadioGroup,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -31,16 +30,151 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
 import { Controller, useForm } from "react-hook-form";
-import {
-  longLabelInputStyling,
-  pageFadeTimeout,
-  pageWidth,
-  parrotImageStyling,
-} from "../constants";
+import { TextInput } from "../TextInput";
+import { DateInput } from "../DateInput";
+import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../constants";
+
+const generalInfoTextFields = [
+  {
+    name: "person_email",
+    label: "Email",
+    rules: { required: "Email is required" },
+  },
+  {
+    name: "person_phone",
+    label: "Phone Number",
+    rules: { required: "Phone number is required" },
+  },
+  {
+    name: "person_address",
+    label: "Street Address",
+    rules: { required: "Street address is required" },
+  },
+  {
+    name: "person_city",
+    label: "City",
+    rules: { required: "City is required" },
+  },
+  {
+    name: "person_state",
+    label: "State",
+    rules: { required: "State is required" },
+  },
+  {
+    name: "person_zipcode",
+    label: "Zip Code",
+    rules: { required: "Zip Code is required" },
+  },
+  {
+    name: "hear_about_us",
+    label: "How did you hear about us?",
+    rules: { required: "Response is required" },
+  },
+];
+
+const householdTextFields = [
+  {
+    name: "num_household_people",
+    label: "How many people are in your household?",
+    rules: { required: "Household size is required" },
+    longLabel: true,
+  },
+  {
+    name: "primary_caregiver_age",
+    label: "How old is the primary caregiver?",
+    rules: { required: "Caregiver age is required" },
+    longLabel: true,
+  },
+  {
+    name: "ages_in_household",
+    label: "List the ages of everyone in the household",
+    rules: { required: "Household members' ages are required" },
+    longLabel: true,
+  },
+  {
+    name: "children_in_house",
+    label: "Are there children in the household? What is their experience with birds?",
+    rules: { required: "Children's experience with birds is required" },
+    multiline: true,
+    longLabel: true,
+  },
+];
+
+const vetTextFields = [
+  {
+    name: "vet_name",
+    label: "Veterinarian Name",
+    rules: { required: "Veterinarian name is required" },
+  },
+  {
+    name: "vet_clinic_name",
+    label: "Veterinarian Clinic Name",
+    rules: { required: "Veterinarian clinic name is required" },
+  },
+  {
+    name: "vet_address",
+    label: "Veterinarian Clinic Address",
+    rules: { required: "Veterinarian address is required" },
+  },
+  {
+    name: "vet_phone",
+    label: "Veterinarian Clinic Phone Number",
+    rules: { required: "Veterinarian phone number is required" },
+  },
+];
+
+const birdCareTextFields = [
+  {
+    name: "what_supp_info",
+    label: "What sources of information do you use to supplement your knowledge of avian care?",
+    rules: { required: "Avian sources of information is required" },
+    multiline: true,
+    longLabel: true,
+  },
+  {
+    name: "lifestyle_changes",
+    label:
+      "Please describe the lifestyle changes you might anticipate over the next 5 years? 10 years? 25 years?",
+    rules: { required: "Lifestyle changes description is required" },
+    multiline: true,
+    longLabel: true,
+  },
+  {
+    name: "vacation_care",
+    label: "When you travel or go on an extended vacation, who will care for your bird?",
+    rules: { required: "Vacation care plan is required" },
+    multiline: true,
+    longLabel: true,
+  },
+  {
+    name: "death_plans",
+    label:
+      "What provisions have you made for your birds and/or other pets in the event of your illness or death?",
+    rules: { required: "Provisions in case of illness/death is required" },
+    multiline: true,
+    longLabel: true,
+  },
+];
+
+const additionalQuestionsTextFields = [
+  {
+    name: "looking_for_in_bird",
+    label: "What are the most important characteristics you are looking for in a companion bird?",
+    rules: { required: "Important characteristics is required" },
+    multiline: true,
+    longLabel: true,
+  },
+  {
+    name: "additional_comments",
+    label:
+      "Is there anything else you would like to add/ask that would help in determining your eligibility?",
+    multiline: true,
+    longLabel: true,
+  },
+];
 
 export const Adopt = () => {
   const {
-    register,
     handleSubmit,
     formState: { errors },
     control,
@@ -120,8 +254,11 @@ export const Adopt = () => {
       no_guarantee_agreement,
       ...submissionData
     } = data;
+
     if (data.have_other_birds === "Yes") {
-      submissionData.have_other_birds = `Yes\nSpecies: ${other_bird_species}\nLast Checkup: ${other_bird_checkup_date}\nDiet: ${other_bird_diet}`;
+      const otherBirdCheckupDateArr = other_bird_checkup_date.split("-");
+      const reformattedCheckupDate = `${otherBirdCheckupDateArr[1]}/${otherBirdCheckupDateArr[2]}/${otherBirdCheckupDateArr[0]}`;
+      submissionData.have_other_birds = `Yes\nSpecies: ${other_bird_species}\nLast Checkup: ${reformattedCheckupDate}\nDiet: ${other_bird_diet}`;
     }
     if (data.previous_birds === "Yes") {
       submissionData.previous_birds = `Yes\nWhat Happened: ${previous_what_happened}`;
@@ -140,6 +277,10 @@ export const Adopt = () => {
     if (data.other_pets_in_home === "Yes") {
       submissionData.other_pets_in_home = `Yes.\nOther Pets: ${what_other_pets}`;
     }
+
+    const personDobArr = submissionData.person_dob.split("-");
+    submissionData.person_dob = `${personDobArr[1]}/${personDobArr[2]}/${personDobArr[0]}`;
+
     // This is where in the future we can send data to the back end
     console.log(submissionData);
   };
@@ -338,80 +479,35 @@ export const Adopt = () => {
                 General Info
               </Typography>
               <Stack spacing={2}>
-                <TextField
-                  id="name"
+                <TextInput
+                  name="person_name"
+                  control={control}
+                  rules={{ required: "Name is required" }}
                   label="Name"
-                  variant="outlined"
-                  {...register("person_name", { required: "Name is required" })}
-                  error={!!errors.person_name?.message}
-                  helperText={errors.person_name?.message}
+                  errors={errors}
                 />
-                <TextField
-                  id="date-of-birth"
-                  label="Date of Birth (MM/DD/YYYY)"
-                  variant="outlined"
-                  {...register("person_dob", { required: "Date of birth is required" })}
-                  error={!!errors.person_dob?.message}
-                  helperText={errors.person_dob?.message}
+                <DateInput
+                  name="person_dob"
+                  control={control}
+                  rules={{ required: "Date of birth is required" }}
+                  label="Date of Birth"
+                  errors={errors}
                 />
-                <TextField
-                  id="email"
-                  label="Email"
-                  variant="outlined"
-                  {...register("person_email", { required: "Email is required" })}
-                  error={!!errors.person_email?.message}
-                  helperText={errors.person_email?.message}
-                />
-                <TextField
-                  id="phone-number"
-                  label="Phone Number"
-                  variant="outlined"
-                  {...register("person_phone", { required: "Phone number is required" })}
-                  error={!!errors.person_phone?.message}
-                  helperText={errors.person_phone?.message}
-                />
-                <TextField
-                  id="street-address"
-                  label="Street Address"
-                  variant="outlined"
-                  {...register("person_address", { required: "Street address is required" })}
-                  error={!!errors.person_address?.message}
-                  helperText={errors.person_address?.message}
-                />
-                <TextField
-                  id="city"
-                  label="City"
-                  variant="outlined"
-                  {...register("person_city", { required: "City is required" })}
-                  error={!!errors.person_city?.message}
-                  helperText={errors.person_city?.message}
-                />
-                <TextField
-                  id="state"
-                  label="State"
-                  variant="outlined"
-                  {...register("person_state", { required: "State is required" })}
-                  error={!!errors.person_state?.message}
-                  helperText={errors.person_state?.message}
-                />
-                <TextField
-                  id="zip-code"
-                  label="Zip Code"
-                  variant="outlined"
-                  {...register("person_zipcode", { required: "Zip code is required" })}
-                  error={!!errors.person_zipcode?.message}
-                  helperText={errors.person_zipcode?.message}
-                />
-                <TextField
-                  id="how-did-you-hear-about-us"
-                  label="How did you hear about us?"
-                  variant="outlined"
-                  {...register("hear_about_us", {
-                    required: "Response is required",
-                  })}
-                  error={!!errors.hear_about_us?.message}
-                  helperText={errors.hear_about_us?.message}
-                />
+                {generalInfoTextFields.map((textField) => {
+                  return (
+                    <TextInput
+                      key={textField.name}
+                      name={textField.name}
+                      control={control}
+                      rules={textField.rules}
+                      label={textField.label}
+                      multiline={textField.multiline}
+                      minRows={textField.minRows}
+                      longLabel={textField.longLabel}
+                      errors={errors}
+                    />
+                  );
+                })}
               </Stack>
               <Typography
                 variant="h3"
@@ -420,49 +516,21 @@ export const Adopt = () => {
                 Household
               </Typography>
               <Stack spacing={2}>
-                <TextField
-                  id="how-many-people-in-household"
-                  label="How many people are in your household?"
-                  variant="outlined"
-                  {...register("num_household_people", { required: "Household size is required" })}
-                  error={!!errors.num_household_people?.message}
-                  helperText={errors.num_household_people?.message}
-                />
-                <TextField
-                  id="how-old-is-primary-caregiver"
-                  label="How old is the primary caregiver?"
-                  variant="outlined"
-                  {...register("primary_caregiver_age", { required: "Caregiver age is required" })}
-                  error={!!errors.primary_caregiver_age?.message}
-                  helperText={errors.primary_caregiver_age?.message}
-                />
-                <TextField
-                  id="household-ages"
-                  label="List the ages of everyone in the household"
-                  sx={{
-                    "& .MuiFormLabel-root": { whiteSpace: "normal" },
-                    "& .MuiFormLabel-root.MuiInputLabel-shrink": { whiteSpace: "nowrap" },
-                  }}
-                  variant="outlined"
-                  {...register("ages_in_household", {
-                    required: "Household members' ages are required",
-                  })}
-                  error={!!errors.ages_in_household?.message}
-                  helperText={errors.ages_in_household?.message}
-                />
-                <TextField
-                  id="children-experience-with-birds"
-                  label="Are there children in the household? What is their experience with birds?"
-                  sx={longLabelInputStyling}
-                  variant="outlined"
-                  multiline
-                  minRows={4}
-                  {...register("children_in_house", {
-                    required: "Children's experience with birds is required",
-                  })}
-                  error={!!errors.children_in_house?.message}
-                  helperText={errors.children_in_house?.message}
-                />
+                {householdTextFields.map((textField) => {
+                  return (
+                    <TextInput
+                      key={textField.name}
+                      name={textField.name}
+                      control={control}
+                      rules={textField.rules}
+                      label={textField.label}
+                      multiline={textField.multiline}
+                      minRows={textField.minRows}
+                      longLabel={textField.longLabel}
+                      errors={errors}
+                    />
+                  );
+                })}
               </Stack>
               <Typography
                 variant="h3"
@@ -513,41 +581,30 @@ export const Adopt = () => {
                     timeout={250}
                   >
                     <Stack spacing={2}>
-                      <TextField
-                        id="other-birds-in-household-text"
+                      <TextInput
+                        name="other_bird_species"
+                        control={control}
+                        rules={{ required: "Species is required" }}
                         label="If yes, list species and how many"
-                        variant="outlined"
                         multiline
-                        minRows={4}
-                        {...register("other_bird_species", {
-                          required: "Species is required",
-                        })}
-                        error={!!errors.other_bird_species?.message}
-                        helperText={errors.other_bird_species?.message}
+                        longLabel
+                        errors={errors}
                       />
-                      <TextField
-                        id="last-bird-checkup-date"
-                        label="If you currently have birds, what was the date of their last annual checkup?"
-                        sx={longLabelInputStyling}
-                        variant="outlined"
-                        {...register("other_bird_checkup_date", {
-                          required: "Last checkup date is required",
-                        })}
-                        error={!!errors.other_bird_checkup_date?.message}
-                        helperText={errors.other_bird_checkup_date?.message}
+                      <DateInput
+                        name="other_bird_checkup_date"
+                        control={control}
+                        rules={{ required: "Last checkup date is required" }}
+                        label="Date of their last annual checkup"
+                        errors={errors}
                       />
-                      <TextField
-                        id="bird-diet"
+                      <TextInput
+                        name="other_bird_diet"
+                        control={control}
+                        rules={{ required: "Current diet is required" }}
                         label="List the current diet that you feed your birds"
-                        sx={longLabelInputStyling}
-                        variant="outlined"
                         multiline
-                        minRows={4}
-                        {...register("other_bird_diet", {
-                          required: "Current diet is required",
-                        })}
-                        error={!!errors.other_bird_diet?.message}
-                        helperText={errors.other_bird_diet?.message}
+                        longLabel
+                        errors={errors}
                       />
                     </Stack>
                   </Fade>
@@ -589,32 +646,27 @@ export const Adopt = () => {
                     in={true}
                     timeout={250}
                   >
-                    <TextField
-                      id="previously-owned-birds-text"
-                      label="If yes, what happened to these birds?"
-                      variant="outlined"
-                      multiline
-                      minRows={4}
-                      {...register("previous_what_happened", {
-                        required: "What happened to birds is required",
-                      })}
-                      error={!!errors.previous_what_happened?.message}
-                      helperText={errors.previous_what_happened?.message}
-                    />
+                    <Stack>
+                      <TextInput
+                        name="previous_what_happened"
+                        control={control}
+                        rules={{ required: "What happened to birds is required" }}
+                        label="If yes, what happened to these birds?"
+                        multiline
+                        longLabel
+                        errors={errors}
+                      />
+                    </Stack>
                   </Fade>
                 )}
-                <TextField
-                  id="other-bird-experience"
+                <TextInput
+                  name="other_bird_experience"
+                  control={control}
+                  rules={{ required: "Other bird experience is required" }}
                   label="Please list any other bird experience that you may have"
-                  sx={longLabelInputStyling}
-                  variant="outlined"
                   multiline
-                  minRows={4}
-                  {...register("other_bird_experience", {
-                    required: "Other bird experience is required",
-                  })}
-                  error={!!errors.other_bird_experience?.message}
-                  helperText={errors.other_bird_experience?.message}
+                  longLabel
+                  errors={errors}
                 />
                 <FormLabel
                   id="current-veterinarian-bool"
@@ -654,46 +706,21 @@ export const Adopt = () => {
                     timeout={250}
                   >
                     <Stack spacing={2}>
-                      <TextField
-                        id="veterinarian-name"
-                        label="Veterinarian Name"
-                        variant="outlined"
-                        {...register("vet_name", {
-                          required: "Veterinarian name is required",
-                        })}
-                        error={!!errors.vet_name?.message}
-                        helperText={errors.vet_name?.message}
-                      />
-                      <TextField
-                        id="veterinary-clinic-name"
-                        label="Veterinarian Clinic Name"
-                        variant="outlined"
-                        {...register("vet_clinic_name", {
-                          required: "Veterinarian clinic name is required",
-                        })}
-                        error={!!errors.vet_clinic_name?.message}
-                        helperText={errors.vet_clinic_name?.message}
-                      />
-                      <TextField
-                        id="veterinary-clinic-address"
-                        label="Veterinarian Clinic Address"
-                        variant="outlined"
-                        {...register("vet_address", {
-                          required: "Veterinarian address is required",
-                        })}
-                        error={!!errors.vet_address?.message}
-                        helperText={errors.vet_address?.message}
-                      />
-                      <TextField
-                        id="veterinary-clinic-phone"
-                        label="Veterinarian Clinic Phone Number"
-                        variant="outlined"
-                        {...register("vet_phone", {
-                          required: "Veterinarian phone number is required",
-                        })}
-                        error={!!errors.vet_phone?.message}
-                        helperText={errors.vet_phone?.message}
-                      />
+                      {vetTextFields.map((textField) => {
+                        return (
+                          <TextInput
+                            key={textField.name}
+                            name={textField.name}
+                            control={control}
+                            rules={textField.rules}
+                            label={textField.label}
+                            multiline={textField.multiline}
+                            minRows={textField.minRows}
+                            longLabel={textField.longLabel}
+                            errors={errors}
+                          />
+                        );
+                      })}
                     </Stack>
                   </Fade>
                 )}
@@ -794,15 +821,14 @@ export const Adopt = () => {
                     </RadioGroup>
                   )}
                 />
-                <TextField
-                  id="daily-routine"
+                <TextInput
+                  name="daily_routine"
+                  control={control}
+                  rules={{ required: "Daily routine is required" }}
                   label="Describe your daily routine at home"
-                  variant="outlined"
                   multiline
-                  minRows={4}
-                  {...register("daily_routine", { required: "Daily routine is required" })}
-                  error={!!errors.daily_routine?.message}
-                  helperText={errors.daily_routine?.message}
+                  longLabel
+                  errors={errors}
                 />
                 <FormLabel
                   id="weekend-different-bool"
@@ -841,28 +867,25 @@ export const Adopt = () => {
                     in={true}
                     timeout={250}
                   >
-                    <TextField
-                      id="weekend-routine"
-                      label="If yes, please explain"
-                      variant="outlined"
-                      multiline
-                      minRows={4}
-                      {...register("weekend_routine", {
-                        required: "Weekend routine is required",
-                      })}
-                      error={!!errors.weekend_routine?.message}
-                      helperText={errors.weekend_routine?.message}
-                    />
+                    <Stack>
+                      <TextInput
+                        name="weekend_routine"
+                        control={control}
+                        rules={{ required: "Weekend routine is required" }}
+                        label="If yes, please explain"
+                        multiline
+                        errors={errors}
+                      />
+                    </Stack>
                   </Fade>
                 )}
-                <TextField
-                  id="bird-hours-alone"
+                <TextInput
+                  name="bird_hours_alone"
+                  control={control}
+                  rules={{ required: "Hours alone is required" }}
                   label="How many hours a day will your bird spend alone?"
-                  sx={longLabelInputStyling}
-                  variant="outlined"
-                  {...register("bird_hours_alone", { required: "Hours alone is required" })}
-                  error={!!errors.bird_hours_alone?.message}
-                  helperText={errors.bird_hours_alone?.message}
+                  longLabel
+                  errors={errors}
                 />
                 <FormLabel
                   id="smokers-in-house-bool"
@@ -901,19 +924,17 @@ export const Adopt = () => {
                     in={true}
                     timeout={250}
                   >
-                    <TextField
-                      id="smokers-explanation"
-                      label="If yes, how do you prevent health problems due to second-hand smoke exposure for your bird(s)?"
-                      sx={longLabelInputStyling}
-                      variant="outlined"
-                      multiline
-                      minRows={4}
-                      {...register("smokers_explanation", {
-                        required: "Second-hand smoke plan is required",
-                      })}
-                      error={!!errors.smokers_explanation?.message}
-                      helperText={errors.smokers_explanation?.message}
-                    />
+                    <Stack>
+                      <TextInput
+                        name="smokers_explanation"
+                        control={control}
+                        rules={{ required: "Second-hand smoke plan is required" }}
+                        label="If yes, how do you prevent health problems due to second-hand smoke exposure for your bird(s)?"
+                        multiline
+                        longLabel
+                        errors={errors}
+                      />
+                    </Stack>
                   </Fade>
                 )}
                 <FormLabel
@@ -953,16 +974,18 @@ export const Adopt = () => {
                     in={true}
                     timeout={250}
                   >
-                    <TextField
-                      id="what-other-pets"
-                      label="If yes, please list species and how many"
-                      variant="outlined"
-                      {...register("what_other_pets", {
-                        required: "Other pets information is required",
-                      })}
-                      error={!!errors.what_other_pets?.message}
-                      helperText={errors.what_other_pets?.message}
-                    />
+                    <Stack>
+                      <TextInput
+                        name="what_other_pets"
+                        control={control}
+                        rules={{ required: "Other pets information is required" }}
+                        label="If yes, please list species and how many"
+                        multiline
+                        minRows={2}
+                        longLabel
+                        errors={errors}
+                      />
+                    </Stack>
                   </Fade>
                 )}
               </Stack>
@@ -973,58 +996,21 @@ export const Adopt = () => {
                 Bird Care
               </Typography>
               <Stack spacing={2}>
-                <TextField
-                  id="what-supp-info"
-                  label="What sources of information do you use to supplement your knowledge of avian care?"
-                  sx={longLabelInputStyling}
-                  variant="outlined"
-                  multiline
-                  minRows={4}
-                  {...register("what_supp_info", {
-                    required: "Avian sources of information is required",
-                  })}
-                  error={!!errors.what_supp_info?.message}
-                  helperText={errors.what_supp_info?.message}
-                />
-                <TextField
-                  id="lifestyle-changes"
-                  label="Please describe the lifestyle changes you might anticipate over the next 5 years? 10 years? 25 years?"
-                  sx={longLabelInputStyling}
-                  variant="outlined"
-                  multiline
-                  minRows={4}
-                  {...register("lifestyle_changes", {
-                    required: "Lifestyle changes description is required",
-                  })}
-                  error={!!errors.lifestyle_changes?.message}
-                  helperText={errors.lifestyle_changes?.message}
-                />
-                <TextField
-                  id="vacation-care"
-                  label="When you travel or go on an extended vacation, who will care for your bird?"
-                  sx={longLabelInputStyling}
-                  variant="outlined"
-                  multiline
-                  minRows={4}
-                  {...register("vacation_care", {
-                    required: "Vacation care plan is required",
-                  })}
-                  error={!!errors.vacation_care?.message}
-                  helperText={errors.vacation_care?.message}
-                />
-                <TextField
-                  id="death-plans"
-                  label="What provisions have you made for your birds and/or other pets in the event of your illness or death?"
-                  sx={longLabelInputStyling}
-                  variant="outlined"
-                  multiline
-                  minRows={4}
-                  {...register("death_plans", {
-                    required: "Provisions in case of illness/death is required",
-                  })}
-                  error={!!errors.death_plans?.message}
-                  helperText={errors.death_plans?.message}
-                />
+                {birdCareTextFields.map((textField) => {
+                  return (
+                    <TextInput
+                      key={textField.name}
+                      name={textField.name}
+                      control={control}
+                      rules={textField.rules}
+                      label={textField.label}
+                      multiline={textField.multiline}
+                      minRows={textField.minRows}
+                      longLabel={textField.longLabel}
+                      errors={errors}
+                    />
+                  );
+                })}
               </Stack>
               <Typography
                 variant="h3"
@@ -1033,32 +1019,21 @@ export const Adopt = () => {
                 Additional Questions
               </Typography>
               <Stack spacing={2}>
-                <TextField
-                  id="looking-for-in-bird"
-                  label="What are the most important characteristics you are looking for in a companion bird?"
-                  sx={longLabelInputStyling}
-                  variant="outlined"
-                  multiline
-                  minRows={4}
-                  {...register("looking_for_in_bird", {
-                    required: "Important characteristics is required",
-                  })}
-                  error={!!errors.looking_for_in_bird?.message}
-                  helperText={errors.looking_for_in_bird?.message}
-                />
-                <TextField
-                  id="additional-comments"
-                  label="Is there anything else you would like to add/ask that would help in determining your eligibility?"
-                  sx={longLabelInputStyling}
-                  variant="outlined"
-                  multiline
-                  minRows={4}
-                  {...register("additional_comments", {
-                    required: false,
-                  })}
-                  error={!!errors.additional_comments?.message}
-                  helperText={errors.additional_comments?.message}
-                />
+                {additionalQuestionsTextFields.map((textField) => {
+                  return (
+                    <TextInput
+                      key={textField.name}
+                      name={textField.name}
+                      control={control}
+                      rules={textField.rules}
+                      label={textField.label}
+                      multiline={textField.multiline}
+                      minRows={textField.minRows}
+                      longLabel={textField.longLabel}
+                      errors={errors}
+                    />
+                  );
+                })}
               </Stack>
               <Typography
                 variant="h3"
