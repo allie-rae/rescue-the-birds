@@ -2,7 +2,7 @@ export { FrontPage } from "./FrontPage";
 export { FullPageLoader } from "./FullPageLoader";
 export { PageNotFound } from "./PageNotFound";
 export { Adopt } from "./Adopt";
-export { Volunteer } from "./Volunteer";
+export { Volunteer } from "./Volunteer/Volunteer";
 export { Donate } from "./Donate";
 export { Board } from "./Board";
 export { Relinquish } from "./Relinquish";
