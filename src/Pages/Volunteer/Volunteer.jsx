@@ -14,9 +14,9 @@ import { useForm, Controller } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import axios from "axios";
-import took from "../Photos/took.png";
-import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../constants";
-import { DateUtilities } from "../utils/date.utils";
+import took from "../../Photos/took.png";
+import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../../constants";
+import { DateUtilities } from "../../utils/date.utils";
 
 export const Volunteer = () => {
   const {
@@ -168,24 +168,30 @@ export const Volunteer = () => {
         </Box>
         <Typography
           variant="h1"
-          sx={{ mb: 2, mt: 2 }}
+          sx={{ my: 2 }}
         >
           Volunteer
         </Typography>
+        
         <Box sx={{ width: pageWidth, maxWidth: "100%", marginBottom: "20px" }}>
-          Thank you for your interest in volunteering at A Refuge for Saving the Wildlife. We rely
-          on volunteers to support our mission and operations every day. You can be a part of our
-          life-saving work. By choosing to volunteer your time and talents, you are helping to make
-          a difference to all the parrots housed here. Whether caring for parrots, managing
-          operations, or cleaning, volunteers are the key to our success. There are many ways you
-          can help out at A Refuge for Saving the Wildlife. Continue reading below to find out how!
-          <br />
-          <br />
-          <strong>You must be at least 18 years old to volunteer at the Refuge.</strong>
-          <br />
-          <br />
-          To apply, please fill out the form below. Once you complete the volunteer application,
-          your information will be reviewed and you will be contacted by our Volunteer Coordinator.
+          <FormHelperText>
+            Thank you for your interest in volunteering at A Refuge for Saving the Wildlife. We rely
+            on volunteers to support our mission and operations every day. You can be a part of our
+            life-saving work. By choosing to volunteer your time and talents, you are helping to make
+            a difference to all the parrots housed here. Whether caring for parrots, managing
+            operations, or cleaning, volunteers are the key to our success. There are many ways you
+            can help out at A Refuge for Saving the Wildlife. Continue reading below to find out how!
+          </FormHelperText>
+          <Typography
+            variant="body1"
+            sx={{ fontWeight: "bold", my: 2 }}
+          >
+            You must be at least 18 years old to volunteer at the Refuge.
+          </Typography>
+          <FormHelperText>
+            To apply, please fill out the form below. Once you complete the volunteer application,
+            your information will be reviewed and you will be contacted by our Volunteer Coordinator.
+          </FormHelperText>
         </Box>
 
         <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
