@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import {
   Button,
   Checkbox,
@@ -5,6 +7,7 @@ import {
   FormControlLabel,
   FormHelperText,
   FormLabel,
+  LinearProgress,
   List,
   ListItem,
   ListItemIcon,
@@ -180,6 +183,7 @@ export const Adopt = () => {
     control,
     watch,
     clearErrors,
+    reset,
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -235,7 +239,22 @@ export const Adopt = () => {
   const watchSmokersInHouse = watch("smokers_in_house", "No");
   const watchOtherPets = watch("other_pets_in_home", "No");
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsSuccess(false);
+      setIsError(false);
+    }, 5000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isSuccess, isError]);
+
   const onSubmit = (data) => {
+    setIsLoading(true);
     const {
       other_bird_species,
       other_bird_checkup_date,
@@ -282,7 +301,17 @@ export const Adopt = () => {
     submissionData.person_dob = `${personDobArr[1]}/${personDobArr[2]}/${personDobArr[0]}`;
 
     // This is where in the future we can send data to the back end
-    console.log(submissionData);
+    axios
+      .post("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/adoption", submissionData)
+      .then(() => {
+        setIsSuccess(true);
+        reset();
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsError(true);
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -1126,6 +1155,13 @@ export const Adopt = () => {
                 >
                   Submit
                 </Button>
+                {isLoading && <LinearProgress />}
+                {isSuccess && <FormHelperText>Form successfully submitted!</FormHelperText>}
+                {isError && (
+                  <FormHelperText error>
+                    We&apos;re sorry, but there was an error submitting the form. Please try again.
+                  </FormHelperText>
+                )}
               </Stack>
             </form>
           </Box>
