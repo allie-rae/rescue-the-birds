@@ -14,9 +14,9 @@ export const TextInput = ({
   rules,
   label,
   type,
-  multiline,
+  multiline = false,
   minRows = 4,
-  longLabel,
+  longLabel = false,
   errors,
 }) => {
   if (longLabel && !multiline) {
