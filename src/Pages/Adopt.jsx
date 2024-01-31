@@ -214,6 +214,7 @@ export const Adopt = () => {
       vet_phone: "",
       residence_type: "Single Family House",
       renter_verification: "Not yet",
+      daily_routine: "",
       weekend_different: "No",
       weekend_routine: "",
       bird_hours_alone: "",
