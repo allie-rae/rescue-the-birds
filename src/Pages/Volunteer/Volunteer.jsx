@@ -16,6 +16,7 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import took from "../../Photos/took.png";
 import { DateInput } from "../../DateInput/index.js";
+import { TextInput } from "../../TextInput/index.js";
 import { DateUtilities } from "../../utils/index.js";
 import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../../constants";
 import { formHelperTextContent } from "./config/index.js";
@@ -195,21 +196,13 @@ export const Volunteer = () => {
         <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2}>
-              <Controller
-                control={control}
+              <TextInput 
                 name="person_name"
-                rules={{ required: "Name is required" }}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    id="name"
-                    label="Name"
-                    variant="outlined"
-                    onBlur={onPersonNameBlur}
-                    error={!!errors.person_name?.message}
-                    helperText={errors.person_name?.message}
-                  />
-                )}
+                control={control}
+                rules={{ required: "Name is required "}}
+                label="Name"
+                onBlur={onPersonNameBlur}
+                errors={errors}
               />
               <DateInput
                 name="person_dob"
@@ -218,21 +211,6 @@ export const Volunteer = () => {
                 label="Date of Birth (MM/DD/YYYY)"
                 errors={errors}
               />
-              {/* <Controller
-                control={control}
-                name="person_dob"
-                rules={{ required: "Date of birth is required" }}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    id="date-of-birth"
-                    label="Date of Birth (MM/DD/YYYY)"
-                    variant="outlined"
-                    error={!!errors.person_dob?.message}
-                    helperText={errors.person_dob?.message}
-                  />
-                )}
-              /> */}
               <Controller
                 control={control}
                 name="person_email"
