@@ -24,4 +24,13 @@ export class DateUtilities {
         return DateUtilities.#date.getFullYear();
     }
 
+    static reformatDateInputString(dateInput) {
+        const dateInputElements = dateInput.split("-");
+        const year = dateInputElements[0];
+        const month = dateInputElements[1];
+        const day = dateInputElements[2];
+        const reformattedDateString = `${month}/${day}/${year}`;
+        return reformattedDateString;
+    }
+
 }

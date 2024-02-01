@@ -1,4 +1,4 @@
-import { DateUtilities } from "../../../utils/date.utils.js";
+import { DateUtilities } from "../../../utils/index.js";
 import { FormHelperText } from "@mui/material";
 
 const getHoldHarmlessPreamble = (personName) => {

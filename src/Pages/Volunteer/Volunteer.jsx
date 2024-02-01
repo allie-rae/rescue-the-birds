@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import axios from "axios";
 import took from "../../Photos/took.png";
+import { DateInput } from "../../DateInput/index.js";
+import { DateUtilities } from "../../utils/index.js";
 import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../../constants";
 import { formHelperTextContent } from "./config/index.js";
 import { formHelperTextUtilities } from "./utils/formHelperText.utils.js";
@@ -114,6 +116,7 @@ export const Volunteer = () => {
     setIsLoading(true);
 
     const {
+      person_dob,
       emergency_contact_name,
       emergency_contact_number,
       has_selected_one_interest,
@@ -125,8 +128,10 @@ export const Volunteer = () => {
       ...submissionData
     } = data;
 
-    submissionData.emergency_contact = `Name: ${emergency_contact_name}\nNumber: ${emergency_contact_number}`;
+    submissionData.person_dob = DateUtilities.reformatDateInputString(person_dob);
 
+    submissionData.emergency_contact = `Name: ${emergency_contact_name}\nNumber: ${emergency_contact_number}`;
+    
     axios
       .post("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/volunteer", submissionData)
       .then(() => {
@@ -206,7 +211,14 @@ export const Volunteer = () => {
                   />
                 )}
               />
-              <Controller
+              <DateInput
+                name="person_dob"
+                control={control}
+                rules={{ required: "Date of birth is required" }}
+                label="Date of Birth (MM/DD/YYYY)"
+                errors={errors}
+              />
+              {/* <Controller
                 control={control}
                 name="person_dob"
                 rules={{ required: "Date of birth is required" }}
@@ -220,7 +232,7 @@ export const Volunteer = () => {
                     helperText={errors.person_dob?.message}
                   />
                 )}
-              />
+              /> */}
               <Controller
                 control={control}
                 name="person_email"
