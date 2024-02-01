@@ -13,6 +13,7 @@ export const TextInput = ({
   control,
   rules,
   label,
+  onBlur,
   type,
   multiline = false,
   minRows = 4,
@@ -37,6 +38,10 @@ export const TextInput = ({
           id={name}
           label={label}
           variant="outlined"
+          onBlur={(e) => {
+            field.onBlur();
+            if (onBlur) onBlur(e);
+          }}
           type={type}
           multiline={multiline}
           minRows={minRows}
