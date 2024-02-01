@@ -5,6 +5,7 @@ import {
   FormControlLabel,
   FormGroup,
   FormHelperText,
+  FormLabel,
   LinearProgress,
   Stack,
   Typography,
@@ -18,7 +19,7 @@ import { DateInput } from "../../DateInput/index.js";
 import { TextInput } from "../../TextInput/index.js";
 import { DateUtilities } from "../../utils/index.js";
 import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../../constants";
-import { formHelperTextContent } from "./config/index.js";
+import { formHelperTextContent, typographyTextContent } from "./config/index.js";
 import { formHelperTextUtilities } from "./utils/formHelperText.utils.js";
 
 export const Volunteer = () => {
@@ -178,22 +179,40 @@ export const Volunteer = () => {
         </Typography>
         
         <Box sx={{ width: pageWidth, maxWidth: "100%", marginBottom: "20px" }}>
-          <FormHelperText>
-            {formHelperTextContent.formIntroduction}
-          </FormHelperText>
           <Typography
             variant="body1"
-            sx={{ fontWeight: "bold", my: 2 }}
+            sx={{ mb: 2 }}
+          >
+            {typographyTextContent.formIntroduction}
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{ fontWeight: "bold", mb: 4 }}
           >
             You must be at least 18 years old to volunteer at the Refuge.
           </Typography>
-          <FormHelperText>
-            {formHelperTextContent.formInstructions}
-          </FormHelperText>
         </Box>
 
         <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
+          <Typography
+            variant="h2"
+            sx={{ mb: 2}}
+          >
+            Volunteer Application
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{ mb: 4 }}
+          >
+            {typographyTextContent.formInstructions}
+          </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <Typography
+              variant="h3"
+              sx={{ mb: 2 }}
+            >
+              General Info
+            </Typography>
             <Stack spacing={2}>
               <TextInput 
                 name="person_name"
@@ -207,7 +226,7 @@ export const Volunteer = () => {
                 name="person_dob"
                 control={control}
                 rules={{ required: "Date of birth is required" }}
-                label="Date of Birth (MM/DD/YYYY)"
+                label="Date of Birth"
                 errors={errors}
               />
               <TextInput 
@@ -259,6 +278,14 @@ export const Volunteer = () => {
                 label="Driver's License Number"
                 errors={errors}
               />
+            </Stack>
+            <Typography
+              variant="h3"
+              sx={{ mb: 2, mt: 4 }}
+            >
+              Emergency Contact Info
+            </Typography>
+            <Stack spacing={2}>
               <TextInput 
                 name="emergency_contact_name"
                 control={control}
@@ -273,11 +300,19 @@ export const Volunteer = () => {
                 label="Emergency Contact Phone Number"
                 errors={errors}
               />
+            </Stack>
+            <Typography
+              variant="h3"
+              sx={{ mb: 2, mt: 4 }}
+            >
+              Experience and Interests
+            </Typography>
+            <Stack spacing={2}>
               <TextInput 
                 name="brief_synopsis_of_birds"
                 control={control}
                 rules={{ required: "A brief synopsis of your bird experience is required" }}
-                label="A brief synopsis of your bird experience"
+                label="Briefly summarize your bird experience"
                 multiline={true}
                 errors={errors}
               />
@@ -289,12 +324,13 @@ export const Volunteer = () => {
                 multiline={true}
                 errors={errors}
               />
-              <Typography
-                variant="body1"
-                sx={{ fontWeight: "bold", pt: 2 }}
+              {/* Including this as a placeholder for spacing until we can fix the sx prop for the TextInput component */}
+              <Typography></Typography>
+              <FormLabel
+                sx={{ fontWeight: "bold" }}
               >
                 Areas of interest (select at least one):
-              </Typography>
+              </FormLabel>
               {/* Display an error message if the user has not selected at least one area of interest for volunteering */}
               {errors.has_selected_one_interest && (
                 <FormHelperText error>{errors.has_selected_one_interest.message}</FormHelperText>
@@ -315,7 +351,9 @@ export const Volunteer = () => {
                     />
                   )}
                 />
-                <FormHelperText>
+                <FormHelperText
+                  sx={{ mb: 3, ml: 4 }}
+                >
                   {formHelperTextContent.birdCareExamples}
                 </FormHelperText>
                 <Controller
@@ -333,7 +371,9 @@ export const Volunteer = () => {
                     />
                   )}
                 />
-                <FormHelperText>
+                <FormHelperText
+                  sx={{ mb: 3, ml: 4 }}
+                >
                   {formHelperTextContent.fosteringInstructions}
                 </FormHelperText>
                 <Controller
@@ -351,17 +391,21 @@ export const Volunteer = () => {
                     />
                   )}
                 />
-                <FormHelperText>
+                <FormHelperText
+                  sx={{ mb: 4, ml: 4 }}
+                >
                   {formHelperTextContent.fundraisingExamples}
                 </FormHelperText>
               </FormGroup>
-              <Typography
-                variant="body1"
-                sx={{ fontWeight: "bold", pt: 2 }}
-              >
-                Volunteer Hold Harmless Agreement:
-              </Typography>
-              
+            </Stack>
+            <Typography
+              variant="h3"
+              sx={{ mb: 2 }}
+            >
+              Volunteer Hold Harmless Agreement
+            </Typography>
+            <Stack spacing={2} sx={{ mb: 6 }}>
+
               {holdHarmlessPreamble}
               
               <FormGroup
@@ -468,9 +512,12 @@ export const Volunteer = () => {
                   </FormHelperText>
                 )}
               </FormGroup>
-              <FormHelperText>
-                I agree to allow RSW&copy; to perform a background check on myself, which may include, but not be limited to, a criminal conviction check and a credit check.
-              </FormHelperText>
+              <Typography
+                variant="body1"
+                sx={{ mb: 2 }}
+              >
+                I agree to allow RSW&copy; to perform a background check on myself, which may include, but not be limited to, a criminal conviction check and a credit check.*
+              </Typography>
               <FormGroup
                 sx={{ pl: 4 }}
               >
@@ -486,7 +533,7 @@ export const Volunteer = () => {
                           onChange={onCheckboxChange(onChange)} 
                         />
                       }
-                      label="I agree.*"
+                      label="I agree"
                     />
                   )}
                 />
@@ -499,6 +546,7 @@ export const Volunteer = () => {
                   </FormHelperText>
                 )}
               </FormGroup>
+            </Stack>
               {/* Hidden input used to validate whether or not a user has selected an area of interest for volunteering. This input is registered to React Hook Form in order to make use of its validation functionality */}
               <input
                 type="hidden"
@@ -506,6 +554,7 @@ export const Volunteer = () => {
                   validate: () => hasSelectedOneInterest() || noInterestsSelectedMessage,
                 })}
               />
+            <Stack spacing={2}>
               <Button
                 variant="contained"
                 color="primary"
@@ -524,7 +573,7 @@ export const Volunteer = () => {
                   We&apos;re sorry, but there was an error submitting the form. Please try again.
                 </FormHelperText>
               )}
-            </Stack>
+            </Stack> 
           </form>
         </Box>
       </Box>
