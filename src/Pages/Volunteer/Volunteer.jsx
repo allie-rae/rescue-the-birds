@@ -26,12 +26,13 @@ export const Volunteer = () => {
   const {
     clearErrors,
     control,
-    formState: { errors, isSubmitted },
+    formState: { errors, isSubmitted, touchedFields },
     getValues,
     handleSubmit,
     register,
     reset,
     setError,
+    setValue,
     watch,
   } = useForm({
     mode: "all",
@@ -85,15 +86,19 @@ export const Volunteer = () => {
     return watchBirdCare === "Yes" || watchFundraising === "Yes" || watchFostering === "Yes";
   };
 
-  const onCheckboxChange = (onChange) => (e) => {
+  const onCheckboxChange = (name) => (e) => {
     const newCheckboxValue = e.target.checked ? "Yes" : "No";
-    onChange(newCheckboxValue);
+    setValue(name, newCheckboxValue, { 
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
   };
 
   useEffect(() => {
-    const hasFormBeenSubmitted = isSubmitted;
+    const userHasClickedAnInterestCheckbox = !!(touchedFields.interested_bird_care || touchedFields.interested_fostering || touchedFields.interested_fundraising);
 
-    if (hasFormBeenSubmitted) {
+    if (userHasClickedAnInterestCheckbox) {
       if (hasSelectedOneInterest()) {
         clearErrors("has_selected_one_interest");
       } else {
@@ -307,7 +312,7 @@ export const Volunteer = () => {
             >
               Experience and Interests
             </Typography>
-            <Stack spacing={2}>
+            <Stack spacing={2} sx={{ mb: 4 }}>
               <TextInput 
                 name="brief_synopsis_of_birds"
                 control={control}
@@ -324,8 +329,10 @@ export const Volunteer = () => {
                 multiline={true}
                 errors={errors}
               />
+            </Stack>
               {/* Including this as a placeholder for spacing until we can fix the sx prop for the TextInput component */}
               <Typography></Typography>
+            <Stack spacing={2} sx={{ mb: 4 }}>
               <FormLabel
                 sx={{ fontWeight: "bold" }}
               >
@@ -339,12 +346,12 @@ export const Volunteer = () => {
                 <Controller
                   control={control}
                   name="interested_bird_care"
-                  render={({ field: { value, onChange } }) => (
+                  render={({ field }) => (
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={value === "Yes"}
-                          onChange={onCheckboxChange(onChange)}
+                          checked={field.value === "Yes"}
+                          onChange={onCheckboxChange(field.name)}
                         />
                       }
                       label="Bird care at the Refuge"
@@ -359,12 +366,12 @@ export const Volunteer = () => {
                 <Controller
                   control={control}
                   name="interested_fostering"
-                  render={({ field: { value, onChange } }) => (
+                  render={({ field }) => (
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={value === "Yes"}
-                          onChange={onCheckboxChange(onChange)}
+                          checked={field.value === "Yes"}
+                          onChange={onCheckboxChange(field.name)}
                         />
                       }
                       label="Fostering in your home"
@@ -379,12 +386,12 @@ export const Volunteer = () => {
                 <Controller
                   control={control}
                   name="interested_fundraising"
-                  render={({ field: { value, onChange } }) => (
+                  render={({ field }) => (
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={value === "Yes"}
-                          onChange={onCheckboxChange(onChange)}
+                          checked={field.value === "Yes"}
+                          onChange={onCheckboxChange(field.name)}
                         />
                       }
                       label="Fundraising"
@@ -415,12 +422,12 @@ export const Volunteer = () => {
                   control={control}
                   name="wishes_to_be_volunteer"
                   rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
-                  render={({ field: { value, onChange }}) => (
+                  render={({ field }) => (
                     <FormControlLabel
                       control={
                         <Checkbox 
-                          checked={value === "Yes"}
-                          onChange={onCheckboxChange(onChange)}
+                          checked={field.value === "Yes"}
+                          onChange={onCheckboxChange(field.name)}
                         />
                       }
                       label="That I wish to be a Volunteer to RSW&copy;, Inc.*"
@@ -439,12 +446,12 @@ export const Volunteer = () => {
                   control={control}
                   name="desires_to_work_with_animals"
                   rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
-                  render={({ field: { value, onChange }}) => (
+                  render={({ field }) => (
                     <FormControlLabel
                       control={
                         <Checkbox 
-                          checked={value === "Yes"}
-                          onChange={onCheckboxChange(onChange)}
+                          checked={field.value === "Yes"}
+                          onChange={onCheckboxChange(field.name)}
                         />
                       }
                       label="That I desire to work with the various animals of RSW&copy;.*"
@@ -463,14 +470,14 @@ export const Volunteer = () => {
                   control={control}
                   name="acknowledges_animal_unknown_behavior"
                   rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
-                  render={({ field: { value, onChange }}) => (
+                  render={({ field }) => (
                     <FormControlLabel
                       sx={{ alignItems: "flex-start", pt:1, mb: 1 }}
                       control={
                         <Checkbox
                           sx={{ mt: -1 }}
-                          checked={value === "Yes"}
-                          onChange={onCheckboxChange(onChange)}
+                          checked={field.value === "Yes"}
+                          onChange={onCheckboxChange(field.name)}
                         />
                       }
                       label="That I acknowledge that some of the animal residents that currently reside at RSW&copy; are formerly abused/neglected animals whose behavior, temperament, and health are unknown.*"
@@ -489,14 +496,14 @@ export const Volunteer = () => {
                   control={control}
                   name="acknowledges_rsw_not_responsible"
                   rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
-                  render={({ field: { value, onChange }}) => (
+                  render={({ field }) => (
                     <FormControlLabel
                       sx={{ alignItems: "flex-start", pt:1, mb: 1 }}
                       control={
                         <Checkbox 
                           sx={{ mt: -1 }}  
-                          checked={value === "Yes"}
-                          onChange={onCheckboxChange(onChange)}
+                          checked={field.value === "Yes"}
+                          onChange={onCheckboxChange(field.name)}
                         />
                       }
                       label="That I acknowledge that RSW&copy; is not responsible for any and all damage, injury claims, and expenses of whatever nature arising from my participation as a Volunteer for RSW&copy;. I agree to hold RSW&copy;, its agents, successors, and assigns harmless.*"
@@ -525,12 +532,12 @@ export const Volunteer = () => {
                   control={control}
                   name="agrees_to_background_check"
                   rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
-                  render={({ field: { value, onChange }}) => (
+                  render={({ field }) => (
                     <FormControlLabel 
                       control={
                         <Checkbox 
-                          checked={value === "Yes"}
-                          onChange={onCheckboxChange(onChange)} 
+                          checked={field.value === "Yes"}
+                          onChange={onCheckboxChange(field.name)} 
                         />
                       }
                       label="I agree"
