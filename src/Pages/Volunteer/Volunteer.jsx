@@ -330,9 +330,7 @@ export const Volunteer = () => {
                 errors={errors}
               />
             </Stack>
-              {/* Including this as a placeholder for spacing until we can fix the sx prop for the TextInput component */}
-              <Typography></Typography>
-            <Stack spacing={2} sx={{ mb: 4 }}>
+            <Stack spacing={2}>
               <FormLabel
                 sx={{ fontWeight: "bold" }}
               >
