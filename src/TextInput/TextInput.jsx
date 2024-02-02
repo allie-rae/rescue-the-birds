@@ -45,7 +45,7 @@ export const TextInput = ({
           type={type}
           multiline={multiline}
           minRows={minRows}
-          sx={longLabel && longLabelInputStyling}
+          sx={longLabel ? longLabelInputStyling : undefined}
           error={Boolean(errors[name]?.message)}
           helperText={errors[name]?.message}
         />
