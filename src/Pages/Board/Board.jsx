@@ -90,6 +90,7 @@ export const Board = () => {
       boarding_start_date: "",
       boarding_end_date: "",
       bird_list: [],
+      vet_records: null,
       vet_record_agreement: false,
       dropoff_agreement: false,
       emergency_agreement: false,
@@ -317,6 +318,55 @@ export const Board = () => {
                   birdListFormValue={getValues("bird_list")}
                 />
                 <FormHelperText error>{errors.bird_list?.message}</FormHelperText>
+                <Controller
+                  control={control}
+                  name="vet_records"
+                  rules={{ required: true }}
+                  render={({ field: { ref, onChange, value } }) => (
+                    <div>
+                      <input
+                        type="file"
+                        onChange={(event) => {
+                          onChange(event.target.files);
+                          console.log(value);
+                        }}
+                        ref={ref}
+                        style={{ display: "none" }}
+                        id="vet-records"
+                        multiple
+                        value={value?.filename}
+                      />
+                      <label htmlFor="vet-records">
+                        <Button
+                          variant="contained"
+                          component="span"
+                        >
+                          Upload File
+                        </Button>
+                      </label>
+
+                      {value && (
+                        <>
+                          <Typography
+                            variant="body1"
+                            sx={{ mt: 1.5, mb: 1 }}
+                          >
+                            Selected Files:
+                          </Typography>
+                          {Array.from(value).map((file) => (
+                            <Typography
+                              key={file.name}
+                              sx={{ mb: 0.5 }}
+                            >
+                              {file.name}
+                            </Typography>
+                          ))}
+                        </>
+                      )}
+                      {errors.file && <p>This field is required.</p>}
+                    </div>
+                  )}
+                />
                 <FormLabel
                   id="vet-records-agreement"
                   sx={{ fontWeight: "bold" }}
