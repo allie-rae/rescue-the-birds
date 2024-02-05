@@ -378,7 +378,6 @@ export const AdoptionForm = () => {
             />
           );
         })}
-
         <FormLabel
           id="children-in-house-bool"
           sx={{ fontWeight: "bold" }}
