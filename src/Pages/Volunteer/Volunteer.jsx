@@ -100,15 +100,17 @@ export const Volunteer = () => {
       touchedFields.interested_fundraising
     );
 
-    if (userHasClickedAnInterestCheckbox) {
-      if (hasSelectedOneInterest()) {
-        clearErrors("has_selected_one_interest");
-      } else {
-        setError("has_selected_one_interest", {
-          type: "manual",
-          message: noInterestsSelectedMessage,
-        });
-      }
+    if (!userHasClickedAnInterestCheckbox) {
+      return;
+    }
+
+    if (hasSelectedOneInterest()) {
+      clearErrors("has_selected_one_interest");
+    } else {
+      setError("has_selected_one_interest", {
+        type: "manual",
+        message: noInterestsSelectedMessage,
+      });
     }
   }, [watchBirdCare, watchFundraising, watchFostering, setError, clearErrors]);
 
