@@ -19,7 +19,7 @@ import { DateInput } from "../../DateInput/index.js";
 import { TextInput } from "../../TextInput/index.js";
 import { DateUtilities } from "../../utils/index.js";
 import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../../constants";
-import { formHelperTextContent, typographyTextContent } from "./config/index.js";
+import { volunteerFormText } from "./config/index.js";
 import { formHelperTextUtilities } from "./utils/formHelperText.utils.js";
 
 export const Volunteer = () => {
@@ -73,7 +73,7 @@ export const Volunteer = () => {
   const onPersonNameBlur = () => {
     const personName = getValues("person_name").trim();
     setVolunteerName(personName || "_____");
-  }
+  };
 
   const watchBirdCare = watch("interested_bird_care");
   const watchFundraising = watch("interested_fundraising");
@@ -88,7 +88,7 @@ export const Volunteer = () => {
 
   const onCheckboxChange = (name) => (e) => {
     const newCheckboxValue = e.target.checked ? "Yes" : "No";
-    setValue(name, newCheckboxValue, { 
+    setValue(name, newCheckboxValue, {
       shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
@@ -96,7 +96,11 @@ export const Volunteer = () => {
   };
 
   useEffect(() => {
-    const userHasClickedAnInterestCheckbox = !!(touchedFields.interested_bird_care || touchedFields.interested_fostering || touchedFields.interested_fundraising);
+    const userHasClickedAnInterestCheckbox = !!(
+      touchedFields.interested_bird_care ||
+      touchedFields.interested_fostering ||
+      touchedFields.interested_fundraising
+    );
 
     if (userHasClickedAnInterestCheckbox) {
       if (hasSelectedOneInterest()) {
@@ -182,13 +186,13 @@ export const Volunteer = () => {
         >
           Volunteer
         </Typography>
-        
+
         <Box sx={{ width: pageWidth, maxWidth: "100%", marginBottom: "20px" }}>
           <Typography
             variant="body1"
             sx={{ mb: 2 }}
           >
-            {typographyTextContent.formIntroduction}
+            {volunteerFormText.formIntroduction}
           </Typography>
           <Typography
             variant="body1"
@@ -201,7 +205,7 @@ export const Volunteer = () => {
         <Box sx={{ width: pageWidth, maxWidth: "100%" }}>
           <Typography
             variant="h2"
-            sx={{ mb: 2}}
+            sx={{ mb: 2 }}
           >
             Volunteer Application
           </Typography>
@@ -209,7 +213,7 @@ export const Volunteer = () => {
             variant="body1"
             sx={{ mb: 4 }}
           >
-            {typographyTextContent.formInstructions}
+            {volunteerFormText.formInstructions}
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Typography
@@ -219,10 +223,10 @@ export const Volunteer = () => {
               General Info
             </Typography>
             <Stack spacing={2}>
-              <TextInput 
+              <TextInput
                 name="person_name"
                 control={control}
-                rules={{ required: "Name is required "}}
+                rules={{ required: "Name is required " }}
                 label="Name"
                 onBlur={onPersonNameBlur}
                 errors={errors}
@@ -234,49 +238,49 @@ export const Volunteer = () => {
                 label="Date of Birth"
                 errors={errors}
               />
-              <TextInput 
+              <TextInput
                 name="person_email"
                 control={control}
                 rules={{ required: "Email is required" }}
                 label="Email"
                 errors={errors}
               />
-              <TextInput 
+              <TextInput
                 name="person_phone"
                 control={control}
                 rules={{ required: "Phone number is required" }}
                 label="Phone Number"
                 errors={errors}
               />
-              <TextInput 
+              <TextInput
                 name="person_address"
                 control={control}
                 rules={{ required: "Street address is required" }}
                 label="Street Address"
                 errors={errors}
               />
-              <TextInput 
+              <TextInput
                 name="person_city"
                 control={control}
                 rules={{ required: "City is required" }}
                 label="City"
                 errors={errors}
               />
-              <TextInput 
+              <TextInput
                 name="person_state"
                 control={control}
                 rules={{ required: "State is required" }}
                 label="State"
                 errors={errors}
               />
-              <TextInput 
+              <TextInput
                 name="person_zipcode"
                 control={control}
                 rules={{ required: "Zip code is required" }}
                 label="Zip Code"
                 errors={errors}
               />
-              <TextInput 
+              <TextInput
                 name="dl_number"
                 control={control}
                 rules={{ required: "Driver's license number is required" }}
@@ -291,14 +295,14 @@ export const Volunteer = () => {
               Emergency Contact Info
             </Typography>
             <Stack spacing={2}>
-              <TextInput 
+              <TextInput
                 name="emergency_contact_name"
                 control={control}
                 rules={{ required: "Emergency contact name is required" }}
                 label="Emergency Contact Name"
                 errors={errors}
               />
-              <TextInput 
+              <TextInput
                 name="emergency_contact_number"
                 control={control}
                 rules={{ required: "Emergency contact number is required" }}
@@ -312,8 +316,11 @@ export const Volunteer = () => {
             >
               Experience and Interests
             </Typography>
-            <Stack spacing={2} sx={{ mb: 4 }}>
-              <TextInput 
+            <Stack
+              spacing={2}
+              sx={{ mb: 4 }}
+            >
+              <TextInput
                 name="brief_synopsis_of_birds"
                 control={control}
                 rules={{ required: "A brief synopsis of your bird experience is required" }}
@@ -321,7 +328,7 @@ export const Volunteer = () => {
                 multiline={true}
                 errors={errors}
               />
-              <TextInput 
+              <TextInput
                 name="why_interested"
                 control={control}
                 rules={{ required: "Explanation of interest is required" }}
@@ -331,9 +338,7 @@ export const Volunteer = () => {
               />
             </Stack>
             <Stack spacing={2}>
-              <FormLabel
-                sx={{ fontWeight: "bold" }}
-              >
+              <FormLabel sx={{ fontWeight: "bold" }}>
                 Areas of interest (select at least one):
               </FormLabel>
               {/* Display an error message if the user has not selected at least one area of interest for volunteering */}
@@ -356,10 +361,8 @@ export const Volunteer = () => {
                     />
                   )}
                 />
-                <FormHelperText
-                  sx={{ mb: 3, ml: 4 }}
-                >
-                  {formHelperTextContent.birdCareExamples}
+                <FormHelperText sx={{ mb: 3, ml: 4 }}>
+                  {volunteerFormText.birdCareExamples}
                 </FormHelperText>
                 <Controller
                   control={control}
@@ -376,10 +379,8 @@ export const Volunteer = () => {
                     />
                   )}
                 />
-                <FormHelperText
-                  sx={{ mb: 3, ml: 4 }}
-                >
-                  {formHelperTextContent.fosteringInstructions}
+                <FormHelperText sx={{ mb: 3, ml: 4 }}>
+                  {volunteerFormText.fosteringInstructions}
                 </FormHelperText>
                 <Controller
                   control={control}
@@ -396,10 +397,8 @@ export const Volunteer = () => {
                     />
                   )}
                 />
-                <FormHelperText
-                  sx={{ mb: 4, ml: 4 }}
-                >
-                  {formHelperTextContent.fundraisingExamples}
+                <FormHelperText sx={{ mb: 4, ml: 4 }}>
+                  {volunteerFormText.fundraisingExamples}
                 </FormHelperText>
               </FormGroup>
             </Stack>
@@ -409,21 +408,21 @@ export const Volunteer = () => {
             >
               Volunteer Hold Harmless Agreement
             </Typography>
-            <Stack spacing={2} sx={{ mb: 6 }}>
-
+            <Stack
+              spacing={2}
+              sx={{ mb: 6 }}
+            >
               {holdHarmlessPreamble}
-              
-              <FormGroup
-                sx={{ pl: 4 }}
-              >
-                <Controller 
+
+              <FormGroup sx={{ pl: 4 }}>
+                <Controller
                   control={control}
                   name="wishes_to_be_volunteer"
                   rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
                   render={({ field }) => (
                     <FormControlLabel
                       control={
-                        <Checkbox 
+                        <Checkbox
                           checked={field.value === "Yes"}
                           onChange={onCheckboxChange(field.name)}
                         />
@@ -433,21 +432,21 @@ export const Volunteer = () => {
                   )}
                 />
                 {errors.wishes_to_be_volunteer && (
-                  <FormHelperText 
+                  <FormHelperText
                     error
                     sx={{ ml: 4, mb: 1 }}
                   >
                     {errors.wishes_to_be_volunteer?.message}
                   </FormHelperText>
                 )}
-                <Controller 
+                <Controller
                   control={control}
                   name="desires_to_work_with_animals"
                   rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
                   render={({ field }) => (
                     <FormControlLabel
                       control={
-                        <Checkbox 
+                        <Checkbox
                           checked={field.value === "Yes"}
                           onChange={onCheckboxChange(field.name)}
                         />
@@ -457,20 +456,20 @@ export const Volunteer = () => {
                   )}
                 />
                 {errors.desires_to_work_with_animals && (
-                  <FormHelperText 
+                  <FormHelperText
                     error
                     sx={{ ml: 4, mb: 1 }}
                   >
                     {errors.desires_to_work_with_animals?.message}
                   </FormHelperText>
                 )}
-                <Controller 
+                <Controller
                   control={control}
                   name="acknowledges_animal_unknown_behavior"
                   rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
                   render={({ field }) => (
                     <FormControlLabel
-                      sx={{ alignItems: "flex-start", pt:1, mb: 1 }}
+                      sx={{ alignItems: "flex-start", pt: 1, mb: 1 }}
                       control={
                         <Checkbox
                           sx={{ mt: -1 }}
@@ -483,23 +482,23 @@ export const Volunteer = () => {
                   )}
                 />
                 {errors.acknowledges_animal_unknown_behavior && (
-                  <FormHelperText 
+                  <FormHelperText
                     error
                     sx={{ ml: 4, mb: 1 }}
                   >
                     {errors.acknowledges_animal_unknown_behavior?.message}
                   </FormHelperText>
                 )}
-                <Controller 
+                <Controller
                   control={control}
                   name="acknowledges_rsw_not_responsible"
                   rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
                   render={({ field }) => (
                     <FormControlLabel
-                      sx={{ alignItems: "flex-start", pt:1, mb: 1 }}
+                      sx={{ alignItems: "flex-start", pt: 1, mb: 1 }}
                       control={
-                        <Checkbox 
-                          sx={{ mt: -1 }}  
+                        <Checkbox
+                          sx={{ mt: -1 }}
                           checked={field.value === "Yes"}
                           onChange={onCheckboxChange(field.name)}
                         />
@@ -509,7 +508,7 @@ export const Volunteer = () => {
                   )}
                 />
                 {errors.acknowledges_rsw_not_responsible && (
-                  <FormHelperText 
+                  <FormHelperText
                     error
                     sx={{ ml: 4, mb: 1 }}
                   >
@@ -521,21 +520,20 @@ export const Volunteer = () => {
                 variant="body1"
                 sx={{ mb: 2 }}
               >
-                I agree to allow RSW&copy; to perform a background check on myself, which may include, but not be limited to, a criminal conviction check and a credit check.*
+                I agree to allow RSW&copy; to perform a background check on myself, which may
+                include, but not be limited to, a criminal conviction check and a credit check.*
               </Typography>
-              <FormGroup
-                sx={{ pl: 4 }}
-              >
-                <Controller 
+              <FormGroup sx={{ pl: 4 }}>
+                <Controller
                   control={control}
                   name="agrees_to_background_check"
                   rules={{ validate: (value) => value === "Yes" || "Agreement is required" }}
                   render={({ field }) => (
-                    <FormControlLabel 
+                    <FormControlLabel
                       control={
-                        <Checkbox 
+                        <Checkbox
                           checked={field.value === "Yes"}
-                          onChange={onCheckboxChange(field.name)} 
+                          onChange={onCheckboxChange(field.name)}
                         />
                       }
                       label="I agree"
@@ -543,7 +541,7 @@ export const Volunteer = () => {
                   )}
                 />
                 {errors.agrees_to_background_check && (
-                  <FormHelperText 
+                  <FormHelperText
                     error
                     sx={{ ml: 4, mb: 1 }}
                   >
@@ -552,13 +550,13 @@ export const Volunteer = () => {
                 )}
               </FormGroup>
             </Stack>
-              {/* Hidden input used to validate whether or not a user has selected an area of interest for volunteering. This input is registered to React Hook Form in order to make use of its validation functionality */}
-              <input
-                type="hidden"
-                {...register("has_selected_one_interest", {
-                  validate: () => hasSelectedOneInterest() || noInterestsSelectedMessage,
-                })}
-              />
+            {/* Hidden input used to validate whether or not a user has selected an area of interest for volunteering. This input is registered to React Hook Form in order to make use of its validation functionality */}
+            <input
+              type="hidden"
+              {...register("has_selected_one_interest", {
+                validate: () => hasSelectedOneInterest() || noInterestsSelectedMessage,
+              })}
+            />
             <Stack spacing={2}>
               <Button
                 variant="contained"
@@ -578,7 +576,7 @@ export const Volunteer = () => {
                   We&apos;re sorry, but there was an error submitting the form. Please try again.
                 </FormHelperText>
               )}
-            </Stack> 
+            </Stack>
           </form>
         </Box>
       </Box>

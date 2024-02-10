@@ -1,2 +1,1 @@
-export * from "./formHelperText.constants.js";
-export * from "./typographyText.constants.js";
+export * from "./volunteerFormText.constants.js";
