@@ -20,7 +20,7 @@ import { TextInput } from "../../TextInput/index.js";
 import { DateUtilities } from "../../utils/index.js";
 import { pageFadeTimeout, pageWidth, parrotImageStyling } from "../../constants";
 import { volunteerFormText } from "./config/index.js";
-import { formHelperTextUtilities } from "./utils/formHelperText.utils.js";
+import { GetHoldHarmlessPreamble } from "./components/GetHoldHarmlessPreamble/index.js";
 
 export const Volunteer = () => {
   const {
@@ -67,8 +67,6 @@ export const Volunteer = () => {
   const [isError, setIsError] = useState(false);
 
   const [volunteerName, setVolunteerName] = useState("_____");
-
-  const holdHarmlessPreamble = formHelperTextUtilities.getHoldHarmlessPreamble(volunteerName);
 
   const onPersonNameBlur = () => {
     const personName = getValues("person_name").trim();
@@ -412,8 +410,7 @@ export const Volunteer = () => {
               spacing={2}
               sx={{ mb: 6 }}
             >
-              {holdHarmlessPreamble}
-
+              <GetHoldHarmlessPreamble personName={volunteerName} />
               <FormGroup sx={{ pl: 4 }}>
                 <Controller
                   control={control}
