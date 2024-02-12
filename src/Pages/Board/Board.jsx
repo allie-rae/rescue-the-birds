@@ -15,6 +15,7 @@ import { Box } from "@mui/system";
 import rose from "../../Photos/rose.png";
 import { ListOfTests } from "../../ListOfTests";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import CloseIcon from "@mui/icons-material/Close";
 import { PricingTable } from "../../PricingTable";
 import { Controller, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
@@ -103,6 +104,7 @@ export const Board = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [vetFiles, setVetFiles] = useState("");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -325,67 +327,88 @@ export const Board = () => {
                   Upload Vet Records
                 </FormLabel>
                 <Box>
-                  <Controller
-                    control={control}
-                    name="vet_records"
-                    rules={{ required: true }}
-                    render={({ field: { ref, onChange, value } }) => (
-                      <div>
-                        <input
-                          type="file"
-                          onChange={(event) => {
-                            // if no files have been added yet
-                            if (!value) {
-                              onChange(event.target.files);
-                            } else {
-                              // combine previously added files with newly added files
-                              const dataTransfer = new DataTransfer();
-                              for (let i = 0; i < event.target.files.length; i++) {
-                                dataTransfer.items.add(event.target.files[i]);
-                              }
-                              for (let i = 0; i < value.length; i++) {
-                                dataTransfer.items.add(value[i]);
-                              }
-                              onChange(dataTransfer.files);
-                            }
-                          }}
-                          ref={ref}
-                          style={{ display: "none" }}
-                          id="vet-records"
-                          multiple
-                          value={value?.filename}
-                        />
-                        <label htmlFor="vet-records">
-                          <Button
-                            variant="contained"
-                            component="span"
-                          >
-                            Upload File
-                          </Button>
-                        </label>
-                        {value && (
-                          <>
-                            {console.log(value)}
-                            <Typography
-                              variant="body1"
-                              sx={{ mt: 1.5, mb: 1 }}
-                            >
-                              Selected Files:
-                            </Typography>
-                            {Array.from(value).map((file) => (
-                              <Typography
-                                key={file.name}
-                                sx={{ mb: 0.5 }}
-                              >
-                                {file.name}
-                              </Typography>
-                            ))}
-                          </>
-                        )}
-                        {errors.file && <p>This field is required.</p>}
-                      </div>
-                    )}
+                  <input
+                    type="file"
+                    accept="image/*, .pdf"
+                    onChange={(event) => {
+                      if (!vetFiles) {
+                        setVetFiles(event.target.files);
+                      } else {
+                        // combine previously added files with newly added files
+                        const dataTransfer = new DataTransfer();
+                        for (let i = 0; i < event.target.files.length; i++) {
+                          dataTransfer.items.add(event.target.files[i]);
+                        }
+                        for (let i = 0; i < vetFiles.length; i++) {
+                          dataTransfer.items.add(vetFiles[i]);
+                        }
+                        setVetFiles(dataTransfer.files);
+                      }
+                    }}
+                    style={{ display: "none" }}
+                    id="vet-records"
+                    multiple
+                    value={vetFiles?.filename}
                   />
+                  <label htmlFor="vet-records">
+                    <Button
+                      variant="contained"
+                      component="span"
+                    >
+                      Add File
+                    </Button>
+                  </label>
+                  {vetFiles && (
+                    <>
+                      <Typography
+                        variant="body1"
+                        sx={{ mt: 1.5, mb: 1 }}
+                      >
+                        Selected Files:
+                      </Typography>
+                      {Array.from(vetFiles).map((file, fileIndex) => (
+                        <Box
+                          key={file.name}
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            mb: 0.5,
+                            px: 2,
+                            py: 1,
+                            backgroundColor: "#67264C",
+                            color: "#fff",
+                            width: "fit-content",
+                            borderRadius: "5px",
+                          }}
+                        >
+                          <Typography sx={{ mr: 1 }}>{file.name}</Typography>
+                          <CloseIcon
+                            onClick={() => {
+                              if (vetFiles.length === 1) {
+                                setVetFiles("");
+                              } else {
+                                // create new FileList without deleted file
+                                const dataTransfer = new DataTransfer();
+                                for (let i = 0; i < vetFiles.length; i++) {
+                                  if (i === fileIndex) continue;
+                                  dataTransfer.items.add(vetFiles[i]);
+                                }
+                                setVetFiles(dataTransfer.files);
+                              }
+                            }}
+                          />
+                        </Box>
+                      ))}
+                    </>
+                  )}
+                  {!vetFiles && (
+                    <Typography
+                      variant="body1"
+                      sx={{ mt: 1.5, mb: 1 }}
+                    >
+                      (None Selected)
+                    </Typography>
+                  )}
                 </Box>
                 <FormLabel
                   id="vet-records-agreement"
