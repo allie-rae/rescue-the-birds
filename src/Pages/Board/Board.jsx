@@ -383,6 +383,7 @@ export const Board = () => {
                         >
                           <Typography sx={{ mr: 1 }}>{file.name}</Typography>
                           <CloseIcon
+                            sx={{ "&:hover": { cursor: "pointer" } }}
                             onClick={() => {
                               if (vetFiles.length === 1) {
                                 setVetFiles("");
