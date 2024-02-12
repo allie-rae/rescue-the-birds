@@ -318,55 +318,75 @@ export const Board = () => {
                   birdListFormValue={getValues("bird_list")}
                 />
                 <FormHelperText error>{errors.bird_list?.message}</FormHelperText>
-                <Controller
-                  control={control}
-                  name="vet_records"
-                  rules={{ required: true }}
-                  render={({ field: { ref, onChange, value } }) => (
-                    <div>
-                      <input
-                        type="file"
-                        onChange={(event) => {
-                          onChange(event.target.files);
-                          console.log(value);
-                        }}
-                        ref={ref}
-                        style={{ display: "none" }}
-                        id="vet-records"
-                        multiple
-                        value={value?.filename}
-                      />
-                      <label htmlFor="vet-records">
-                        <Button
-                          variant="contained"
-                          component="span"
-                        >
-                          Upload File
-                        </Button>
-                      </label>
-
-                      {value && (
-                        <>
-                          <Typography
-                            variant="body1"
-                            sx={{ mt: 1.5, mb: 1 }}
+                <FormLabel
+                  id="boarding-schedule"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Upload Vet Records
+                </FormLabel>
+                <Box>
+                  <Controller
+                    control={control}
+                    name="vet_records"
+                    rules={{ required: true }}
+                    render={({ field: { ref, onChange, value } }) => (
+                      <div>
+                        <input
+                          type="file"
+                          onChange={(event) => {
+                            // if no files have been added yet
+                            if (!value) {
+                              onChange(event.target.files);
+                            } else {
+                              // combine previously added files with newly added files
+                              const dataTransfer = new DataTransfer();
+                              for (let i = 0; i < event.target.files.length; i++) {
+                                dataTransfer.items.add(event.target.files[i]);
+                              }
+                              for (let i = 0; i < value.length; i++) {
+                                dataTransfer.items.add(value[i]);
+                              }
+                              onChange(dataTransfer.files);
+                            }
+                          }}
+                          ref={ref}
+                          style={{ display: "none" }}
+                          id="vet-records"
+                          multiple
+                          value={value?.filename}
+                        />
+                        <label htmlFor="vet-records">
+                          <Button
+                            variant="contained"
+                            component="span"
                           >
-                            Selected Files:
-                          </Typography>
-                          {Array.from(value).map((file) => (
+                            Upload File
+                          </Button>
+                        </label>
+                        {value && (
+                          <>
+                            {console.log(value)}
                             <Typography
-                              key={file.name}
-                              sx={{ mb: 0.5 }}
+                              variant="body1"
+                              sx={{ mt: 1.5, mb: 1 }}
                             >
-                              {file.name}
+                              Selected Files:
                             </Typography>
-                          ))}
-                        </>
-                      )}
-                      {errors.file && <p>This field is required.</p>}
-                    </div>
-                  )}
-                />
+                            {Array.from(value).map((file) => (
+                              <Typography
+                                key={file.name}
+                                sx={{ mb: 0.5 }}
+                              >
+                                {file.name}
+                              </Typography>
+                            ))}
+                          </>
+                        )}
+                        {errors.file && <p>This field is required.</p>}
+                      </div>
+                    )}
+                  />
+                </Box>
                 <FormLabel
                   id="vet-records-agreement"
                   sx={{ fontWeight: "bold" }}
