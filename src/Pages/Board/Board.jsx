@@ -378,7 +378,7 @@ export const Board = () => {
                             backgroundColor: "#67264C",
                             color: "#fff",
                             width: "fit-content",
-                            borderRadius: "5px",
+                            borderRadius: "4px",
                           }}
                         >
                           <Typography sx={{ mr: 1 }}>{file.name}</Typography>
