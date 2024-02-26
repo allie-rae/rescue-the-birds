@@ -15,6 +15,7 @@ import { Box } from "@mui/system";
 import rose from "../../Photos/rose.png";
 import { ListOfTests } from "../../ListOfTests";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import CloseIcon from "@mui/icons-material/Close";
 import { PricingTable } from "../../PricingTable";
 import { Controller, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
@@ -102,6 +103,7 @@ export const Board = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [vetFiles, setVetFiles] = useState("");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -132,10 +134,11 @@ export const Board = () => {
     const reformattedBoardingEndDate = `${boardingEndDateArr[1]}/${boardingEndDateArr[2]}/${boardingEndDateArr[0]}`;
 
     axios
-      .post("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/boarding", {
+      .postForm("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/boarding", {
         ...rest,
         boarding_start_date: reformattedBoardingStartDate,
         boarding_end_date: reformattedBoardingEndDate,
+        vet_files: vetFiles,
       })
       .then(() => {
         setIsSuccess(true);
@@ -317,6 +320,97 @@ export const Board = () => {
                   birdListFormValue={getValues("bird_list")}
                 />
                 <FormHelperText error>{errors.bird_list?.message}</FormHelperText>
+              </Stack>
+              <Box sx={{ mb: 4 }}>
+                <FormLabel
+                  id="boarding-schedule"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Upload Vet Records
+                </FormLabel>
+                <Typography
+                  variant="body1"
+                  sx={{ mt: 0.5, mb: 2 }}
+                >
+                  pdf and image file types accepted
+                </Typography>
+                <input
+                  type="file"
+                  accept="image/*, .pdf"
+                  onChange={(event) => {
+                    if (!vetFiles) {
+                      setVetFiles(event.target.files);
+                    } else {
+                      // combine previously added files with newly added files
+                      const dataTransfer = new DataTransfer();
+                      for (let i = 0; i < event.target.files.length; i++) {
+                        dataTransfer.items.add(event.target.files[i]);
+                      }
+                      for (let i = 0; i < vetFiles.length; i++) {
+                        dataTransfer.items.add(vetFiles[i]);
+                      }
+                      setVetFiles(dataTransfer.files);
+                    }
+                  }}
+                  style={{ display: "none" }}
+                  id="vet-records"
+                  multiple
+                  value={vetFiles?.filename}
+                />
+                <label htmlFor="vet-records">
+                  <Button
+                    variant="contained"
+                    component="span"
+                  >
+                    Add File
+                  </Button>
+                </label>
+                {vetFiles && (
+                  <>
+                    <Typography
+                      variant="body1"
+                      sx={{ mt: 1.5, mb: 1 }}
+                    >
+                      Selected Files:
+                    </Typography>
+                    {Array.from(vetFiles).map((file, fileIndex) => (
+                      <Box
+                        key={file.name}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          mb: 0.5,
+                          px: 2,
+                          py: 1,
+                          backgroundColor: "secondary.main",
+                          color: "secondary.contrastText",
+                          width: "fit-content",
+                          borderRadius: "4px",
+                        }}
+                      >
+                        <Typography sx={{ mr: 1 }}>{file.name}</Typography>
+                        <CloseIcon
+                          sx={{ "&:hover": { cursor: "pointer" } }}
+                          onClick={() => {
+                            if (vetFiles.length === 1) {
+                              setVetFiles("");
+                            } else {
+                              // create new FileList without deleted file
+                              const dataTransfer = new DataTransfer();
+                              for (let i = 0; i < vetFiles.length; i++) {
+                                if (i === fileIndex) continue;
+                                dataTransfer.items.add(vetFiles[i]);
+                              }
+                              setVetFiles(dataTransfer.files);
+                            }
+                          }}
+                        />
+                      </Box>
+                    ))}
+                  </>
+                )}
+              </Box>
+              <Stack spacing={2}>
                 <FormLabel
                   id="vet-records-agreement"
                   sx={{ fontWeight: "bold" }}
