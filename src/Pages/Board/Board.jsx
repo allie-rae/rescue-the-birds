@@ -134,10 +134,11 @@ export const Board = () => {
     const reformattedBoardingEndDate = `${boardingEndDateArr[1]}/${boardingEndDateArr[2]}/${boardingEndDateArr[0]}`;
 
     axios
-      .post("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/boarding", {
+      .postForm("https://rescuethebirds-jfcaxndkka-uc.a.run.app/forms/boarding", {
         ...rest,
         boarding_start_date: reformattedBoardingStartDate,
         boarding_end_date: reformattedBoardingEndDate,
+        vet_files: vetFiles,
       })
       .then(() => {
         setIsSuccess(true);
